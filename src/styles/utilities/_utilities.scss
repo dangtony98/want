@@ -1,0 +1,77 @@
+.marg {
+    &-t {
+
+        &-xs {
+            margin-top: 1rem;
+        }
+
+        &-sm {
+            margin-top: 2rem;
+        }
+
+        &-m {
+            margin-top: 4rem;
+        }
+
+        &-l {
+            margin-top: 10rem;
+        }
+    }
+
+    &-b {
+
+        &-xs {
+            margin-bottom: 1rem;
+        }
+
+        &-sm {
+            margin-bottom: 2rem;
+        }
+
+        &-m {
+            margin-bottom: 4rem;
+        }
+
+        &-l {
+            margin-bottom: 10rem;
+        }
+    }
+
+    &-l {
+
+        &-xs {
+            margin-left: 1rem;
+        }
+
+        &-sm {
+            margin-left: 2rem;
+        }
+
+        &-m {
+            margin-left: 4rem;
+        }
+
+        &-l {
+            margin-left: 10rem;
+        }
+    }
+
+    &-r {
+
+        &-xs {
+            margin-right: 1rem;
+        }
+
+        &-sm {
+            margin-right: 2rem;
+        }
+
+        &-m {
+            margin-right: 4rem;
+        }
+
+        &-l {
+            margin-right: 10rem;
+        }
+    }
+}

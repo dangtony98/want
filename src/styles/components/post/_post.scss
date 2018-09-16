@@ -1,0 +1,21 @@
+.post {
+    position: fixed;
+    width: 34rem;
+}
+
+.post-box {
+    width: 100%;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    border: 1px solid $color-grey;
+    box-shadow: $box-shadow;
+}
+
+.post-input {
+    margin: 1rem 0 2rem 0;
+    width: 100%;
+}
+
+.post-button {
+    margin: 1rem 0 2rem 2rem;
+}

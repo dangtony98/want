@@ -1,0 +1,30 @@
+// GENERIC WRAPPERS
+
+.wrapper-flex {
+    display: flex;
+    align-items: center;
+}
+
+.wrapper-flex-spaced {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+// SPECIFIC WRAPPERS
+
+.home-content {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+
+    &__left {
+        min-width: 36rem;
+        padding: 1rem;
+    }
+
+    &__right {
+        width: 75rem;
+        padding: 1rem;
+    }
+}

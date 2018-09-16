@@ -1,0 +1,13 @@
+.navigation-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    height: 5rem;
+    width: 100%;
+    color: $color-white;
+    background-color: $color-primary-0;
+    box-shadow: $box-shadow;
+    font-size: 2rem;
+    font-weight: 700;
+    text-align: center;
+}

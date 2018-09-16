@@ -1,0 +1,63 @@
+.button {
+    display: inline-block;
+    height: 5rem;
+    padding: 1.5rem 2rem;
+    border-radius: 0.5rem;
+    border: 1px solid $color-grey;
+    box-shadow: $box-shadow;
+    color: $color-grey-dark;
+    font-size: 1.5rem;
+    font-weight: 300;
+    outline: none;
+    transition: all 0.2s;
+
+    &:active {
+        border: 1px solid $color-primary-0;
+    }
+}
+
+.button-shaded {
+    display: inline-block;
+    height: 5rem;
+    padding: 1.5rem 2rem;
+    border-radius: 0.5rem;
+    border: 1px solid $color-primary-0;
+    box-shadow: $box-shadow;
+    color: $color-white;
+    background-color: $color-primary-0;
+    font-size: 1.5rem;
+    font-weight: 300;
+    outline: none;
+    transition: all 0.2s;
+
+    &:hover {
+        border: 1px solid $color-primary-3;
+        background-color: $color-primary-3;
+    }
+
+    &:active {
+        border: 1px solid $color-primary-3;
+        background-color: $color-primary-3;
+    }
+}
+
+.button-simple {
+    display: inline-block;
+    margin: 2rem 0 0 0;
+    padding: 0;
+    color: $color-primary-0;
+    border: none;
+    background-color: $color-white;
+    font-size: 1.5rem;
+    font-weight: 300;
+    outline: none;
+    transition: all 0.2s;
+
+    &:hover {
+        color: $color-primary-3;
+    }
+
+    &:active {
+        color: $color-primary-3;
+    }
+}

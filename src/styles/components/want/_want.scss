@@ -1,0 +1,44 @@
+.want {
+    height: auto;
+    width: 100%;
+    margin-top: 2rem;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    border: 1px solid $color-grey;
+    box-shadow: $box-shadow;
+
+    &__profile-image {
+        height: 5rem;
+        width: 5rem;
+        border-radius: 50%;
+        border: 1px solid $color-grey;
+        box-shadow: $box-shadow;
+    }
+
+    &__profile-detail {
+        margin-left: 2rem;
+    }
+
+    &__name {
+        margin: 0;
+    }
+
+    &__timestamp {
+        margin: 0;
+    }
+
+    &__title {
+        margin: 0;
+    }
+
+    &__pay {
+        color: $color-primary-0;
+        font-weight: 700;
+    }
+
+    &__description {
+        margin-top: 1rem;
+        font-weight: 300;
+        color: $color-grey-dark;
+    }
+}
