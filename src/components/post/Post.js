@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { animateScroll as scroll } from 'react-scroll';
 import PostForm from './PostForm';
 
 export default class Post extends Component {
@@ -10,6 +11,7 @@ export default class Post extends Component {
     
     onPostSubmit(formContent) {
         console.log(formContent);
+        scroll.scrollToTop();
     }
 
     render() {

@@ -1,36 +1,32 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Collapse } from 'react-collapse';
+import { invertSortIsExpanded } from '../../actions/layout';
 
-export default class Sort extends Component {
+export class Sort extends Component {
     constructor(props) {
         super(props);
 
         this.onSortBtnPressed = this.onSortBtnPressed.bind(this);
-
-        this.state = {
-            isOpened: false
-        }
     }
 
     onSortBtnPressed() {
-        this.setState((prevState) => ({
-            isOpened: !prevState.isOpened
-        }));
+        this.props.invertSortIsExpanded();
     }
 
     render() {
-        const { isOpened } = this.state;
+        const { sortIsExpanded } = this.props;
         return (
             <div className="sort">
                 <button
                     onClick={this.onSortBtnPressed} 
                     className="button">
                     Sort
-                    { isOpened ? <i class="icon-dropdown fas fa-chevron-up"></i>
+                    { sortIsExpanded ? <i class="icon-dropdown fas fa-chevron-up"></i>
                     : <i class="icon-dropdown fas fa-chevron-down"></i>}
                     
                 </button>
-                <Collapse isOpened={isOpened}>
+                <Collapse isOpened={sortIsExpanded}>
                     <div className="sort-dropdown">
 
                     </div>
@@ -39,3 +35,13 @@ export default class Sort extends Component {
         );
     }
 }
+
+const mapStateToProps = ({ layout }) => ({
+    sortIsExpanded: layout.sortIsExpanded
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    invertSortIsExpanded: () => dispatch(invertSortIsExpanded())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sort);

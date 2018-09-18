@@ -1,57 +1,74 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import { Collapse } from 'react-collapse';
+import { openPostIsExpanded } from '../../actions/layout';
 
 class PostForm extends Component {
     constructor(props) {
         super(props);
 
         this.generateField = this.generateField.bind(this);
+        this.onInputFocus = this.onInputFocus.bind(this);
     }
 
-    generateField(name, label, placeholder) {
+    generateField(type, name, placeholder) {
         return (
             <div>
-                <label 
-                    htmlFor={name}
-                    className="label-block"
-                >{label}</label>
                 <Field 
                     name={name} 
-                    component="input" 
+                    component={type} 
                     type="text"
                     placeholder={placeholder}
                     autocomplete="off"
-                    className="post-input input-text" 
+                    onFocus={this.onInputFocus}
+                    className="post-input input-text marg-b-sm" 
                 />
             </div>
         );
     }
 
+    onInputFocus() {
+        console.log('Input focused');
+        this.props.openPostIsExpanded();
+    }
+
     render() {
-        const { handleSubmit } = this.props;
+        const { handleSubmit, postIsExpanded } = this.props;
         return (
             <form onSubmit={handleSubmit}>
                 {this.generateField(
+                    'input',
                     'title', 
-                    'Title',
                     'Enter a title'
                 )}
-                <label 
-                    htmlFor={name}
-                    className="label-block"
-                >Offer</label>
+                {/* {postIsExpanded && 
+                this.generateField(
+                    'description', 
+                    'Enter a description'
+                )} */}
+                <Collapse isOpened={postIsExpanded}>
+                    <Field
+                        name="description"
+                        component="textarea"
+                        placeholder="Enter a description"
+                        onFocus={this.onInputFocus}
+                        className="post-textarea textarea marg-b-sm"
+                    />
+                </Collapse>
                 <div className="wrapper-flex">
                     <Field 
                         name="pay" 
                         component="input" 
                         type="text"
-                        placeholder="Enter an initial pay offer"
+                        placeholder="Enter an offer amount"
                         autocomplete="off"
+                        onFocus={this.onInputFocus}
                         className="post-input input-text" 
                     />
                     <button
                         type="submit"
-                        className="post-button button-shaded"
+                        className="button-shaded marg-l-sm"
                     >Post</button>  
                 </div>
             </form>
@@ -59,4 +76,12 @@ class PostForm extends Component {
     }
 }
 
-export default reduxForm({form: 'post'})(PostForm);
+const mapStateToProps = ({ layout }) => ({
+    postIsExpanded: layout.postIsExpanded
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    openPostIsExpanded: () => dispatch(openPostIsExpanded())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({form: 'post'})(PostForm));
