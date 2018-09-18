@@ -1,12 +1,24 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { animateScroll as scroll } from 'react-scroll';
+import { closePostIsExpanded } from '../../actions/layout';
 import PostForm from './PostForm';
 
-export default class Post extends Component {
+export class Post extends Component {
     constructor(props) {
         super(props);
 
         this.onPostSubmit = this.onPostSubmit.bind(this);
+        this.setWrapperRef = this.setWrapperRef.bind(this);
+        this.handleClickOutside = this.handleClickOutside.bind(this);
+    }
+
+    componentDidMount() {
+        document.addEventListener('mousedown', this.handleClickOutside);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('mousedown', this.handleClickOutside);
     }
     
     onPostSubmit(formContent) {
@@ -14,14 +26,37 @@ export default class Post extends Component {
         scroll.scrollToTop();
     }
 
+    setWrapperRef(node) {
+        this.wrapperRef = node;
+    }
+
+    handleClickOutside(event) {
+        if (this.wrapperRef && !this.wrapperRef.contains(event.target) && this.props.postIsExpanded == true && this.props.form.post.values == undefined) {
+            this.props.closePostIsExpanded();
+        }
+    }
+
     render() {
         return (
             <div className="post">
                 <h4>Post a Want</h4>
-                <div className="post-box">
+                <div
+                    ref={this.setWrapperRef} 
+                    className="post-box">
                     <PostForm onSubmit={this.onPostSubmit} />
                 </div>
             </div>
         );
     }
 }
+
+const mapStateToProps = ({ layout, form }) => ({
+    postIsExpanded: layout.postIsExpanded,
+    form
+});
+
+const mapDispatchToProps = (dispatch) => ({
+    closePostIsExpanded: () => dispatch(closePostIsExpanded())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Post);

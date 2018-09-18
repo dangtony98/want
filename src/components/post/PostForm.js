@@ -14,22 +14,20 @@ class PostForm extends Component {
 
     generateField(type, name, placeholder) {
         return (
-            <div>
-                <Field 
-                    name={name} 
-                    component={type} 
-                    type="text"
-                    placeholder={placeholder}
-                    autocomplete="off"
-                    onFocus={this.onInputFocus}
-                    className="post-input input-text marg-b-sm" 
-                />
-            </div>
+            <Field 
+                name={name} 
+                component={type} 
+                type="text"
+                placeholder={placeholder}
+                autocomplete="off"
+                onFocus={this.onInputFocus}
+                required="true"
+                className="post-input input-text" 
+            />
         );
     }
 
     onInputFocus() {
-        console.log('Input focused');
         this.props.openPostIsExpanded();
     }
 
@@ -42,21 +40,18 @@ class PostForm extends Component {
                     'title', 
                     'Enter a title'
                 )}
-                {/* {postIsExpanded && 
-                this.generateField(
-                    'description', 
-                    'Enter a description'
-                )} */}
                 <Collapse isOpened={postIsExpanded}>
                     <Field
                         name="description"
                         component="textarea"
                         placeholder="Enter a description"
+                        autocomplete="off"
                         onFocus={this.onInputFocus}
-                        className="post-textarea textarea marg-b-sm"
+                        required="true"
+                        className="post-textarea textarea marg-t-sm"
                     />
                 </Collapse>
-                <div className="wrapper-flex">
+                <div className="wrapper-flex marg-t-sm">
                     <Field 
                         name="pay" 
                         component="input" 
@@ -64,6 +59,7 @@ class PostForm extends Component {
                         placeholder="Enter an offer amount"
                         autocomplete="off"
                         onFocus={this.onInputFocus}
+                        required="true"
                         className="post-input input-text" 
                     />
                     <button
