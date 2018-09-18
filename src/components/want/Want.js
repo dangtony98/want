@@ -7,34 +7,39 @@ export default class Want extends Component {
 
         this.onAcceptBtnPressed = this.onAcceptBtnPressed.bind(this);
         this.onDetailsBtnPressed = this.onDetailsBtnPressed.bind(this);
+        this.applyCharacterLimit = this.applyCharacterLimit.bind(this);
     }
 
     onAcceptBtnPressed() {
-        console.log(`Triggered ACCEPT for ${this.props.name}`);
+
     }
 
     onDetailsBtnPressed() {
-        console.log(`Triggered DETAILS for ${this.props.name}`);
+
+    }
+
+    applyCharacterLimit(description) {
+        return `${description.substring(0, 300)}...`;
     }
 
     render() {
-        const { name, timestamp, title, pay, description} = this.props;
+        const { firstName, timestamp, title, pay, description} = this.props;
         return (
             <div className="want">
                 <div className="wrapper-flex marg-b-sm">
                     <img 
                         src={image}
-                        className="want__profile-image"
+                        className="want__image"
                     ></img>
-                    <div className="want__profile-detail">
-                        <h4 className="want__name">{name}</h4>
+                    <div className="marg-l-sm">
+                        <h4 className="want__firstName">{firstName}</h4>
                         <h4 className="want__timestamp">{timestamp}</h4>
                     </div>
                 </div>
                     <h4 className="want__title">{title}</h4>
                     <h4 className="want__pay">{`$${pay}`}</h4>
                 <p className="want__description">
-                    {description}
+                    {this.applyCharacterLimit(description)}
                 </p>
                 <div className="wrapper-flex-spaced">
                     <button

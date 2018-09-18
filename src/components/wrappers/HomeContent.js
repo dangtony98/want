@@ -5,13 +5,13 @@ import Sort from '../narrow/Sort';
 import Want from '../want/Want';
 
 const sampleWantList = [{
-    name: 'John Smith',
+    firstName: 'John',
     timestamp: '5s',
     title: 'Buy and deliver groceries from Wegmans',
     pay: 20,
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.'
 }, {
-    name: 'Mary Johnson',
+    firstName: 'Mary',
     timestamp: '20s',
     title: 'Clean apartment',
     pay: 25,
@@ -29,7 +29,7 @@ export default () => (
             <Sort />
             {sampleWantList.map((want) => (
                 <Want
-                    name={want.name}
+                    firstName={want.firstName}
                     timestamp={want.timestamp}
                     title={want.title}
                     pay={want.pay}
