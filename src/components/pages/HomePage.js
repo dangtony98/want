@@ -3,7 +3,7 @@ import NavigationBar from '../navigation/NavigationBar';
 import HomeContent from '../wrappers/HomeContent';
 
 export default () => (
-    <div>
+    <div className="home-page">
         <NavigationBar />
         <HomeContent />
     </div>
