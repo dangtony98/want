@@ -10,4 +10,18 @@ const invertSortIsExpanded = () => ({
     type: 'INVERT_SORT_ISEXPANDED'
 });
 
-export { openPostIsExpanded, closePostIsExpanded, invertSortIsExpanded };
+const openChatIsExpanded = () => ({
+    type: 'OPEN_CHAT_ISEXPANDED'
+});
+
+const closeChatIsExpanded = () => ({
+    type: 'CLOSE_CHAT_ISEXPANDED'
+});
+
+export { 
+    openPostIsExpanded, 
+    closePostIsExpanded, 
+    invertSortIsExpanded,
+    openChatIsExpanded,
+    closeChatIsExpanded
+};

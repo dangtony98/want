@@ -1,0 +1,22 @@
+.select {
+    display: block;
+    width: 100%;
+    border-radius: 0.5rem;
+    border: none;
+    box-shadow: $box-shadow;
+    color: $color-grey-dark;
+    line-height: 4rem;
+    background-color: $color-white;
+    font-size: 1.5rem;
+    font-weight: 300;
+
+    &:focus {
+        border: 1px solid $color-primary-0;
+        color: $color-primary-0;
+    }
+}
+
+.Select-control {
+    border: 1px solid $color-grey !important;
+    box-shadow: none !important;
+}

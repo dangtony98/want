@@ -1,3 +1,5 @@
+// MAJOR BUTTONS
+
 .button {
     display: inline-block;
     height: 5rem;
@@ -16,6 +18,8 @@
     }
 }
 
+// SHADED BUTTONS
+
 .button-shaded {
     display: inline-block;
     height: 5rem;
@@ -31,8 +35,8 @@
     transition: all 0.2s;
 
     &:hover {
-        border: 1px solid $color-primary-3;
-        background-color: $color-primary-3;
+        border: 1px solid $color-primary-2;
+        background-color: $color-primary-2;
     }
 
     &:active {
@@ -40,6 +44,8 @@
         background-color: $color-primary-3;
     }
 }
+
+// LINK BUTTONS
 
 .button-simple {
     display: inline-block;
@@ -60,4 +66,13 @@
     &:active {
         color: $color-primary-3;
     }
+}
+
+// ICON-EMBEDDED BUTTONS
+
+.button-icon {
+    display: inline-block;
+    border: none;
+    background-color: $color-white;
+    outline: none;
 }

@@ -1,0 +1,36 @@
+.chat-box {
+    position: fixed;
+    right: 2.5rem;
+    height: 40rem;
+    width: 30rem;
+    padding: 1rem;
+    background-color: $color-white;
+    border-radius: 0.5rem;
+    border: 1px solid $color-grey;
+    box-shadow: $box-shadow;
+    z-index: 1000;
+    transition: all 0.2s;
+
+    &--active {
+        bottom: 2.5rem;
+        animation: fadeInUp 0.2s;
+    }
+
+    &--inactive {
+        bottom: -60rem;
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+}
+
+.chat-box-button {
+    &:active {
+        .icon-minimize {
+            color: $color-primary-0;
+        }
+    }
+}

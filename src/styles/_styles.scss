@@ -13,6 +13,7 @@
 @import './components/generic/input';
 @import './components/generic/label';
 @import './components/generic/link';
+@import './components/generic/select';
 @import './components/generic/textarea';
 
 // CUSTOM COMPONENTS
@@ -23,6 +24,9 @@
 
 @import './components/navigation/navigation-bar';
 @import './components/navigation/navigation-link';
+
+@import './components/chat/chat-widget';
+@import './components/chat/chat-box';
 
 @import './components/post/post';
 
