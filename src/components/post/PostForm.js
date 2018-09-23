@@ -38,15 +38,29 @@ const select = {
     }
 }
 
+const renderSelectField = ({ input, options, name, id }) => (
+    <Select 
+        {...input}
+        id={id}
+        name={name}
+        options={options}
+        value={input.value}
+        onChange={(value) => input.onChange(value)}
+        onBlur={(value) => input.onBlur(value)}
+        styles={select.styles}
+        className="select marg-t-sm" 
+    />
+);
+
 class PostForm extends Component {
     constructor(props) {
         super(props);
 
-        this.generateField = this.generateField.bind(this);
+        this.renderInputField = this.renderInputField.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
     }
 
-    generateField(type, name, placeholder) {
+    renderInputField(type, name, placeholder) {
         return (
             <Field 
                 name={name} 
@@ -69,17 +83,21 @@ class PostForm extends Component {
         const { handleSubmit, postIsExpanded } = this.props;
         return (
             <form onSubmit={handleSubmit}>
-                {this.generateField(
+                {this.renderInputField(
                     'input',
                     'title', 
                     'Enter a title'
                 )}
                 <Collapse isOpened={postIsExpanded}>
-                    <Select 
+                    <Field 
+                        component={renderSelectField}
+                        options={select.options} 
+                    />
+                    {/* <Select 
                         options={select.options}
                         styles={select.styles}
                         className="select marg-t-sm" 
-                    />
+                    /> */}
                     <Field
                         name="description"
                         component="textarea"
