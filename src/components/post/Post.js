@@ -39,7 +39,7 @@ export class Post extends Component {
     render() {
         return (
             <div className="post">
-                <h4>Post a Want</h4>
+                <h4 className="home-content__heading">Post a Want</h4>
                 <div
                     ref={this.setWrapperRef} 
                     className="post-box">

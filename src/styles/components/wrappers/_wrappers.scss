@@ -18,6 +18,10 @@
     justify-content: center;
     margin: 0 auto;
 
+    &__heading {
+        color: $color-grey-dark;
+    }
+
     &__left {
         min-width: 36rem;
         padding: 1rem;

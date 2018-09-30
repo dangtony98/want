@@ -36,7 +36,7 @@ export default () => (
             <Post />
         </div>
         <div className="home-content__right">
-            <h4>Wants around You</h4>
+            <h4 className="home-content__heading">Wants around You</h4>
             <Filter />
             <Sort />
             {sampleWantList.map((want) => (

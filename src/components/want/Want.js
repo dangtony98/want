@@ -32,7 +32,10 @@ export default class Want extends Component {
                         className="want__image"
                     ></img>
                     <div className="marg-l-sm">
-                        <h4 className="want__firstName">{firstName}</h4>
+                        <div>
+                            <h4 className="want__firstName">{firstName}</h4>
+                            <i class="icon-verified fas fa-check-circle"></i>
+                        </div>
                         <h4 className="want__timestamp">{timestamp}</h4>
                     </div>
                 </div>

@@ -12,7 +12,6 @@ export class ChatWidget extends Component {
     onWidgetPressed() {
         if (!this.props.chatIsExpanded) {
             this.props.openChatIsExpanded();
-            console.log('Expand!');
         }
     }
 

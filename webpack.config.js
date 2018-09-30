@@ -23,7 +23,7 @@ module.exports = {
                     'sass-loader'
                 ]
             }, {
-                test: /\.(png|jpg|gif)$/,
+                test: /\.(gif|png|jpe?g|svg)$/i,
                 use: [
                 {
                     loader: 'file-loader',
@@ -31,6 +31,27 @@ module.exports = {
                 }, {
                     loader: 'url-loader',
                     options: {}
+                }, {
+                    loader: 'image-webpack-loader',
+                    options: {
+                        mozjpeg: {
+                          progressive: true,
+                          quality: 65
+                        },
+                        optipng: {
+                          enabled: false,
+                        },
+                        pngquant: {
+                          quality: '65-90',
+                          speed: 4
+                        },
+                        gifsicle: {
+                          interlaced: false,
+                        },
+                        webp: {
+                          quality: 75
+                        }
+                      }
                 }
                 ]
             }
@@ -42,3 +63,5 @@ module.exports = {
         inline: true
     }
 }
+
+// /\.(png|jpg|gif)$/

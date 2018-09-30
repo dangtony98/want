@@ -1,0 +1,19 @@
+.chat-block {
+    display: flex;
+    width: 100%;
+    animation: fadeIn 0.2s;
+
+    &__message {
+        display: inline-block;
+        margin-left: auto;
+        max-width: 100%;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        font-weight: 300;
+        overflow-wrap: break-word;
+    }
+}
+
+.chat-block:not(:last-of-type) {
+    margin-bottom: 1rem;
+}

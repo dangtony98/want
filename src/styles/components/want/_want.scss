@@ -10,6 +10,7 @@
 
     &__title {
         margin: 0;
+        color: $color-grey-dark;
     }
 
     &__pay {
@@ -18,7 +19,9 @@
     }
 
     &__firstName {
-        margin: 0;
+        display: inline-block;
+        margin: 0 0.5rem 0 0;
+        color: $color-grey-dark;
     }
 
     &__image {
@@ -31,6 +34,7 @@
 
     &__timestamp {
         margin: 0;
+        color: $color-grey-dark;
     }
 
     &__description {

@@ -11,12 +11,4 @@
     font-size: 2rem;
     font-weight: 700;
     text-align: center;
-
-    &__image {
-        height: 3rem;
-        width: 3rem;
-        border-radius: 50%;
-        border: 1px solid $color-grey;
-        box-shadow: $box-shadow;
-    }
 }

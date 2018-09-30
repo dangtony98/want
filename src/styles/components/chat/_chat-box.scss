@@ -1,9 +1,11 @@
 .chat-box {
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     right: 2.5rem;
     height: 40rem;
-    width: 30rem;
-    padding: 1rem;
+    width: 34rem;
     background-color: $color-white;
     border-radius: 0.5rem;
     border: 1px solid $color-grey;
@@ -24,13 +26,63 @@
         display: flex;
         align-items: center;
         justify-content: space-between;
+        padding: 0.5rem 1rem;
+        background-color: $color-primary-0;
+    }
+
+    &__name {
+        color: $color-white;
+    }
+
+    &__body {
+        flex: 1;
+        padding: 1rem;
+        overflow: scroll;
+        background-color: $color-white;
+    }
+
+    &__bottom {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        border-top: 1px solid $color-grey;
     }
 }
 
-.chat-box-button {
+.chat-box-textarea {
+    height: 5rem;
+    max-height: 10rem;
+    flex: 1;
+}
+
+.chat-box-minimize-button {
+    background-color: transparent;
+
+    &:hover {
+        .icon-minimize {
+            color: $color-primary-2;
+        }
+    }
+
     &:active {
         .icon-minimize {
-            color: $color-primary-0;
+            color: $color-primary-3;
+        }
+    }
+}
+
+.chat-box-message-button {
+    background-color: transparent;
+
+    &:hover {
+        .icon-message {
+            color: $color-primary-2;
+        }
+    }
+
+    &:active {
+        .icon-message {
+            color: $color-primary-3;
         }
     }
 }

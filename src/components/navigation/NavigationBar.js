@@ -17,7 +17,7 @@ export default () => (
             <Link to="/">
                 <img 
                     src={image}
-                    className="navigation-bar__image"
+                    className="profile-picture--mini"
                 ></img>
             </Link>
         </div>
