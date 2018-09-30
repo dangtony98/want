@@ -24,9 +24,11 @@
     &--active {
         bottom: 2.5rem;
         animation: fadeInUp 0.2s;
+        visibility: visible;
     }
 
     &--inactive {
         bottom: -8.5rem;
+        visibility: hidden;
     }
 }

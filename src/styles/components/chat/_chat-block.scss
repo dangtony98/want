@@ -1,7 +1,11 @@
 .chat-block {
-    display: flex;
     width: 100%;
+    margin-top: 1rem;
     animation: fadeIn 0.2s;
+
+    &:first-child {
+        margin-top: 0;
+    }
 
     &__message {
         display: inline-block;
@@ -12,8 +16,8 @@
         font-weight: 300;
         overflow-wrap: break-word;
     }
-}
 
-.chat-block:not(:last-of-type) {
-    margin-bottom: 1rem;
+    &__timestamp {
+        font-weight: 300;
+    }
 }

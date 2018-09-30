@@ -13,6 +13,16 @@ export class ChatBox extends Component {
         this.onCloseBtnPressed = this.onCloseBtnPressed.bind(this);
         this.onChatTyped = this.onChatTyped.bind(this);
         this.onEnterPressed = this.onEnterPressed.bind(this);
+
+        this.scrollToBottom = this.scrollToBottom.bind(this);
+    }
+
+    componentDidMount() {
+        this.scrollToBottom();
+    }
+
+    componentDidUpdate() {
+        this.scrollToBottom();
     }
 
     onCloseBtnPressed() {
@@ -32,7 +42,12 @@ export class ChatBox extends Component {
                 content: e.target.value
             });
             this.props.updateChatInput('');
+            this.chatBoxEnd.scrollIntoView({ behavior: "smooth" });
         }
+    }
+
+    scrollToBottom() {
+        this.chatBoxEnd.scrollIntoView({ behavior: "smooth" });
     }
 
     render() {
@@ -55,7 +70,8 @@ export class ChatBox extends Component {
                         <i className="icon-minimize fas fa-window-minimize"></i>
                     </button>
                 </div>
-                <div className="chat-box__body">
+                <div
+                    className="chat-box__body">
                     {chatMessages.map((chatMessage) => {
                         return (
                             <ChatBlock 
@@ -63,6 +79,9 @@ export class ChatBox extends Component {
                             />
                         )
                     })}
+                    <div style={{ float:"left", clear: "both", margin: '0' }}
+                        ref={(el) => { this.chatBoxEnd = el; }}>
+                    </div>
                 </div>
                 <div className="chat-box__bottom">
                     <Textarea 

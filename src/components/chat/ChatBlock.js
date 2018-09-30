@@ -1,21 +1,42 @@
 import React from 'react';
 import { connect } from 'react-redux';
+var moment = require('moment');
 
 export const ChatBlock = ({ chatMessage, currentUser }) => {
-    const chatMessageStyle = {
-        backgroundColor: currentUser == chatMessage.sender ? '#582A72' : '#ECF0F1',
-        color: currentUser == chatMessage.sender ? '#fff' : '#7F8C8D',
-        margin: currentUser == chatMessage.sender ? '0 0 0 auto' : '0 auto 0 0'
+    const chatStyle = {
+        message: {
+            backgroundColor: currentUser == chatMessage.sender ? '#582A72' : '#ECF0F1',
+            color: currentUser == chatMessage.sender ? '#FFF' : '#7F8C8D',
+            margin: currentUser == chatMessage.sender ? '0 0 0 auto' : '0 auto 0 0'
+        },
+        timestamp: {
+            color: currentUser == chatMessage.sender ? '#7F8C8D' : '#7F8C8D',
+            margin: currentUser == chatMessage.sender ? '10px 0 0 auto' : '10px auto 0 0'
+        }
+    }
+
+    const renderTimeStamp = () => {
+
     }
 
     return (
         <div className="chat-block">
-            <div 
-                style={chatMessageStyle}
-                className={`chat-block__message`}
-            >
-                {chatMessage.content}
+            <div className="wrapper-flex">
+                <div 
+                    style={chatStyle.message}
+                    className={`chat-block__message`}
+                >
+                    {chatMessage.content}
+                </div>
             </div>
+            {chatMessage.timestamp && 
+            <div className="wrapper-flex marg-t-xs">
+                <div
+                    style={chatStyle.timestamp} 
+                    className="chat-block__timestamp">
+                    {chatMessage.timestamp.format('dddd h:mma')}
+                </div>
+            </div>}
         </div>
     );
 }
