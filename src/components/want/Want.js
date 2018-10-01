@@ -18,8 +18,8 @@ export default class Want extends Component {
 
     }
 
-    applyCharacterLimit(description) {
-        return `${description.substring(0, 300)}...`;
+    applyCharacterLimit(description, limit) {
+        return `${description.substring(0, limit)}...`;
     }
 
     render() {
@@ -42,7 +42,7 @@ export default class Want extends Component {
                     <h4 className="want__title">{title}</h4>
                     <h4 className="want__pay">{`$${pay}`}</h4>
                 <p className="want__description">
-                    {this.applyCharacterLimit(description)}
+                    {this.applyCharacterLimit(description, 300)}
                 </p>
                 <div className="wrapper-flex-spaced">
                     <button

@@ -30,7 +30,7 @@ export const ChatBlock = ({ chatMessage, currentUser }) => {
                 </div>
             </div>
             {chatMessage.timestamp && 
-            <div className="wrapper-flex marg-t-xs">
+            <div className="wrapper-flex">
                 <div
                     style={chatStyle.timestamp} 
                     className="chat-block__timestamp">

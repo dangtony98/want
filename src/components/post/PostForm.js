@@ -110,7 +110,7 @@ class PostForm extends Component {
                 </Collapse>
                 <div className="wrapper-flex marg-t-sm">
                     <Field 
-                        name="pay" 
+                        name="offer" 
                         component="input" 
                         type="text"
                         placeholder="Enter an offer amount"
@@ -137,4 +137,4 @@ const mapDispatchToProps = (dispatch) => ({
     openPostIsExpanded: () => dispatch(openPostIsExpanded())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({form: 'post'})(PostForm));
+export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({ form: 'post' })(PostForm));

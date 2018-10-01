@@ -1,7 +1,8 @@
 const layout = {
     postIsExpanded: false,
     sortIsExpanded: false,
-    chatIsExpanded: false
+    chatIsExpanded: false,
+    chatRenegotiationIsExpanded: false
 }
 
 export default (state = layout, action) => {
@@ -30,6 +31,21 @@ export default (state = layout, action) => {
             return {
                 ...state,
                 chatIsExpanded: false
+            }
+        case 'OPEN_CHAT_RENEGOTIATION_ISEXPANDED':
+            return {
+                ...state,
+                chatRenegotiationIsExpanded: true
+            }
+        case 'CLOSE_CHAT_RENEGOTIATION_ISEXPANDED':
+            return {
+                ...state,
+                chatRenegotiationIsExpanded: false
+            }
+        case 'INVERT_CHAT_RENEGOTIATION_ISEXPANDED':
+            return {
+                ...state,
+                chatRenegotiationIsExpanded: !state.chatRenegotiationIsExpanded
             }
         default:
             return state;

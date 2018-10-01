@@ -20,7 +20,7 @@
     }
 
     &--inactive {
-        bottom: -60rem;
+        bottom: -42.5rem;
         visibility: hidden;
     }
 
@@ -32,8 +32,12 @@
         background-color: $color-primary-0;
     }
 
-    &__name {
-        color: $color-white;
+    &__details {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0.5rem 1rem;
+        background-color: $color-primary-1;
     }
 
     &__body {
@@ -49,6 +53,21 @@
         padding: 1rem;
         border-top: 1px solid $color-grey;
     }
+
+    &__name {
+        margin: 0 0 0 1rem;
+        color: $color-white;
+    }
+
+    &__subject {
+        margin: 0;
+        color: $color-white;
+    }
+
+    &__pay {
+        margin: 0;
+        color: $color-white;
+    }
 }
 
 .chat-box-textarea {
@@ -57,33 +76,23 @@
     flex: 1;
 }
 
-.chat-box-minimize-button {
-    background-color: transparent;
-
-    &:hover {
-        .icon-minimize {
-            color: $color-primary-2;
-        }
-    }
-
-    &:active {
-        .icon-minimize {
-            color: $color-primary-3;
-        }
-    }
+.chat-box-input {
+    width: 100%;
 }
 
-.chat-box-message-button {
+.chat-box-header-button {
     background-color: transparent;
 
     &:hover {
-        .icon-message {
+        .icon-minimize,
+        .icon-dollar {
             color: $color-primary-2;
         }
     }
 
     &:active {
-        .icon-message {
+        .icon-minimize,
+        .icon-dollar {
             color: $color-primary-3;
         }
     }

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Textarea from 'react-textarea-autosize';
 import ChatBlock from './ChatBlock';
-import { closeChatIsExpanded } from '../../actions/layout';
+import { closeChatIsExpanded, closeChatRenegotiationIsExpanded, invertChatRenegotiationIsExpanded } from '../../actions/layout';
 import { updateChatInput, sendMessage } from '../../actions/chat';
 import image from '../../assets/sample-profile.png';
 
@@ -11,10 +11,12 @@ export class ChatBox extends Component {
         super(props);
 
         this.onCloseBtnPressed = this.onCloseBtnPressed.bind(this);
+        this.onRenegotiationBtnPressed = this.onRenegotiationBtnPressed.bind(this);
         this.onChatTyped = this.onChatTyped.bind(this);
         this.onEnterPressed = this.onEnterPressed.bind(this);
 
         this.scrollToBottom = this.scrollToBottom.bind(this);
+        this.applyCharacterLimit = this.applyCharacterLimit.bind(this);
     }
 
     componentDidMount() {
@@ -26,12 +28,18 @@ export class ChatBox extends Component {
     }
 
     onCloseBtnPressed() {
+        this.props.closeChatRenegotiationIsExpanded();
         this.props.closeChatIsExpanded();
     }
 
+    onRenegotiationBtnPressed() {
+        this.props.invertChatRenegotiationIsExpanded();
+    }
+
     onChatTyped(e) {
-        const chatInput = e.target.value;
-        this.props.updateChatInput(chatInput);
+        if (/\S/.test(e.target.value)) {
+            this.props.updateChatInput(e.target.value);
+        }
     }
 
     onEnterPressed(e) {
@@ -50,6 +58,10 @@ export class ChatBox extends Component {
         this.chatBoxEnd.scrollIntoView({ behavior: "smooth" });
     }
 
+    applyCharacterLimit(description, limit) {
+        return `${description.substring(0, limit)}...`;
+    }
+
     render() {
         const chatBoxStyles = this.props.chatIsExpanded ? 'chat-box--active' : 'chat-box--inactive';
         const { chatInput, chatMessages } = this.props;
@@ -61,15 +73,28 @@ export class ChatBox extends Component {
                             src={image}
                             className="profile-picture--mini"
                         ></img>
-                        <h4 className="chat-box__name marg-l-xs">John</h4>
+                        <h4 className="chat-box__name">John</h4>
                     </div>
-                    <button
-                        onClick={this.onCloseBtnPressed}
-                        className="chat-box-minimize-button button-icon"
-                    >
-                        <i className="icon-minimize fas fa-window-minimize"></i>
-                    </button>
+                    <div className="wrapper-flex">
+                        <button
+                            onClick={this.onRenegotiationBtnPressed}
+                            className="chat-box-header-button button-icon"
+                        >
+                            <i class="icon-dollar fas fa-dollar-sign"></i>
+                        </button>
+                        <button
+                            onClick={this.onCloseBtnPressed}
+                            className="chat-box-header-button button-icon"
+                        >
+                            <i className="icon-minimize fas fa-window-minimize"></i>
+                        </button>
+                        
+                    </div>
                 </div>
+                {/* <div className="chat-box__details">
+                    <h4 className="chat-box__subject">{this.applyCharacterLimit('Buy and deliver groceries from Wegmans', 20)}</h4>
+                    <h4 className="chat-box__pay">$20</h4>
+                </div> */}
                 <div
                     className="chat-box__body">
                     {chatMessages.map((chatMessage) => {
@@ -109,14 +134,9 @@ const mapStateToProps = ({ admin, layout, chat }) => ({
 const mapDispatchToProps = (dispatch) => ({
     closeChatIsExpanded: () => dispatch(closeChatIsExpanded()),
     updateChatInput: (chatInput) => dispatch(updateChatInput(chatInput)),
-    sendMessage: (chatMessage) => dispatch(sendMessage(chatMessage))
+    sendMessage: (chatMessage) => dispatch(sendMessage(chatMessage)),
+    closeChatRenegotiationIsExpanded: () => dispatch(closeChatRenegotiationIsExpanded()),
+    invertChatRenegotiationIsExpanded: () => dispatch(invertChatRenegotiationIsExpanded())
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ChatBox);
-
-{/* <button
-    onClick={this.onMessageBtnPressed}
-    className="chat-box-message-button button-icon"
->
-    <i class="icon-message fas fa-paper-plane"></i>
-</button> */}
