@@ -3,6 +3,8 @@ import Post from '../post/Post';
 import Filter from '../narrow/Filter';
 import Sort from '../narrow/Sort';
 import Want from '../want/Want';
+import CurrentWants from '../current/CurrentWants';
+import CurrentFulfillments from '../current/CurrentFulfillments';
 
 const sampleWantList = [{
     firstName: 'John',
@@ -35,7 +37,7 @@ export default () => (
         <div className="home-content__left">
             <Post />
         </div>
-        <div className="home-content__right">
+        <div className="home-content__middle">
             <h4 className="home-content__heading">Wants around You</h4>
             <Filter />
             <Sort />
@@ -48,6 +50,10 @@ export default () => (
                     description={want.description} 
                 />
             ))}
+        </div>
+        <div className="home-content__right">
+            <CurrentWants />
+            <CurrentFulfillments />
         </div>
     </div>
 );

@@ -29,6 +29,7 @@
 
     &--inactive {
         bottom: -8.5rem;
+        animation: fadeOutDown 0.2s;
         visibility: hidden;
     }
 }

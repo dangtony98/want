@@ -108,12 +108,12 @@ class PostForm extends Component {
                         className="post-textarea textarea marg-t-sm"
                     />
                 </Collapse>
-                <div className="wrapper-flex marg-t-sm">
+                <div className="wrapper-flex wrapper-flex--center marg-t-sm">
                     <Field 
                         name="offer" 
                         component="input" 
                         type="text"
-                        placeholder="Enter an offer amount"
+                        placeholder="Enter an offer"
                         autocomplete="off"
                         onFocus={this.onInputFocus}
                         required="true"

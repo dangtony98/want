@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Collapse } from 'react-collapse'; // Collapse
 import Textarea from 'react-textarea-autosize';
+import ChatRenegotiation from './ChatRenegotiation';
 import ChatBlock from './ChatBlock';
 import { closeChatIsExpanded, closeChatRenegotiationIsExpanded, invertChatRenegotiationIsExpanded } from '../../actions/layout';
 import { updateChatInput, sendMessage } from '../../actions/chat';
@@ -37,8 +39,10 @@ export class ChatBox extends Component {
     }
 
     onChatTyped(e) {
-        if (/\S/.test(e.target.value)) {
+        if (e.target.value.trim() != '') {
             this.props.updateChatInput(e.target.value);
+        } else {
+            this.props.updateChatInput('');
         }
     }
 
@@ -68,29 +72,32 @@ export class ChatBox extends Component {
         return (
             <div className={`chat-box ${chatBoxStyles}`}>
                 <div className="chat-box__header">
-                    <div className="wrapper-flex">
+                    <div className="wrapper-flex wrapper-flex--center">
                         <img 
                             src={image}
                             className="profile-picture--mini"
                         ></img>
                         <h4 className="chat-box__name">John</h4>
                     </div>
-                    <div className="wrapper-flex">
+                    <div className="wrapper-flex wrapper-flex--center">
                         <button
                             onClick={this.onRenegotiationBtnPressed}
-                            className="chat-box-header-button button-icon"
+                            className="button-icon"
                         >
                             <i class="icon-dollar fas fa-dollar-sign"></i>
                         </button>
                         <button
                             onClick={this.onCloseBtnPressed}
-                            className="chat-box-header-button button-icon"
+                            className="button-icon"
                         >
                             <i className="icon-minimize fas fa-window-minimize"></i>
                         </button>
                         
                     </div>
                 </div>
+                <Collapse isOpened={this.props.chatRenegotiationIsExpanded}>
+                    <ChatRenegotiation />
+                </Collapse>
                 {/* <div className="chat-box__details">
                     <h4 className="chat-box__subject">{this.applyCharacterLimit('Buy and deliver groceries from Wegmans', 20)}</h4>
                     <h4 className="chat-box__pay">$20</h4>
@@ -128,7 +135,8 @@ const mapStateToProps = ({ admin, layout, chat }) => ({
     currentUser: admin.currentUser,
     chatIsExpanded: layout.chatIsExpanded,
     chatInput: chat.chatInput,
-    chatMessages: chat.chatMessages
+    chatMessages: chat.chatMessages,
+    chatRenegotiationIsExpanded: layout.chatRenegotiationIsExpanded
 });
 
 const mapDispatchToProps = (dispatch) => ({

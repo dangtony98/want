@@ -10,11 +10,11 @@ export class ChatRenegotiation extends Component {
     render() {
         const chatRenegotiationStyles = this.props.chatIsExpanded && this.props.chatRenegotiationIsExpanded ? 'chat-renegotiation--active' : 'chat-renegotiation--inactive';
         return (
-            <div className={`chat-renegotiation wrapper-flex ${chatRenegotiationStyles}`}>
+            <div className={`chat-renegotiationX wrapper-flex wrapper-flex--center`}>
                 <Field 
                     name="offer"
                     component="input"
-                    placeholder="Propose counteroffer"
+                    placeholder="Enter a new offer"
                     autocomplete="off"
                     className="chat-box-input input-text"
                 />

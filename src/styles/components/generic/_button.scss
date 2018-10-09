@@ -72,7 +72,23 @@
 
 .button-icon {
     display: inline-block;
+    background-color: transparent;
     border: none;
-    background-color: $color-white;
     outline: none;
+
+    &:hover {
+        .icon-minimize,
+        .icon-dollar,
+        .icon-share {
+            color: $color-primary-2;
+        }
+    }
+
+    &:active {
+        .icon-minimize,
+        .icon-dollar,
+        .icon-share {
+            color: $color-primary-3;
+        }
+    }
 }

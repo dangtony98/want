@@ -1,0 +1,42 @@
+.current-want {
+    height: auto;
+    width: 100%;
+
+    &__title {
+        margin: 0;
+        color: $color-grey-dark;
+    }
+
+    &__content {
+        flex: 1;
+        padding: 2rem;
+    }
+
+    &__status {
+        align-self: stretch;
+        width: 2rem;
+        background-color: green;
+    }
+
+    &__details-button {
+        margin-left: 2rem;
+    }
+
+    &:not(:last-child) {
+        border-bottom: 1px solid $color-grey;
+    }
+}
+
+.current-wants-box {
+    width: 100%;
+    border-radius: 0.5rem;
+    border: 1px solid $color-grey;
+    box-shadow: $box-shadow;
+    background-color: $color-white;
+    overflow: hidden;
+}
+
+.current-wants-text {
+    color: $color-grey-dark;
+    margin-bottom: 0;
+}

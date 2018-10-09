@@ -18,6 +18,17 @@
 
     &--inactive {
         bottom: 32.5rem;
+        animation: fadeOutDown 0.2s;
         visibility: hidden;
     }
+}
+
+.chat-renegotiationX {
+    width: 100%;
+    padding: 1rem;
+    background-color: $color-white;
+    border-bottom: 1px solid $color-grey;
+    box-shadow: $box-shadow;
+    z-index: 1000;
+    transition: all 0.2s;
 }

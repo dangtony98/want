@@ -10,8 +10,7 @@ const chat = {
         content: 'This message is being stored as an array element by Redux.'
     }, { 
         sender: '11aS43eaF3',
-        content: 'Great!',
-        timestamp: moment()
+        content: 'Great!'
     }],
     chatInput: ''
 }

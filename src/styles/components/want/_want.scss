@@ -1,6 +1,7 @@
 .want {
     height: auto;
     width: 100%;
+    min-width: 50rem;
     margin-top: 2rem;
     padding: 2rem;
     border-radius: 0.5rem;
@@ -41,5 +42,9 @@
         margin-top: 1rem;
         font-weight: 300;
         color: $color-grey-dark;
+    }
+
+    &__counter-button {
+        margin-left: 2rem;
     }
 }

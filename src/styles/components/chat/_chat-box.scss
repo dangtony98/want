@@ -21,6 +21,7 @@
 
     &--inactive {
         bottom: -42.5rem;
+        animation: fadeOutDown 0.2s;
         visibility: hidden;
     }
 
@@ -43,6 +44,7 @@
     &__body {
         flex: 1;
         padding: 1rem;
+        z-index: 900;
         overflow: scroll;
         background-color: $color-white;
     }
@@ -78,22 +80,4 @@
 
 .chat-box-input {
     width: 100%;
-}
-
-.chat-box-header-button {
-    background-color: transparent;
-
-    &:hover {
-        .icon-minimize,
-        .icon-dollar {
-            color: $color-primary-2;
-        }
-    }
-
-    &:active {
-        .icon-minimize,
-        .icon-dollar {
-            color: $color-primary-3;
-        }
-    }
 }

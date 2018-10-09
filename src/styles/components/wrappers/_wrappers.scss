@@ -2,16 +2,30 @@
 
 .wrapper-flex {
     display: flex;
-    align-items: center;
+
+    &--top {
+        align-items: flex-start;
+    }
+    
+    &--center {
+        align-items: center;
+    }
 }
 
 .wrapper-flex-spaced {
     display: flex;
-    align-items: center;
     justify-content: space-between;
+
+    &--top {
+        align-items: flex-start;
+    }
+
+    &--center {
+        align-items: center;
+    }
 }
 
-// SPECIFIC WRAPPERS
+// PAGE WRAPPERS
 
 .home-content {
     display: flex;
@@ -27,8 +41,13 @@
         padding: 1rem;
     }
 
-    &__right {
+    &__middle {
         width: 75rem;
+        padding: 1rem;
+    }
+
+    &__right {
+        min-width: 36rem;
         padding: 1rem;
     }
 }
