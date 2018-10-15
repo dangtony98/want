@@ -5,13 +5,13 @@
     right: 0;
     transform: translate(-100%, -50%);
     font-size: 1.5rem;
-    color: $color-grey;
+    color: $color-grey-dark;
 }
 
 .icon-dropdown {
     margin-left: 1rem;
     font-size: 1.5rem;
-    color: $color-grey;
+    color: $color-grey-dark;
 }
 
 .icon-chat {
@@ -22,18 +22,19 @@
 .icon-dollar {
     color: $color-white;
     font-size: 1.5rem;
-    transition: all 0.2s;
+    transition: color 0.2s;
 }
 
 .icon-minimize {
     color: $color-white;
     font-size: 1.5rem;
-    transition: all 0.2s;
+    transition: color 0.2s;
 }
 
 .icon-message {
     color: $color-primary-0;
     font-size: 1.5rem;
+    transition: color 0.2s;
 }
 
 .icon-verified {
@@ -44,4 +45,15 @@
 .icon-share {
     color: $color-primary-0;
     font-size: 1.5rem;
+    transition: color 0.2s;
+}
+
+.icon-circle {
+    font-size: 1rem;
+}
+
+.icon-ellipsis-h {
+    color: $color-primary-0;
+    font-size: 1.5rem;
+    transition: color 0.2s;
 }

@@ -11,6 +11,7 @@
     border: 1px solid $color-grey;
     box-shadow: $box-shadow;
     z-index: 1000;
+    overflow: hidden;
     transition: all 0.2s;
 
     &--active {

@@ -1,9 +1,11 @@
 const current = {
     currentWants: [{
         isMatched: false,
+        uuid: '9bc439438d',
         fulfiller: {
             firstName: null,
-            uuid: null
+            uuid: null,
+            rating: null
         },
         body: {
             title: 'Buy and deliver Starbucks to 407 College Ave',
@@ -17,7 +19,7 @@ const current = {
         }, {
             firstName: 'Ethan',
             rating: 4.64,
-            counterOffer: 6.5
+            counterOffer: 6
         }, {
             firstName: 'Peter',
             rating: 4.31,
@@ -25,17 +27,42 @@ const current = {
         }]
     }, {
         isMatched: true,
+        uuid: '1fn4339038e',
         fulfiller: {
             firstName: 'Maxwell',
-            uuid: ''
+            uuid: '1ac49438x',
+            rating: 4.92
         },
         body: {
-            title: 'Buy and deliver Starbucks to 407 College Ave',
+            title: 'Pack clothes for summer storage',
             pay: 10,
             description: "I'd like someone to deliver a grande coldbrew to my apartment at 407 College Ave tomorrow morning around 8:15am. Thanks!"
         }
     }],
-    currentFulfillments: []
+    currentFulfillments: [{
+        isMatched: false,
+        uuid: '4dq49418z',
+        wanter: {
+            firstName: 'Pedro',
+            uuid: '4ad44318z'
+        },
+        body: {
+            title: 'Create website frontend for Suna Breakfast',
+            pay: 300,
+            description: 'We are Suna Breakfast, a rising breakfast delivery service at Cornell. We are seeking a local web developer with expertise in AngularJS. Pay is negotiable.'
+        }
+    }, {
+        isMatched: true,
+        wanter: {
+            firstName: 'Jessica',
+            uuid: '1fd0df313z'
+        },
+        body: {
+            title: 'Share CS2110 notes',
+            pay: 5,
+            description: 'I '
+        }
+    }]
 }
 
 export default (state = current, action) => {

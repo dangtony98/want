@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-export default class CurrentWant extends Component {
+export default class CurrentFulfillment extends Component {
     constructor(props) {
         super(props);
 
@@ -9,7 +9,7 @@ export default class CurrentWant extends Component {
     }
 
     onEllipsisBtnPressed() {
-        console.log('Ellipsis Triggered in Current Want section.');
+        console.log('Ellipsis Triggered in Current Fulfillment section.');
     }
 
     applyCharacterLimit(description, limit) {
@@ -17,21 +17,21 @@ export default class CurrentWant extends Component {
     }
 
     render() {
-        const { isMatched, fulfiller, body } = this.props;
+        const { isMatched, wanter, body } = this.props;
         const circleStyle = { color: isMatched ? '#2ECC71' : '#7F8C8D' }
         return (
-            <div className="current-want">
-                <div className="current-want__content">
+            <div className="current-fulfillment">
+                <div className="current-fulfillment__content">
                     <div className="wrapper-flex-spaced">
                         <div className="wrapper-flex wrapper-flex--center">
                             <i
                                 style={circleStyle} 
-                                className="current-want__circle icon-circle fas fa-circle"
+                                className="current-fulfillment__circle icon-circle fas fa-circle"
                             ></i>
-                            <h4 className="current-want__title">{this.applyCharacterLimit(body.title, 25)}</h4>
+                            <h4 className="current-fulfillment__title">{this.applyCharacterLimit(body.title, 25)}</h4>
                         </div>
                         <div className="wrapper-flex wrapper-flex--center">
-                            <h4 className="current-wants-text">{`(-$${body.pay})`}</h4>
+                            <h4 className="current-fulfillments-text">{`(+$${body.pay})`}</h4>
                             <button
                                 onClick={this.onEllipsisBtnPressed}
                                 className="button-icon marg-l-xs"
@@ -40,7 +40,7 @@ export default class CurrentWant extends Component {
                             </button>
                         </div>
                     </div>
-                    <h4 className="current-wants-text">Fulfiller: {fulfiller.firstName != null ? fulfiller.firstName : 'Undecided'}</h4>
+                    <h4 className="current-fulfillments-text">Wanter: {wanter.firstName != null ? wanter.firstName : 'Undecided'}</h4>
                 </div>
             </div>
         );

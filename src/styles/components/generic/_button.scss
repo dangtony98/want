@@ -79,7 +79,8 @@
     &:hover {
         .icon-minimize,
         .icon-dollar,
-        .icon-share {
+        .icon-share,
+        .icon-ellipsis-h {
             color: $color-primary-2;
         }
     }
@@ -87,7 +88,8 @@
     &:active {
         .icon-minimize,
         .icon-dollar,
-        .icon-share {
+        .icon-share,
+        .icon-ellipsis-h {
             color: $color-primary-3;
         }
     }
