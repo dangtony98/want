@@ -1,0 +1,36 @@
+.ReactModal__Content {
+    opacity: 0;
+}
+  
+.ReactModal__Content--after-open {
+    opacity: 1;
+    transition: opacity 150ms;
+}
+  
+.ReactModal__Content--before-close {
+    opacity: 0;
+}
+
+.details-modal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 100px;
+    width: 73rem;
+    transform: translate(-50%, -50%);
+    border-radius: 0.5rem;
+    background-color: $color-white;
+    box-shadow: $box-shadow;
+    outline: none;
+    z-index: 2100;
+
+    &--overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: rgba($color-black, 0.8);
+        z-index: 2000;
+    }
+}

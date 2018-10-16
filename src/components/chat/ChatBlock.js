@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 var moment = require('moment');
 
 export const ChatBlock = ({ chatMessage, currentUser }) => {
@@ -39,6 +40,11 @@ export const ChatBlock = ({ chatMessage, currentUser }) => {
             </div>}
         </div>
     );
+}
+
+ChatBlock.PropTypes = {
+    chatMessage: PropTypes.object,
+    currentUser: PropTypes.string
 }
 
 const mapStateToProps = ({ admin }) => ({

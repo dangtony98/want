@@ -1,13 +1,23 @@
+// MIXINS
+
+@import './mixins/mixins';
+
+// BASE
+
 @import './base/base';
 @import './base/variables';
-@import './mixins/mixins';
 @import './base/typography';
 @import './base/utilities';
+
+// ANIMATIONS
+
 @import './animations/animations';
+
+// UTILITIES
 
 @import './utilities/utilities';
 
-// GENERIC COMPONENTS
+// GENERIC
 
 @import './components/generic/button';
 @import './components/generic/input';
@@ -16,29 +26,51 @@
 @import './components/generic/select';
 @import './components/generic/textarea';
 
-// CUSTOM COMPONENTS
+// ICONS
+
+@import './icons/icons';
+
+// COMPONENTS
+
 @import './components/pages/home-page';
 @import './components/wrappers/wrappers';
 
-@import './icons/icons';
+// COMPONENTS/NAVIGATION
 
 @import './components/navigation/navigation-bar';
 @import './components/navigation/navigation-link';
 
+// COMPONENTS/CHAT
 @import './components/chat/chat-widget';
 @import './components/chat/chat-renegotiation';
 @import './components/chat/chat-box';
 @import './components/chat/chat-block';
 
+// COMPONENTS/POST
+
 @import './components/post/post';
+
+// COMPONENTS/FILTER
 
 @import './components/filter/filter';
 
+// COMPONENTS/SORT
+
 @import './components/sort/sort';
 
+// COMPONENTS/WANT
+
 @import './components/want/want';
+
+// COMPONENTS/CURRENT
 
 @import './components/current/current-wants';
 @import './components/current/current-fulfillments';
 
+//COMPONENTS/PROFILE
+
 @import './components/profile/profile-picture';
+
+// COMPONENTS/MODAL
+
+@import './components/modal/details-modal';

@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { openDetailsModalIsExpanded } from '../../actions/modal';
 import image from './sample-profile.png';
 
-export default class Want extends Component {
+export class Want extends Component {
     constructor(props) {
         super(props);
 
@@ -20,7 +22,7 @@ export default class Want extends Component {
     }
 
     onDetailsBtnPressed() {
-
+        this.props.openDetailsModalIsExpanded();
     }
 
     applyCharacterLimit(description, limit) {
@@ -74,3 +76,9 @@ export default class Want extends Component {
         );
     }
 }
+
+const mapDispatchToProps = (dispatch) => ({
+    openDetailsModalIsExpanded: () => dispatch(openDetailsModalIsExpanded())
+});
+
+export default connect(null, mapDispatchToProps)(Want);
