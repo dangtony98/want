@@ -23,7 +23,7 @@ export class Sort extends Component {
                     className="button">
                     Sort
                     { sortIsExpanded ? <i class="icon-dropdown fas fa-chevron-up"></i>
-                    : <i class="icon-dropdown fas fa-chevron-down"></i>}
+                    : <i className="icon-dropdown fas fa-chevron-down"></i>}
                     
                 </button>
                 <Collapse isOpened={sortIsExpanded}>

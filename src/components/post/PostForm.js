@@ -67,7 +67,7 @@ class PostForm extends Component {
                 component={type} 
                 type="text"
                 placeholder={placeholder}
-                autocomplete="off"
+                autoComplete="off"
                 onFocus={this.onInputFocus}
                 required="true"
                 className="post-input input-text" 
@@ -89,7 +89,8 @@ class PostForm extends Component {
                     'Enter a title'
                 )}
                 <Collapse isOpened={postIsExpanded}>
-                    <Field 
+                    <Field
+                        name="category" 
                         component={renderSelectField}
                         options={select.options} 
                     />
@@ -102,7 +103,7 @@ class PostForm extends Component {
                         name="description"
                         component="textarea"
                         placeholder="Enter a description"
-                        autocomplete="off"
+                        autoComplete="off"
                         onFocus={this.onInputFocus}
                         required="true"
                         className="post-textarea textarea marg-t-sm"
@@ -114,7 +115,7 @@ class PostForm extends Component {
                         component="input" 
                         type="text"
                         placeholder="Enter an offer"
-                        autocomplete="off"
+                        autoComplete="off"
                         onFocus={this.onInputFocus}
                         required="true"
                         className="post-input input-text" 

@@ -84,7 +84,7 @@ export class ChatBox extends Component {
                             onClick={this.onRenegotiationBtnPressed}
                             className="button-icon"
                         >
-                            <i class="icon-dollar fas fa-dollar-sign"></i>
+                            <i className="icon-dollar fas fa-dollar-sign"></i>
                         </button>
                         <button
                             onClick={this.onCloseBtnPressed}
@@ -104,10 +104,11 @@ export class ChatBox extends Component {
                 </div> */}
                 <div
                     className="chat-box__body">
-                    {chatMessages.map((chatMessage) => {
+                    {chatMessages.map((chatMessage, index) => {
                         return (
                             <ChatBlock 
                                 chatMessage={chatMessage}
+                                key={index}
                             />
                         )
                     })}

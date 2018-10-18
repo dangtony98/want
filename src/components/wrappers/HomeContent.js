@@ -8,24 +8,28 @@ import CurrentFulfillments from '../current/CurrentFulfillments';
 
 const sampleWantList = [{
     firstName: 'John',
+    uuid: '9bf4124d8e',
     timestamp: '5s',
     title: 'Buy and deliver groceries from Wegmans',
     pay: 20,
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.'
 }, {
     firstName: 'Mary',
+    uuid: '9bf400398e',
     timestamp: '20s',
     title: 'Clean apartment',
     pay: 25,
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.'
 }, {
     firstName: 'Jane',
+    uuid: '9cf429438a',
     timestamp: '1m',
     title: 'Tutor for CS2110',
     pay: 40,
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.'
 }, {
     firstName: 'Elon',
+    uuid: '9ui431408b',
     timestamp: '3m',
     title: 'Drive to Walmart on Fri',
     pay: 15,
@@ -48,6 +52,7 @@ export default () => (
                     title={want.title}
                     pay={want.pay}
                     description={want.description} 
+                    key={want.uuid}
                 />
             ))}
         </div>

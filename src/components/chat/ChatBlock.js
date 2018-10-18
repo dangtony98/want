@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 var moment = require('moment');
 
-export const ChatBlock = ({ chatMessage, currentUser }) => {
+const ChatBlock = ({ chatMessage, currentUser }) => {
     const chatStyle = {
         message: {
             backgroundColor: currentUser == chatMessage.sender ? '#582A72' : '#ECF0F1',
@@ -42,9 +42,9 @@ export const ChatBlock = ({ chatMessage, currentUser }) => {
     );
 }
 
-ChatBlock.PropTypes = {
-    chatMessage: PropTypes.object,
-    currentUser: PropTypes.string
+ChatBlock.propTypes = {
+    chatMessage: PropTypes.object.isRequired,
+    currentUser: PropTypes.string.isRequired
 }
 
 const mapStateToProps = ({ admin }) => ({

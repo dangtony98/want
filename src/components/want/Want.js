@@ -48,7 +48,7 @@ export class Want extends Component {
                             onClick={this.onRenegotiationBtnPressed}
                             className="button-icon"
                         >
-                            <i class="icon-share fas fa-share-alt"></i>
+                            <i className="icon-share fas fa-share-alt"></i>
                         </button>
                 </div>
                 <h4 className="want__title">{title}</h4>

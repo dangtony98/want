@@ -53,6 +53,7 @@ const current = {
         }
     }, {
         isMatched: true,
+        uuid: '1aq56417a',
         wanter: {
             firstName: 'Jessica',
             uuid: '1fd0df313z'

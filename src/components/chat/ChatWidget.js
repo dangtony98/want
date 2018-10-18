@@ -22,7 +22,7 @@ export class ChatWidget extends Component {
                 onClick={this.onWidgetPressed}
                 className={`chat-widget ${chatWidgetStyles}`}
             >
-                <i class="icon-chat fas fa-comment-alt"></i> 
+                <i className="icon-chat fas fa-comment-alt"></i> 
             </button>
         );
     }

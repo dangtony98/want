@@ -18,7 +18,7 @@ export class Filter extends Component {
         const { searchTerm } = this.props;
         return (
             <div className="filter">
-                <i class="icon-search fas fa-search"></i>
+                <i className="icon-search fas fa-search"></i>
                 <input
                     type="text"
                     value={searchTerm}

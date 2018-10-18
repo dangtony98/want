@@ -15,7 +15,7 @@ export class ChatRenegotiation extends Component {
                     name="offer"
                     component="input"
                     placeholder="Enter a new offer"
-                    autocomplete="off"
+                    autoComplete="off"
                     className="chat-box-input input-text"
                 />
                 <button
