@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Collapse } from 'react-collapse';
+import PropTypes from 'prop-types';
 import { invertSortIsExpanded } from '../../actions/layout';
 
 export class Sort extends Component {
@@ -22,7 +23,7 @@ export class Sort extends Component {
                     onClick={this.onSortBtnPressed} 
                     className="button">
                     Sort
-                    { sortIsExpanded ? <i class="icon-dropdown fas fa-chevron-up"></i>
+                    { sortIsExpanded ? <i className="icon-dropdown fas fa-chevron-up"></i>
                     : <i className="icon-dropdown fas fa-chevron-down"></i>}
                     
                 </button>
@@ -34,6 +35,11 @@ export class Sort extends Component {
             </div>
         );
     }
+}
+
+Sort.propTypes = {
+    sortIsExpanded: PropTypes.bool.isRequired,
+    invertSortIsExpanded: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ layout }) => ({

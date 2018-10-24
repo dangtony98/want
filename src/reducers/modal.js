@@ -1,5 +1,6 @@
 const modal = {
-    detailsModalIsExpanded: false
+    detailsModalIsExpanded: false,
+    detailsModalWantId: null
 }
 
 export default (state = modal, action) => {
@@ -13,6 +14,11 @@ export default (state = modal, action) => {
             return {
                 ...state,
                 detailsModalIsExpanded: false
+            }
+        case 'SET_DETAILS_MODAL_WANT_ID':
+            return {
+                ...state,
+                detailsModalWantId: action.wantId
             }
         default:
             return state;

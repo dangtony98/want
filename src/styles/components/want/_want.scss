@@ -2,7 +2,7 @@
     height: auto;
     width: 100%;
     min-width: 50rem;
-    margin-top: 2rem;
+    // margin-top: 2rem;
     padding: 2rem;
     border-radius: 0.5rem;
     border: 1px solid $color-grey;
@@ -28,6 +28,7 @@
     &__image {
         height: 5rem;
         width: 5rem;
+        object-fit: cover;
         border-radius: 50%;
         border: 1px solid $color-grey;
         box-shadow: $box-shadow;

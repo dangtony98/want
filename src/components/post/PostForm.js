@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Collapse } from 'react-collapse';
 import Select from 'react-select';
+import PropTypes from 'prop-types';
 import { openPostIsExpanded } from '../../actions/layout';
 
 
@@ -128,6 +129,12 @@ class PostForm extends Component {
             </form>
         );
     }
+}
+
+PostForm.propTypes = {
+    postIsExpanded: PropTypes.bool.isRequired,
+    openPostIsExpanded: PropTypes.func.isRequired,
+    handleSubmit: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ layout }) => ({

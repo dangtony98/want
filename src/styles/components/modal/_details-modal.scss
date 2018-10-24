@@ -15,7 +15,7 @@
     position: absolute;
     top: 50%;
     left: 50%;
-    height: 100px;
+    height: auto;
     width: 73rem;
     transform: translate(-50%, -50%);
     border-radius: 0.5rem;
@@ -23,6 +23,7 @@
     box-shadow: $box-shadow;
     outline: none;
     z-index: 2100;
+    animation: fadeInCenterFixed 0.5s;
 
     &--overlay {
         position: fixed;
@@ -30,7 +31,8 @@
         left: 0;
         right: 0;
         bottom: 0;
-        background-color: rgba($color-black, 0.8);
+        background-color: rgba($color-black, 0.75);
         z-index: 2000;
+        animation: fadeIn 0.5s;
     }
 }

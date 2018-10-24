@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Collapse } from 'react-collapse'; // Collapse
+import { Collapse } from 'react-collapse';
 import Textarea from 'react-textarea-autosize';
+import PropTypes from 'prop-types';
 import ChatRenegotiation from './ChatRenegotiation';
 import ChatBlock from './ChatBlock';
 import { closeChatIsExpanded, closeChatRenegotiationIsExpanded, invertChatRenegotiationIsExpanded } from '../../actions/layout';
@@ -130,6 +131,19 @@ export class ChatBox extends Component {
             </div>
         );
     }
+}
+
+ChatBox.propTypes = {
+    currentUser: PropTypes.string.isRequired,
+    chatIsExpanded: PropTypes.bool.isRequired,
+    chatInput: PropTypes.string,
+    chatMessages: PropTypes.array,
+    chatRenegotiationIsExpanded: PropTypes.bool.isRequired,
+    closeChatIsExpanded: PropTypes.func.isRequired,
+    updateChatInput: PropTypes.func.isRequired,
+    sendMessage: PropTypes.func.isRequired,
+    closeChatRenegotiationIsExpanded: PropTypes.func.isRequired,
+    invertChatRenegotiationIsExpanded: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ admin, layout, chat }) => ({

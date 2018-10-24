@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { openDetailsModalIsExpanded } from '../../actions/modal';
+import { openDetailsModalIsExpanded, closeDetailsModalIsExpanded, setDetailsModalWantId } from '../../actions/modal';
+import PropTypes from 'prop-types';
 import image from './sample-profile.png';
 
 export class Want extends Component {
@@ -10,6 +11,8 @@ export class Want extends Component {
         this.onAcceptBtnPressed = this.onAcceptBtnPressed.bind(this);
         this.onCounterOfferBtnPressed = this.onCounterOfferBtnPressed.bind(this);
         this.onDetailsBtnPressed = this.onDetailsBtnPressed.bind(this);
+        this.onShareBtnPressed = this.onShareBtnPressed.bind(this);
+        this.onCloseBtnPressed = this.onCloseBtnPressed.bind(this);
         this.applyCharacterLimit = this.applyCharacterLimit.bind(this);
     }
 
@@ -22,7 +25,16 @@ export class Want extends Component {
     }
 
     onDetailsBtnPressed() {
+        this.props.setDetailsModalWantId(this.props.wantId);
         this.props.openDetailsModalIsExpanded();
+    }
+
+    onShareBtnPressed() {
+
+    }
+
+    onCloseBtnPressed() {
+        this.props.closeDetailsModalIsExpanded();
     }
 
     applyCharacterLimit(description, limit) {
@@ -30,13 +42,13 @@ export class Want extends Component {
     }
 
     render() {
-        const { firstName, timestamp, title, pay, description} = this.props;
+        const { isDetailsModal, firstName, photo, timestamp, title, pay, description } = this.props;
         return (
-            <div className="want">
+            <div className={`want ${!isDetailsModal && 'marg-t-sm'}`}>
                 <div className="wrapper-flex-spaced wrapper-flex-spaced--top">
                     <div className="wrapper-flex wrapper-flex--center marg-b-sm">
                         <img 
-                            src={image}
+                            src={photo}
                             className="want__image"
                         ></img>
                         <div className="marg-l-sm">
@@ -44,17 +56,24 @@ export class Want extends Component {
                             <h4 className="want__timestamp">{timestamp}</h4>
                         </div>
                     </div>
-                    <button
+                    {!isDetailsModal ? 
+                        <button
                             onClick={this.onRenegotiationBtnPressed}
                             className="button-icon"
                         >
                             <i className="icon-share fas fa-share-alt"></i>
+                        </button> :
+                        <button
+                            onClick={this.onCloseBtnPressed} 
+                            className="button-icon">
+                            <i className="icon-close fas fa-times"></i>
                         </button>
+                    }
                 </div>
                 <h4 className="want__title">{title}</h4>
                 <h4 className="want__pay">{`$${pay}`}</h4>
                 <p className="want__description">
-                    {this.applyCharacterLimit(description, 300)}
+                    {!isDetailsModal ? this.applyCharacterLimit(description, 300) : description}
                 </p>
                 <div className="wrapper-flex-spaced wrapper-flex-spaced--center">
                     <div>
@@ -67,18 +86,33 @@ export class Want extends Component {
                             className="want__counter-button button-simple"
                         >Counteroffer</button>
                     </div>
-                    <button
-                        onClick={this.onDetailsBtnPressed} 
-                        className="want__accept-button button-simple"
-                    >Details</button>
+                    {!isDetailsModal && 
+                        <button
+                            onClick={this.onDetailsBtnPressed} 
+                            className="want__accept-button button-simple"
+                        >Details</button>
+                    }
                 </div>
             </div>
         );
     }
 }
 
+Want.propTypes = {
+    firstName: PropTypes.string.isRequired,
+    timestamp: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    pay: PropTypes.number.isRequired,
+    description: PropTypes.string.isRequired,
+    openDetailsModalIsExpanded: PropTypes.func.isRequired,
+    closeDetailsModalIsExpanded: PropTypes.func.isRequired,
+    setDetailsModalWantId: PropTypes.func.isRequired
+}
+
 const mapDispatchToProps = (dispatch) => ({
-    openDetailsModalIsExpanded: () => dispatch(openDetailsModalIsExpanded())
+    openDetailsModalIsExpanded: () => dispatch(openDetailsModalIsExpanded()),
+    closeDetailsModalIsExpanded: () => dispatch(closeDetailsModalIsExpanded()),
+    setDetailsModalWantId: (wantId) => dispatch(setDetailsModalWantId(wantId))
 });
 
 export default connect(null, mapDispatchToProps)(Want);

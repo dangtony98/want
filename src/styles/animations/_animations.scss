@@ -20,6 +20,18 @@
     }
 }
 
+@keyframes fadeInCenterFixed {
+    0% {
+        opacity: 0;
+        transform: translate(-50%, 0);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
 @keyframes fadeOutDown {
     0% {
         opacity: 1;

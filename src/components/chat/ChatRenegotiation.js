@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
+import PropTypes from 'prop-types';
 
 export class ChatRenegotiation extends Component {
     constructor(props) {
@@ -25,6 +26,11 @@ export class ChatRenegotiation extends Component {
             </div>
         );
     }
+}
+
+ChatRenegotiation.propTypes = {
+    chatIsExpanded: PropTypes.bool.isRequired,
+    chatRenegotiationIsExpanded: PropTypes.bool.isRequired
 }
 
 const mapStateToProps = ({ layout }) => ({

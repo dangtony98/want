@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import CurrentFulfillment from './CurrentFulfillment';
 
 export const CurrentFulfillments = ({ currentFulfillments }) => (
@@ -15,6 +16,10 @@ export const CurrentFulfillments = ({ currentFulfillments }) => (
         </div>
     </div>
 );
+
+CurrentFulfillments.propTypes = {
+    currentFulfillments: PropTypes.array
+}
 
 const mapStateToProps = ({ current }) => ({
     currentFulfillments: current.currentFulfillments

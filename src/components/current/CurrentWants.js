@@ -1,5 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import CurrentWant from './CurrentWant';
 
 export const CurrentWants = ({ currentWants }) => (
@@ -15,6 +16,10 @@ export const CurrentWants = ({ currentWants }) => (
         </div>
     </div>
 );
+
+CurrentWants.propTypes = {
+    currentWants: PropTypes.array
+}
 
 const mapStateToProps = ({ current }) => ({
     currentWants: current.currentWants

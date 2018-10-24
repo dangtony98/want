@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { openChatIsExpanded } from '../../actions/layout';
 
 export class ChatWidget extends Component {
@@ -26,6 +27,11 @@ export class ChatWidget extends Component {
             </button>
         );
     }
+}
+
+ChatWidget.propTypes = {
+    chatIsExpanded: PropTypes.bool.isRequired,
+    openChatIsExpanded: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ layout }) => ({

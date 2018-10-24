@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { animateScroll as scroll } from 'react-scroll';
+import PropTypes from 'prop-types';
 import { closePostIsExpanded } from '../../actions/layout';
 import PostForm from './PostForm';
 
@@ -48,6 +49,12 @@ export class Post extends Component {
             </div>
         );
     }
+}
+
+Post.propTypes = {
+    postIsExpanded: PropTypes.bool.isRequired,
+    form: PropTypes.object.isRequired,
+    closePostIsExpanded: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ layout, form }) => ({

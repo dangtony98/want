@@ -1,8 +1,10 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import image from '../../assets/sample-profile.png';
 
-export default () => (
+export const NavigationBar = ({ photo }) => (
     <div className="navigation-bar">
         <div>
 
@@ -16,10 +18,20 @@ export default () => (
         <div>
             <Link to="/">
                 <img 
-                    src={image}
+                    src={photo}
                     className="profile-picture--mini"
                 ></img>
             </Link>
         </div>
     </div>
 );
+
+NavigationBar.propTypes = {
+    photo: PropTypes.string
+}
+
+const mapStateToProps = ({ admin }) => ({
+    photo: admin.photo
+});
+
+export default connect(mapStateToProps)(NavigationBar);

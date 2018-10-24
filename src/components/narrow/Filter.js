@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { updateSearchTerm } from '../../actions/filter';
 
 export class Filter extends Component {
@@ -30,6 +31,11 @@ export class Filter extends Component {
             </div>
         );
     }
+}
+
+Filter.propTypes = {
+    searchTerm: PropTypes.string,
+    updateSearchTerm: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ filter }) => ({

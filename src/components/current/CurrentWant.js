@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class CurrentWant extends Component {
     constructor(props) {
@@ -45,4 +46,10 @@ export default class CurrentWant extends Component {
             </div>
         );
     }
+}
+
+CurrentWant.propTypes = {
+    isMatched: PropTypes.bool.isRequired,
+    fulfiller: PropTypes.object.isRequired,
+    body: PropTypes.object.isRequired
 }
