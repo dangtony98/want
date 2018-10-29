@@ -17,6 +17,7 @@ export class HomeContent extends Component {
 
     componentDidMount() {
         // Fetching data from backend in progress.
+        console.log('Sending GET Request to retrieve Want...');
         axios.get('http://d571ba11.ngrok.io/api/want/show/2', { headers: { "Accept": "application/json" } })
             .then((response) => {
                 console.log('Response: ' + response);

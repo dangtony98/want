@@ -4,7 +4,9 @@ import LoginBox from '../login/LoginBox';
 
 export default () => (
     <div className="login-page">
-        <LoginIllustration />
-        <LoginBox />
+        {/* <div className="login-content"> */}
+            <LoginIllustration />
+            <LoginBox />
+        {/* </div> */}
     </div>
 )
