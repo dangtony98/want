@@ -61,12 +61,12 @@ class PostForm extends Component {
         this.onInputFocus = this.onInputFocus.bind(this);
     }
 
-    renderInputField(type, name, placeholder) {
+    renderInputField(inputType, name, placeholder) {
         return (
             <Field 
                 name={name} 
-                component={type} 
-                type="text"
+                component="input" 
+                type={inputType}
                 placeholder={placeholder}
                 autoComplete="off"
                 onFocus={this.onInputFocus}
@@ -85,7 +85,7 @@ class PostForm extends Component {
         return (
             <form onSubmit={handleSubmit}>
                 {this.renderInputField(
-                    'input',
+                    'text',
                     'title', 
                     'Enter a title'
                 )}

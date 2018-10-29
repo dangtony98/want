@@ -33,12 +33,12 @@
 // COMPONENTS
 
 @import './components/pages/home-page';
+@import './components/pages/login-page';
 @import './components/wrappers/wrappers';
 
 // COMPONENTS/NAVIGATION
 
-@import './components/navigation/navigation-bar';
-@import './components/navigation/navigation-link';
+@import './components/navigation/navigation';
 
 // COMPONENTS/CHAT
 @import './components/chat/chat-widget';
@@ -73,4 +73,10 @@
 
 // COMPONENTS/MODAL
 
+@import './components/modal/modal';
+@import './components/modal/accept-modal';
 @import './components/modal/details-modal';
+
+// COMPONENTS/LOGIN
+
+@import './components/login/login';

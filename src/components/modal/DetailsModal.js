@@ -1,50 +1,67 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactModal from 'react-modal';
+import { closeDetailsModalIsExpanded } from '../../actions/modal';
 import Want from '../want/Want';
 import PropTypes from 'prop-types';
 
 export class DetailsModal extends Component {
+    constructor(props) {
+        super(props);
+
+        this.onOutsideModalPressed = this.onOutsideModalPressed.bind(this);
+    }
+
     componentWillMount() {
         ReactModal.setAppElement('body');
     }
 
+    onOutsideModalPressed() {
+        this.props.closeDetailsModalIsExpanded();
+    }
+
     render() {
-        const { isOpen, detailsModalWantId, wants } = this.props;
+        const { isOpen, modalWantId, wants } = this.props;
         return (
             <ReactModal 
                 isOpen={isOpen}
                 className="details-modal"
-                overlayClassName="details-modal--overlay"
+                overlayClassName="modal-overlay"
+                onRequestClose={this.onOutsideModalPressed}
             >
-                <div className="details-modal__header">
-                    {wants.map((want) => {
-                        return want.wantId == detailsModalWantId &&
-                            <Want
-                                isDetailsModal={true}
-                                wantId={want.wantId}
-                                firstName={want.firstName}
-                                photo={want.photo}
-                                timestamp={want.timestamp}
-                                title={want.title}
-                                pay={want.pay}
-                                description={want.description} 
-                                key={want.wantId}
-                            />
-                    })}
-                </div>
+                {wants.map((want) => {
+                    return want.wantId == modalWantId &&
+                        <Want
+                            isDetailsModal={true}
+                            wantId={want.wantId}
+                            firstName={want.firstName}
+                            photo={want.photo}
+                            timestamp={want.timestamp}
+                            title={want.title}
+                            pay={want.pay}
+                            description={want.description} 
+                            key={want.wantId}
+                        />
+                })}
             </ReactModal>
         );
     }
 }
 
 DetailsModal.propTypes = {
-    detailsModalWantId: PropTypes.string,
+    isOpen: PropTypes.bool.isRequired,
+    modalWantId: PropTypes.string,
+    wants: PropTypes.array,
+    closeDetailsModalIsExpanded: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ modal, feed }) => ({
-    detailsModalWantId: modal.detailsModalWantId,
+    modalWantId: modal.modalWantId,
     wants: feed.wants
 });
 
-export default connect(mapStateToProps)(DetailsModal);
+const mapDispatchToProps = (dispatch) => ({
+    closeDetailsModalIsExpanded: () => dispatch(closeDetailsModalIsExpanded())
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(DetailsModal);

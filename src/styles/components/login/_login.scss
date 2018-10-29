@@ -1,0 +1,36 @@
+.login-illustration {
+    margin: 0 auto 4rem auto;
+    width: 32rem;
+    text-align: center;
+
+    &__logo {
+        font-size: 2.5rem;
+        font-weight: 700;
+    }
+}
+
+.login-box {
+    margin: 0 auto;
+    width: 32rem;
+}
+
+.login-input {
+    width: 100%;
+}
+
+.login-button {
+    width: 100%;
+}
+
+.login-text {
+    text-align: center;
+    color: $color-grey-dark;
+}
+
+.login-link {
+    color: $color-primary-0;
+
+    &:visited {
+        color: $color-primary-0;
+    }
+}

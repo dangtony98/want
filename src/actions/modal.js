@@ -6,13 +6,26 @@ const closeDetailsModalIsExpanded = () => ({
     type: 'CLOSE_DETAILS_MODAL_ISEXPANDED'
 });
 
-const setDetailsModalWantId = (wantId) => ({
-    type: 'SET_DETAILS_MODAL_WANT_ID',
-    wantId
+const openAcceptModalIsExpanded = () => {
+    // Perform Redux Promise to make sure Want has been accepted.
+    return ({
+        type: 'OPEN_ACCEPT_MODAL_ISEXPANDED'
+    })
+};
+
+const closeAcceptModalIsExpanded = () => ({
+    type: 'CLOSE_ACCEPT_MODAL_ISEXPANDED'
 });
+
+const setModalWantId = (wantId) => ({
+    type: 'SET_MODAL_WANT_ID',
+    wantId
+})
 
 export {
     openDetailsModalIsExpanded,
     closeDetailsModalIsExpanded,
-    setDetailsModalWantId
+    openAcceptModalIsExpanded,
+    closeAcceptModalIsExpanded,
+    setModalWantId
 }

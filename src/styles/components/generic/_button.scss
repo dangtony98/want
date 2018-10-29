@@ -84,6 +84,14 @@
         .icon-close {
             color: $color-primary-2;
         }
+
+        .icon-facebook {
+            color: $color-facebook-1;
+        }
+
+        .icon-google {
+            color: $color-google-1;
+        }
     }
 
     &:active {
@@ -93,6 +101,14 @@
         .icon-ellipsis-h,
         .icon-close {
             color: $color-primary-3;
+        }
+
+        .icon-facebook {
+            color: $color-facebook-2;
+        }
+
+        .icon-google {
+            color: $color-google-2;
         }
     }
 }

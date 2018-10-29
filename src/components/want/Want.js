@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { openDetailsModalIsExpanded, closeDetailsModalIsExpanded, setDetailsModalWantId } from '../../actions/modal';
+import { openDetailsModalIsExpanded, closeDetailsModalIsExpanded, openAcceptModalIsExpanded, setModalWantId } from '../../actions/modal';
 import PropTypes from 'prop-types';
 import image from './sample-profile.png';
 
@@ -17,7 +17,8 @@ export class Want extends Component {
     }
 
     onAcceptBtnPressed() {
-
+        this.props.setModalWantId(this.props.wantId);
+        this.props.openAcceptModalIsExpanded();
     }
 
     onCounterOfferBtnPressed() {
@@ -25,7 +26,7 @@ export class Want extends Component {
     }
 
     onDetailsBtnPressed() {
-        this.props.setDetailsModalWantId(this.props.wantId);
+        this.props.setModalWantId(this.props.wantId);
         this.props.openDetailsModalIsExpanded();
     }
 
@@ -106,13 +107,15 @@ Want.propTypes = {
     description: PropTypes.string.isRequired,
     openDetailsModalIsExpanded: PropTypes.func.isRequired,
     closeDetailsModalIsExpanded: PropTypes.func.isRequired,
-    setDetailsModalWantId: PropTypes.func.isRequired
+    openAcceptModalIsExpanded: PropTypes.func.isRequired,
+    setModalWantId: PropTypes.func.isRequired
 }
 
 const mapDispatchToProps = (dispatch) => ({
     openDetailsModalIsExpanded: () => dispatch(openDetailsModalIsExpanded()),
     closeDetailsModalIsExpanded: () => dispatch(closeDetailsModalIsExpanded()),
-    setDetailsModalWantId: (wantId) => dispatch(setDetailsModalWantId(wantId))
+    openAcceptModalIsExpanded: () => dispatch(openAcceptModalIsExpanded()),
+    setModalWantId: (wantId) => dispatch(setModalWantId(wantId))
 });
 
 export default connect(null, mapDispatchToProps)(Want);

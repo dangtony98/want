@@ -1,6 +1,7 @@
 const modal = {
+    modalWantId: null,
     detailsModalIsExpanded: false,
-    detailsModalWantId: null
+    acceptModalIsExpanded: false
 }
 
 export default (state = modal, action) => {
@@ -13,12 +14,25 @@ export default (state = modal, action) => {
         case 'CLOSE_DETAILS_MODAL_ISEXPANDED':
             return {
                 ...state,
+                modalWantId: null,
                 detailsModalIsExpanded: false
             }
-        case 'SET_DETAILS_MODAL_WANT_ID':
+        case 'SET_MODAL_WANT_ID':
             return {
                 ...state,
-                detailsModalWantId: action.wantId
+                modalWantId: action.wantId
+            }
+        case 'OPEN_ACCEPT_MODAL_ISEXPANDED':
+            return {
+                ...state,
+                acceptModalIsExpanded: true,
+                detailsModalIsExpanded: false
+            }
+        case 'CLOSE_ACCEPT_MODAL_ISEXPANDED':
+            return {
+                ...state,
+                modalWantId: null,
+                acceptModalIsExpanded: false
             }
         default:
             return state;
