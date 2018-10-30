@@ -48,7 +48,7 @@ export default class LoginBox extends Component {
                     </div>
                 <div>
                     <h4 className="login-text">Forgot <Link to="/" className="login-link link">password</Link>?</h4>
-                    <h4 className="login-text">Don't have an account? <Link to="/" className="login-link link">Sign up</Link></h4>
+                    <h4 className="login-text">Don't have an account? <Link to="/signup" className="login-link link">Sign up</Link></h4>
                 </div>
             </div>
         );

@@ -1,0 +1,82 @@
+.signup-section {
+    margin: 2rem auto 4rem auto;
+    width: 50rem;
+    text-align: center;
+}
+
+.signup-logo {
+    font-size: 2.5rem;
+    font-weight: 700;
+}
+
+.promo-box {
+    position: relative;
+    margin: 0 auto;
+    width: 40rem;
+    height: 58rem;
+    padding: 2rem 18rem 2rem 2rem;
+    background-color: $color-white;
+    border-radius: 0.5rem;
+    border: 1px solid $color-grey;
+    box-shadow: $box-shadow;
+
+    &__group:not(:last-child) {
+        margin-bottom: 4rem;
+    }
+}
+
+.promo-illustration {
+    height: 5rem;
+    width: 13rem;
+    margin-right: 2rem;
+    border-radius: 50%;
+    background-color: green;
+}
+
+.promo-heading {
+    margin-top: 0;
+    color: $color-primary-0;
+}
+
+.promo-text {
+    flex: 1;
+    color: $color-grey-dark;
+    font-weight: 300;
+    word-wrap: break-word;
+    // background-color: orange;
+}
+
+.signup-box {
+    position: absolute;
+    top: 4%;
+    right: 0%;
+    transform: translate(50%, 0);
+
+    width: 34rem;
+    padding: 2rem;
+    border-radius: 0.5rem;
+    background-color: $color-white;
+    border: 1px solid $color-grey;
+    box-shadow: $box-shadow;
+}
+
+.signup-input {
+    width: 100%;
+}
+
+.signup-button {
+    width: 100%;
+}
+
+.signup-text {
+    color: $color-grey-dark;
+    font-weight: 300;
+}
+
+.signup-link {
+    color: $color-primary-0;
+
+    &:visited {
+        color: $color-primary-0;
+    }
+}

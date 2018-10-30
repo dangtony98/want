@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import PropTypes from 'prop-types';
 
-export class LoginForm extends Component {
+export class SignupForm extends Component {
     constructor(props) {
         super(props);
 
@@ -28,6 +28,16 @@ export class LoginForm extends Component {
         return (
             <form onSubmit={handleSubmit}>
                 {this.renderInputField(
+                    'text',
+                    'firstName',
+                    'First name'
+                )}
+                {this.renderInputField(
+                    'text',
+                    'lastName',
+                    'Last name'
+                )}
+                {this.renderInputField(
                     'email',
                     'email',
                     'Email'
@@ -37,14 +47,19 @@ export class LoginForm extends Component {
                     'password',
                     'Password'
                 )}
-                <button className="login-button button-shaded">Login</button>
+                {this.renderInputField(
+                    'password',
+                    'repassword',
+                    'Re-enter password'
+                )}
+                <button className="signup-button button-shaded">Create account</button>
             </form>
         );
     }
 }
 
-LoginForm.propTypes = {
+SignupForm.propTypes = {
     handleSubmit: PropTypes.func.isRequired
 }
 
-export default reduxForm({ form: 'login' })(LoginForm);
+export default reduxForm({ form: 'signup' })(SignupForm);
