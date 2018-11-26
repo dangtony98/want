@@ -23,6 +23,10 @@
     &--center {
         align-items: center;
     }
+
+    &--flex1 {
+        flex: 1;
+    }
 }
 
 // PAGE WRAPPERS
@@ -31,10 +35,6 @@
     display: flex;
     justify-content: center;
     margin: 0 auto;
-
-    &__heading {
-        color: $color-grey-dark;
-    }
 
     &__left {
         min-width: 36rem;
@@ -50,6 +50,10 @@
         min-width: 36rem;
         padding: 1rem;
     }
+}
+
+.content-heading {
+    color: $color-grey-dark;
 }
 
 // .login-content {

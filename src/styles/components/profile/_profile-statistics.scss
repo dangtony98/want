@@ -1,0 +1,27 @@
+.profile-statistics {
+    width: 22rem;
+    padding: 1rem;
+
+    &__group {
+        text-align: center;
+    }
+
+    &__measure {
+        font-weight: 500;
+    }
+
+    &__box {
+        padding: 2rem;
+        color: $color-white;
+        background-color: $color-primary-0;
+        border-radius: 0.5rem;
+        border: 1px solid $color-primary-0;
+        box-shadow: $box-shadow;
+    }
+}
+
+.profile-bottom {
+    height: auto;
+    width: 98rem;
+    margin: 0 auto;
+}

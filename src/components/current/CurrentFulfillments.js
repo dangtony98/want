@@ -5,7 +5,7 @@ import CurrentFulfillment from './CurrentFulfillment';
 
 export const CurrentFulfillments = ({ currentFulfillments }) => (
     <div className="marg-t-sm">
-        <h4 className="home-content__heading">Current Fulfillments</h4>
+        <h4 className="content-heading">Current Fulfillments</h4>
         <div className="current-fulfillments-box">
             {currentFulfillments.map((currentFulfillment, index) => (
                 <CurrentFulfillment 

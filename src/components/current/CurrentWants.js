@@ -5,7 +5,7 @@ import CurrentWant from './CurrentWant';
 
 export const CurrentWants = ({ currentWants }) => (
     <div>
-        <h4 className="home-content__heading">Current Wants</h4>
+        <h4 className="content-heading">Current Wants</h4>
         <div className="current-wants-box">
             {currentWants.map((currentWant) => (
                 <CurrentWant 

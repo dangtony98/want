@@ -1,0 +1,35 @@
+.profile-summary {
+    height: auto;
+    width: 98rem;
+    padding: 1rem;
+    margin: 0 auto;
+
+    &__photo {
+        height: 22rem;
+        width: 22rem;
+        border-top-left-radius: 0.5rem;
+        border-bottom-left-radius: 0.5rem;
+        border-top: 1px solid $color-grey;
+        border-left: 1px solid $color-grey;
+        border-bottom: 1px solid $color-grey;
+        box-shadow: $box-shadow;
+        object-fit: cover;
+    }
+
+    &__box {
+        flex: 1;
+        padding: 2rem;
+        border-top-right-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+        border-top: 1px solid $color-grey;
+        border-right: 1px solid $color-grey;
+        border-bottom: 1px solid $color-grey;
+        box-shadow: $box-shadow;
+        background-color: $color-white;
+    }
+}
+
+.profile-text {
+    font-weight: 300;
+    color: $color-grey-dark;
+}

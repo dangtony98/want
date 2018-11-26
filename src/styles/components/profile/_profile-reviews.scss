@@ -1,0 +1,23 @@
+// PROFILE REVIEW + WANT STYLES OVERLAP
+
+.profile-reviews {
+    flex: 1;
+    padding: 1rem;
+
+    &__box {
+        background-color: $color-white;
+        border-radius: 0.5rem;
+        border: 1px solid $color-grey;
+        box-shadow: $box-shadow;
+    }
+}
+
+.profile-review {
+    padding: 2rem;
+
+    &__review {
+        margin-top: 1rem;
+        font-weight: 300;
+        color: $color-grey-dark;
+    }
+}

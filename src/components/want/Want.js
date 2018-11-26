@@ -51,7 +51,7 @@ export class Want extends Component {
                         <img 
                             src={photo}
                             className="want__image"
-                        ></img>
+                        />
                         <div className="marg-l-sm">
                             <h4 className="want__firstName">{firstName}</h4>
                             <h4 className="want__timestamp">{timestamp}</h4>

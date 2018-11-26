@@ -33,9 +33,15 @@
 
 // COMPONENTS
 
+// COMPONENTS/PAGES
+
 @import './components/pages/home-page';
 @import './components/pages/login-page';
 @import './components/pages/signup-page';
+@import './components/pages/profile-page';
+
+// COMPONENTS/WRAPPERS
+
 @import './components/wrappers/wrappers';
 
 // COMPONENTS/NAVIGATION
@@ -72,6 +78,9 @@
 //COMPONENTS/PROFILE
 
 @import './components/profile/profile-picture';
+@import './components/profile/profile-reviews';
+@import './components/profile/profile-statistics';
+@import './components/profile/profile-summary';
 
 // COMPONENTS/MODAL
 

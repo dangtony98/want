@@ -35,7 +35,7 @@ export class HomeContent extends Component {
                     <Post />
                 </div>
                 <div className="home-content__middle">
-                    <h4 className="home-content__heading">Wants around You</h4>
+                    <h4 className="content-heading">Wants around You</h4>
                     <Filter />
                     <Sort />
                     {wants.map((want) => (
