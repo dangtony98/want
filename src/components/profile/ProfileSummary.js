@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default ({ summary }) => {
+const ProfileSummary = ({ summary }) => {
     const applyCharacterLimit = (description, limit) => (`${description.substring(0, limit)}...`);
 
     return (
@@ -21,3 +22,9 @@ export default ({ summary }) => {
         </div>
     );
 }
+
+ProfileSummary.propTypes = {
+    summary: PropTypes.object
+}
+
+export default ProfileSummary;

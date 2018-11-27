@@ -4,6 +4,7 @@ import NavigationBar from '../navigation/NavigationBar';
 import ProfileSummary from '../profile/ProfileSummary';
 import ProfileStatistics from '../profile/ProfileStatistics';
 import ProfileReviews from '../profile/ProfileReviews';
+import PropTypes from 'prop-types';
 
 export class ProfilePage extends Component {
     render() {
@@ -19,6 +20,12 @@ export class ProfilePage extends Component {
             </div>
         );
     }
+}
+
+ProfilePage.propTypes = {
+    summary: PropTypes.object.isRequired,
+    statistics: PropTypes.object.isRequired,
+    reviews: PropTypes.array
 }
 
 const mapStateToProps = ({ profile }) => ({

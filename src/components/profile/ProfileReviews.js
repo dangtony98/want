@@ -1,7 +1,8 @@
 import React from 'react';
 import ProfileReview from './ProfileReview';
+import PropTypes from 'prop-types';
 
-export default ({ reviews }) => (
+const ProfileReviews = ({ reviews }) => (
     <div className="profile-reviews">
         <h4 className="content-heading">Reviews</h4>
         <div className="profile-reviews__box">
@@ -17,3 +18,9 @@ export default ({ reviews }) => (
         </div>
     </div>
 );
+
+ProfileReviews.propTypes = {
+    reviews: PropTypes.array
+}
+
+export default ProfileReviews;

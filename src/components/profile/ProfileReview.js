@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 
 export default class ProfileReview extends Component {
     constructor(props) {
@@ -10,12 +11,16 @@ export default class ProfileReview extends Component {
 
     renderRating(rating) {
         let ratingArr = [];
-        for (let i = 0; i < Math.round(rating); i++) {
-            ratingArr.push(<i 
+        for (let i = 0; i < 5; i++) {
+            i < Math.round(rating) ? ratingArr.push(<i 
                 className="icon-star fas fa-star"
+                key={i}
+            ></i>) : ratingArr.push(<i 
+                className="icon-star far fa-star"
                 key={i}
             ></i>);
         }
+
         return ratingArr;
     }
 
@@ -47,4 +52,13 @@ export default class ProfileReview extends Component {
             </div>
         );
     }
+}
+
+ProfileReview.propTypes = {
+    firstName: PropTypes.string,
+    photo: PropTypes.string,
+    timestamp: PropTypes.string,
+    rating: PropTypes.number,
+    title: PropTypes.string,
+    review: PropTypes.object
 }

@@ -1,6 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-export default ({ statistics }) => (
+const ProfileStatistics = ({ statistics }) => (
     <div className="profile-statistics">
         <h4 className="content-heading">Statistics</h4>
         <div className="profile-statistics__box">
@@ -19,3 +20,9 @@ export default ({ statistics }) => (
         </div>
     </div>
 );
+
+ProfileStatistics.propTypes = {
+    statistics: PropTypes.object
+}
+
+export default ProfileStatistics;
