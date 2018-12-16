@@ -1,0 +1,27 @@
+.footer {
+    height: auto;
+    padding: 2rem;
+    color: $color-grey-dark;
+    background-color: $color-white;
+
+    &__box {
+        width: 85.5rem;
+        margin: 0 auto;
+    }
+
+    &__column {
+        flex: 1;
+    }
+}
+
+.footer-heading {
+    font-weight: 700;
+}
+
+.footer-link {
+    color: $color-primary-0;
+    
+    &:visited {
+        color: $color-primary-1;
+    }
+}

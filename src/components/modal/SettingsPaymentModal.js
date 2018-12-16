@@ -8,7 +8,6 @@ export class SettingsPaymentModal extends Component {
     constructor(props) {
         super(props);
 
-        this.onCancelButtonPressed = this.onCancelButtonPressed.bind(this);
         this.onSaveButtonPressed = this.onSaveButtonPressed.bind(this);
         this.onOutsideModalPressed = this.onOutsideModalPressed.bind(this);
         this.handleChange = this.handleChange.bind(this);
@@ -25,10 +24,6 @@ export class SettingsPaymentModal extends Component {
 
     componentWillMount() {
         ReactModal.setAppElement('body');
-    }
-
-    onCancelButtonPressed() {
-        console.log('Cancel button pressed!');
     }
 
     onSaveButtonPressed() {
@@ -74,7 +69,8 @@ export class SettingsPaymentModal extends Component {
                     <div className="settings-payment-modal__box wrapper-flex">
                         <form
                             onSubmit={this.onFormSubmit} 
-                            className="settings-payment-modal__half-box">
+                            className="settings-payment-modal__half-box"
+                        >
                             <div className="wrapper-flex">
                                 <i className="icon-credit-card fab fa-cc-visa marg-r-sm"></i>
                                 <i className="icon-credit-card fab fa-cc-mastercard marg-r-sm"></i>

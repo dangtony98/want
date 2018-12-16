@@ -1,3 +1,13 @@
 .link {
     text-decoration: none;
+
+    &:hover {
+        .icon-facebook {
+            color: $color-facebook-1;
+        }
+
+        .icon-instagram {
+            color: $color-instagram-1;
+        }
+    }
 }

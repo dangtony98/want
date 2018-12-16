@@ -3,6 +3,10 @@
 .wrapper-flex {
     display: flex;
 
+    &--column {
+        flex-direction: column;
+    }
+
     &--top {
         align-items: flex-start;
     }
@@ -15,6 +19,10 @@
 .wrapper-flex-spaced {
     display: flex;
     justify-content: space-between;
+
+    &--column {
+        flex-direction: column;
+    }
 
     &--top {
         align-items: flex-start;

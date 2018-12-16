@@ -28,7 +28,7 @@ const openSettingsPaymentModalIsExpanded = () => ({
 const setModalWantId = (wantId) => ({
     type: 'SET_MODAL_WANT_ID',
     wantId
-})
+});
 
 export {
     openDetailsModalIsExpanded,

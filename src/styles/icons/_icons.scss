@@ -82,9 +82,17 @@
     transition: color 0.2s;
 }
 
+// CONSIDER NOT INCLUDING LINKEDIN AT ALL ANYWHERE IN THE APP
+
 .icon-linkedin {
     color: $color-linkedin-0;
     font-size: 3rem;
+    transition: color 0.2s;
+}
+
+.icon-instagram {
+    color: $color-instagram-0;
+    font-size: 3.4rem;
     transition: color 0.2s;
 }
 
