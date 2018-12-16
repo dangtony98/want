@@ -39,6 +39,8 @@
 @import './components/pages/login-page';
 @import './components/pages/signup-page';
 @import './components/pages/profile-page';
+@import './components/pages/setup-page';
+@import './components/pages/settings-page';
 
 // COMPONENTS/WRAPPERS
 
@@ -87,6 +89,7 @@
 @import './components/modal/modal';
 @import './components/modal/accept-modal';
 @import './components/modal/details-modal';
+@import './components/modal/settings-payment-modal';
 
 // COMPONENTS/LOGIN
 
@@ -95,3 +98,14 @@
 // COMPONENTS/SIGNUP
 
 @import './components/signup/signup';
+
+// COMPONENTS/SETUP
+
+@import './components/setup/setup';
+
+// COMPONENTS/SETTINGS
+
+@import './components/settings/settings';
+@import './components/settings/settings-preferences';
+@import './components/settings/settings-edit-profile';
+@import './components/settings/settings-payment';

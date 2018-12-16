@@ -8,6 +8,7 @@ import filter from '../reducers/filter';
 import chat from '../reducers/chat';
 import modal from '../reducers/modal';
 import profile from '../reducers/profile';
+import settings from '../reducers/settings';
 
 export default createStore(combineReducers({
     admin,
@@ -18,5 +19,6 @@ export default createStore(combineReducers({
     chat,
     modal,
     profile,
+    settings,
     form: formReducer
 }));

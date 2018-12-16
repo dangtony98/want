@@ -7,7 +7,9 @@ import store from './store/store';
 import HomePage from './components/pages/HomePage';
 import LoginPage from './components/pages/LoginPage';
 import SignupPage from './components/pages/SignupPage';
+import SetupPage from './components/pages/SetupPage';
 import ProfilePage from './components/pages/ProfilePage';
+import SettingsPage from './components/pages/SettingsPage';
 
 ReactDOM.render(
     <Provider store={store}>
@@ -16,7 +18,9 @@ ReactDOM.render(
                 <Route path="/" component={HomePage} exact />
                 <Route path="/login" component={LoginPage} />
                 <Route path="/signup" component={SignupPage} />
+                <Route path="/setup" component={SetupPage} />
                 <Route path="/profile" component={ProfilePage} />
+                <Route path="/settings" component={SettingsPage} />
             </Switch>
         </Router>
     </Provider>

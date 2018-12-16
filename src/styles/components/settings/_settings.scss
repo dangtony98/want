@@ -1,0 +1,32 @@
+.settings-content {
+    width: 73.5rem;
+    padding: 1rem;
+
+    &__box {
+        width: 100%;
+        padding: 2rem;
+        background-color: $color-white;
+        border-radius: 0.5rem;
+        border: 1px solid $color-grey;
+    }
+}
+
+.settings-input {
+    width: 100%;
+}
+
+.settings-textarea {
+    height: 24rem;
+    width: 100%;
+}
+
+.settings-wrapper {
+    height: auto;
+    width: 98rem;
+    margin: 0 auto;
+}
+
+.settings-update {
+    width: 73.5rem;
+    padding: 1rem;
+}

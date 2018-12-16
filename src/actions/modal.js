@@ -17,6 +17,14 @@ const closeAcceptModalIsExpanded = () => ({
     type: 'CLOSE_ACCEPT_MODAL_ISEXPANDED'
 });
 
+const closeSettingsPaymentModalIsExpanded = () => ({
+    type: 'CLOSE_SETTINGS_PAYMENT_MODAL_ISEXPANDED'
+});
+
+const openSettingsPaymentModalIsExpanded = () => ({
+    type: 'OPEN_SETTINGS_PAYMENT_MODAL_ISEXPANDED'
+});
+
 const setModalWantId = (wantId) => ({
     type: 'SET_MODAL_WANT_ID',
     wantId
@@ -27,5 +35,7 @@ export {
     closeDetailsModalIsExpanded,
     openAcceptModalIsExpanded,
     closeAcceptModalIsExpanded,
+    openSettingsPaymentModalIsExpanded,
+    closeSettingsPaymentModalIsExpanded,
     setModalWantId
 }

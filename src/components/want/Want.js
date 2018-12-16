@@ -77,20 +77,20 @@ export class Want extends Component {
                     {!isDetailsModal ? this.applyCharacterLimit(description, 300) : description}
                 </p>
                 <div className="wrapper-flex-spaced wrapper-flex-spaced--center">
-                    <div>
+                    <div className="wrapper-flex">
                         <button
                             onClick={this.onAcceptBtnPressed} 
-                            className="button-simple"
+                            className="button-simple marg-t-sm"
                         >Accept</button>
                         <button
                             onClick={this.onCounterOfferBtnPressed} 
-                            className="want__counter-button button-simple"
+                            className="want__counter-button button-simple marg-t-sm"
                         >Counteroffer</button>
                     </div>
                     {!isDetailsModal && 
                         <button
                             onClick={this.onDetailsBtnPressed} 
-                            className="want__accept-button button-simple"
+                            className="want__accept-button button-simple marg-t-sm"
                         >Details</button>
                     }
                 </div>

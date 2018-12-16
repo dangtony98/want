@@ -1,0 +1,36 @@
+.settings-edit-profile {
+    &__photo {
+        height: 20rem;
+        width: 20rem;
+        object-fit: cover;
+        border: 1px solid $color-grey;
+        border-radius: 0.5rem;
+        box-shadow: $box-shadow;
+    }
+
+    &__upload-box {
+        height: 20rem;
+        width: 20rem;
+        margin: 0;
+        border: 1px solid $color-grey;
+        border-radius: 0.5rem;
+        outline: none;
+        color: $color-grey-dark;
+        font-weight: 300;
+        font-size: 1.5rem;
+
+        &:active {
+            border: 1px solid $color-primary-0;
+            color: $color-primary-0;
+        }
+    }
+
+    &__upload-label {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+    }
+}

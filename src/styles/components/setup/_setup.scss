@@ -1,0 +1,39 @@
+.setup-box {
+    width: 73.5rem;
+    margin: 0 auto;
+    padding: 2rem;
+    border: 1px solid $color-grey;
+    background-color: $color-white;
+    box-shadow: $box-shadow;
+}
+
+.setup-grid {
+    display: grid;
+    width: 50rem;
+    margin: 2rem auto 2rem auto;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2rem;
+    grid-auto-rows: minmax(100px, auto);
+
+    &__item {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 14rem;
+        padding: 2rem;
+        border-radius: 0.5rem;
+        background-color: $color-white;
+        box-shadow: $box-shadow;
+        background-size: cover;
+        cursor: pointer;
+    }
+}
+
+.setup-text {
+    font-weight: 300;
+    color: $color-grey-dark;
+
+    &--white {
+        color: $color-white;
+    }
+}

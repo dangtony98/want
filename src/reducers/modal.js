@@ -1,7 +1,8 @@
 const modal = {
     modalWantId: null,
     detailsModalIsExpanded: false,
-    acceptModalIsExpanded: false
+    acceptModalIsExpanded: false,
+    settingsPaymentModalIsExpanded: false
 }
 
 export default (state = modal, action) => {
@@ -17,11 +18,6 @@ export default (state = modal, action) => {
                 modalWantId: null,
                 detailsModalIsExpanded: false
             }
-        case 'SET_MODAL_WANT_ID':
-            return {
-                ...state,
-                modalWantId: action.wantId
-            }
         case 'OPEN_ACCEPT_MODAL_ISEXPANDED':
             return {
                 ...state,
@@ -33,6 +29,21 @@ export default (state = modal, action) => {
                 ...state,
                 modalWantId: null,
                 acceptModalIsExpanded: false
+            }
+        case 'OPEN_SETTINGS_PAYMENT_MODAL_ISEXPANDED':
+            return {
+                ...state,
+                settingsPaymentModalIsExpanded: true
+            }
+        case 'CLOSE_SETTINGS_PAYMENT_MODAL_ISEXPANDED':
+            return {
+                ...state,
+                settingsPaymentModalIsExpanded: false
+            }
+        case 'SET_MODAL_WANT_ID':
+            return {
+                ...state,
+                modalWantId: action.wantId
             }
         default:
             return state;

@@ -48,8 +48,7 @@
 // LINK BUTTONS
 
 .button-simple {
-    display: inline-block;
-    margin: 2rem 0 0 0;
+    display: block;
     padding: 0;
     color: $color-primary-0;
     border: none;
@@ -85,12 +84,20 @@
             color: $color-primary-2;
         }
 
+        .icon-notification {
+            color: $color-grey-light;
+        }
+
         .icon-facebook {
             color: $color-facebook-1;
         }
 
         .icon-google {
             color: $color-google-1;
+        }
+        
+        .icon-linkedin {
+            color: $color-linkedin-1;
         }
     }
 
@@ -103,12 +110,20 @@
             color: $color-primary-3;
         }
 
+        .icon-notification {
+            color: $color-grey;
+        }
+
         .icon-facebook {
             color: $color-facebook-2;
         }
 
         .icon-google {
             color: $color-google-2;
+        }
+
+        .icon-linkedin {
+            color: $color-linkedin-2;
         }
     }
 }

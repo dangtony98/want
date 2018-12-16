@@ -15,12 +15,17 @@ export const NavigationBar = ({ photo }) => (
                 className="navigation-link link"
             >WANT</Link>
         </div>
-        <div>
+        <div className="wrapper-flex wrapper-flex--center">
+            <Link to="/">
+                <button className="button-icon">
+                    <i className="icon-notification fas fa-bell marg-r-sm"></i>
+                </button>
+            </Link>
             <Link to="/">
                 <img 
                     src={photo}
                     className="profile-picture--mini"
-                ></img>
+                />
             </Link>
         </div>
     </div>
