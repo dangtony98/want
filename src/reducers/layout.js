@@ -2,7 +2,8 @@ const layout = {
     postIsExpanded: false,
     sortIsExpanded: false,
     chatIsExpanded: false,
-    chatRenegotiationIsExpanded: false
+    chatRenegotiationIsExpanded: false,
+    notificationBoxIsOpen: false
 }
 
 export default (state = layout, action) => {
@@ -46,6 +47,21 @@ export default (state = layout, action) => {
             return {
                 ...state,
                 chatRenegotiationIsExpanded: !state.chatRenegotiationIsExpanded
+            }
+        case 'OPEN_NOTIFICATION_BOX_ISOPEN':
+            return {
+                ...state,
+                notificationBoxIsOpen: true
+            }
+        case 'CLOSE_NOTIFICATION_BOX_ISOPEN':
+            return {
+                ...state,
+                notificationBoxIsOpen: false
+            }
+        case 'INVERT_NOTIFICATION_BOX_ISOPEN':
+            return {
+                ...state,
+                notificationBoxIsOpen: !state.notificationBoxIsOpen
             }
         default:
             return state;

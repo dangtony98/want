@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 import LoginForm from './LoginForm';
 
-export default class LoginBox extends Component {
+export class LoginBox extends Component {
     constructor(props) {
         super(props);
 
@@ -13,6 +14,8 @@ export default class LoginBox extends Component {
     
     onLoginFormSubmit(formContent) {
         console.log(formContent);
+        // SEND POST REQUEST FOR AUTHENTICATION
+        this.props.history.push("/");
     }
 
     onFacebookBtnPressed() {
@@ -54,3 +57,5 @@ export default class LoginBox extends Component {
         );
     }
 }
+
+export default withRouter(LoginBox);

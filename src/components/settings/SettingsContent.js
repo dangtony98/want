@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import SettingsEditProfile from './SettingsEditProfile';
 import SettingsPayment from './SettingsPayment';
-import SettingsPrivacy from './SettingsPrivacy';
+import SettingsSecurity from './SettingsSecurity';
 
 const settingsContentSwitch = (selectedPreference) => {
     switch (selectedPreference) {
@@ -10,8 +10,8 @@ const settingsContentSwitch = (selectedPreference) => {
             return (<SettingsEditProfile />);
         case 'Payment':
             return (<SettingsPayment />);
-        case 'Privacy':
-            return (<SettingsPrivacy />);
+        case 'Security':
+            return (<SettingsSecurity />);
         default:
             return;
     }

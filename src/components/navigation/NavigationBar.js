@@ -1,42 +1,74 @@
-import React from 'react';
+import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import NotificationBox from '../notification/NotificationBox';
+import { closeNotificationBoxIsOpen, invertNotificationBoxIsOpen } from '../../actions/layout';
 import PropTypes from 'prop-types';
 import image from '../../assets/sample-profile.png';
 
-export const NavigationBar = ({ photo }) => (
-    <div className="navigation-bar">
-        <div>
+export class NavigationBar extends Component {
+    constructor(props) {
+        super(props);
 
-        </div>
-        <div>
-            <Link 
-                to="/"
-                className="navigation-link link"
-            >WANT</Link>
-        </div>
-        <div className="wrapper-flex wrapper-flex--center">
-            <Link to="/">
-                <button className="button-icon">
-                    <i className="icon-notification fas fa-bell marg-r-sm"></i>
-                </button>
-            </Link>
-            <Link to="/">
-                <img 
-                    src={photo}
-                    className="profile-picture--mini"
-                />
-            </Link>
-        </div>
-    </div>
-);
+        this.onNotificationButtonPressed = this.onNotificationButtonPressed.bind(this);
+    }
 
-NavigationBar.propTypes = {
-    photo: PropTypes.string
+    componentDidMount() {
+        this.props.closeNotificationBoxIsOpen();
+    }
+
+    onNotificationButtonPressed() {
+        this.props.invertNotificationBoxIsOpen();
+    }
+
+    render() {
+        const { photo, notificationBoxIsOpen } = this.props;
+        return (
+            <div>
+                <div className="navigation-bar">
+                    <div>
+
+                    </div>
+                    <div>
+                        <Link 
+                            to="/"
+                            className="navigation-link link"
+                        >WANT</Link>
+                    </div>
+                    <div className="wrapper-flex wrapper-flex--center">
+                        <button
+                            onClick={this.onNotificationButtonPressed} 
+                            className="button-icon"
+                        >
+                            <i className="icon-notification fas fa-bell marg-r-sm"></i>
+                        </button>
+                        <Link to="/settings">
+                            <img 
+                                src={photo}
+                                className="profile-picture--mini"
+                            />
+                        </Link>
+                    </div>
+                </div>
+                {notificationBoxIsOpen && <NotificationBox />}
+            </div>
+        );
+    }
 }
 
-const mapStateToProps = ({ admin }) => ({
-    photo: admin.photo
+NavigationBar.propTypes = {
+    photo: PropTypes.string,
+    notificationBoxIsOpen: PropTypes.bool
+}
+
+const mapStateToProps = ({ admin, layout }) => ({
+    photo: admin.photo,
+    notificationBoxIsOpen: layout.notificationBoxIsOpen
 });
 
-export default connect(mapStateToProps)(NavigationBar);
+const mapDispatchToProps = (dispatch) => ({
+    closeNotificationBoxIsOpen: () => dispatch(closeNotificationBoxIsOpen()),
+    invertNotificationBoxIsOpen: () => dispatch(invertNotificationBoxIsOpen())
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(NavigationBar);

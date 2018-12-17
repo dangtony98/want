@@ -26,6 +26,18 @@ const invertChatRenegotiationIsExpanded = () => ({
     type: 'INVERT_CHAT_RENEGOTIATION_ISEXPANDED'
 });
 
+const openNotificationBoxIsOpen = () => ({
+    type: 'OPEN_NOTIFICATION_BOX_ISOPEN'
+});
+
+const closeNotificationBoxIsOpen = () => ({
+    type: 'CLOSE_NOTIFICATION_BOX_ISOPEN'
+});
+
+const invertNotificationBoxIsOpen = () => ({
+    type: 'INVERT_NOTIFICATION_BOX_ISOPEN'
+});
+
 export { 
     openPostIsExpanded, 
     closePostIsExpanded, 
@@ -33,5 +45,8 @@ export {
     openChatIsExpanded,
     closeChatIsExpanded,
     closeChatRenegotiationIsExpanded,
-    invertChatRenegotiationIsExpanded
+    invertChatRenegotiationIsExpanded,
+    openNotificationBoxIsOpen,
+    closeNotificationBoxIsOpen,
+    invertNotificationBoxIsOpen
 };

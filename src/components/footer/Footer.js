@@ -22,6 +22,7 @@ export default () => (
                     <h4 className="footer-heading">Other</h4>
                     <h4><Link to="/" className="footer-link link">Terms & Conditions</Link></h4>
                     <h4><Link to="/" className="footer-link link">Privacy Policy</Link></h4>
+                    <h4><Link to="/" className="footer-link link">Report</Link></h4>
                 </div>
             </div>
             <hr className="hr marg-t-sm marg-b-sm"></hr>

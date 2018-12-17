@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { changeSelectedPreference } from '../../actions/settings';
 
 // FINALIZE STYLING FOR THIS COMPONENT
 
-const preferenceOptions = ['Payment', 'Privacy', 'Security'];
+const preferenceOptions = ['Payment', 'Security'];
 
 const preferenceStyles = {
     box: {
@@ -35,6 +36,10 @@ export class SettingsPreferences extends Component {
 
     onPreferenceBtnPressed(value) {
         this.props.changeSelectedPreference(value);
+        if (value == 'Logout') {
+            // LOGOUT THE USER
+            this.props.history.push("/login");
+        }
     }
 
     render() {
@@ -87,7 +92,7 @@ const mapStateToProps = ({ settings }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    changeSelectedPreference: (preference) => dispatch(changeSelectedPreference(preference))
+    changeSelectedPreference: (preference) => dispatch(changeSelectedPreference(preference)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(SettingsPreferences);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(SettingsPreferences));

@@ -1,0 +1,15 @@
+.notification-box {
+    position: fixed;
+    top: 5.4rem;
+    right: 8rem;
+    height: 60rem;
+    width: 37.5rem;
+    padding: 2rem;
+    background-color: $color-white;
+    border: 1px solid $color-grey;
+    border-bottom-left-radius: 0.5rem;
+    border-bottom-right-radius: 0.5rem;
+    box-shadow: $box-shadow;
+    z-index: 100;
+    animation: fadeInDown 0.2s;
+}

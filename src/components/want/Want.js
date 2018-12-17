@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import { openDetailsModalIsExpanded, closeDetailsModalIsExpanded, openAcceptModalIsExpanded, setModalWantId } from '../../actions/modal';
 import PropTypes from 'prop-types';
 import image from './sample-profile.png';
@@ -53,7 +54,7 @@ export class Want extends Component {
                             className="want__image"
                         />
                         <div className="marg-l-sm">
-                            <h4 className="want__firstName">{firstName}</h4>
+                            <h4 className="want__firstName"><Link to="/profile" className="link">{firstName}</Link></h4>
                             <h4 className="want__timestamp">{timestamp}</h4>
                         </div>
                     </div>
