@@ -1,0 +1,24 @@
+.notification-tab {
+    max-height: auto;
+    width: 100%;
+    padding: 2rem;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: rgba($color-primary-1, 0.1);
+    }
+
+    &--border:not(:last-child) {
+        border-bottom: 1px solid $color-grey;
+    }
+
+    &__image {
+        height: 5rem;
+        width: 5rem;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 1px solid $color-grey;
+        box-shadow: $box-shadow;
+    }
+}

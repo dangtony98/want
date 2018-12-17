@@ -54,7 +54,9 @@ export class Want extends Component {
                             className="want__image"
                         />
                         <div className="marg-l-sm">
-                            <h4 className="want__firstName"><Link to="/profile" className="link">{firstName}</Link></h4>
+                            <h4 className="want__firstName">
+                                <Link to="/profile" className="link" target="_blank">{firstName}</Link>
+                            </h4>
                             <h4 className="want__timestamp">{timestamp}</h4>
                         </div>
                     </div>

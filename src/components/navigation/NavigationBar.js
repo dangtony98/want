@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import NotificationBox from '../notification/NotificationBox';
+import NotificationBox from '../notifications/NotificationBox';
 import { closeNotificationBoxIsOpen, invertNotificationBoxIsOpen } from '../../actions/layout';
 import PropTypes from 'prop-types';
 import image from '../../assets/sample-profile.png';
+
+const navigationStyles = {
+    notificationIcon: {
+        selected: {
+            color: '#9775AA'
+        },
+        unselected: {
+            color: '#FFF'
+        }
+    }
+}
 
 export class NavigationBar extends Component {
     constructor(props) {
@@ -40,7 +51,10 @@ export class NavigationBar extends Component {
                             onClick={this.onNotificationButtonPressed} 
                             className="button-icon"
                         >
-                            <i className="icon-notification fas fa-bell marg-r-sm"></i>
+                            <i 
+                                className="icon-notification fas fa-bell marg-r-sm"
+                                style={notificationBoxIsOpen ? navigationStyles.notificationIcon.selected : navigationStyles.notificationIcon.unselected}
+                            ></i>
                         </button>
                         <Link to="/settings">
                             <img 
