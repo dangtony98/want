@@ -24,7 +24,7 @@ export class NotificationBox extends Component {
     }
 
     handleClickOutside(event) {
-        if (this.wrapperRef && !this.wrapperRef.contains(event.target)) {
+        if (this.wrapperRef && !this.wrapperRef.contains(event.target) && event.target.id != 'icon-notification') {
             this.props.closeNotificationBoxIsOpen();
         }
     }
@@ -34,13 +34,9 @@ export class NotificationBox extends Component {
         return (
             <div className="notification-box" ref={this.setWrapperRef}>
                 {notifications.map((notification, index) => {
-                    const { photo, subject, date, link } = notification;
                     return (
                         <NotificationTab 
-                            photo={photo}
-                            subject={subject}
-                            date={date}
-                            link={link}
+                            notification={notification}
                             key={index}
                         />
                     );

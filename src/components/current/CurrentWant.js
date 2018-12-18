@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export default class CurrentWant extends Component {
@@ -41,7 +42,7 @@ export default class CurrentWant extends Component {
                             </button>
                         </div>
                     </div>
-                    <h4 className="current-wants-text">Fulfiller: {fulfiller.firstName != null ? fulfiller.firstName : 'Undecided'}</h4>
+                    <h4 className="current-wants-text marg-l-sm">{fulfiller.firstName != null ? <span>By <Link to="/profile" className="link">{fulfiller.firstName}</Link></span> : <Link to="/profile" className="link">Select a Fulfiller</Link>}</h4>
                 </div>
             </div>
         );

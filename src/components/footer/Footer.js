@@ -13,7 +13,7 @@ export default () => (
                     <h4><Link to="/" className="footer-link link">Press & Media</Link></h4>
                 </div>
                 <div className="footer__column">
-                    <h4 className="footer-heading">Guides</h4>
+                    <h4 className="footer-heading">Help</h4>
                     <h4><Link to="/" className="footer-link link">Wanters</Link></h4>
                     <h4><Link to="/" className="footer-link link">Fulfillers</Link></h4>
                     <h4><Link to="/" className="footer-link link">FAQ</Link></h4>

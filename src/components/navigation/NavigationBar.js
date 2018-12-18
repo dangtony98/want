@@ -54,6 +54,7 @@ export class NavigationBar extends Component {
                             <i 
                                 className="icon-notification fas fa-bell marg-r-sm"
                                 style={notificationBoxIsOpen ? navigationStyles.notificationIcon.selected : navigationStyles.notificationIcon.unselected}
+                                id="icon-notification"
                             ></i>
                         </button>
                         <Link to="/settings">

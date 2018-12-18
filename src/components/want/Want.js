@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { openDetailsModalIsExpanded, closeDetailsModalIsExpanded, openAcceptModalIsExpanded, setModalWantId } from '../../actions/modal';
 import PropTypes from 'prop-types';
@@ -49,15 +50,17 @@ export class Want extends Component {
             <div className={`want ${!isDetailsModal && 'marg-t-sm'}`}>
                 <div className="wrapper-flex-spaced wrapper-flex-spaced--top">
                     <div className="wrapper-flex wrapper-flex--center marg-b-sm">
-                        <img 
-                            src={photo}
-                            className="want__image"
-                        />
+                        <Link to="/profile">
+                            <img 
+                                src={photo}
+                                className="want__image"
+                            />
+                        </Link>
                         <div className="marg-l-sm">
                             <h4 className="want__firstName">
-                                <Link to="/profile" className="link" target="_blank">{firstName}</Link>
+                                <Link to="/profile" target="_blank" className="link">{firstName}</Link>
                             </h4>
-                            <h4 className="want__timestamp">{timestamp}</h4>
+                            <h4 className="want__timestamp">{`${moment(timestamp).fromNow(true)} ago`}</h4>
                         </div>
                     </div>
                     {!isDetailsModal ? 
@@ -104,7 +107,7 @@ export class Want extends Component {
 
 Want.propTypes = {
     firstName: PropTypes.string.isRequired,
-    timestamp: PropTypes.string.isRequired,
+    timestamp: PropTypes.object.isRequired,
     title: PropTypes.string.isRequired,
     pay: PropTypes.number.isRequired,
     description: PropTypes.string.isRequired,
