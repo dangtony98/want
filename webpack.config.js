@@ -63,5 +63,3 @@ module.exports = {
         inline: true
     }
 }
-
-// /\.(png|jpg|gif)$/

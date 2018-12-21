@@ -41,6 +41,7 @@
 @import './components/pages/profile-page';
 @import './components/pages/setup-page';
 @import './components/pages/settings-page';
+@import './components/pages/information-page';
 
 // COMPONENTS/WRAPPERS
 
@@ -118,3 +119,7 @@
 
 @import './components/notifications/notification-box';
 @import './components/notifications/notification-tab';
+
+// COMPONENTS/INFORMATION
+
+@import './components/information/information';

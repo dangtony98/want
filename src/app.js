@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import ReactDOM from 'react-dom';
 import './styles/_styles.scss';
 import { Provider } from 'react-redux';
@@ -10,6 +10,11 @@ import SignupPage from './components/pages/SignupPage';
 import SetupPage from './components/pages/SetupPage';
 import ProfilePage from './components/pages/ProfilePage';
 import SettingsPage from './components/pages/SettingsPage';
+import AboutUsPage from './components/pages/AboutUsPage';
+import TeamPage from './components/pages/TeamPage';
+import PressPage from './components/pages/PressPage';
+import WantersPage from './components/pages/WantersPage';
+import FulfillersPage from './components/pages/FulfillersPage';
 
 ReactDOM.render(
     <Provider store={store}>
@@ -21,6 +26,11 @@ ReactDOM.render(
                 <Route path="/setup" component={SetupPage} />
                 <Route path="/profile" component={ProfilePage} />
                 <Route path="/settings" component={SettingsPage} />
+                <Route path="/about" component={AboutUsPage} />
+                <Route path="/team" component={TeamPage} />
+                <Route path="/press" component={PressPage} />
+                <Route path="/wanters" component={WantersPage} />
+                <Route path="/fulfillers" component={FulfillersPage} />
             </Switch>
         </Router>
     </Provider>

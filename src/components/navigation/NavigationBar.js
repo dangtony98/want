@@ -37,7 +37,7 @@ export class NavigationBar extends Component {
         return (
             <div>
                 <div className="navigation-bar">
-                    <div>
+                    <div className="navigation-bar__placeholder-box">
 
                     </div>
                     <div>

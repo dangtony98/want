@@ -14,6 +14,10 @@
     font-weight: 700;
     text-align: center;
     z-index: 300;
+
+    &__placeholder-box {
+        width: 8rem;
+    }
 }
 
 .navigation-link {

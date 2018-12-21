@@ -2,15 +2,20 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { changeSelectedPreference } from '../../actions/settings';
+import PropTypes from 'prop-types';
 
 // FINALIZE STYLING FOR THIS COMPONENT
 
-const preferenceOptions = ['Payment', 'Security'];
+const preferenceOptions = {
+    EDIT_PROFILE: 'Edit Profile',
+    PAYMENT: 'Payment',
+    SECURITY: 'Security',
+    LOGOUT: 'Logout'
+}
 
 const preferenceStyles = {
     box: {
         selected: {
-            // backgroundColor: 'rgba(151, 117, 170, 0.1)',
             transition: 'all 0.2s'
         },
         unselected: {
@@ -50,19 +55,19 @@ export class SettingsPreferences extends Component {
                 <div className="settings-preferences__box">
                     <div 
                         className="settings-preferences__preference"
-                        style={selectedPreference == 'Edit Profile' ? preferenceStyles.box.selected : preferenceStyles.box.unselected}
+                        style={selectedPreference == preferenceOptions.EDIT_PROFILE ? preferenceStyles.box.selected : preferenceStyles.box.unselected}
                     >
                         <button
                             onClick={() => this.onPreferenceBtnPressed('Edit Profile')}
                             className="settings-preferences__button button-simple marg-t-xs"
-                            style={selectedPreference == 'Edit Profile' ? preferenceStyles.btn.selected : preferenceStyles.btn.unselected}
+                            style={selectedPreference == preferenceOptions.EDIT_PROFILE ? preferenceStyles.btn.selected : preferenceStyles.btn.unselected}
                         >Edit Profile</button>
                     </div>
-                    {preferenceOptions.map((title, index) => (
+                    {[preferenceOptions.PAYMENT, preferenceOptions.SECURITY].map((title, index) => (
                         <div
-                            key={index} 
                             className="settings-preferences__preference"
                             style={selectedPreference == title ? preferenceStyles.box.selected : preferenceStyles.box.unselected}
+                            key={index}
                         >
                             <button
                                 onClick={() => this.onPreferenceBtnPressed(title)} 
@@ -73,18 +78,23 @@ export class SettingsPreferences extends Component {
                     ))}
                     <div 
                         className="settings-preferences__preference"
-                        style={selectedPreference == 'Logout' ? preferenceStyles.box.selected : preferenceStyles.box.unselected}
+                        style={selectedPreference == preferenceOptions.LOGOUT ? preferenceStyles.box.selected : preferenceStyles.box.unselected}
                     >
                         <button
                             onClick={() => this.onPreferenceBtnPressed('Logout')}
                             className="settings-preferences__button button-simple marg-b-xs"
-                            style={selectedPreference == 'Logout' ? preferenceStyles.btn.selected : preferenceStyles.btn.unselected}
+                            style={selectedPreference == preferenceOptions.LOGOUT ? preferenceStyles.btn.selected : preferenceStyles.btn.unselected}
                         >Logout</button>
                     </div>
                 </div>
             </div>
         );
     }
+}
+
+SettingsPreferences.propTypes = {
+    selectedPreference: PropTypes.string,
+    changeSelectedPreference: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ settings }) => ({

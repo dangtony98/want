@@ -1,0 +1,37 @@
+.information-jumbotron {
+    position: relative;
+    height: 75rem;
+    width: 100%;
+
+    &__box {
+        height: auto;
+        width: 50rem;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: $color-white;
+    }
+}
+
+.information-horizontal-image {
+    height: 25rem;
+    width: 100%;
+}
+
+.information-text {
+    color: $color-grey-dark;
+}
+
+.information-section {
+    height: auto;
+    width: 100%;
+    padding: 2rem;
+}
+
+.information-box {
+    height: auto;
+    width: 50rem;
+    margin: 0 auto;
+}

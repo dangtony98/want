@@ -35,6 +35,8 @@ export class SettingsPayment extends Component {
 
     render() {
         const { savedCards } = this.state;
+
+        // CONSIDER REVISING DIV STRUCTURE TO CSS GRID LAYOUT
         return (
             <div className="settings-edit-profile">
                 <div className="settings-content">
