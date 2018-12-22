@@ -70,6 +70,8 @@ const feed = {
 
 export default (state = feed, action) => {
     switch (action.type) {
+        case 'UPDATE_FEED':
+            return state;
         default:
             return state;
     }

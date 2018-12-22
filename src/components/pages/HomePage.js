@@ -7,6 +7,7 @@ import ChatBox from '../chat/ChatBox';
 
 export default () => {
     window.scrollTo(0, 0);
+
     return (
         <div className="home-page">
             <ModalHandler />

@@ -7,15 +7,8 @@ export class LoginBox extends Component {
     constructor(props) {
         super(props);
 
-        this.onLoginFormSubmit = this.onLoginFormSubmit.bind(this);
         this.onFacebookBtnPressed = this.onFacebookBtnPressed.bind(this);
         this.onGoogleBtnPressed = this.onGoogleBtnPressed.bind(this);
-    }
-    
-    onLoginFormSubmit(formContent) {
-        console.log(formContent);
-        // SEND POST REQUEST FOR AUTHENTICATION
-        this.props.history.push("/");
     }
 
     onFacebookBtnPressed() {
@@ -29,7 +22,7 @@ export class LoginBox extends Component {
     render() {
         return (
             <div className="login-box">
-                <LoginForm onSubmit={this.onLoginFormSubmit} />
+                <LoginForm />
                 <h4 className="login-text marg-t-m marg-b-sm">Or login with</h4>
                     <div className="wrapper-flex-spaced wrapper-flex-spaced--center marg-b-m">
                         <div></div>

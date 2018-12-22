@@ -4,6 +4,8 @@ import './styles/_styles.scss';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import store from './store/store';
+
+// PAGES
 import HomePage from './components/pages/HomePage';
 import LoginPage from './components/pages/LoginPage';
 import SignupPage from './components/pages/SignupPage';
@@ -16,16 +18,19 @@ import PressPage from './components/pages/PressPage';
 import WantersPage from './components/pages/WantersPage';
 import FulfillersPage from './components/pages/FulfillersPage';
 
+// HOCS
+import RequireAuth from './components/helpers/RequireAuth';
+
 ReactDOM.render(
     <Provider store={store}>
         <Router>
             <Switch>
-                <Route path="/" component={HomePage} exact />
+                <Route path="/" component={RequireAuth(HomePage)} exact />
                 <Route path="/login" component={LoginPage} />
                 <Route path="/signup" component={SignupPage} />
                 <Route path="/setup" component={SetupPage} />
-                <Route path="/profile" component={ProfilePage} />
-                <Route path="/settings" component={SettingsPage} />
+                <Route path="/profile" component={RequireAuth(ProfilePage)} />
+                <Route path="/settings" component={RequireAuth(SettingsPage)} />
                 <Route path="/about" component={AboutUsPage} />
                 <Route path="/team" component={TeamPage} />
                 <Route path="/press" component={PressPage} />

@@ -1,7 +1,7 @@
 const profile = {
     summary: {
-        firstName: 'Isabella',
-        photo: 'https://images.unsplash.com/photo-1530243301483-fb1e29cb7862?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=3bc41113a3248b45540fe023c9a6ac98&auto=format&fit=crop&w=934&q=80',
+        firstName: 'John',
+        photo: 'https://images.unsplash.com/photo-1530983822321-fcac2d3c0f06?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=0ee757d7b18ec14dd482d03c4daa2bac&auto=format&fit=crop&w=2219&q=80',
         shortDescription: 'Chef, amateur photographer and cat lover',
         description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.'
     },
@@ -11,8 +11,8 @@ const profile = {
         reviews: 15
     },
     reviews: [{
-        firstName: 'John',
-        photo: 'https://images.unsplash.com/photo-1530983822321-fcac2d3c0f06?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=0ee757d7b18ec14dd482d03c4daa2bac&auto=format&fit=crop&w=2219&q=80',
+        firstName: 'Isabella',
+        photo: 'https://images.unsplash.com/photo-1530243301483-fb1e29cb7862?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=3bc41113a3248b45540fe023c9a6ac98&auto=format&fit=crop&w=934&q=80',
         timestamp: 'November, 2018',
         rating: 4.43,
         title: 'Help take a professional profile picture for LinkedIn',

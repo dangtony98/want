@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
 import NotificationBox from '../notifications/NotificationBox';
+import { setUser } from '../../actions/admin';
 import { closeNotificationBoxIsOpen, invertNotificationBoxIsOpen } from '../../actions/layout';
 import PropTypes from 'prop-types';
 import image from '../../assets/sample-profile.png';
@@ -26,6 +28,20 @@ export class NavigationBar extends Component {
 
     componentDidMount() {
         this.props.closeNotificationBoxIsOpen();
+        axios.get('http://94a65306.ngrok.io/api/user', 
+            { 
+                headers: { 
+                    'Accept': 'application/json', 
+                    'Authorization': `Bearer ${localStorage.getItem('token')}` 
+                }
+            })
+            .then((response) => {
+                // SEND POST REQUEST TO LOAD USER
+                this.props.setUser(response.data.user);
+            })
+            .catch((error) => {
+                console.log('Error: ' + error);
+            });
     }
 
     onNotificationButtonPressed() {
@@ -73,7 +89,10 @@ export class NavigationBar extends Component {
 
 NavigationBar.propTypes = {
     photo: PropTypes.string,
-    notificationBoxIsOpen: PropTypes.bool
+    notificationBoxIsOpen: PropTypes.bool,
+    closeNotificationBoxIsOpen: PropTypes.func.isRequired,
+    invertNotificationBoxIsOpen: PropTypes.func.isRequired,
+    setUser: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ admin, layout }) => ({
@@ -83,7 +102,8 @@ const mapStateToProps = ({ admin, layout }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     closeNotificationBoxIsOpen: () => dispatch(closeNotificationBoxIsOpen()),
-    invertNotificationBoxIsOpen: () => dispatch(invertNotificationBoxIsOpen())
+    invertNotificationBoxIsOpen: () => dispatch(invertNotificationBoxIsOpen()),
+    setUser: (user) => dispatch(setUser(user))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(NavigationBar);

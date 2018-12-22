@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import axios from 'axios';
 import { changeSelectedPreference } from '../../actions/settings';
 import PropTypes from 'prop-types';
 
@@ -42,8 +43,25 @@ export class SettingsPreferences extends Component {
     onPreferenceBtnPressed(value) {
         this.props.changeSelectedPreference(value);
         if (value == 'Logout') {
-            // LOGOUT THE USER
-            this.props.history.push("/login");
+            console.log('AXX');
+            console.log(localStorage.getItem('token'));
+            axios.post('http://94a65306.ngrok.io/api/logout', 
+            { 
+                headers: { 
+                    'Accept': 'application/json', 
+                    'Authorization': `Bearer ${localStorage.getItem('token')}` 
+                }
+            })
+            .then((response) => {
+                // SEND POST REQUEST FOR LOGOUT
+                console.log('RESPONSE');
+                console.log(response);
+                localStorage.removeItem('token');
+                this.props.history.push("/login");
+            })
+            .catch((error) => {
+                console.log('Error: ' + error);
+            });
         }
     }
 

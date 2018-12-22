@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import { updateFeed } from '../../actions/feed';
 import Post from '../post/Post';
 import Filter from '../narrow/Filter';
 import Sort from '../narrow/Sort';
@@ -17,14 +18,13 @@ export class HomeContent extends Component {
 
     componentDidMount() {
         // Fetching data from backend in progress.
-        console.log('Sending GET Request to retrieve Want...');
-        axios.get('http://d571ba11.ngrok.io/api/want/show/2', { headers: { "Accept": "application/json" } })
-            .then((response) => {
-                console.log('Response: ' + response);
-            })
-            .catch((error) => {
-                console.log('Error: ' + error);
-            });
+        // axios.get('http://94a65306.ngrok.io/api/want/show/1')
+        //     .then((response) => {
+        //         console.log(response);
+        //     })
+        //     .catch((error) => {
+        //         console.log('Error: ' + error);
+        //     });
     }
 
     render() {
@@ -72,4 +72,8 @@ const mapStateToProps = ({ feed }) => ({
     wants: feed.wants
 });
 
-export default connect(mapStateToProps)(HomeContent);
+const mapDispatchToProps = (dispatch) => ({
+    updateFeed: (feed) => dispatch(updateFeed(feed))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeContent);
