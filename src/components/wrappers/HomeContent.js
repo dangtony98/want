@@ -17,7 +17,7 @@ export class HomeContent extends Component {
     }
 
     componentDidMount() {
-        // Fetching data from backend in progress.
+        // TEST GET REQUEST
         // axios.get('http://94a65306.ngrok.io/api/want/show/1')
         //     .then((response) => {
         //         console.log(response);
