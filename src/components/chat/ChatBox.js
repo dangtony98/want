@@ -7,7 +7,6 @@ import ChatRenegotiation from './ChatRenegotiation';
 import ChatBlock from './ChatBlock';
 import { closeChatIsExpanded, closeChatRenegotiationIsExpanded, invertChatRenegotiationIsExpanded } from '../../actions/layout';
 import { updateChatInput, sendMessage } from '../../actions/chat';
-import image from '../../assets/sample-profile.png';
 
 export class ChatBox extends Component {
     constructor(props) {
@@ -75,7 +74,7 @@ export class ChatBox extends Component {
                 <div className="chat-box__header">
                     <div className="wrapper-flex wrapper-flex--center">
                         <img 
-                            src={image}
+                            src="https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=934&q=80"
                             className="profile-picture--mini"
                         ></img>
                         <h4 className="chat-box__name">John</h4>

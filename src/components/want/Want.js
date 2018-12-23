@@ -4,7 +4,6 @@ import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { openDetailsModalIsExpanded, closeDetailsModalIsExpanded, openAcceptModalIsExpanded, setModalWantId } from '../../actions/modal';
 import PropTypes from 'prop-types';
-import image from './sample-profile.png';
 
 export class Want extends Component {
     constructor(props) {

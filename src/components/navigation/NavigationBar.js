@@ -6,7 +6,6 @@ import NotificationBox from '../notifications/NotificationBox';
 import { setUser } from '../../actions/admin';
 import { closeNotificationBoxIsOpen, invertNotificationBoxIsOpen } from '../../actions/layout';
 import PropTypes from 'prop-types';
-import image from '../../assets/sample-profile.png';
 
 const navigationStyles = {
     notificationIcon: {

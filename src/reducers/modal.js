@@ -1,8 +1,17 @@
+const detailsModalType = {
+    STANDARD: 'STANDARD',
+    BIDDING: 'BIDDING',
+    WANT: 'WANT',
+    FULFILLMENT: 'FULFILLMENT'
+}
+
 const modal = {
     modalWantId: null,
     detailsModalIsExpanded: false,
     acceptModalIsExpanded: false,
-    settingsPaymentModalIsExpanded: false
+    settingsPaymentModalIsExpanded: false,
+    biddersModalIsExpanded: false,
+    detailsModalType: null
 }
 
 export default (state = modal, action) => {
@@ -44,6 +53,11 @@ export default (state = modal, action) => {
             return {
                 ...state,
                 modalWantId: action.wantId
+            }
+        case 'SET_DETAILS_MODAL_WANT_ID':
+            // IN PROGRESS
+            return {
+                ...state
             }
         default:
             return state;

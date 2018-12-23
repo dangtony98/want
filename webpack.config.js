@@ -1,3 +1,4 @@
+const CompressionPlugin = require('compression-webpack-plugin');
 const path = require('path');
 
 module.exports = {
@@ -57,6 +58,11 @@ module.exports = {
             }
         ]
     },
+    plugins: [
+        new CompressionPlugin({
+            test: /\.js(\?.*)?$/i
+          })
+    ],
     devServer: {
         contentBase: path.join(__dirname, 'public'),
         historyApiFallback: true,

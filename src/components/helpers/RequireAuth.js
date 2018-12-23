@@ -13,13 +13,11 @@ const checkAuthentication = (props, callback) => {
         .then((response) => {
             // AUTHENTICATION SUCCESSFUL
             callback();
-            return true;
         })
         .catch((error) => {
             // AUTHENTICATION UNSUCCESSFUL
             console.log('Error: ' + error);
             props.history.push('/login');
-            return false;
         });
 }
 
@@ -30,16 +28,18 @@ export default (ComposedComponent) => {
         super(props);
 
         this.state = {
-            isAuthenticated: false
+            // *** SET TO FALSE IN PRODUCTION
+            isAuthenticated: true
         }
     }
 
     componentWillMount() {
-        checkAuthentication(this.props, () => { 
-            this.setState({
-                isAuthenticated: true
-            });  
-        });
+        // *** UNCOMMENT IN PRODUCTION
+        // checkAuthentication(this.props, () => { 
+        //     this.setState({
+        //         isAuthenticated: true
+        //     });  
+        // });
     }
 
     render() {

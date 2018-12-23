@@ -25,13 +25,15 @@ const ModalHandler = ({ acceptModalIsExpanded, detailsModalIsExpanded, settingsP
 ModalHandler.propTypes = {
     acceptModalIsExpanded: PropTypes.bool.isRequired,
     detailsModalIsExpanded: PropTypes.bool.isRequired,
-    settingsPaymentModalIsExpanded: PropTypes.bool.isRequired
+    settingsPaymentModalIsExpanded: PropTypes.bool.isRequired,
+    detailsModalType: PropTypes.string.isRequired
 }
 
 const mapStateToProps = ({ modal }) => ({
     acceptModalIsExpanded: modal.acceptModalIsExpanded,
     detailsModalIsExpanded: modal.detailsModalIsExpanded,
-    settingsPaymentModalIsExpanded: modal.settingsPaymentModalIsExpanded
+    settingsPaymentModalIsExpanded: modal.settingsPaymentModalIsExpanded,
+    detailsModalType: modal.detailsModalType
 });
 
 export default connect(mapStateToProps)(ModalHandler);

@@ -18,15 +18,19 @@ export class LoginForm extends Component {
     onFormSubmit(e) {
         e.preventDefault();        
         if (this.state.email != '' && this.state.password != '') {
-            axios.post('http://94a65306.ngrok.io/api/login', this.state)
-            .then((response) => {
-                // SEND POST REQUEST FOR AUTHENTICATION
-                localStorage.setItem('token', response.data.token);
-                this.props.history.push("/");
-            })
-            .catch((error) => {
-                console.log('Error: ' + error);
-            });
+            // UNCOMMENT IN PRODUCTION
+            // axios.post('http://94a65306.ngrok.io/api/login', this.state)
+            // .then((response) => {
+            //     // SEND POST REQUEST FOR AUTHENTICATION
+            //     localStorage.setItem('token', response.data.token);
+            //     this.props.history.push("/");
+            // })
+            // .catch((error) => {
+            //     console.log('Error: ' + error);
+            // });
+
+            // *** COMMENT IN PRODUCTION
+            this.props.history.push('/');
         }
     }
 

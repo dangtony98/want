@@ -11,8 +11,8 @@ const admin = {
 export default (state = admin, action) => {
     switch (action.type) {
         case 'SET_USER':
+            // FINISH SETTING UP THE USER
             console.log('SET_USER TRIGGERED');
-            console.log(action.user);
             return {
                 ...state,
                 photo: `http://94a65306.ngrok.io/api/avatars/${action.user.avatar}`
