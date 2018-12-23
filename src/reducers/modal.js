@@ -1,9 +1,13 @@
-const detailsModalType = {
-    STANDARD: 'STANDARD',
-    BIDDING: 'BIDDING',
-    WANT: 'WANT',
-    FULFILLMENT: 'FULFILLMENT'
-}
+/* 
+
+DETAILS MODAL TYPES:
+NONE: A WANT FORMAT BELONGING TO THE NEWSFEED
+STANDARD: AN EXPANDED WANT FORMAT BELONGING TO THE STANDARD DETAILS MODAL
+BIDDING: A WANT FORMAT SHOWING THE WANT'S POTENTIAL FULFILLERS
+WANT: A WANT FORMAT ENABLING PAYMENT TO THE FULFILLER
+FULFILLMENT: A WANT FORMAT ENABLING THE USER TO REQUEST PAYMENT FROM THE WANTER
+
+*/
 
 const modal = {
     modalWantId: null,
@@ -54,10 +58,10 @@ export default (state = modal, action) => {
                 ...state,
                 modalWantId: action.wantId
             }
-        case 'SET_DETAILS_MODAL_WANT_ID':
-            // IN PROGRESS
+        case 'SET_DETAILS_MODAL_TYPE':
             return {
-                ...state
+                ...state,
+                detailsModalType: action.modalType
             }
         default:
             return state;

@@ -40,7 +40,7 @@ export class HomeContent extends Component {
                     <Sort />
                     {wants.map((want) => (
                         <Want
-                            isDetailsModal={false}
+                            detailsModalType="NONE"
                             wantId={want.wantId}
                             firstName={want.firstName}
                             photo={want.photo}
@@ -58,7 +58,7 @@ export class HomeContent extends Component {
                 </div>
             </div>
         ) : (
-            // Content to display if feed cannot be loaded.
+            // CONTENT TO DISPLAY IF FEED CANNOT BE LOADED
             <div></div>
         )
     }

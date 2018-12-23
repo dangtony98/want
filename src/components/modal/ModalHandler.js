@@ -5,7 +5,7 @@ import DetailsModal from './DetailsModal';
 import SettingsPaymentModal from './SettingsPaymentModal';
 import PropTypes from 'prop-types';
 
-const ModalHandler = ({ acceptModalIsExpanded, detailsModalIsExpanded, settingsPaymentModalIsExpanded }) => (
+const ModalHandler = ({ acceptModalIsExpanded, detailsModalIsExpanded, settingsPaymentModalIsExpanded, detailsModalType }) => (
     <div>
         <AcceptModal 
             isOpen={acceptModalIsExpanded}
@@ -13,6 +13,7 @@ const ModalHandler = ({ acceptModalIsExpanded, detailsModalIsExpanded, settingsP
         />
         <DetailsModal 
             isOpen={detailsModalIsExpanded}
+            detailsModalType={detailsModalType}
             closeTimeoutMS={150}
         />
         <SettingsPaymentModal

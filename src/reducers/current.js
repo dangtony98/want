@@ -1,7 +1,7 @@
 const current = {
     currentWants: [{
         isMatched: false,
-        uuid: '9bc439438d',
+        wantId: '9bc439438d',
         fulfiller: {
             firstName: null,
             uuid: null,
@@ -27,7 +27,7 @@ const current = {
         }]
     }, {
         isMatched: true,
-        uuid: '1fn4339038e',
+        wantId: '1fn4339038e',
         fulfiller: {
             firstName: 'Maxwell',
             uuid: '1ac49438x',
@@ -41,7 +41,7 @@ const current = {
     }],
     currentFulfillments: [{
         isMatched: false,
-        uuid: '4dq49418z',
+        wantId: '4dq49418z',
         wanter: {
             firstName: 'Pedro',
             uuid: '4ad44318z'
@@ -53,7 +53,7 @@ const current = {
         }
     }, {
         isMatched: true,
-        uuid: '1aq56417a',
+        wantId: '1aq56417a',
         wanter: {
             firstName: 'Jessica',
             uuid: '1fd0df313z'

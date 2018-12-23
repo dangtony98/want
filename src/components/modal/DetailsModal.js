@@ -9,6 +9,7 @@ export class DetailsModal extends Component {
     constructor(props) {
         super(props);
 
+        this.retrieveWant = this.retrieveWant.bind(this);
         this.onOutsideModalPressed = this.onOutsideModalPressed.bind(this);
     }
 
@@ -16,12 +17,19 @@ export class DetailsModal extends Component {
         ReactModal.setAppElement('body');
     }
 
+    retrieveWant() {
+        // SEND GET REQUEST TO RETRIEVE WANT INFORMATION
+        // IF SUCCESSFUL RESPONSE, RETURN WANT COMPONENT
+    }
+
     onOutsideModalPressed() {
         this.props.closeDetailsModalIsExpanded();
     }
 
     render() {
-        const { isOpen, modalWantId, wants } = this.props;
+        const { isOpen, modalWantId, wants, detailsModalType } = this.props;
+        console.log('modalWantId: ' + modalWantId);
+        console.log('detailsModalType: ' + detailsModalType);
         return (
             <ReactModal 
                 isOpen={isOpen}
@@ -29,10 +37,11 @@ export class DetailsModal extends Component {
                 overlayClassName="modal-overlay"
                 onRequestClose={this.onOutsideModalPressed}
             >
+            {/* TRIGGER retrieveWant() HERE */}
                 {wants.map((want) => {
                     return want.wantId == modalWantId &&
                         <Want
-                            isDetailsModal={true}
+                            detailsModalType={detailsModalType}
                             wantId={want.wantId}
                             firstName={want.firstName}
                             photo={want.photo}

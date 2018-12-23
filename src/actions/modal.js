@@ -30,9 +30,12 @@ const setModalWantId = (wantId) => ({
     wantId
 });
 
-const setDetailsModalWantId = (wantId) => ({
-    type: 'SET_DETAILS_MODAL_WANT_ID'
-});
+const setDetailsModalType = (modalType) => {
+    return ({
+        type: 'SET_DETAILS_MODAL_TYPE',
+        modalType
+    });
+};
 
 export {
     openDetailsModalIsExpanded,
@@ -42,5 +45,5 @@ export {
     openSettingsPaymentModalIsExpanded,
     closeSettingsPaymentModalIsExpanded,
     setModalWantId,
-    setDetailsModalWantId
+    setDetailsModalType
 }

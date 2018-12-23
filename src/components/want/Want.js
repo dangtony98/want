@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-import { openDetailsModalIsExpanded, closeDetailsModalIsExpanded, openAcceptModalIsExpanded, setModalWantId } from '../../actions/modal';
+import { openDetailsModalIsExpanded, closeDetailsModalIsExpanded, openAcceptModalIsExpanded, setModalWantId, setDetailsModalType } from '../../actions/modal';
 import PropTypes from 'prop-types';
 
 export class Want extends Component {
@@ -28,6 +28,7 @@ export class Want extends Component {
 
     onDetailsBtnPressed() {
         this.props.setModalWantId(this.props.wantId);
+        this.props.setDetailsModalType('STANDARD');
         this.props.openDetailsModalIsExpanded();
     }
 
@@ -44,9 +45,9 @@ export class Want extends Component {
     }
 
     render() {
-        const { isDetailsModal, firstName, photo, timestamp, title, pay, description } = this.props;
+        const { detailsModalType, firstName, photo, timestamp, title, pay, description } = this.props;
         return (
-            <div className={`want ${!isDetailsModal && 'marg-t-sm'}`}>
+            <div className={`want ${detailsModalType == 'NONE' && 'marg-t-sm'}`}>
                 <div className="wrapper-flex-spaced wrapper-flex-spaced--top">
                     <div className="wrapper-flex wrapper-flex--center marg-b-sm">
                         <Link to="/profile">
@@ -62,7 +63,7 @@ export class Want extends Component {
                             <h4 className="want__timestamp">{`${moment(timestamp).fromNow(true)} ago`}</h4>
                         </div>
                     </div>
-                    {!isDetailsModal ? 
+                    {detailsModalType == 'NONE' ? 
                         <button
                             onClick={this.onRenegotiationBtnPressed}
                             className="button-icon"
@@ -79,7 +80,7 @@ export class Want extends Component {
                 <h4 className="want__title">{title}</h4>
                 <h4 className="want__pay">{`$${pay}`}</h4>
                 <p className="want__description">
-                    {!isDetailsModal ? this.applyCharacterLimit(description, 300) : description}
+                    {detailsModalType == 'NONE' ? this.applyCharacterLimit(description, 300) : description}
                 </p>
                 <div className="wrapper-flex-spaced wrapper-flex-spaced--center">
                     <div className="wrapper-flex">
@@ -92,13 +93,18 @@ export class Want extends Component {
                             className="want__counter-button button-simple marg-t-sm"
                         >Counteroffer</button>
                     </div>
-                    {!isDetailsModal && 
+                    {detailsModalType == 'NONE' && 
                         <button
                             onClick={this.onDetailsBtnPressed} 
                             className="want__accept-button button-simple marg-t-sm"
                         >Details</button>
                     }
                 </div>
+                {detailsModalType == 'BIDDING' &&
+                    <div>
+                        XXX
+                    </div>
+                }
             </div>
         );
     }
@@ -113,14 +119,16 @@ Want.propTypes = {
     openDetailsModalIsExpanded: PropTypes.func.isRequired,
     closeDetailsModalIsExpanded: PropTypes.func.isRequired,
     openAcceptModalIsExpanded: PropTypes.func.isRequired,
-    setModalWantId: PropTypes.func.isRequired
+    setModalWantId: PropTypes.func.isRequired,
+    setDetailsModalType: PropTypes.func.isRequired
 }
 
 const mapDispatchToProps = (dispatch) => ({
     openDetailsModalIsExpanded: () => dispatch(openDetailsModalIsExpanded()),
     closeDetailsModalIsExpanded: () => dispatch(closeDetailsModalIsExpanded()),
     openAcceptModalIsExpanded: () => dispatch(openAcceptModalIsExpanded()),
-    setModalWantId: (wantId) => dispatch(setModalWantId(wantId))
+    setModalWantId: (wantId) => dispatch(setModalWantId(wantId)),
+    setDetailsModalType: (modalType) => dispatch(setDetailsModalType(modalType))
 });
 
 export default connect(null, mapDispatchToProps)(Want);
