@@ -17,9 +17,10 @@ export class DetailsModal extends Component {
         ReactModal.setAppElement('body');
     }
 
-    retrieveWant() {
+    retrieveWant(wantId, detailsModalType) {
         // SEND GET REQUEST TO RETRIEVE WANT INFORMATION
         // IF SUCCESSFUL RESPONSE, RETURN WANT COMPONENT
+        
     }
 
     onOutsideModalPressed() {
@@ -48,7 +49,7 @@ export class DetailsModal extends Component {
                             timestamp={want.timestamp}
                             title={want.title}
                             pay={want.pay}
-                            description={want.description} 
+                            description={want.description}
                             key={want.wantId}
                         />
                 })}

@@ -1,25 +1,6 @@
 import React, { Component } from 'react'
 import { withRouter } from 'react-router';
-import axios from 'axios';
-
-const checkAuthentication = (props, callback) => {
-    axios.get('http://94a65306.ngrok.io/api/user', 
-        { 
-            headers: { 
-                'Accept': 'application/json', 
-                'Authorization': `Bearer ${localStorage.getItem('token')}` 
-            }
-        })
-        .then((response) => {
-            // AUTHENTICATION SUCCESSFUL
-            callback();
-        })
-        .catch((error) => {
-            // AUTHENTICATION UNSUCCESSFUL
-            console.log('Error: ' + error);
-            props.history.push('/login');
-        });
-}
+import { checkAuthentication } from '../../services/api/authentication';
 
 export default (ComposedComponent) => {
 
@@ -28,18 +9,16 @@ export default (ComposedComponent) => {
         super(props);
 
         this.state = {
-            // *** SET TO FALSE IN PRODUCTION
-            isAuthenticated: true
+            isAuthenticated: false
         }
     }
 
     componentWillMount() {
-        // *** UNCOMMENT IN PRODUCTION
-        // checkAuthentication(this.props, () => { 
-        //     this.setState({
-        //         isAuthenticated: true
-        //     });  
-        // });
+        checkAuthentication(this.props, () => { 
+            this.setState({
+                isAuthenticated: true
+            });  
+        });
     }
 
     render() {

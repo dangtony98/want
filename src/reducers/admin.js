@@ -1,3 +1,5 @@
+const WANT_URL = 'https://dry-mesa-87903.herokuapp.com'
+
 const admin = {
     currentUser: '11aS43eaF3',
     firstName: 'John',
@@ -15,7 +17,7 @@ export default (state = admin, action) => {
             console.log('SET_USER TRIGGERED');
             return {
                 ...state,
-                photo: `http://94a65306.ngrok.io/api/avatars/${action.user.avatar}`
+                photo: `${WANT_URL}/api/avatars/${action.user.avatar}`
             };
         default:
             return state;

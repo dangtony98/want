@@ -46,6 +46,23 @@ export class Want extends Component {
 
     render() {
         const { detailsModalType, firstName, photo, timestamp, title, pay, description } = this.props;
+        
+        // SAMPLE FULFILLER OPTIONS
+        const fulfillerOptions = [{
+            firstName: 'Daria',
+            rating: 4.72,
+            counterOffer: 7.5
+        }, {
+            firstName: 'Ethan',
+            rating: 4.64,
+            counterOffer: 6
+        }, {
+            firstName: 'Peter',
+            rating: 4.31,
+            counterOffer: 10
+        }];
+        
+        console.log('detailsModalType from Want.js: ' + detailsModalType);
         return (
             <div className={`want ${detailsModalType == 'NONE' && 'marg-t-sm'}`}>
                 <div className="wrapper-flex-spaced wrapper-flex-spaced--top">
@@ -63,7 +80,7 @@ export class Want extends Component {
                             <h4 className="want__timestamp">{`${moment(timestamp).fromNow(true)} ago`}</h4>
                         </div>
                     </div>
-                    {detailsModalType == 'NONE' ? 
+                    { detailsModalType == 'NONE' ? 
                         <button
                             onClick={this.onRenegotiationBtnPressed}
                             className="button-icon"
@@ -82,28 +99,32 @@ export class Want extends Component {
                 <p className="want__description">
                     {detailsModalType == 'NONE' ? this.applyCharacterLimit(description, 300) : description}
                 </p>
-                <div className="wrapper-flex-spaced wrapper-flex-spaced--center">
-                    <div className="wrapper-flex">
-                        <button
-                            onClick={this.onAcceptBtnPressed} 
-                            className="button-simple marg-t-sm"
-                        >Accept</button>
-                        <button
-                            onClick={this.onCounterOfferBtnPressed} 
-                            className="want__counter-button button-simple marg-t-sm"
-                        >Counteroffer</button>
+                { (detailsModalType == 'NONE' || detailsModalType == 'STANDARD') && 
+                    <div className="wrapper-flex-spaced wrapper-flex-spaced--center">
+                        <div className="wrapper-flex">
+                            <button
+                                onClick={this.onAcceptBtnPressed} 
+                                className="button-simple marg-t-sm"
+                            >Accept</button>
+                            <button
+                                onClick={this.onCounterOfferBtnPressed} 
+                                className="want__counter-button button-simple marg-t-sm"
+                            >Counteroffer</button>
+                        </div>
+                        {detailsModalType == 'NONE' && 
+                            <button
+                                onClick={this.onDetailsBtnPressed} 
+                                className="want__accept-button button-simple marg-t-sm"
+                            >Details</button>
+                        }
                     </div>
-                    {detailsModalType == 'NONE' && 
-                        <button
-                            onClick={this.onDetailsBtnPressed} 
-                            className="want__accept-button button-simple marg-t-sm"
-                        >Details</button>
-                    }
-                </div>
+                }
                 {detailsModalType == 'BIDDING' &&
-                    <div>
-                        XXX
-                    </div>
+                    fulfillerOptions.map((fulfiller) => (
+                        <div>
+                            {fulfiller.firstName}
+                        </div>
+                    ))
                 }
             </div>
         );

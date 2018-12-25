@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
-import axios from 'axios';
+import { checkAuthentication, login } from '../../services/api/authentication';
 
 export class LoginForm extends Component {
     constructor(props) {
@@ -15,22 +15,16 @@ export class LoginForm extends Component {
         }
     }
 
+    componentWillMount() {
+        checkAuthentication(this.props, () => {
+            this.props.history.push('/');
+        });
+    }
+
     onFormSubmit(e) {
         e.preventDefault();        
         if (this.state.email != '' && this.state.password != '') {
-            // UNCOMMENT IN PRODUCTION
-            // axios.post('http://94a65306.ngrok.io/api/login', this.state)
-            // .then((response) => {
-            //     // SEND POST REQUEST FOR AUTHENTICATION
-            //     localStorage.setItem('token', response.data.token);
-            //     this.props.history.push("/");
-            // })
-            // .catch((error) => {
-            //     console.log('Error: ' + error);
-            // });
-
-            // *** COMMENT IN PRODUCTION
-            this.props.history.push('/');
+            login(this.state, this.props);
         }
     }
 

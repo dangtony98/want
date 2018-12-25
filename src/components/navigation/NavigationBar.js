@@ -5,6 +5,7 @@ import axios from 'axios';
 import NotificationBox from '../notifications/NotificationBox';
 import { setUser } from '../../actions/admin';
 import { closeNotificationBoxIsOpen, invertNotificationBoxIsOpen } from '../../actions/layout';
+import { getUser } from '../../services/api/authentication';
 import PropTypes from 'prop-types';
 
 const navigationStyles = {
@@ -27,20 +28,7 @@ export class NavigationBar extends Component {
 
     componentDidMount() {
         this.props.closeNotificationBoxIsOpen();
-        axios.get('http://94a65306.ngrok.io/api/user', 
-            { 
-                headers: { 
-                    'Accept': 'application/json', 
-                    'Authorization': `Bearer ${localStorage.getItem('token')}` 
-                }
-            })
-            .then((response) => {
-                // SEND POST REQUEST TO LOAD USER
-                this.props.setUser(response.data.user);
-            })
-            .catch((error) => {
-                console.log('Error: ' + error);
-            });
+        getUser(this.props);
     }
 
     onNotificationButtonPressed() {
