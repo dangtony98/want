@@ -7,10 +7,10 @@ export const CurrentWants = ({ currentWants }) => (
     <div>
         <h4 className="content-heading">Current Wants</h4>
         <div className="current-wants-box">
-            {currentWants.map((currentWant) => (
+            {currentWants.map((currentWant, index) => (
                 <CurrentWant 
                     {...currentWant}
-                    key={currentWant.uuid}
+                    key={index}
                 />
             ))}
         </div>

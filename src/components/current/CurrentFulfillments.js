@@ -10,7 +10,7 @@ export const CurrentFulfillments = ({ currentFulfillments }) => (
             {currentFulfillments.map((currentFulfillment, index) => (
                 <CurrentFulfillment 
                     {...currentFulfillment} 
-                    key={currentFulfillment.uuid}
+                    key={index}
                 />
             ))}
         </div>

@@ -35,14 +35,33 @@ const checkAuthentication = (props, callback) => {
 
 const login = (state, props) => {
     axios.post(`${WANT_URL}/api/login`, state)
-    .then((response) => {
-        // SEND POST REQUEST FOR AUTHENTICATION
-        localStorage.setItem('token', response.data.token);
-        props.history.push("/");
-    })
-    .catch((error) => {
-        console.log('Error: ' + error);
-    });
+        .then((response) => {
+            // SEND POST REQUEST FOR AUTHENTICATION
+            localStorage.setItem('token', response.data.token);
+            props.history.push("/");
+        })
+        .catch((error) => {
+            console.log('Error: ' + error);
+        });
+}
+
+// REGISTER()
+
+// POSTS FIRST NAME, LAST NAME, EMAIL, AND PASSWORD TO TEH SERVER FOR REGISTRATION
+// STATE: CONTAINS FIRST NAME, LAST NAME, EMAIL, PASSWORD, AND REPASSWORD
+// PROPS: CONTAINS PUSH() FUNC
+
+const register = (state, props) => {
+    axios.post(`${WANT_URL}/api/register`, state)
+        .then((response) => {
+            // SEND POST REQUEST FOR REGISTRATION
+            console.log('Sent Register POST request');
+            localStorage.setItem('token', response.data.token);
+            props.history.push("/");
+        })
+        .catch((error) => {
+            console.log('Error: ' + error);
+        });
 }
 
 // GETUSER()
@@ -67,4 +86,4 @@ const getUser = (props) => {
         });
 }
 
-export { checkAuthentication, login, getUser };
+export { checkAuthentication, login, register, getUser };

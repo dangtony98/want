@@ -27,7 +27,7 @@ ModalHandler.propTypes = {
     acceptModalIsExpanded: PropTypes.bool.isRequired,
     detailsModalIsExpanded: PropTypes.bool.isRequired,
     settingsPaymentModalIsExpanded: PropTypes.bool.isRequired,
-    detailsModalType: PropTypes.string.isRequired
+    detailsModalType: PropTypes.string
 }
 
 const mapStateToProps = ({ modal }) => ({

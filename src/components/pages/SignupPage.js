@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import PromoBox from '../signup/PromoBox';
-import SignupBox from '../signup/SignupBox';
 
 export default () => (
     <div className="signup-page">

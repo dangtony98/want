@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
-import { checkAuthentication, login } from '../../services/api/authentication';
+import { login } from '../../services/api/authentication';
+import PropTypes from 'prop-types';
 
 export class LoginForm extends Component {
     constructor(props) {
@@ -15,15 +16,10 @@ export class LoginForm extends Component {
         }
     }
 
-    componentWillMount() {
-        checkAuthentication(this.props, () => {
-            this.props.history.push('/');
-        });
-    }
-
     onFormSubmit(e) {
-        e.preventDefault();        
-        if (this.state.email != '' && this.state.password != '') {
+        e.preventDefault();
+        const { email, password } = this.state;        
+        if (email != '' && password != '') {
             login(this.state, this.props);
         }
     }
@@ -46,6 +42,7 @@ export class LoginForm extends Component {
                     placeholder="Email"
                     autoComplete="off"
                     className="input-text settings-input marg-b-sm"
+                    required
                 />
                 <input
                     name="password"
@@ -55,11 +52,16 @@ export class LoginForm extends Component {
                     placeholder="Password"
                     autoComplete="off"
                     className="input-text settings-input marg-b-sm"
+                    required
                 />
                 <button className="login-button button-shaded">Login</button>
             </form>
         );
     }
+}
+
+LoginForm.propTypes = {
+    history: PropTypes.object.isRequired
 }
 
 export default withRouter(LoginForm);
