@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const WANT_URL = 'https://dry-mesa-87903.herokuapp.com'
+const WANT_URL = 'https://dry-mesa-87903.herokuapp.com';
 
 // CHECKAUTHENTICATION()
 
-// GETS AN "AUTHENTICATED OR NOT" FROM THE SERVER BASED ON STORED LOCAL TOKEN
+// GETS AN "AUTHENTICATED OR NOT" FROM THE SERVER BASED ON STORED TOKEN
 // PROPS: CONTAINS PUSH() FUNC
 // CALLBACK: THE SETSTATE CALLBACK TO ENABLE COMPONENT RENDERING IN HOC
 
@@ -41,6 +41,32 @@ const login = (state, props) => {
             props.history.push("/");
         })
         .catch((error) => {
+            console.log('Error: ' + error);
+        });
+}
+
+// LOGOUT()
+
+// POSTS STORED TOKEN TO THE SERVER TO LOGOUT
+// PROPS: CONTAINS PUSH() FUNC
+
+const logout = (props) => {
+    axios.post(`${WANT_URL}/api/logout`, {
+
+        },
+        {
+            headers: { 
+                'Accept': 'application/json', 
+                'Authorization': `Bearer ${localStorage.getItem('token')}` 
+            }
+        })
+        .then((response) => {
+            // AUTHENTICATION SUCCESSFUL
+            localStorage.removeItem('token');
+            props.history.push('/login');
+        })
+        .catch((error) => {
+            // AUTHENTICATION UNSUCCESSFUL
             console.log('Error: ' + error);
         });
 }
@@ -86,4 +112,4 @@ const getUser = (props) => {
         });
 }
 
-export { checkAuthentication, login, register, getUser };
+export { checkAuthentication, login, logout, register, getUser };

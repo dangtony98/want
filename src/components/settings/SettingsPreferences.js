@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import axios from 'axios';
 import { changeSelectedPreference } from '../../actions/settings';
+import { logout } from '../../services/api/authentication';
 import PropTypes from 'prop-types';
 
 // FINALIZE STYLING FOR THIS COMPONENT
@@ -33,6 +33,8 @@ const preferenceStyles = {
     }
 }
 
+const WANT_URL = 'https://dry-mesa-87903.herokuapp.com'
+
 export class SettingsPreferences extends Component {
     constructor(props) {
         super(props);
@@ -41,27 +43,10 @@ export class SettingsPreferences extends Component {
     }
 
     onPreferenceBtnPressed(value) {
-        this.props.changeSelectedPreference(value);
         if (value == 'Logout') {
-            console.log('AXX');
-            console.log(localStorage.getItem('token'));
-            axios.post('http://94a65306.ngrok.io/api/logout', 
-            { 
-                headers: { 
-                    'Accept': 'application/json', 
-                    'Authorization': `Bearer ${localStorage.getItem('token')}` 
-                }
-            })
-            .then((response) => {
-                // SEND POST REQUEST FOR LOGOUT
-                console.log('RESPONSE');
-                console.log(response);
-                localStorage.removeItem('token');
-                this.props.history.push("/login");
-            })
-            .catch((error) => {
-                console.log('Error: ' + error);
-            });
+            logout(this.props);
+        } else {
+            this.props.changeSelectedPreference(value);
         }
     }
 

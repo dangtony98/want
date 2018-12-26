@@ -2,10 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { Collapse } from 'react-collapse';
+import { animateScroll as scroll } from 'react-scroll';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
 import { openPostIsExpanded } from '../../actions/layout';
 
+// scroll.scrollToTop();
 
 const select = {
     options: [
@@ -58,7 +60,13 @@ class PostForm extends Component {
         super(props);
 
         this.renderInputField = this.renderInputField.bind(this);
+        
+        this.onFormSubmit = this.onFormSubmit.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
+
+        this.state = {
+            
+        }
     }
 
     renderInputField(inputType, name, placeholder) {
@@ -74,6 +82,11 @@ class PostForm extends Component {
                 className="post-input input-text" 
             />
         );
+    }
+
+    onFormSubmit(e) {
+        e.preventDefault();
+        // SEND POST REQUEST TO SUBMIT WANT
     }
 
     onInputFocus() {

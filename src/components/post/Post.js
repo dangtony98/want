@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { animateScroll as scroll } from 'react-scroll';
 import PropTypes from 'prop-types';
 import { closePostIsExpanded } from '../../actions/layout';
 import PostForm from './PostForm';
@@ -9,7 +8,6 @@ export class Post extends Component {
     constructor(props) {
         super(props);
 
-        this.onPostSubmit = this.onPostSubmit.bind(this);
         this.setWrapperRef = this.setWrapperRef.bind(this);
         this.handleClickOutside = this.handleClickOutside.bind(this);
     }
@@ -20,11 +18,6 @@ export class Post extends Component {
 
     componentWillUnmount() {
         document.removeEventListener('mousedown', this.handleClickOutside);
-    }
-    
-    onPostSubmit(formContent) {
-        console.log(formContent);
-        scroll.scrollToTop();
     }
 
     setWrapperRef(node) {
@@ -44,7 +37,7 @@ export class Post extends Component {
                 <div
                     ref={this.setWrapperRef} 
                     className="post-box">
-                    <PostForm onSubmit={this.onPostSubmit} />
+                    <PostForm />
                 </div>
             </div>
         );
