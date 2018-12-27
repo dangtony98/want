@@ -2,27 +2,29 @@ import axios from 'axios';
 
 const WANT_URL = 'https://dry-mesa-87903.herokuapp.com'
 
-// CHECKAUTHENTICATION()
+// POST()
 
-// GETS AN "AUTHENTICATED OR NOT" FROM THE SERVER BASED ON STORED LOCAL TOKEN
-// PROPS: CONTAINS PUSH() FUNC
-// CALLBACK: THE SETSTATE CALLBACK TO ENABLE COMPONENT RENDERING IN HOC
+// POSTS A WANT CONTANING A TITLE, COST, CATEGORY, AND DESCRIPTION TO THE SERVER
 
-const checkAuthentication = (props, callback) => {
-    axios.get(`${WANT_URL}/api/user`, 
-        { 
-            headers: { 
-                'Accept': 'application/json', 
-                'Authorization': `Bearer ${localStorage.getItem('token')}` 
-            }
-        })
-        .then((response) => {
-            // AUTHENTICATION SUCCESSFUL
-            callback();
-        })
-        .catch((error) => {
-            // AUTHENTICATION UNSUCCESSFUL
-            console.log('Error: ' + error);
-            props.history.push('/login');
-        });
+const post = (form, scroll, callback) => {
+    axios.post(`${WANT_URL}/api/want`, form,
+    {
+        headers: { 
+            'Accept': 'application/json', 
+            'Authorization': `Bearer ${localStorage.getItem('token')}` 
+        }
+    })
+    .then((response) => {
+        // POST SUCCESSFUL
+        callback();
+        scroll.scrollToTop();
+    })
+    .catch((error) => {
+        // POST UNSUCCESSFUL
+        console.log('Error: ' + error);
+        console.log('Failed Form: ');
+        console.log(form);
+    });
 }
+
+export { post };

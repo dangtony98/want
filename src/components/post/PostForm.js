@@ -6,18 +6,19 @@ import { animateScroll as scroll } from 'react-scroll';
 import Select from 'react-select';
 import PropTypes from 'prop-types';
 import { openPostIsExpanded } from '../../actions/layout';
+import { post } from '../../services/api/post';
 
-// scroll.scrollToTop();
+import numeral from 'numeral';
 
 const select = {
     options: [
-        { value: 'purchase', label: 'Purchase & Delivery' },
-        { value: 'home', label: 'Home Services' },
-        { value: 'freelance', label: 'Freelance' },
-        { value: 'transportation', label: 'Transportation' },
-        { value: 'education', label: 'Education' },
-        { value: 'entertainment', label: 'Entertainment' },
-        { value: 'other', label: 'Other' },
+        { value: 1, label: 'Purchase & Delivery' },
+        { value: 2, label: 'Home Services' },
+        { value: 3, label: 'Freelance' },
+        { value: 4, label: 'Transportation' },
+        { value: 5, label: 'Education' },
+        { value: 6, label: 'Entertainment' },
+        { value: 7, label: 'Other' },
     ],
     styles: {
         control: (base, state) => ({
@@ -41,52 +42,54 @@ const select = {
     }
 }
 
-const renderSelectField = ({ input, options, name, id }) => (
-    <Select 
-        {...input}
-        id={id}
-        name={name}
-        options={options}
-        value={input.value}
-        onChange={(value) => input.onChange(value)}
-        onBlur={(value) => input.onBlur(value)}
-        styles={select.styles}
-        className="select marg-t-sm" 
-    />
-);
-
 class PostForm extends Component {
     constructor(props) {
         super(props);
-
-        this.renderInputField = this.renderInputField.bind(this);
         
         this.onFormSubmit = this.onFormSubmit.bind(this);
+        this.handleChange = this.handleChange.bind(this);
+        this.handleChangeSelect = this.handleChangeSelect.bind(this);
         this.onInputFocus = this.onInputFocus.bind(this);
 
         this.state = {
-            
+            title: '',
+            cost: '',
+            description: '',
+            category: null
         }
-    }
-
-    renderInputField(inputType, name, placeholder) {
-        return (
-            <Field 
-                name={name} 
-                component="input" 
-                type={inputType}
-                placeholder={placeholder}
-                autoComplete="off"
-                onFocus={this.onInputFocus}
-                required="true"
-                className="post-input input-text" 
-            />
-        );
     }
 
     onFormSubmit(e) {
         e.preventDefault();
-        // SEND POST REQUEST TO SUBMIT WANT
+        const { title, cost, description, category } = this.state;
+        if (title != '' && cost != '' && description != '' && category != null) {
+            // SEND POST REQUEST TO SUBMIT WANT
+            post({
+                    ...this.state,
+                    cost: numeral(numeral(`$${this.state.cost}`).format('$0,0.00'))._value,
+                    category: this.state.category.value
+                }, scroll, () => {
+                    this.setState({
+                        title: '',
+                        cost: '',
+                        description: '',
+                        category: null
+                    });
+                });
+        }
+    }
+
+    handleChange(e) {
+        this.setState({
+            [e.target.name]: e.target.value
+        });
+    }
+
+    handleChangeSelect(e) {
+        this.setState({
+            ...this.state,
+            category: e
+        });
     }
 
     onInputFocus() {
@@ -94,45 +97,53 @@ class PostForm extends Component {
     }
 
     render() {
-        const { handleSubmit, postIsExpanded } = this.props;
+        const { postIsExpanded } = this.props;
+        const { title, cost, description, category } = this.state;
         return (
-            <form onSubmit={handleSubmit}>
-                {this.renderInputField(
-                    'text',
-                    'title', 
-                    'Enter a title'
-                )}
+            <form onSubmit={this.onFormSubmit}>
+                <input
+                    name="title"
+                    value={title}
+                    onChange={this.handleChange} 
+                    onFocus={this.onInputFocus}
+                    type="text"
+                    placeholder="Enter a title"
+                    autoComplete="off"
+                    className="post-input input-text"
+                    required
+                />
                 <Collapse isOpened={postIsExpanded}>
-                    <Field
-                        name="category" 
-                        component={renderSelectField}
-                        options={select.options} 
-                    />
-                    {/* <Select 
+                    <Select
+                        value={category}
                         options={select.options}
+                        onChange={this.handleChangeSelect}
                         styles={select.styles}
                         className="select marg-t-sm" 
-                    /> */}
-                    <Field
+                        required
+                    />
+                    <textarea
                         name="description"
-                        component="textarea"
+                        value={description}
+                        onChange={this.handleChange} 
+                        type="text"
                         placeholder="Enter a description"
                         autoComplete="off"
-                        onFocus={this.onInputFocus}
-                        required="true"
                         className="post-textarea textarea marg-t-sm"
+                        required
                     />
                 </Collapse>
                 <div className="wrapper-flex wrapper-flex--center marg-t-sm">
-                    <Field 
-                        name="offer" 
-                        component="input" 
-                        type="text"
+                    <input
+                        name="cost"
+                        value={cost}
+                        onChange={this.handleChange} 
+                        type="number"
+                        step="0.01"
+                        pattern="^\d*(\.\d{0,2})?$"
                         placeholder="Enter an offer"
                         autoComplete="off"
-                        onFocus={this.onInputFocus}
-                        required="true"
-                        className="post-input input-text" 
+                        className="post-input input-text"
+                        required
                     />
                     <button
                         type="submit"

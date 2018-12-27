@@ -25,7 +25,8 @@ export class Post extends Component {
     }
 
     handleClickOutside(event) {
-        if (this.wrapperRef && !this.wrapperRef.contains(event.target) && this.props.postIsExpanded == true && this.props.form.post.values == undefined) {
+        // FIND WAY TO KEEP FORM OPEN WHEN ANY VALUE IS SELECTED IN POSTFORM STATE
+        if (this.wrapperRef && !this.wrapperRef.contains(event.target) && this.props.postIsExpanded == true) {
             this.props.closePostIsExpanded();
         }
     }
