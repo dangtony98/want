@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { WANT_URL } from '../variables/variables';
 
-// const WANT_URL = 'https://dry-mesa-87903.herokuapp.com';
-
 // CHECKAUTHENTICATION()
 
 // GETS AN "AUTHENTICATED OR NOT" FROM THE SERVER BASED ON STORED TOKEN
@@ -10,7 +8,6 @@ import { WANT_URL } from '../variables/variables';
 // CALLBACK: THE SETSTATE CALLBACK TO ENABLE COMPONENT RENDERING IN HOC
 
 const checkAuthentication = (props, callback) => {
-    console.log('XZ');
     axios.get(`${WANT_URL}/api/user`, 
         { 
             headers: { 

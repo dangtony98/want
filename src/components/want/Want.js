@@ -3,18 +3,26 @@ import { connect } from 'react-redux';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { openDetailsModalIsExpanded, closeDetailsModalIsExpanded, openAcceptModalIsExpanded, setModalWantId, setDetailsModalType } from '../../actions/modal';
+import { getUser } from '../../services/api/profile';
 import PropTypes from 'prop-types';
 
 export class Want extends Component {
     constructor(props) {
         super(props);
 
+        this.onProfileBtnPressed = this.onProfileBtnPressed.bind(this);
         this.onAcceptBtnPressed = this.onAcceptBtnPressed.bind(this);
         this.onCounterOfferBtnPressed = this.onCounterOfferBtnPressed.bind(this);
         this.onDetailsBtnPressed = this.onDetailsBtnPressed.bind(this);
         this.onShareBtnPressed = this.onShareBtnPressed.bind(this);
         this.onCloseBtnPressed = this.onCloseBtnPressed.bind(this);
         this.applyCharacterLimit = this.applyCharacterLimit.bind(this);
+    }
+
+    onProfileBtnPressed(userId) {
+        // SEND POST REQUEST TO RETRIEVE THE REQUESTED USER'S PROFILE INFORMATION
+        console.log('onPerofileBtnPressed() triggered for user: ' + userId);
+        getUser(userId);
     }
 
     onAcceptBtnPressed() {
@@ -45,7 +53,7 @@ export class Want extends Component {
     }
 
     render() {
-        const { detailsModalType, firstName, photo, timestamp, title, pay, description } = this.props;
+        const { detailsModalType, userId, firstName, photo, timestamp, title, pay, description } = this.props;
         
         // SAMPLE FULFILLER OPTIONS
         const fulfillerOptions = [{
@@ -76,6 +84,10 @@ export class Want extends Component {
                         <div className="marg-l-sm">
                             <h4 className="want__firstName">
                                 <Link to="/profile" target="_blank" className="link">{firstName}</Link>
+                                {/* <button
+                                    onClick={() => this.onProfileBtnPressed(userId)} 
+                                    className="button-simple"
+                                >{firstName}</button> */}
                             </h4>
                             <h4 className="want__timestamp">{`${moment(timestamp).fromNow(true)} ago`}</h4>
                         </div>

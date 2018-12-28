@@ -41,13 +41,14 @@ export class HomeContent extends Component {
                     {wants.map((want) => (
                         <Want
                             detailsModalType="NONE"
-                            wantId={want.wantId}
-                            firstName={want.firstName}
-                            photo={want.photo}
-                            timestamp={want.timestamp}
-                            title={want.title}
-                            pay={want.pay}
-                            description={want.description} 
+                            {...want}
+                            // wantId={want.wantId}
+                            // firstName={want.firstName}
+                            // photo={want.photo}
+                            // timestamp={want.timestamp}
+                            // title={want.title}
+                            // pay={want.pay}
+                            // description={want.description} 
                             key={want.wantId}
                         />
                     ))}
