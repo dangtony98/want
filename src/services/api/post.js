@@ -1,6 +1,5 @@
 import axios from 'axios';
-
-const WANT_URL = 'https://dry-mesa-87903.herokuapp.com'
+import { WANT_URL } from '../variables/variables';
 
 // POST()
 
@@ -10,20 +9,19 @@ const post = (form, scroll, callback) => {
     axios.post(`${WANT_URL}/api/want`, form,
     {
         headers: { 
-            'Accept': 'application/json', 
-            'Authorization': `Bearer ${localStorage.getItem('token')}` 
+            Accept: 'application/json', 
+            Authorization: `Bearer ${localStorage.getItem('token')}` 
         }
     })
     .then((response) => {
         // POST SUCCESSFUL
         callback();
         scroll.scrollToTop();
+        // TRIGGER SUBSEQUENT REQUEST TO RELOAD NEWSFEED WITH THE POSTED WANT AS THE FIRST POST
     })
     .catch((error) => {
         // POST UNSUCCESSFUL
         console.log('Error: ' + error);
-        console.log('Failed Form: ');
-        console.log(form);
     });
 }
 

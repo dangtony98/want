@@ -1,6 +1,7 @@
 import axios from 'axios';
+import { WANT_URL } from '../variables/variables';
 
-const WANT_URL = 'https://dry-mesa-87903.herokuapp.com';
+// const WANT_URL = 'https://dry-mesa-87903.herokuapp.com';
 
 // CHECKAUTHENTICATION()
 
@@ -9,11 +10,12 @@ const WANT_URL = 'https://dry-mesa-87903.herokuapp.com';
 // CALLBACK: THE SETSTATE CALLBACK TO ENABLE COMPONENT RENDERING IN HOC
 
 const checkAuthentication = (props, callback) => {
+    console.log('XZ');
     axios.get(`${WANT_URL}/api/user`, 
         { 
             headers: { 
-                'Accept': 'application/json', 
-                'Authorization': `Bearer ${localStorage.getItem('token')}` 
+                Accept: 'application/json', 
+                Authorization: `Bearer ${localStorage.getItem('token')}` 
             }
         })
         .then((response) => {
@@ -56,8 +58,8 @@ const logout = (props) => {
         },
         {
             headers: { 
-                'Accept': 'application/json', 
-                'Authorization': `Bearer ${localStorage.getItem('token')}` 
+                Accept: 'application/json', 
+                Authorization: `Bearer ${localStorage.getItem('token')}` 
             }
         })
         .then((response) => {
@@ -99,8 +101,8 @@ const getUser = (props) => {
     axios.get(`${WANT_URL}/api/user`, 
         {
             headers: { 
-                'Accept': 'application/json', 
-                'Authorization': `Bearer ${localStorage.getItem('token')}` 
+                Accept: 'application/json', 
+                Authorization: `Bearer ${localStorage.getItem('token')}` 
             }
         })
         .then((response) => {

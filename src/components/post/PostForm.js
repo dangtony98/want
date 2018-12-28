@@ -63,10 +63,9 @@ class PostForm extends Component {
         e.preventDefault();
         const { title, cost, description, category } = this.state;
         if (title != '' && cost != '' && description != '' && category != null) {
-            // SEND POST REQUEST TO SUBMIT WANT
             post({
                     ...this.state,
-                    cost: numeral(numeral(`$${this.state.cost}`).format('$0,0.00'))._value,
+                    cost: numeral(numeral(`$${this.state.cost}`).format('$0,0.00'))._value * 100,
                     category: this.state.category.value
                 }, scroll, () => {
                     this.setState({
