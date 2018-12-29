@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom';
 import { setModalWantId, setDetailsModalType, openDetailsModalIsExpanded } from '../../actions/modal';
 import PropTypes from 'prop-types';
 
+const tabStyle = (isMatched) => ({
+    backgroundColor: isMatched ? 'rgb(255, 255, 255)' : 'rgba(189, 195, 199, 0.3)'
+});
+
 export class CurrentWant extends Component {
     constructor(props) {
         super(props);
@@ -38,21 +42,21 @@ export class CurrentWant extends Component {
 
     render() {
         const { isMatched, fulfiller, body } = this.props;
-        const circleStyle = { color: isMatched ? '#2ECC71' : '#7F8C8D' }
         return (
             <div
                 onClick={this.onCurrentWantPressed} 
                 className="current-want"
+                style={tabStyle(isMatched)}
             >
                 <div className="current-want__content">
                     <div className="wrapper-flex-spaced">
-                        <div className="wrapper-flex wrapper-flex--center">
+                        {/* <div className="wrapper-flex wrapper-flex--center">
                             <i
                                 style={circleStyle} 
                                 className="current-want__circle icon-circle fas fa-circle"
-                            ></i>
+                            ></i> */}
                             <h4 className="current-want__title">{this.applyCharacterLimit(body.title, 25)}</h4>
-                        </div>
+                        {/* </div> */}
                         <div className="wrapper-flex wrapper-flex--center">
                             <h4 className="current-wants-text">{`(-$${body.pay})`}</h4>
                             <button
@@ -63,7 +67,7 @@ export class CurrentWant extends Component {
                             </button>
                         </div>
                     </div>
-                    <h4 className="current-wants-text marg-l-sm">{fulfiller.firstName != null ? <span>By <Link to="/profile" target="_blank" className="link">{fulfiller.firstName}</Link></span> : <Link to="/profile" className="link">Select a Fulfiller</Link>}</h4>
+                    <h4 className="current-wants-text">{fulfiller.firstName != null ? <span>By <Link to="/profile" target="_blank" className="link">{fulfiller.firstName}</Link></span> : <Link to="/profile" className="link">Select a Fulfiller</Link>}</h4>
                 </div>
             </div>
         );

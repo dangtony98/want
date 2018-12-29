@@ -4,6 +4,10 @@ import { Link } from 'react-router-dom';
 import { setModalWantId, setDetailsModalType, openDetailsModalIsExpanded } from '../../actions/modal';
 import PropTypes from 'prop-types';
 
+const tabStyle = (isMatched) => ({
+    backgroundColor: isMatched ? '#fff' : 'rgba(189, 195, 199, 0.3)'
+});
+
 export class CurrentFulfillment extends Component {
     constructor(props) {
         super(props);
@@ -38,21 +42,21 @@ export class CurrentFulfillment extends Component {
 
     render() {
         const { isMatched, wanter, body } = this.props;
-        const circleStyle = { color: isMatched ? '#2ECC71' : '#7F8C8D' }
         return (
             <div
                 onClick={this.onCurrentFulfillmentPressed} 
                 className="current-fulfillment"
+                style={tabStyle(isMatched)}
             >
                 <div className="current-fulfillment__content">
                     <div className="wrapper-flex-spaced">
-                        <div className="wrapper-flex wrapper-flex--center">
+                        {/* <div className="wrapper-flex wrapper-flex--center">
                             <i
                                 style={circleStyle} 
                                 className="current-fulfillment__circle icon-circle fas fa-circle"
-                            ></i>
+                            ></i> */}
                             <h4 className="current-fulfillment__title">{this.applyCharacterLimit(body.title, 25)}</h4>
-                        </div>
+                        {/* </div> */}
                         <div className="wrapper-flex wrapper-flex--center">
                             <h4 className="current-fulfillments-text">{`(+$${body.pay})`}</h4>
                             <button
@@ -63,7 +67,7 @@ export class CurrentFulfillment extends Component {
                             </button>
                         </div>
                     </div>
-                    <h4 className="current-fulfillments-text marg-l-sm">For {wanter.firstName != null ? <Link to="/profile" target="_blank" className="link">{wanter.firstName}</Link> : 'Undecided'}</h4>
+                    <h4 className="current-fulfillments-text">For {wanter.firstName != null ? <Link to="/profile" target="_blank" className="link">{wanter.firstName}</Link> : 'Undecided'}</h4>
                 </div>
             </div>
         );
