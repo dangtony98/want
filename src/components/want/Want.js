@@ -17,6 +17,10 @@ export class Want extends Component {
         this.onShareBtnPressed = this.onShareBtnPressed.bind(this);
         this.onCloseBtnPressed = this.onCloseBtnPressed.bind(this);
         this.applyCharacterLimit = this.applyCharacterLimit.bind(this);
+
+        this.state = {
+            copiedAnimation: false
+        }
     }
 
     onProfileBtnPressed(userId) {
@@ -41,7 +45,16 @@ export class Want extends Component {
     }
 
     onShareBtnPressed() {
-
+        // TRIGGER SHARE ANIMATION
+        if (!this.state.copiedAnimation) {
+            this.setState({ copiedAnimation: true }, () => {
+                window.setTimeout(() => {
+                    this.setState({
+                        copiedAnimation: false
+                    });
+                }, 900);
+            });
+        }
     }
 
     onCloseBtnPressed() {
@@ -54,6 +67,7 @@ export class Want extends Component {
 
     render() {
         const { detailsModalType, userId, firstName, photo, timestamp, title, pay, description } = this.props;
+        const { copiedAnimation } = this.state;
         
         // SAMPLE FULFILLER OPTIONS
         const fulfillerOptions = [{
@@ -92,13 +106,17 @@ export class Want extends Component {
                             <h4 className="want__timestamp">{`${moment(timestamp).fromNow(true)} ago`}</h4>
                         </div>
                     </div>
-                    { detailsModalType == 'NONE' ? 
-                        <button
-                            onClick={this.onRenegotiationBtnPressed}
-                            className="button-icon"
-                        >
-                            <i className="icon-share fas fa-share-alt"></i>
-                        </button> :
+                    {detailsModalType == 'NONE' ? 
+                        <div className="wrapper-flex wrapper-flex--center">
+                            {copiedAnimation && <div className="want-copied">Copied link to clipboard</div>}
+                            <button
+                                onClick={this.onShareBtnPressed}
+                                className="button-icon"
+                            >
+                                <i className="icon-share fas fa-share-alt"></i>
+                            </button>
+                        </div>
+                         :
                         <button
                             onClick={this.onCloseBtnPressed} 
                             className="button-icon">
@@ -111,7 +129,7 @@ export class Want extends Component {
                 <p className="want__description">
                     {detailsModalType == 'NONE' ? this.applyCharacterLimit(description, 300) : description}
                 </p>
-                { (detailsModalType == 'NONE' || detailsModalType == 'STANDARD') && 
+                {(detailsModalType == 'NONE' || detailsModalType == 'STANDARD') && 
                     <div className="wrapper-flex-spaced wrapper-flex-spaced--center">
                         <div className="wrapper-flex">
                             <button

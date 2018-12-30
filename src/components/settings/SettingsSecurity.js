@@ -22,8 +22,9 @@ export default class SettingsSecurity extends Component {
 
     onFormSubmit(e) {
         e.preventDefault();
-        
-        if (this.state.newPassword == this.state.confirmPassword) {
+
+        const { newPassword, confirmPassword } = this.state;
+        if (newPassword == confirmPassword) {
             // SEND POST REQUEST TO UPDATE PASSWORD
             console.log(this.state);
         } else {
