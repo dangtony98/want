@@ -50,13 +50,7 @@ export class CurrentWant extends Component {
             >
                 <div className="current-want__content">
                     <div className="wrapper-flex-spaced">
-                        {/* <div className="wrapper-flex wrapper-flex--center">
-                            <i
-                                style={circleStyle} 
-                                className="current-want__circle icon-circle fas fa-circle"
-                            ></i> */}
-                            <h4 className="current-want__title">{this.applyCharacterLimit(body.title, 25)}</h4>
-                        {/* </div> */}
+                        <h4 className="current-want__title">{this.applyCharacterLimit(body.title, 25)}</h4>
                         <div className="wrapper-flex wrapper-flex--center">
                             <h4 className="current-wants-text">{`(-$${body.pay})`}</h4>
                             <button

@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Field, reduxForm } from 'redux-form';
 import { Collapse } from 'react-collapse';
 import { animateScroll as scroll } from 'react-scroll';
 import Select from 'react-select';
@@ -157,7 +156,6 @@ class PostForm extends Component {
 PostForm.propTypes = {
     postIsExpanded: PropTypes.bool.isRequired,
     openPostIsExpanded: PropTypes.func.isRequired,
-    handleSubmit: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ layout }) => ({
@@ -168,4 +166,4 @@ const mapDispatchToProps = (dispatch) => ({
     openPostIsExpanded: () => dispatch(openPostIsExpanded())
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(reduxForm({ form: 'post' })(PostForm));
+export default connect(mapStateToProps, mapDispatchToProps)(PostForm);
