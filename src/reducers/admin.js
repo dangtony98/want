@@ -1,4 +1,5 @@
 const WANT_URL = 'https://dry-mesa-87903.herokuapp.com'
+const IMAGE_URL = 'https://wantapi.s3.us-east-2.amazonaws.com'
 
 const admin = {
     currentUser: '11aS43eaF3',
@@ -17,7 +18,7 @@ export default (state = admin, action) => {
             console.log('SET_USER TRIGGERED');
             return {
                 ...state,
-                photo: `${WANT_URL}/api/avatars/${action.user.avatar}`
+                photo: `${IMAGE_URL}/${action.user.avatar}`
             };
         default:
             return state;
