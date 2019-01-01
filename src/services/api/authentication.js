@@ -80,7 +80,6 @@ const register = (state, props) => {
     axios.post(`${WANT_URL}/api/register`, state)
         .then((response) => {
             // SEND POST REQUEST FOR REGISTRATION
-            console.log('Sent Register POST request');
             localStorage.setItem('token', response.data.token);
             props.history.push("/");
         })

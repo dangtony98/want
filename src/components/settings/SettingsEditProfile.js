@@ -1,21 +1,35 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { uploadAvatar } from '../../services/api/settings';
 
 export class SettingsEditProfile extends Component {
     constructor(props) {
         super(props);
 
+        this.handleUploadFile = this.handleUploadFile.bind(this);
         this.handleChange = this.handleChange.bind(this);
         this.onFormSubmit = this.onFormSubmit.bind(this);
 
         this.state = {
-            firstName: this.props.firstName,
-            lastName: this.props.lastName,
+            first_name: this.props.first_name,
+            last_name: this.props.last_name,
             email: this.props.email,
             subtitle: this.props.subtitle,
             description: this.props.description,
             photo: null
         }
+    }
+
+    handleUploadFile(e) {
+        this.setState({
+            photo: e.target.files[0]
+        }, () => {
+            const { photo } = this.state;
+            const data = new FormData();
+            
+            data.append('avatar', photo);
+            uploadAvatar(data);
+        });
     }
 
     handleChange(e) {
@@ -33,7 +47,7 @@ export class SettingsEditProfile extends Component {
     
     render() {
         const { photo } = this.props;
-        const { firstName, lastName, email, subtitle, description } = this.state;
+        const { first_name, last_name, email, subtitle, description } = this.state;
         return (
             <div className="settings-edit-profile">
                 <form onSubmit={this.onFormSubmit}>
@@ -56,7 +70,7 @@ export class SettingsEditProfile extends Component {
                                 name="photo" 
                                 type="file"
                                 id="profile-photo-upload"
-                                onChange={this.handleChange}
+                                onChange={this.handleUploadFile}
                                 accept="image/png, image/jpeg"
                                 className="input-file" 
                             />
@@ -67,7 +81,7 @@ export class SettingsEditProfile extends Component {
                         <div className="settings-content__box">
                             <input
                                 name="firstName"
-                                value={firstName}
+                                value={first_name}
                                 onChange={this.handleChange} 
                                 type="text"
                                 placeholder="Enter your first name" 
@@ -76,7 +90,7 @@ export class SettingsEditProfile extends Component {
                             />
                             <input 
                                 name="lastName"
-                                value={lastName} 
+                                value={last_name} 
                                 onChange={this.handleChange}
                                 type="text"
                                 placeholder="Enter your last name" 
@@ -128,8 +142,8 @@ export class SettingsEditProfile extends Component {
 } 
 
 const mapStateToProps = ({ admin }) => ({
-    firstName: admin.firstName,
-    lastName: admin.lastName,
+    first_name: admin.first_name,
+    last_name: admin.last_name,
     email: admin.email,
     subtitle: admin.subtitle,
     description: admin.description,

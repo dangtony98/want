@@ -1,23 +1,24 @@
-const WANT_URL = 'https://dry-mesa-87903.herokuapp.com'
 const IMAGE_URL = 'https://wantapi.s3.us-east-2.amazonaws.com'
 
 const admin = {
-    currentUser: '11aS43eaF3',
-    firstName: 'John',
-    lastName: 'Doe',
-    email: 'johndoe@gmail.com',
+    id: null,
+    first_name: null,
+    last_name: null,
+    email: null,
     subtitle: 'Chef, amateur photographer, and cat lover',
     description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.',
-    photo: ''
+    photo: null
 }
 
 export default (state = admin, action) => {
     switch (action.type) {
         case 'SET_USER':
-            // FINISH SETTING UP THE USER
-            console.log('SET_USER TRIGGERED');
             return {
                 ...state,
+                id: action.user.id,
+                first_name: action.user.first_name,
+                last_name: action.user.last_name,
+                email: action.user.email,
                 photo: `${IMAGE_URL}/${action.user.avatar}`
             };
         default:
