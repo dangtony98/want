@@ -49,7 +49,7 @@ export class NotificationTab extends Component {
         return (
             <div className="notification-tab notification-tab--border wrapper-flex wrapper-flex--center">
                 <Link to="/profile">
-                    <img 
+                    <img
                         src={photo}
                         className="notification-tab__image"
                     />

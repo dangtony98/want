@@ -8,7 +8,10 @@ import {
     INVERT_CHAT_RENEGOTIATION_ISEXPANDED,
     OPEN_NOTIFICATION_BOX_ISOPEN,
     CLOSE_NOTIFICATION_BOX_ISOPEN,
-    INVERT_NOTIFICATION_BOX_ISOPEN
+    INVERT_NOTIFICATION_BOX_ISOPEN,
+    OPEN_PROFILE_DROPDOWN_ISOPEN,
+    CLOSE_PROFILE_DROPDOWN_ISOPEN,
+    INVERT_PROFILE_DROPDOWN_ISOPEN
 } from '../actions/constants';
 
 const layout = {
@@ -16,7 +19,8 @@ const layout = {
     sortIsExpanded: false,
     chatIsExpanded: false,
     chatRenegotiationIsExpanded: false,
-    notificationBoxIsOpen: false
+    notificationBoxIsOpen: false,
+    profileDropdownIsOpen: false
 }
 
 export default (state = layout, action) => {
@@ -70,6 +74,21 @@ export default (state = layout, action) => {
             return {
                 ...state,
                 notificationBoxIsOpen: !state.notificationBoxIsOpen
+            }
+        case OPEN_PROFILE_DROPDOWN_ISOPEN:
+            return {
+                ...state,
+                profileDropdownIsOpen: true
+            }
+        case CLOSE_PROFILE_DROPDOWN_ISOPEN:
+            return {
+                ...state,
+                profileDropdownIsOpen: false
+            }
+        case INVERT_PROFILE_DROPDOWN_ISOPEN:
+            return {
+                ...state,
+                profileDropdownIsOpen: !state.profileDropdownIsOpen
             }
         default:
             return state;

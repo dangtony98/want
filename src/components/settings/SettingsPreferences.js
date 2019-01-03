@@ -52,21 +52,22 @@ export class SettingsPreferences extends Component {
 
     render() {
         const { selectedPreference } = this.props;
+        const { EDIT_PROFILE, PAYMENT, SECURITY, LOGOUT } = preferenceOptions; 
         return (
             <div className="settings-preferences">
-                <h4 className="content-heading">Preferences</h4>
+                <h4 className="content-heading">Settings</h4>
                 <div className="settings-preferences__box">
                     <div 
                         className="settings-preferences__preference"
-                        style={selectedPreference == preferenceOptions.EDIT_PROFILE ? preferenceStyles.box.selected : preferenceStyles.box.unselected}
+                        style={selectedPreference == EDIT_PROFILE ? preferenceStyles.box.selected : preferenceStyles.box.unselected}
                     >
                         <button
                             onClick={() => this.onPreferenceBtnPressed('Edit Profile')}
                             className="settings-preferences__button button-simple marg-t-xs"
-                            style={selectedPreference == preferenceOptions.EDIT_PROFILE ? preferenceStyles.btn.selected : preferenceStyles.btn.unselected}
+                            style={selectedPreference == EDIT_PROFILE ? preferenceStyles.btn.selected : preferenceStyles.btn.unselected}
                         >Edit Profile</button>
                     </div>
-                    {[preferenceOptions.PAYMENT, preferenceOptions.SECURITY].map((title, index) => (
+                    {[PAYMENT, SECURITY].map((title, index) => (
                         <div
                             className="settings-preferences__preference"
                             style={selectedPreference == title ? preferenceStyles.box.selected : preferenceStyles.box.unselected}
@@ -81,12 +82,12 @@ export class SettingsPreferences extends Component {
                     ))}
                     <div 
                         className="settings-preferences__preference"
-                        style={selectedPreference == preferenceOptions.LOGOUT ? preferenceStyles.box.selected : preferenceStyles.box.unselected}
+                        style={selectedPreference == LOGOUT ? preferenceStyles.box.selected : preferenceStyles.box.unselected}
                     >
                         <button
                             onClick={() => this.onPreferenceBtnPressed('Logout')}
                             className="settings-preferences__button button-simple marg-b-xs"
-                            style={selectedPreference == preferenceOptions.LOGOUT ? preferenceStyles.btn.selected : preferenceStyles.btn.unselected}
+                            style={selectedPreference == LOGOUT ? preferenceStyles.btn.selected : preferenceStyles.btn.unselected}
                         >Logout</button>
                     </div>
                 </div>

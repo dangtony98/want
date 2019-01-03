@@ -8,7 +8,10 @@ import {
     INVERT_CHAT_RENEGOTIATION_ISEXPANDED,
     OPEN_NOTIFICATION_BOX_ISOPEN,
     CLOSE_NOTIFICATION_BOX_ISOPEN,
-    INVERT_NOTIFICATION_BOX_ISOPEN
+    INVERT_NOTIFICATION_BOX_ISOPEN,
+    OPEN_PROFILE_DROPDOWN_ISOPEN,
+    CLOSE_PROFILE_DROPDOWN_ISOPEN,
+    INVERT_PROFILE_DROPDOWN_ISOPEN   
 } from './constants';
 
 const openPostIsExpanded = () => ({
@@ -51,6 +54,18 @@ const invertNotificationBoxIsOpen = () => ({
     type: INVERT_NOTIFICATION_BOX_ISOPEN
 });
 
+const openProfileDropdownIsOpen = () => ({
+    type: OPEN_PROFILE_DROPDOWN_ISOPEN
+});
+
+const closeProfileDropdownIsOpen = () => ({
+    type: CLOSE_PROFILE_DROPDOWN_ISOPEN
+});
+
+const invertProfileDropdownIsOpen = () => ({
+    type: INVERT_PROFILE_DROPDOWN_ISOPEN
+});
+
 export { 
     openPostIsExpanded, 
     closePostIsExpanded, 
@@ -61,5 +76,8 @@ export {
     invertChatRenegotiationIsExpanded,
     openNotificationBoxIsOpen,
     closeNotificationBoxIsOpen,
-    invertNotificationBoxIsOpen
+    invertNotificationBoxIsOpen,
+    openProfileDropdownIsOpen,
+    closeProfileDropdownIsOpen,
+    invertProfileDropdownIsOpen
 };

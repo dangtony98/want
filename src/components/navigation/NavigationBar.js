@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import NotificationBox from '../notifications/NotificationBox';
+import ProfileDropdown from '../dropdowns/ProfileDropdown';
 import { setUser } from '../../actions/admin';
-import { closeNotificationBoxIsOpen, invertNotificationBoxIsOpen } from '../../actions/layout';
+import { closeNotificationBoxIsOpen, invertNotificationBoxIsOpen, closeProfileDropdownIsOpen, invertProfileDropdownIsOpen } from '../../actions/layout';
 import { getUser } from '../../services/api/authentication';
 import PropTypes from 'prop-types';
 
@@ -15,6 +16,14 @@ const navigationStyles = {
         unselected: {
             color: '#FFF'
         }
+    },
+    profilePictureMini: {
+        selected: {
+            border: '1px solid #9775AA'
+        },
+        unselected: {
+            border: '1px solid #FFF'
+        }
     }
 }
 
@@ -23,19 +32,27 @@ export class NavigationBar extends Component {
         super(props);
 
         this.onNotificationButtonPressed = this.onNotificationButtonPressed.bind(this);
+        this.onProfileButtonPressed = this.onProfileButtonPressed.bind(this);
     }
 
     componentDidMount() {
         this.props.closeNotificationBoxIsOpen();
+        this.props.closeProfileDropdownIsOpen();
         getUser(this.props);
     }
 
     onNotificationButtonPressed() {
         this.props.invertNotificationBoxIsOpen();
+        this.props.closeProfileDropdownIsOpen();
+    }
+
+    onProfileButtonPressed() {
+        this.props.invertProfileDropdownIsOpen();
+        this.props.closeNotificationBoxIsOpen();
     }
 
     render() {
-        const { photo, notificationBoxIsOpen } = this.props;
+        const { photo, notificationBoxIsOpen, profileDropdownIsOpen } = this.props;
         return (
             <div>
                 <div className="navigation-bar">
@@ -59,15 +76,21 @@ export class NavigationBar extends Component {
                                 id="icon-notification"
                             ></i>
                         </button>
-                        <Link to="/settings">
+                        <button
+                            onClick={this.onProfileButtonPressed} 
+                            className="button-icon"
+                        >
                             <img 
                                 src={photo}
                                 className="profile-picture--mini"
+                                style={profileDropdownIsOpen ? navigationStyles.profilePictureMini.selected : navigationStyles.profilePictureMini.unselected}
+                                id="profile-picture--mini"
                             />
-                        </Link>
+                        </button>
                     </div>
                 </div>
                 {notificationBoxIsOpen && <NotificationBox />}
+                {profileDropdownIsOpen && <ProfileDropdown />}
             </div>
         );
     }
@@ -76,19 +99,25 @@ export class NavigationBar extends Component {
 NavigationBar.propTypes = {
     photo: PropTypes.string,
     notificationBoxIsOpen: PropTypes.bool,
+    profileDropdownIsOpen: PropTypes.bool,
     closeNotificationBoxIsOpen: PropTypes.func.isRequired,
     invertNotificationBoxIsOpen: PropTypes.func.isRequired,
+    closeProfileDropdownIsOpen: PropTypes.func.isRequired,
+    invertProfileDropdownIsOpen: PropTypes.func.isRequired,
     setUser: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ admin, layout }) => ({
     photo: admin.photo,
-    notificationBoxIsOpen: layout.notificationBoxIsOpen
+    notificationBoxIsOpen: layout.notificationBoxIsOpen,
+    profileDropdownIsOpen: layout.profileDropdownIsOpen
 });
 
 const mapDispatchToProps = (dispatch) => ({
     closeNotificationBoxIsOpen: () => dispatch(closeNotificationBoxIsOpen()),
     invertNotificationBoxIsOpen: () => dispatch(invertNotificationBoxIsOpen()),
+    closeProfileDropdownIsOpen: () => dispatch(closeProfileDropdownIsOpen()),
+    invertProfileDropdownIsOpen: () => dispatch(invertProfileDropdownIsOpen()),
     setUser: (user) => dispatch(setUser(user))
 })
 
