@@ -25,12 +25,12 @@ ReactDOM.render(
     <Provider store={store}>
         <Router>
             <Switch>
-                <Route path="/" component={RequireAuth(HomePage)} exact />
+                <Route path="/" component={(HomePage)} exact /> {/*RequireAuth Wrapper*/}
                 <Route path="/login" component={LoginPage} />
                 <Route path="/signup" component={SignupPage} />
                 <Route path="/setup" component={SetupPage} />
-                <Route path="/profile" component={RequireAuth(ProfilePage)} />
-                <Route path="/settings" component={RequireAuth(SettingsPage)} />
+                <Route path="/profile" component={(ProfilePage)} /> {/*RequireAuth Wrapper*/}
+                <Route path="/settings" component={(SettingsPage)} /> {/*RequireAuth Wrapper*/}
                 <Route path="/about" component={AboutUsPage} />
                 <Route path="/team" component={TeamPage} />
                 <Route path="/press" component={PressPage} />

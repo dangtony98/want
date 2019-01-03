@@ -1,4 +1,5 @@
-const IMAGE_URL = 'https://wantapi.s3.us-east-2.amazonaws.com'
+import { IMAGE_URL } from '../services/variables/variables';
+import { SET_USER } from '../actions/constants';
 
 const admin = {
     id: null,
@@ -12,7 +13,7 @@ const admin = {
 
 export default (state = admin, action) => {
     switch (action.type) {
-        case 'SET_USER':
+        case SET_USER:
             return {
                 ...state,
                 id: action.user.id,

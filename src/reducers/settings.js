@@ -1,3 +1,5 @@
+import { CHANGE_SELECTED_PREFERENCE } from '../actions/constants';
+
 const settings = {
     selectedPreference: null,
     savedCards: [{
@@ -17,7 +19,7 @@ const settings = {
 
 export default (state = settings, action) => {
     switch (action.type) {
-        case 'CHANGE_SELECTED_PREFERENCE':
+        case CHANGE_SELECTED_PREFERENCE:
             return {
                 ...state,
                 selectedPreference: action.preference

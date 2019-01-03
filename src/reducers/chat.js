@@ -1,4 +1,4 @@
-var moment = require('moment');
+import { UPDATE_CHAT_INPUT, SEND_MESSAGE } from '../actions/constants';
 
 const chat = {
     chatTarget: null,
@@ -20,12 +20,12 @@ const chat = {
 
 export default (state = chat, action) => {
     switch (action.type) {
-        case 'UPDATE_CHAT_INPUT':
+        case UPDATE_CHAT_INPUT:
             return {
                 ...state,
                 chatInput: action.chatInput
             };
-        case 'SEND_MESSAGE':
+        case SEND_MESSAGE:
             return {
                 ...state,
                 chatMessages: [...state.chatMessages, action.chatMessage]

@@ -1,10 +1,12 @@
+import { UPDATE_SEARCH_TERM } from '../actions/constants';
+
 const filter = {
     searchTerm: ''
 }
 
 export default (state = filter, action) => {
     switch (action.type) {
-        case 'UPDATE_SEARCH_TERM':
+        case UPDATE_SEARCH_TERM:
             return {
                 ...state,
                 searchTerm: action.searchTerm

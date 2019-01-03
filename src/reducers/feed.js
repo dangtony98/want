@@ -1,4 +1,5 @@
 import moment from 'moment';
+import { UPDATE_FEED } from '../actions/constants';
 
 const feed = {
     wants: [{
@@ -78,7 +79,7 @@ const feed = {
 
 export default (state = feed, action) => {
     switch (action.type) {
-        case 'UPDATE_FEED':
+        case UPDATE_FEED:
             return state;
         default:
             return state;
