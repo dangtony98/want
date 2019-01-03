@@ -1,5 +1,5 @@
 import { IMAGE_URL } from '../services/variables/variables';
-import { SET_USER } from '../actions/constants';
+import { SET_USER, SET_PHOTO } from '../actions/constants';
 
 const admin = {
     id: null,
@@ -22,6 +22,11 @@ export default (state = admin, action) => {
                 email: action.user.email,
                 photo: `${IMAGE_URL}/${action.user.avatar}`
             };
+        case SET_PHOTO:
+            return {
+                ...state,
+                photo: `${IMAGE_URL}/${action.user.avatar}`
+            }
         default:
             return state;
     }

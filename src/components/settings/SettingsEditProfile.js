@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { uploadAvatar } from '../../services/api/settings';
+import { uploadAvatar, getAvatar } from '../../services/api/settings';
+import { setPhoto } from '../../actions/admin';
 
 export class SettingsEditProfile extends Component {
     constructor(props) {
@@ -28,7 +29,9 @@ export class SettingsEditProfile extends Component {
             const data = new FormData();
             
             data.append('avatar', photo);
-            uploadAvatar(data);
+            uploadAvatar(data, () => {
+                getAvatar(props);
+            });
         });
     }
 
@@ -150,4 +153,8 @@ const mapStateToProps = ({ admin }) => ({
     photo: admin.photo
 });
 
-export default connect(mapStateToProps)(SettingsEditProfile);
+const mapDispatchToProps = (dispatch) => ({
+    setPhoto: (photo) => dispatch(setPhoto(photo))
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsEditProfile);
