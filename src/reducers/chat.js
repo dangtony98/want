@@ -14,7 +14,7 @@ const chat = {
     }],
     chatInput: ''
 }
-9
+
 // Should each chat message have its own unique id/key? (Modify JSON accordingly)
 // console.log(chat.chatMessages[2].timestamp.format('dddd h:mma'));
 

@@ -20,7 +20,6 @@ export class DetailsModal extends Component {
     retrieveWant(wantId, detailsModalType) {
         // SEND GET REQUEST TO RETRIEVE WANT INFORMATION
         // IF SUCCESSFUL RESPONSE, RETURN WANT COMPONENT
-        
     }
 
     onOutsideModalPressed() {
@@ -39,7 +38,7 @@ export class DetailsModal extends Component {
                 onRequestClose={this.onOutsideModalPressed}
             >
             {/* TRIGGER retrieveWant() HERE */}
-                {wants.map((want) => {
+                {/* {wants.map((want) => {
                     return want.wantId == modalWantId &&
                         <Want
                             detailsModalType={detailsModalType}
@@ -52,7 +51,7 @@ export class DetailsModal extends Component {
                             description={want.description}
                             key={want.wantId}
                         />
-                })}
+                })} */}
             </ReactModal>
         );
     }

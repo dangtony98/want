@@ -33,7 +33,7 @@ export class AcceptModal extends Component {
                 overlayClassName="modal-overlay"
                 onRequestClose={this.onOutsideModalPressed}
             >
-                {wants.map((want) => {
+                {/* {wants.map((want) => {
                     return want.wantId == modalWantId &&
                         <div key={want.wantId}>
                             <div className="wrapper-flex-spaced wrapper-flex--center">
@@ -52,7 +52,7 @@ export class AcceptModal extends Component {
                                 We'll notify you once we get a mutual confirmation
                             </p>
                         </div>
-                })}
+                })} */}
             </ReactModal>
         );
     }

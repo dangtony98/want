@@ -8,6 +8,7 @@ import Sort from '../narrow/Sort';
 import Want from '../want/Want';
 import CurrentWants from '../current/CurrentWants';
 import CurrentFulfillments from '../current/CurrentFulfillments';
+import { getFeed } from '../../services/api/feed';
 import PropTypes from 'prop-types';
 
 export class HomeContent extends Component {
@@ -17,14 +18,7 @@ export class HomeContent extends Component {
     }
 
     componentDidMount() {
-        // TEST GET REQUEST
-        // axios.get('http://94a65306.ngrok.io/api/want/show/1')
-        //     .then((response) => {
-        //         console.log(response);
-        //     })
-        //     .catch((error) => {
-        //         console.log('Error: ' + error);
-        //     });
+        getFeed(this.props);
     }
 
     render() {
@@ -38,20 +32,14 @@ export class HomeContent extends Component {
                     <h4 className="content-heading">Wants around You</h4>
                     <Filter />
                     <Sort />
-                    {wants.map((want) => (
+                    {wants != null ? wants.map((want) => (
                         <Want
                             detailsModalType="NONE"
                             {...want}
-                            // wantId={want.wantId}
-                            // firstName={want.firstName}
-                            // photo={want.photo}
-                            // timestamp={want.timestamp}
-                            // title={want.title}
-                            // pay={want.pay}
-                            // description={want.description} 
-                            key={want.wantId}
+                            key={want.id}
+
                         />
-                    ))}
+                    )) : ''}
                 </div>
                 <div className="home-content__right">
                     <CurrentWants />

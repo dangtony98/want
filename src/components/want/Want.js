@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { openDetailsModalIsExpanded, closeDetailsModalIsExpanded, openAcceptModalIsExpanded, setModalWantId, setDetailsModalType } from '../../actions/modal';
 import { getUser } from '../../services/api/profile';
 import PropTypes from 'prop-types';
+import { IMAGE_URL } from '../../services/variables/variables';
 
 export class Want extends Component {
     constructor(props) {
@@ -66,7 +67,7 @@ export class Want extends Component {
     }
 
     render() {
-        const { detailsModalType, userId, firstName, photo, timestamp, title, pay, description } = this.props;
+        const { detailsModalType, category_id, cost, created_at, description, id, title, user} = this.props;
         const { copiedAnimation } = this.state;
         
         // SAMPLE FULFILLER OPTIONS
@@ -84,26 +85,25 @@ export class Want extends Component {
             counterOffer: 10
         }];
         
-        console.log('detailsModalType from Want.js: ' + detailsModalType);
         return (
             <div className={`want ${detailsModalType == 'NONE' && 'marg-t-sm'}`}>
                 <div className="wrapper-flex-spaced wrapper-flex-spaced--top">
                     <div className="wrapper-flex wrapper-flex--center marg-b-sm">
                         <Link to="/profile">
                             <img 
-                                src={photo}
+                                src={`${IMAGE_URL}/${user.avatar}`}
                                 className="want__image"
                             />
                         </Link>
                         <div className="marg-l-sm">
                             <h4 className="want__firstName">
-                                <Link to="/profile" target="_blank" className="link">{firstName}</Link>
+                                <Link to="/profile" target="_blank" className="link">{user.first_name}</Link>
                                 {/* <button
                                     onClick={() => this.onProfileBtnPressed(userId)} 
                                     className="button-simple"
                                 >{firstName}</button> */}
                             </h4>
-                            <h4 className="want__timestamp">{`${moment(timestamp).fromNow(true)} ago`}</h4>
+                            <h4 className="want__timestamp">{`${moment(created_at).fromNow(true)} ago`}</h4>
                         </div>
                     </div>
                     {detailsModalType == 'NONE' ? 
@@ -125,7 +125,7 @@ export class Want extends Component {
                     }
                 </div>
                 <h4 className="want__title">{title}</h4>
-                <h4 className="want__pay">{`$${pay}`}</h4>
+                <h4 className="want__pay">{`$${cost}`}</h4>
                 <p className="want__description">
                     {detailsModalType == 'NONE' ? this.applyCharacterLimit(description, 300) : description}
                 </p>
@@ -162,11 +162,14 @@ export class Want extends Component {
 }
 
 Want.propTypes = {
-    firstName: PropTypes.string.isRequired,
-    timestamp: PropTypes.object.isRequired,
-    title: PropTypes.string.isRequired,
-    pay: PropTypes.number.isRequired,
-    description: PropTypes.string.isRequired,
+    detailsModalType: PropTypes.string,
+    category_id: PropTypes.number,
+    cost: PropTypes.number,
+    created_at: PropTypes.string,
+    description: PropTypes.string,
+    id: PropTypes.number,
+    title: PropTypes.string,
+    user: PropTypes.object,
     openDetailsModalIsExpanded: PropTypes.func.isRequired,
     closeDetailsModalIsExpanded: PropTypes.func.isRequired,
     openAcceptModalIsExpanded: PropTypes.func.isRequired,
