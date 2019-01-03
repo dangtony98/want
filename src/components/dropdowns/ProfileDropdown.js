@@ -4,10 +4,12 @@ import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import { logout } from '../../services/api/authentication';
 import { closeProfileDropdownIsOpen } from '../../actions/layout';
+import PropTypes from 'prop-types';
 
 const profileDropdownOptions = {
     PROFILE: 'Profile',
     SETTINGS: 'Settings',
+    HELP: 'Help',
     LOGOUT: 'Logout'
 }
 
@@ -33,13 +35,16 @@ export class ProfileDropdown extends Component {
     }
 
     onButtonPressed(option) {
-        const { PROFILE, SETTINGS, LOGOUT } = profileDropdownOptions;
+        const { PROFILE, SETTINGS, HELP, LOGOUT } = profileDropdownOptions;
         switch (option) {
             case PROFILE:
                 this.props.history.push('/');
                 break;
             case SETTINGS:
                 this.props.history.push('/settings');
+                break;
+            case HELP:
+                this.props.history.push('/wanters');
                 break;
             case LOGOUT:
                 logout(this.props);
@@ -48,13 +53,13 @@ export class ProfileDropdown extends Component {
     }
 
     handleClickOutside(event) {
-        if (this.wrapperRef && !this.wrapperRef.contains(event.target) && event.target.id != 'profile-picture--mini') {
+        if (this.wrapperRef && !this.wrapperRef.contains(event.target) && event.target.id != 'profile-picture--mini' && event.target.id != 'profile-picture--mini-button') {
             this.props.closeProfileDropdownIsOpen();
         }
     }
 
     render() {
-        const { PROFILE, SETTINGS, LOGOUT } = profileDropdownOptions;
+        const { PROFILE, SETTINGS, HELP, LOGOUT } = profileDropdownOptions;
         const { email } = this.props;
         return (
             <div className="profile-dropdown" ref={this.setWrapperRef}>
@@ -65,11 +70,11 @@ export class ProfileDropdown extends Component {
                     </Link>
                 </div>
                 <hr className="hr"></hr>
-
-                {[PROFILE, SETTINGS, LOGOUT].map((option) => (
+                {[PROFILE, SETTINGS, HELP, LOGOUT].map((option, index) => (
                     <button 
                         onClick={() => this.onButtonPressed(option)}
                         className="button-simple marg-t-sm"
+                        key={index}
                     >
                         <h4 className="profile-dropdown-text">{option}</h4>
                     </button>
@@ -77,6 +82,11 @@ export class ProfileDropdown extends Component {
             </div>
         );
     }
+}
+
+ProfileDropdown.propTypes = {
+    email: PropTypes.string,
+    closeProfileDropdownIsOpen: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ admin }) => ({

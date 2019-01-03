@@ -11,10 +11,26 @@ html {
 
 body {
     font-size: 1.5rem;
-    font-family: 'Roboto', 'sans-serif';
+    font-family: 'Roboto', 'Open Sans', 'sans-serif';
     line-height: 2.25rem;
 }
 
 button {
     cursor: pointer;
+}
+
+.mainLoginInput::-webkit-input-placeholder {
+    font-family: 'Roboto', 'Open Sans', 'sans-serif';
+}
+  
+.mainLoginInput:-ms-input-placeholder {
+    font-family: 'Roboto', 'Open Sans', 'sans-serif';
+}
+
+.mainLoginInput:-moz-placeholder {
+    font-family: 'Roboto', 'Open Sans', 'sans-serif';
+}
+
+.mainLoginInput::-moz-placeholder {
+    font-family: 'Roboto', 'Open Sans', 'sans-serif';
 }

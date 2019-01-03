@@ -44,7 +44,7 @@ const ChatBlock = ({ chatMessage, currentUser }) => {
 
 ChatBlock.propTypes = {
     chatMessage: PropTypes.object.isRequired,
-    currentUser: PropTypes.string.isRequired
+    currentUser: PropTypes.string
 }
 
 const mapStateToProps = ({ admin }) => ({

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import NotificationTab from './NotificationTab';
 import { closeNotificationBoxIsOpen } from '../../actions/layout';
+import PropTypes from 'prop-types';
 
 export class NotificationBox extends Component {
     constructor(props) {
@@ -24,7 +25,8 @@ export class NotificationBox extends Component {
     }
 
     handleClickOutside(event) {
-        if (this.wrapperRef && !this.wrapperRef.contains(event.target) && event.target.id != 'icon-notification') {
+        if (event.target.id == 'icon-notification-button') console.log('woo');
+        if (this.wrapperRef && !this.wrapperRef.contains(event.target) && event.target.id != 'icon-notification' && event.target.id != 'icon-notification-button') {
             this.props.closeNotificationBoxIsOpen();
         }
     }
@@ -46,6 +48,11 @@ export class NotificationBox extends Component {
     }
 }
 
+NotificationBox.propTypes = {
+    notifications: PropTypes.array,
+    closeNotificationBoxIsOpen: PropTypes.func.isRequired
+}
+
 const mapStateToProps = ({ notifications }) => ({
     notifications: notifications.notifications
 });
@@ -53,5 +60,7 @@ const mapStateToProps = ({ notifications }) => ({
 const mapDispatchToProps = (dispatch) => ({
     closeNotificationBoxIsOpen: () => dispatch(closeNotificationBoxIsOpen())
 });
+
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(NotificationBox);

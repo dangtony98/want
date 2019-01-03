@@ -6,3 +6,10 @@
 .filter-search {
     width: 100%;
 }
+
+.filter-button {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    transform: translate(-75%, -50%);
+}

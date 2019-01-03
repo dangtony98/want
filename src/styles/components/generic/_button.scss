@@ -76,6 +76,7 @@
     outline: none;
 
     &:hover {
+        .icon-search,
         .icon-minimize,
         .icon-dollar,
         .icon-share,
@@ -102,6 +103,7 @@
     }
 
     &:active {
+        .icon-search,
         .icon-minimize,
         .icon-dollar,
         .icon-share,

@@ -7,7 +7,12 @@ export class Filter extends Component {
     constructor(props) {
         super(props);
         
+        this.onSearchButtonPressed = this.onSearchButtonPressed.bind(this);
         this.onSearchTyped = this.onSearchTyped.bind(this);
+    }
+
+    onSearchButtonPressed() {
+        console.log('onSearchButtonPresssed() triggered');
     }
 
     onSearchTyped(e) {
@@ -19,7 +24,12 @@ export class Filter extends Component {
         const { searchTerm } = this.props;
         return (
             <div className="filter">
-                <i className="icon-search fas fa-search"></i>
+                <button 
+                    onClick={this.onSearchButtonPressed}
+                    className="filter-button button-icon"
+                >
+                    <i className="icon-search fas fa-search"></i>
+                </button>
                 <input
                     type="text"
                     value={searchTerm}

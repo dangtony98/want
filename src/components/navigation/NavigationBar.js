@@ -69,6 +69,7 @@ export class NavigationBar extends Component {
                         <button
                             onClick={this.onNotificationButtonPressed} 
                             className="button-icon"
+                            id="icon-notification-button"
                         >
                             <i 
                                 className="icon-notification fas fa-bell marg-r-sm"
@@ -79,6 +80,7 @@ export class NavigationBar extends Component {
                         <button
                             onClick={this.onProfileButtonPressed} 
                             className="button-icon"
+                            id="profile-picture--mini-button"
                         >
                             <img 
                                 src={photo}
