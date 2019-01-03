@@ -133,7 +133,7 @@ export class ChatBox extends Component {
 }
 
 ChatBox.propTypes = {
-    currentUser: PropTypes.string.isRequired,
+    currentUser: PropTypes.number,
     chatIsExpanded: PropTypes.bool.isRequired,
     chatInput: PropTypes.string,
     chatMessages: PropTypes.array,
@@ -146,7 +146,7 @@ ChatBox.propTypes = {
 }
 
 const mapStateToProps = ({ admin, layout, chat }) => ({
-    currentUser: admin.currentUser,
+    currentUser: admin.id,
     chatIsExpanded: layout.chatIsExpanded,
     chatInput: chat.chatInput,
     chatMessages: chat.chatMessages,

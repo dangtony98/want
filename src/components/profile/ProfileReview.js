@@ -1,15 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-export default class ProfileReview extends Component {
-    constructor(props) {
-        super(props);
-
-        this.renderRating = this.renderRating.bind(this);
-        this.applyCharacterLimit = this.applyCharacterLimit.bind(this);
-    }
-
-    renderRating(rating) {
+export const ProfileReview = ({ firstName, photo, timestamp, rating, title, review }) => {
+    const renderRating = (rating) => {
         let ratingArr = [];
         for (let i = 0; i < 5; i++) {
             i < Math.round(rating) ? ratingArr.push(<i 
@@ -24,35 +17,34 @@ export default class ProfileReview extends Component {
         return ratingArr;
     }
 
-    applyCharacterLimit(description, limit) {
+    const applyCharacterLimit = (description, limit) => {
         return `${description.substring(0, limit)}...`;
     }
 
-    render() {
-        const { firstName, photo, timestamp, rating, title, review } = this.props.review;
-        return (
-            <div className="profile-review">
-                <div className="wrapper-flex-spaced wrapper-flex-spaced--top">
-                    <div className="wrapper-flex wrapper-flex--center marg-b-sm">
-                        <img
-                            src={photo}
-                            className="want__image"
-                        />
-                        <div className="wrapper-flex-spaced--flex1 marg-l-sm">
-                            <h4 className="want__firstName">{firstName}</h4>
-                            <div>
-                                {this.renderRating(rating)}
-                            </div>
+    return (
+        <div className="profile-review">
+            <div className="wrapper-flex-spaced wrapper-flex-spaced--top">
+                <div className="wrapper-flex wrapper-flex--center marg-b-sm">
+                    <img
+                        src={photo}
+                        className="want__image"
+                    />
+                    <div className="wrapper-flex-spaced--flex1 marg-l-sm">
+                        <h4 className="want__firstName">{firstName}</h4>
+                        <div>
+                            {renderRating(rating)}
                         </div>
                     </div>
-                    <h4 className="want__timestamp">{timestamp}</h4>
                 </div>
-                <h4 className="want__title">{title}</h4>
-                <p className="profile-review__review">{this.applyCharacterLimit(review, 300)}</p>
+                <h4 className="want__timestamp">{timestamp}</h4>
             </div>
-        );
-    }
+            <h4 className="want__title">{title}</h4>
+            <p className="profile-review__review">{applyCharacterLimit(review, 300)}</p>
+        </div>
+    );
 }
+
+export default ProfileReview;
 
 ProfileReview.propTypes = {
     firstName: PropTypes.string,
