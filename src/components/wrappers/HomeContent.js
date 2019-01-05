@@ -53,7 +53,8 @@ export class HomeContent extends Component {
 }
 
 HomeContent.propTypes = {
-    wants: PropTypes.array
+    wants: PropTypes.array,
+    updateFeed: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ feed }) => ({

@@ -7,6 +7,7 @@
     border: 1px solid $color-grey;
     box-shadow: $box-shadow;
     background-color: $color-white;
+    animation: fadeIn 1s;
 
     &__title {
         margin: 0;

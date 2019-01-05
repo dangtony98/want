@@ -6,6 +6,9 @@ import Select from 'react-select';
 import PropTypes from 'prop-types';
 import { openPostIsExpanded } from '../../actions/layout';
 import { post } from '../../services/api/post';
+import { updateFeed } from '../../actions/feed';
+import { getFeed } from '../../services/api/feed';
+
 
 import numeral from 'numeral';
 
@@ -66,13 +69,15 @@ class PostForm extends Component {
                     ...this.state,
                     cost: numeral(numeral(`$${this.state.cost}`).format('$0,0.00'))._value * 100,
                     category: this.state.category.value
-                }, scroll, () => {
+                }, () => {
                     this.setState({
                         title: '',
                         cost: '',
                         description: '',
                         category: null
                     });
+                    scroll.scrollToTop();
+                    getFeed(this.props);
                 });
         }
     }
@@ -156,6 +161,7 @@ class PostForm extends Component {
 PostForm.propTypes = {
     postIsExpanded: PropTypes.bool.isRequired,
     openPostIsExpanded: PropTypes.func.isRequired,
+    updateFeed: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ layout }) => ({
@@ -163,7 +169,8 @@ const mapStateToProps = ({ layout }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    openPostIsExpanded: () => dispatch(openPostIsExpanded())
+    openPostIsExpanded: () => dispatch(openPostIsExpanded()),
+    updateFeed: (feed) => dispatch(updateFeed(feed))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostForm);
