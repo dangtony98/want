@@ -22,7 +22,7 @@ export class SettingsEditProfile extends Component {
     }
 
     componentWillReceiveProps() {
-        
+
     }
 
     handleUploadFile(e) {
