@@ -21,6 +21,10 @@ export class SettingsEditProfile extends Component {
         }
     }
 
+    componentWillReceiveProps() {
+        
+    }
+
     handleUploadFile(e) {
         this.setState({
             photo: e.target.files[0]
@@ -30,7 +34,7 @@ export class SettingsEditProfile extends Component {
             
             data.append('avatar', photo);
             uploadAvatar(data, () => {
-                getAvatar(props);
+                getAvatar(this.props);
             });
         });
     }
@@ -51,6 +55,9 @@ export class SettingsEditProfile extends Component {
     render() {
         const { photo } = this.props;
         const { first_name, last_name, email, subtitle, description } = this.state;
+        console.log('state');
+        console.log(this.state);
+        console.log(this.props);
         return (
             <div className="settings-edit-profile">
                 <form onSubmit={this.onFormSubmit}>

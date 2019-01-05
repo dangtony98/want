@@ -5,6 +5,17 @@ import Select from 'react-select';
 import PropTypes from 'prop-types';
 import { invertSortIsExpanded } from '../../actions/layout';
 
+const sortStyles = {
+    button: {
+        selected: {
+            border: '1px solid rgb(88, 42, 114)'
+        },
+        unselected: {
+            border: '1px solid rgb(189,195,199)'
+        }
+    }
+}
+
 const select = {
     filter: {
         name: 'filter',
@@ -85,7 +96,9 @@ export class Sort extends Component {
                 <div className="wrapper-flex wrapper-flex--center">
                     <button
                         onClick={this.onSortBtnPressed} 
-                        className="button">
+                        className="button"
+                        style={sortIsExpanded ? sortStyles.button.selected : sortStyles.button.unselected}
+                    >
                         Options
                         { sortIsExpanded ? <i className="icon-dropdown fas fa-chevron-up"></i>
                         : <i className="icon-dropdown fas fa-chevron-down"></i>}

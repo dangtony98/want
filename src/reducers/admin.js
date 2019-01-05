@@ -25,7 +25,7 @@ export default (state = admin, action) => {
         case SET_PHOTO:
             return {
                 ...state,
-                photo: `${IMAGE_URL}/${action.user.avatar}`
+                photo: `${IMAGE_URL}/${action.photo}`
             }
         default:
             return state;

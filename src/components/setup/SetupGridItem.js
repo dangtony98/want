@@ -3,10 +3,10 @@ import React, { Component } from 'react';
 const gridItemStyles = {
     box: {
         selected: {
-            border: '1px solid #582A72',
+            border: '1px solid rgb(88, 42, 114)'
         },
         unselected: {
-            border: '1px solid #7F8C8D',
+            border: '1px solid rgb(189,195,199)'
         }
     },
     text: {

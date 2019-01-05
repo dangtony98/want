@@ -5,7 +5,7 @@ import NotificationBox from '../notifications/NotificationBox';
 import ProfileDropdown from '../dropdowns/ProfileDropdown';
 import { setUser } from '../../actions/admin';
 import { closeNotificationBoxIsOpen, invertNotificationBoxIsOpen, closeProfileDropdownIsOpen, invertProfileDropdownIsOpen } from '../../actions/layout';
-import { getUser } from '../../services/api/authentication';
+import { getUser } from '../../services/api/admin';
 import PropTypes from 'prop-types';
 
 const navigationStyles = {

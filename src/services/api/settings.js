@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { WANT_URL } from '../variables/variables';
+import { IMAGE_URL, WANT_URL } from '../variables/variables';
 
 // UPLOADAVATAR()
 
@@ -31,20 +31,20 @@ const uploadAvatar = (data, callback) => {
 // PROPS: CONTAINS SETPHOTO() FUNC
 
 const getAvatar = (props) => {
-    // axios.get(`${WANT_URL}/api/user`, 
-    // {
-    //     headers: { 
-    //         Accept: 'application/json', 
-    //         Authorization: `Bearer ${localStorage.getItem('token')}` 
-    //     }
-    // })
-    // .then((response) => {
-    //     // SEND POST REQUEST TO LOAD USER
-    //     props.setPhoto(response.data.user);
-    // })
-    // .catch((error) => {
-    //     console.log('Error: ' + error);
-    // });
+    axios.get(`${WANT_URL}/api/avatar`, 
+    {
+        headers: { 
+            Accept: 'application/json', 
+            Authorization: `Bearer ${localStorage.getItem('token')}` 
+        }
+    })
+    .then((response) => {
+        // SEND POST REQUEST TO LOAD USER
+        props.setPhoto(response.data);
+    })
+    .catch((error) => {
+        console.log('Error: ' + error);
+    });
 }
 
 export { uploadAvatar, getAvatar };
