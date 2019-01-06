@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { WANT_URL } from '../variables/variables';
 
-// GETPROFILE()
+// GETPROFILE() — GET
 
 // GETS A USER'S PUBLIC PROFILE GIVEN A USER'S ID
 // USERID: THE USER TO RETRIEVE
@@ -10,7 +10,7 @@ const getUser = (userId, props) => {
 
 }
 
-// GETREVIEWS()
+// GETREVIEWS() — GET
 
 // GETS A SET OF REVIEWS GIVEN A REQUESTED PAGE
 // PAGE: THE PAGE TO RETRIEVE

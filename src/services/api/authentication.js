@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { WANT_URL } from '../variables/variables';
 
-// CHECKAUTHENTICATION()
+// CHECKAUTHENTICATION() — GET
 
 // GETS AN "AUTHENTICATED OR NOT" FROM THE SERVER BASED ON STORED TOKEN
 // PROPS: CONTAINS PUSH() FUNC
@@ -26,7 +26,7 @@ const checkAuthentication = (props, callback) => {
         });
 }
 
-// LOGIN()
+// LOGIN() — POST
 
 // POSTS EMAIL AND PASSWORD TO THE SERVER FOR AUTHENTICATION
 // STATE: CONTAINS EMAIL AND PASSWORD
@@ -44,7 +44,7 @@ const login = (state, props) => {
         });
 }
 
-// LOGOUT()
+// LOGOUT() — POST
 
 // POSTS STORED TOKEN TO THE SERVER TO LOGOUT
 // PROPS: CONTAINS PUSH() FUNC
@@ -70,7 +70,7 @@ const logout = (props) => {
         });
 }
 
-// REGISTER()
+// REGISTER() — POST
 
 // POSTS FIRST NAME, LAST NAME, EMAIL, AND PASSWORD TO TEH SERVER FOR REGISTRATION
 // STATE: CONTAINS FIRST NAME, LAST NAME, EMAIL, PASSWORD, AND REPASSWORD

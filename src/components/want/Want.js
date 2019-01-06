@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import moment from 'moment';
 import { Link } from 'react-router-dom';
 import { openDetailsModalIsExpanded, closeDetailsModalIsExpanded, openAcceptModalIsExpanded, setModalWantId, setDetailsModalType } from '../../actions/modal';
 import { getUser } from '../../services/api/profile';
 import PropTypes from 'prop-types';
 import { IMAGE_URL } from '../../services/variables/variables';
+import moment from 'moment';
+import numeral from 'numeral';
+
+const wantStyles = {
+    self: {
+        border: '1px solid rgb(88, 42, 114)'
+    },
+    other: {
+        border: '1px solid rgb(189,195,199)'
+    }
+}
 
 export class Want extends Component {
     constructor(props) {
@@ -69,7 +79,7 @@ export class Want extends Component {
     render() {
         const { detailsModalType, category_id, cost, created_at, description, id, title, user} = this.props;
         const { copiedAnimation } = this.state;
-        
+
         // SAMPLE FULFILLER OPTIONS
         const fulfillerOptions = [{
             firstName: 'Daria',
@@ -86,7 +96,10 @@ export class Want extends Component {
         }];
         
         return (
-            <div className={`want ${detailsModalType == 'NONE' && 'marg-t-sm'}`}>
+            <div 
+                className={`want ${detailsModalType == 'NONE' && 'want--feed marg-t-sm'}`}
+                style={(detailsModalType == 'NONE' && id == user.id) ? wantStyles.self : wantStyles.other}
+            >
                 <div className="wrapper-flex-spaced wrapper-flex-spaced--top">
                     <div className="wrapper-flex wrapper-flex--center marg-b-sm">
                         <Link to="/profile">
@@ -108,7 +121,7 @@ export class Want extends Component {
                     </div>
                     {detailsModalType == 'NONE' ? 
                         <div className="wrapper-flex wrapper-flex--center">
-                            {copiedAnimation && <div className="want-copied">Copied link to clipboard</div>}
+                            {copiedAnimation && <div className="want-copied">Copied</div>}
                             <button
                                 onClick={this.onShareBtnPressed}
                                 className="button-icon"
@@ -125,7 +138,7 @@ export class Want extends Component {
                     }
                 </div>
                 <h4 className="want__title">{title}</h4>
-                <h4 className="want__pay">{`$${cost}`}</h4>
+                <h4 className="want__pay">{numeral(cost / 100).format('$0,0.00')}</h4>
                 <p className="want__description">
                     {detailsModalType == 'NONE' ? this.applyCharacterLimit(description, 300) : description}
                 </p>
@@ -162,6 +175,7 @@ export class Want extends Component {
 }
 
 Want.propTypes = {
+    id: PropTypes.number,
     detailsModalType: PropTypes.string,
     category_id: PropTypes.number,
     cost: PropTypes.number,
@@ -177,6 +191,10 @@ Want.propTypes = {
     setDetailsModalType: PropTypes.func.isRequired
 }
 
+const mapStateToProps = ({ admin }) => ({
+    id: admin.id
+});
+
 const mapDispatchToProps = (dispatch) => ({
     openDetailsModalIsExpanded: () => dispatch(openDetailsModalIsExpanded()),
     closeDetailsModalIsExpanded: () => dispatch(closeDetailsModalIsExpanded()),
@@ -185,4 +203,4 @@ const mapDispatchToProps = (dispatch) => ({
     setDetailsModalType: (modalType) => dispatch(setDetailsModalType(modalType))
 });
 
-export default connect(null, mapDispatchToProps)(Want);
+export default connect(mapStateToProps, mapDispatchToProps)(Want);

@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { IMAGE_URL, WANT_URL } from '../variables/variables';
 
-// UPLOADAVATAR()
+// UPLOADAVATAR() — POST
 
 // UPLOADS NEW PROFILE PICTURE TO THE SERVER
 // DATA: CONTAINS THE NEW IMAGE
@@ -25,7 +25,7 @@ const uploadAvatar = (data, callback) => {
     });
 }
 
-// GETAVATAR()
+// GETAVATAR() — GET
 
 // GETS THE CURRENT PROFILE PICTURE FROM THE SERVER
 // PROPS: CONTAINS SETPHOTO() FUNC

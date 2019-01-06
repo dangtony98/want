@@ -4,7 +4,7 @@
 import axios from 'axios';
 import { WANT_URL } from '../variables/variables';
 
-// GETUSER()
+// GETUSER() — GET
 
 // GETS USER ADMIN DATA
 // PROPS: CONTAINS SETUSER() FUNC
@@ -26,7 +26,7 @@ const getUser = (props) => {
         });
 }
 
-// GETAVATAR()
+// GETAVATAR() — GET
 
 // GETS USER AVATAR
 // PROPS: CONTAINS SETPHOTO() FUNC

@@ -1,11 +1,12 @@
 import axios from 'axios';
 import { WANT_URL } from '../variables/variables';
 
-// POST()
+// POST() — POST
 
 // POSTS A WANT CONTANING A TITLE, COST, CATEGORY, AND DESCRIPTION TO THE SERVER
 
 const post = (form, callback) => {
+    console.log(form);
     axios.post(`${WANT_URL}/api/want`, form,
     {
         headers: { 

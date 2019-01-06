@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { WANT_URL } from '../variables/variables';
 
-// GETFEED()
+// GETFEED() — GET
 
 // GETS NEWSFEED OF WANTS TO DISPLAY
 // PROPS: CONTAINS UPDATEFEED() FUNC

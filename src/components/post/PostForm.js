@@ -8,8 +8,6 @@ import { openPostIsExpanded } from '../../actions/layout';
 import { post } from '../../services/api/post';
 import { updateFeed } from '../../actions/feed';
 import { getFeed } from '../../services/api/feed';
-
-
 import numeral from 'numeral';
 
 const select = {
@@ -83,9 +81,30 @@ class PostForm extends Component {
     }
 
     handleChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
+        console.log('handleChange() triggered');
+        let value = e.target.value;
+        // console.log(value);
+        if (e.target.name == 'cost') {
+            if (e.target.value != '-') {
+                if (value.split('.').length == 1) {
+                    if (Number(value.split('.')[0]) <= 100) {
+                        this.setState({
+                            [e.target.name]: value
+                        });
+                    }
+                } else if (value.split('.').length == 2) {
+                    if (value.split('.')[1].length <= 2) {
+                        this.setState({
+                            [e.target.name]: value
+                        });
+                    }
+                }
+            }
+        } else {
+            this.setState({
+                [e.target.name]: value
+            });
+        }
     }
 
     handleChangeSelect(e) {
@@ -146,6 +165,8 @@ class PostForm extends Component {
                         placeholder="Enter an offer"
                         autoComplete="off"
                         className="post-input input-text"
+                        min="0"
+                        max="100"
                         required
                     />
                     <button

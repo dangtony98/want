@@ -4,10 +4,12 @@
     min-width: 50rem;
     padding: 2rem;
     border-radius: 0.5rem;
-    border: 1px solid $color-grey;
     box-shadow: $box-shadow;
     background-color: $color-white;
-    animation: fadeIn 1s;
+
+    &--feed {
+        animation: fadeIn 1s;
+    }
 
     &__title {
         margin: 0;
