@@ -1,8 +1,7 @@
-import moment from 'moment';
 import { UPDATE_FEED } from '../actions/constants';
 
 const feed = {
-    wants: null
+    wants: []
 }
 
 export default (state = feed, action) => {
@@ -10,7 +9,7 @@ export default (state = feed, action) => {
         case UPDATE_FEED:
             return {
                 ...state,
-                wants: action.feed.data
+                wants: action.feed.data ? action.feed.data : []
             }
         default:
             return state;

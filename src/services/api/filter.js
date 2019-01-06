@@ -14,6 +14,8 @@ const applySearchTerm = (searchTerm) => {
 // APPLIES SORT AND FILTER OPTIONS TO THE NEWSFEED
 
 const applyFilters = (filters, props) => {
+    console.log('Filters being applied: ');
+    console.log(filters);
     axios.post(`${WANT_URL}/api/newsfeedNew`, {
             ...filters
         },
@@ -25,6 +27,8 @@ const applyFilters = (filters, props) => {
         })
         .then((response) => {
             // FILTERS SUCCESSFULLY APPLIED
+            console.log('Filters response: ');
+            console.log(response);
             props.updateFeed(response.data);
         })
         .catch((error) => {
@@ -33,4 +37,27 @@ const applyFilters = (filters, props) => {
         });
 }
 
-export { applySearchTerm, applyFilters };
+// GETCATEGORIES — GET
+
+// GETS LIST OF POSSIBLE WANT CATEGORIES
+// CALLBACK: CALLBACK FUNCTION TO INJECT THE RESPONSE CATEGORIES INTO SORT OPTIONS
+
+const getCategories = (callback) => {
+    axios.get(`${WANT_URL}/api/category`, 
+        { 
+            headers: { 
+                Accept: 'application/json', 
+                Authorization: `Bearer ${localStorage.getItem('token')}` 
+            }
+        })
+        .then((response) => {
+            // CATEGORIES RETRIEVAL SUCCESSFUL
+            callback(response.data);
+        })
+        .catch((error) => {
+            // CATEGORIES RETRIEVAL UNSUCCESSFUL
+            console.log('Error: ' + error);
+        });
+}
+
+export { applySearchTerm, applyFilters, getCategories };

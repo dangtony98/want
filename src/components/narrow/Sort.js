@@ -5,6 +5,7 @@ import Select from 'react-select';
 import { invertSortIsExpanded } from '../../actions/layout';
 import { applyFilters } from '../../services/api/filter';
 import { updateFeed } from '../../actions/feed';
+import { getCategories } from '../../services/api/filter';
 import PropTypes from 'prop-types';
 
 const sortStyles = {
@@ -73,21 +74,54 @@ export class Sort extends Component {
         this.onSortBtnPressed = this.onSortBtnPressed.bind(this);
 
         this.state = {
-            categories: { value: 1, label: 'None' },
-            sort_by: { value: 'none', label: 'None' }
+            filter: {
+                name: 'categories',
+                options: []
+            },
+            chosen: {
+                categories: { value: 1, label: 'None' },
+                sort_by: { value: '', label: 'None' }
+            }
         }
+    }
+
+    componentWillMount() {
+        console.log('componentDidMount() in Sort Component');
+        let selectOptions = [];
+        getCategories((categories) => {
+            console.log('Inside callback: ');
+            categories.forEach((category) => {
+                const option = { value: category.id, label: category.name };
+                selectOptions.push(option);
+                // CONSTRUCT CATEGORY OBJECT WITH VALUE AND LABEL ATTRS
+                // APPEND CATEGORY OBJECT TO SELECTOPTIONS ARRAY
+            });
+        });
+        this.setState({
+            ...this.state,
+            filter: {
+                ...this.state.filter,
+                options: selectOptions
+            }
+        }, () => {
+            console.log('New state: ');
+            console.log(this.state);
+        });
     }
 
     handleChangeSelect(e, name) {
         this.setState({
-            [name]: e
+            ...this.state,
+            chosen: {
+                ...this.state.chosen,
+                [name]: e
+            }
         }, () => {
-            const { categories, sort_by } = this.state;
+            const { categories, sort_by } = this.state.chosen;
             applyFilters({
                 categories: [categories.value == 1 ? '' : [categories.value]],
                 sort_by: sort_by.value
             }, this.props);
-            // SEND POST REQUEST CONTAINING THE COMPONENT'S STATE TO UPDATE NEWSFEED ACCORDINGLY
         });
     }
 
@@ -97,7 +131,7 @@ export class Sort extends Component {
 
     render() {
         const { sortIsExpanded } = this.props;
-        const { categories, sort_by } = this.state;
+        const { categories, sort_by } = this.state.chosen;
         return (
             <div className="sort">
                 <div className="wrapper-flex wrapper-flex--center">
@@ -112,7 +146,7 @@ export class Sort extends Component {
                         
                     </button>
                     {(categories != null && categories.value != 1) && <div className="sort-tab marg-l-sm">{categories.label}</div>}
-                    {(sort_by != null && sort_by.value != 'none') && <div className="sort-tab marg-l-sm">{sort_by.label}</div>}
+                    {(sort_by != null && sort_by.value != '') && <div className="sort-tab marg-l-sm">{sort_by.label}</div>}
                 </div>
                 <Collapse isOpened={sortIsExpanded}>
                     <div className="sort-dropdown">

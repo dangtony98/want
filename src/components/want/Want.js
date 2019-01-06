@@ -10,10 +10,10 @@ import numeral from 'numeral';
 
 const wantStyles = {
     self: {
-        border: '1px solid rgb(88, 42, 114)'
+        // border: '1px solid rgb(88, 42, 114)'
     },
     other: {
-        border: '1px solid rgb(189,195,199)'
+        // border: '1px solid rgb(189,195,199)'
     }
 }
 
@@ -79,7 +79,8 @@ export class Want extends Component {
     render() {
         const { detailsModalType, category_id, cost, created_at, description, id, title, user} = this.props;
         const { copiedAnimation } = this.state;
-
+        console.log(title);
+        console.log(category_id);
         // SAMPLE FULFILLER OPTIONS
         const fulfillerOptions = [{
             firstName: 'Daria',

@@ -18,7 +18,7 @@ const select = {
         { value: 4, label: 'Transportation' },
         { value: 5, label: 'Education' },
         { value: 6, label: 'Entertainment' },
-        { value: 7, label: 'Other' },
+        { value: 7, label: 'Other' }
     ],
     styles: {
         control: (base, state) => ({
