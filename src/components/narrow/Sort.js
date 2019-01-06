@@ -4,6 +4,7 @@ import { Collapse } from 'react-collapse';
 import Select from 'react-select';
 import { invertSortIsExpanded } from '../../actions/layout';
 import { applyFilters } from '../../services/api/filter';
+import { updateFeed } from '../../actions/feed';
 import PropTypes from 'prop-types';
 
 const sortStyles = {
@@ -34,10 +35,10 @@ const select = {
     sort: {
         name: 'sort_by',
         options: [
-            { value: 'none', label: 'None' },
-            { value: 2, label: 'Newest' },
-            { value: 3, label: 'Oldest' },
-            { value: 4, label: 'Pay (High-Low)' },
+            { value: '', label: 'None' },
+            { value: 'created_at#desc', label: 'Newest' },
+            { value: 'created_at#asc', label: 'Oldest' },
+            { value: 'cost#desc', label: 'Pay (High-Low)' },
             { value: 'cost#asc', label: 'Pay (Low-High)' }
         ]
     },
@@ -83,9 +84,9 @@ export class Sort extends Component {
         }, () => {
             const { categories, sort_by } = this.state;
             applyFilters({
-                categories: categories.value,
+                categories: [categories.value == 1 ? '' : [categories.value]],
                 sort_by: sort_by.value
-            });
+            }, this.props);
             // SEND POST REQUEST CONTAINING THE COMPONENT'S STATE TO UPDATE NEWSFEED ACCORDINGLY
         });
     }
@@ -146,7 +147,8 @@ export class Sort extends Component {
 
 Sort.propTypes = {
     sortIsExpanded: PropTypes.bool.isRequired,
-    invertSortIsExpanded: PropTypes.func.isRequired
+    invertSortIsExpanded: PropTypes.func.isRequired,
+    updateFeed: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ layout }) => ({
@@ -154,7 +156,8 @@ const mapStateToProps = ({ layout }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    invertSortIsExpanded: () => dispatch(invertSortIsExpanded())
+    invertSortIsExpanded: () => dispatch(invertSortIsExpanded()),
+    updateFeed: (feed) => dispatch(updateFeed(feed))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sort);

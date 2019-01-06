@@ -110,7 +110,9 @@ export class Want extends Component {
                         </Link>
                         <div className="marg-l-sm">
                             <h4 className="want__firstName">
-                                <Link to="/profile" target="_blank" className="link">{user.first_name}</Link>
+                                <Link to="/profile" target="_blank" className="link">
+                                    {user.first_name}
+                                </Link>
                                 {/* <button
                                     onClick={() => this.onProfileBtnPressed(userId)} 
                                     className="button-simple"

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { IMAGE_URL, WANT_URL } from '../variables/variables';
+import { WANT_URL } from '../variables/variables';
 
 // UPLOADAVATAR() — POST
 
@@ -47,4 +47,12 @@ const getAvatar = (props) => {
     });
 }
 
-export { uploadAvatar, getAvatar };
+// CHANGEPASSWORD() - POST
+
+// CHANGES THE CURRENT USER'S PASSWORD
+
+const changePassword = () => {
+
+}
+
+export { uploadAvatar, getAvatar, changePassword };

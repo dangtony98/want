@@ -13,11 +13,8 @@ const applySearchTerm = (searchTerm) => {
 
 // APPLIES SORT AND FILTER OPTIONS TO THE NEWSFEED
 
-const applyFilters = (filters) => {
-    console.log('Attempting to submit the form: ');
-    console.log(filters);
-    
-    axios.post(`${WANT_URL}/api/newsfeed`, {
+const applyFilters = (filters, props) => {
+    axios.post(`${WANT_URL}/api/newsfeedNew`, {
             ...filters
         },
         { 
@@ -28,8 +25,7 @@ const applyFilters = (filters) => {
         })
         .then((response) => {
             // FILTERS SUCCESSFULLY APPLIED
-            console.log('Filters submitted. Response: ');
-            console.log(response);
+            props.updateFeed(response.data);
         })
         .catch((error) => {
             // FILTERS UNSUCCESSFULLY APPLIED

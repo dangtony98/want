@@ -83,21 +83,16 @@ class PostForm extends Component {
     handleChange(e) {
         console.log('handleChange() triggered');
         let value = e.target.value;
-        // console.log(value);
         if (e.target.name == 'cost') {
-            if (e.target.value != '-') {
-                if (value.split('.').length == 1) {
-                    if (Number(value.split('.')[0]) <= 100) {
-                        this.setState({
-                            [e.target.name]: value
-                        });
-                    }
-                } else if (value.split('.').length == 2) {
-                    if (value.split('.')[1].length <= 2) {
-                        this.setState({
-                            [e.target.name]: value
-                        });
-                    }
+            if (value.split('.').length == 1) {
+                this.setState({
+                    [e.target.name]: value
+                });
+            } else if (value.split('.').length == 2) {
+                if (value.split('.')[1].length <= 2) {
+                    this.setState({
+                        [e.target.name]: value
+                    });
                 }
             }
         } else {

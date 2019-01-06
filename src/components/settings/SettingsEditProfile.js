@@ -21,8 +21,22 @@ export class SettingsEditProfile extends Component {
         }
     }
 
-    componentWillReceiveProps() {
+    componentDidMount() {
+        console.log('componentDidMount()');
+        console.log(this.props);
+        // this.setState({
+        //     first_name: this.props.first_name,
+        //     last_name: this.props.last_name,
+        //     email: this.props.email,
+        //     subtitle: this.props.subtitle,
+        //     description: this.props.description,
+        //     photo: this.props.photo
+        // });
+    }
 
+    componentWillReceiveProps() {
+        console.log('componentWillReceiveProsp()');
+        console.log(this.props);
     }
 
     handleUploadFile(e) {
