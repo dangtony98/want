@@ -46,4 +46,4 @@ const getCategories = (props) => {
         });
 }
 
-export { getFeed };
+export { getFeed, getCategories };
