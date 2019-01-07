@@ -22,23 +22,19 @@ export class SettingsEditProfile extends Component {
     }
 
     componentDidMount() {
-        console.log('componentDidMount()');
-        console.log(this.props);
-        // this.setState({
-        //     first_name: this.props.first_name,
-        //     last_name: this.props.last_name,
-        //     email: this.props.email,
-        //     subtitle: this.props.subtitle,
-        //     description: this.props.description,
-        //     photo: this.props.photo
-        // });
+        window.setTimeout(() => {
+            const { first_name, last_name, email, subtitle, description, photo } = this.props;
+            this.setState({
+                first_name: first_name,
+                last_name: last_name,
+                email: email,
+                subtitle: subtitle,
+                description: description,
+                photo: photo
+            })
+        }, 500);
     }
-
-    componentWillReceiveProps() {
-        console.log('componentWillReceiveProsp()');
-        console.log(this.props);
-    }
-
+    
     handleUploadFile(e) {
         this.setState({
             photo: e.target.files[0]
@@ -101,7 +97,7 @@ export class SettingsEditProfile extends Component {
                         <h4 className="content-heading">Required</h4>
                         <div className="settings-content__box">
                             <input
-                                name="firstName"
+                                name="first_name"
                                 value={first_name}
                                 onChange={this.handleChange} 
                                 type="text"
@@ -110,7 +106,7 @@ export class SettingsEditProfile extends Component {
                                 required 
                             />
                             <input 
-                                name="lastName"
+                                name="last_name"
                                 value={last_name} 
                                 onChange={this.handleChange}
                                 type="text"

@@ -36,7 +36,7 @@ export class Want extends Component {
 
     onProfileBtnPressed(userId) {
         // SEND POST REQUEST TO RETRIEVE THE REQUESTED USER'S PROFILE INFORMATION
-        console.log('onPerofileBtnPressed() triggered for user: ' + userId);
+        console.log('onProfileBtnPressed() triggered for user: ' + userId);
         getUser(userId);
     }
 
@@ -77,9 +77,8 @@ export class Want extends Component {
     }
 
     render() {
-        const { detailsModalType, category_id, cost, created_at, description, id, title, user} = this.props;
+        const { detailsModalType, categories, category_id, cost, created_at, description, id, title, user} = this.props;
         const { copiedAnimation } = this.state;
-        console.log(this.props);
         // SAMPLE FULFILLER OPTIONS
         const fulfillerOptions = [{
             firstName: 'Daria',
@@ -109,7 +108,7 @@ export class Want extends Component {
                             />
                         </Link>
                         <div className="marg-l-sm">
-                            <h4 className="want__firstName">
+                            <h4 className="want-text">
                                 <Link to="/profile" target="_blank" className="link">
                                     {user.first_name}
                                 </Link>
@@ -118,7 +117,7 @@ export class Want extends Component {
                                     className="button-simple"
                                 >{firstName}</button> */}
                             </h4>
-                            <h4 className="want__timestamp">{`${moment(created_at).fromNow(true)} ago`}</h4>
+                            <h4 className="want-text">{`${moment(created_at).fromNow(true)} ago`}</h4>
                         </div>
                     </div>
                     {detailsModalType == 'NONE' ? 
@@ -139,8 +138,11 @@ export class Want extends Component {
                         </button>
                     }
                 </div>
-                <h4 className="want__title">{title}</h4>
+                <h4 className="want-text">{title}</h4>
                 <h4 className="want__pay">{numeral(cost / 100).format('$0,0.00')}</h4>
+                <h4 className="want-text">
+                    {categories.map((category) => (category.value == category_id ? category.label : ''))}
+                </h4>
                 <p className="want__description">
                     {detailsModalType == 'NONE' ? this.applyCharacterLimit(description, 300) : description}
                 </p>

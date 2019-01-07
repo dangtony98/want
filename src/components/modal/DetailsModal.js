@@ -28,8 +28,8 @@ export class DetailsModal extends Component {
 
     render() {
         const { isOpen, modalWantId, wants, detailsModalType } = this.props;
-        console.log('modalWantId: ' + modalWantId);
-        console.log('detailsModalType: ' + detailsModalType);
+        // console.log('modalWantId: ' + modalWantId);
+        // console.log('detailsModalType: ' + detailsModalType);
         return (
             <ReactModal 
                 isOpen={isOpen}

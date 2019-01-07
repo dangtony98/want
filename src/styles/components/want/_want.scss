@@ -11,20 +11,9 @@
         animation: fadeIn 1s;
     }
 
-    &__title {
-        margin: 0;
-        color: $color-grey-dark;
-    }
-
     &__pay {
         color: $color-primary-0;
         font-weight: 700;
-    }
-
-    &__firstName {
-        display: inline-block;
-        margin: 0 0 0 0;
-        color: $color-grey-dark;
     }
 
     &__image {
@@ -36,11 +25,6 @@
         box-shadow: $box-shadow;
     }
 
-    &__timestamp {
-        margin: 0;
-        color: $color-grey-dark;
-    }
-
     &__description {
         margin-top: 1rem;
         font-weight: 300;
@@ -50,6 +34,11 @@
     &__counter-button {
         margin-left: 2rem;
     }
+}
+
+.want-text {
+    margin: 0;
+    color: $color-grey-dark;
 }
 
 .want-placeholder {

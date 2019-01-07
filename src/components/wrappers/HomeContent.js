@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { updateFeed } from '../../actions/feed';
+import InfiniteScroll from 'react-infinite-scroller';
+import { updateFeed, setNextPageUrl, setHasMoreWants } from '../../actions/feed';
 import Post from '../post/Post';
 import Filter from '../narrow/Filter';
 import Sort from '../narrow/Sort';
@@ -9,19 +10,58 @@ import CurrentWants from '../current/CurrentWants';
 import CurrentFulfillments from '../current/CurrentFulfillments';
 import { getFeed } from '../../services/api/feed';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 export class HomeContent extends Component {
     constructor(props) {
         super(props);
         
+        this.handleLoadWants = this.handleLoadWants.bind(this);
     }
 
     componentDidMount() {
         getFeed(this.props);
     }
 
+    handleLoadWants(page) {
+        let next_page_url = this.props.next_page_url;
+        axios.get(next_page_url, 
+            { 
+                headers: { 
+                    Accept: 'application/json', 
+                    Authorization: `Bearer ${localStorage.getItem('token')}` 
+                }
+            })
+            .then((response) => {
+                // NEWSFEED RETRIEVAL SUCCESSFUL
+                let wants = this.props.wants;
+                response.data.data.map((want) => {
+                    wants.push(want);
+                });
+                if (response.data.next_page_url != null) {
+                    this.props.setNextPageUrl(response.data.next_page_url);
+                } else {
+                    this.props.setHasMoreWants(false);
+                }
+            })
+            .catch((error) => {
+                // NEWSFEED RETRIEVAL UNSUCCESSFUL
+                console.log('Error: ' + error);
+            });
+    }
+
     render() {
-        const { wants } = this.props;
+        const { wants, hasMoreWants } = this.props;
+        let wantArr = [];
+        wants.map((want) => {
+            wantArr.push(
+                <Want
+                    detailsModalType="NONE"
+                    {...want}
+                    key={want.id}
+                />
+            )
+        });
         return wants ? (
             <div className="home-content">
                 <div className="home-content__left">
@@ -31,16 +71,13 @@ export class HomeContent extends Component {
                     <h4 className="content-heading">Wants around You</h4>
                     <Filter />
                     <Sort />
-                    {wants.length != 0 ? (wants.map((want) => (
-                        <Want
-                            detailsModalType="NONE"
-                            {...want}
-                            key={want.id}
-
-                        />
-                    ))) : (
-                        <div className="want-placeholder marg-t-sm"></div>
-                    )}
+                    <InfiniteScroll
+                        pageStart={0}
+                        loadMore={this.handleLoadWants}
+                        hasMore={hasMoreWants}
+                    >   
+                        {wantArr}
+                    </InfiniteScroll>
                 </div>
                 <div className="home-content__right">
                     <CurrentWants />
@@ -56,15 +93,22 @@ export class HomeContent extends Component {
 
 HomeContent.propTypes = {
     wants: PropTypes.array,
-    updateFeed: PropTypes.func.isRequired
+    next_page_url: PropTypes.string,
+    hasMoreWants: PropTypes.bool,
+    updateFeed: PropTypes.func.isRequired,
+    setNextPageUrl: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ feed }) => ({
-    wants: feed.wants
+    wants: feed.wants,
+    next_page_url: feed.next_page_url,
+    hasMoreWants: feed.hasMoreWants
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    updateFeed: (feed) => dispatch(updateFeed(feed))
+    updateFeed: (feed) => dispatch(updateFeed(feed)),
+    setNextPageUrl: (url) => dispatch(setNextPageUrl(url)),
+    setHasMoreWants: (status) => dispatch(setHasMoreWants(status))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContent);
