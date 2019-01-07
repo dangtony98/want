@@ -1,7 +1,8 @@
-import { UPDATE_SEARCH_TERM } from '../actions/constants';
+import { UPDATE_SEARCH_TERM, STORE_CATEGORIES } from '../actions/constants';
 
 const filter = {
-    searchTerm: ''
+    searchTerm: '',
+    categories: []
 }
 
 export default (state = filter, action) => {
@@ -10,6 +11,11 @@ export default (state = filter, action) => {
             return {
                 ...state,
                 searchTerm: action.searchTerm
+            }
+        case STORE_CATEGORIES:
+            return {
+                ...state,
+                categories: action.categories
             }
         default:
             return state;

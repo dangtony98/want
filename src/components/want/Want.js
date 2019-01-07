@@ -79,8 +79,7 @@ export class Want extends Component {
     render() {
         const { detailsModalType, category_id, cost, created_at, description, id, title, user} = this.props;
         const { copiedAnimation } = this.state;
-        console.log(title);
-        console.log(category_id);
+        console.log(this.props);
         // SAMPLE FULFILLER OPTIONS
         const fulfillerOptions = [{
             firstName: 'Daria',
@@ -194,8 +193,9 @@ Want.propTypes = {
     setDetailsModalType: PropTypes.func.isRequired
 }
 
-const mapStateToProps = ({ admin }) => ({
-    id: admin.id
+const mapStateToProps = ({ admin, filter }) => ({
+    id: admin.id,
+    categories: filter.categories
 });
 
 const mapDispatchToProps = (dispatch) => ({

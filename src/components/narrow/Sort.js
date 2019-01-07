@@ -6,6 +6,7 @@ import { invertSortIsExpanded } from '../../actions/layout';
 import { applyFilters } from '../../services/api/filter';
 import { updateFeed } from '../../actions/feed';
 import { getCategories } from '../../services/api/filter';
+import { storeCategories } from '../../actions/filter';
 import PropTypes from 'prop-types';
 
 const sortStyles = {
@@ -20,19 +21,6 @@ const sortStyles = {
 }
 
 const select = {
-    filter: {
-        name: 'categories',
-        options: [
-            { value: 1, label: 'None' },
-            { value: 2, label: 'Purchase & Delivery' },
-            { value: 3, label: 'Home Services' },
-            { value: 4, label: 'Freelance' },
-            { value: 5, label: 'Transportation' },
-            { value: 6, label: 'Education' },
-            { value: 7, label: 'Entertainment' },
-            { value: 8, label: 'Other' },
-        ]
-    },
     sort: {
         name: 'sort_by',
         options: [
@@ -85,28 +73,25 @@ export class Sort extends Component {
         }
     }
 
-    componentWillMount() {
-        console.log('componentDidMount() in Sort Component');
+    componentDidMount() {
         let selectOptions = [];
+
         getCategories((categories) => {
-            console.log('Inside callback: ');
             categories.forEach((category) => {
                 const option = { value: category.id, label: category.name };
                 selectOptions.push(option);
-                // CONSTRUCT CATEGORY OBJECT WITH VALUE AND LABEL ATTRS
-                // APPEND CATEGORY OBJECT TO SELECTOPTIONS ARRAY
             });
         });
+
         this.setState({
             ...this.state,
             filter: {
                 ...this.state.filter,
                 options: selectOptions
             }
-        }, () => {
-            console.log('New state: ');
-            console.log(this.state);
         });
+
+        this.props.storeCategories(selectOptions);
     }
 
     handleChangeSelect(e, name) {
@@ -132,6 +117,7 @@ export class Sort extends Component {
     render() {
         const { sortIsExpanded } = this.props;
         const { categories, sort_by } = this.state.chosen;
+        const { name, options } = this.state.filter;
         return (
             <div className="sort">
                 <div className="wrapper-flex wrapper-flex--center">
@@ -152,14 +138,16 @@ export class Sort extends Component {
                     <div className="sort-dropdown">
                         <div className="wrapper-flex-spaced wrapper-flex-spaced--center">
                             <h4 className="sort-text">Filter by</h4>
-                            <Select
-                                value={categories}
-                                options={select.filter.options}
-                                onChange={(e) => this.handleChangeSelect(e, select.filter.name)}
-                                styles={select.styles}
-                                className="select" 
-                                required
-                            />
+                            {options.length != 0 && 
+                                <Select
+                                    value={categories}
+                                    options={options}
+                                    onChange={(e) => this.handleChangeSelect(e, name)}
+                                    styles={select.styles}
+                                    className="select" 
+                                    required
+                                />
+                            }
                         </div>
                         <div className="wrapper-flex-spaced wrapper-flex-spaced--center marg-t-sm">
                             <h4 className="sort-text">Sort by</h4>
@@ -182,7 +170,8 @@ export class Sort extends Component {
 Sort.propTypes = {
     sortIsExpanded: PropTypes.bool.isRequired,
     invertSortIsExpanded: PropTypes.func.isRequired,
-    updateFeed: PropTypes.func.isRequired
+    updateFeed: PropTypes.func.isRequired,
+    storeCategories: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ layout }) => ({
@@ -191,7 +180,8 @@ const mapStateToProps = ({ layout }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     invertSortIsExpanded: () => dispatch(invertSortIsExpanded()),
-    updateFeed: (feed) => dispatch(updateFeed(feed))
+    updateFeed: (feed) => dispatch(updateFeed(feed)),
+    storeCategories: (categories) => dispatch(storeCategories(categories))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sort);

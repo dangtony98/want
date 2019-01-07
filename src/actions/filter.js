@@ -1,8 +1,13 @@
-import { UPDATE_SEARCH_TERM } from './constants';
+import { UPDATE_SEARCH_TERM, STORE_CATEGORIES } from './constants';
 
 const updateSearchTerm = (searchTerm) => ({
     type: UPDATE_SEARCH_TERM,
     searchTerm
 });
 
-export { updateSearchTerm };
+const storeCategories = (categories) => ({
+    type: STORE_CATEGORIES,
+    categories
+})
+
+export { updateSearchTerm, storeCategories };

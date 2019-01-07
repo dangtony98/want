@@ -8,6 +8,7 @@ import { openPostIsExpanded } from '../../actions/layout';
 import { post } from '../../services/api/post';
 import { updateFeed } from '../../actions/feed';
 import { getFeed } from '../../services/api/feed';
+import { getCategories } from '../../services/api/filter';
 import numeral from 'numeral';
 
 const select = {
@@ -52,27 +53,48 @@ class PostForm extends Component {
         this.onInputFocus = this.onInputFocus.bind(this);
 
         this.state = {
-            title: '',
-            cost: '',
-            description: '',
-            category: null
+            options: [],
+            chosen: {
+                title: '',
+                cost: '',
+                description: '',
+                category: null
+            }
         }
+    }
+
+    componentDidMount() {
+        let selectOptions = [];
+
+        getCategories((categories) => {
+            categories.forEach((category) => {
+                const option = { value: category.id, label: category.name };
+                selectOptions.push(option);
+            });
+        });
+        this.setState({
+            ...this.state,
+            options: selectOptions
+        });
     }
 
     onFormSubmit(e) {
         e.preventDefault();
-        const { title, cost, description, category } = this.state;
+        const { title, cost, description, category } = this.state.chosen;
         if (title != '' && cost != '' && description != '' && category != null) {
             post({
-                    ...this.state,
-                    cost: numeral(numeral(`$${this.state.cost}`).format('$0,0.00'))._value * 100,
-                    category: this.state.category.value
+                    ...this.state.chosen,
+                    cost: numeral(numeral(`$${this.state.chosen.cost}`).format('$0,0.00'))._value * 100,
+                    category: this.state.chosen.category.value
                 }, () => {
                     this.setState({
-                        title: '',
-                        cost: '',
-                        description: '',
-                        category: null
+                        ...this.state,
+                        chosen: {
+                            title: '',
+                            cost: '',
+                            description: '',
+                            category: null
+                        }
                     });
                     scroll.scrollToTop();
                     getFeed(this.props);
@@ -81,23 +103,34 @@ class PostForm extends Component {
     }
 
     handleChange(e) {
-        console.log('handleChange() triggered');
         let value = e.target.value;
         if (e.target.name == 'cost') {
             if (value.split('.').length == 1) {
                 this.setState({
-                    [e.target.name]: value
+                    ...this.state,
+                    chosen: {
+                        ...this.state.chosen,
+                        [e.target.name]: value
+                    }
                 });
             } else if (value.split('.').length == 2) {
                 if (value.split('.')[1].length <= 2) {
                     this.setState({
-                        [e.target.name]: value
+                        ...this.state,
+                        chosen: {
+                            ...this.state.chosen,
+                            [e.target.name]: value
+                        }
                     });
                 }
             }
         } else {
             this.setState({
-                [e.target.name]: value
+                ...this.state,
+                chosen: {
+                    ...this.state.chosen,
+                    [e.target.name]: value
+                }
             });
         }
     }
@@ -105,7 +138,10 @@ class PostForm extends Component {
     handleChangeSelect(e) {
         this.setState({
             ...this.state,
-            category: e
+            chosen: {
+                ...this.state.chosen,
+                category: e
+            }
         });
     }
 
@@ -115,7 +151,8 @@ class PostForm extends Component {
 
     render() {
         const { postIsExpanded } = this.props;
-        const { title, cost, description, category } = this.state;
+        const { title, cost, description, category } = this.state.chosen;
+        const { options } = this.state;
         return (
             <form onSubmit={this.onFormSubmit}>
                 <input
@@ -130,14 +167,17 @@ class PostForm extends Component {
                     required
                 />
                 <Collapse isOpened={postIsExpanded}>
-                    <Select
-                        value={category}
-                        options={select.options}
-                        onChange={this.handleChangeSelect}
-                        styles={select.styles}
-                        className="select marg-t-sm" 
-                        required
-                    />
+                    {options.length != 0 && 
+                        <Select
+                            value={category}
+                            options={options}
+                            onChange={this.handleChangeSelect}
+                            styles={select.styles}
+                            className="select marg-t-sm" 
+                            required
+                        />
+                    }
+                    
                     <textarea
                         name="description"
                         value={description}
