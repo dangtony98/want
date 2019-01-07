@@ -51,8 +51,25 @@ const getAvatar = (props) => {
 
 // CHANGES THE CURRENT USER'S PASSWORD
 
-const changePassword = () => {
-
+const changePassword = (data) => {
+    console.log('Change password form submitted as: ');
+    console.log(data);
+    axios.post(`${WANT_URL}/api/change-password`, data,
+    {
+        headers: { 
+            Accept: 'application/json', 
+            Authorization: `Bearer ${localStorage.getItem('token')}` 
+        }
+    })
+    .then((response) => {
+        // UPLOAD AVATAR SUCCESSFUL
+        console.log('changePassword() successful with response: ');
+        console.log(response);
+    })
+    .catch((error) => {
+        // UPLOAD AVATAR UNSUCCESSFUL
+        console.log('Error: ' + error);
+    });
 }
 
 export { uploadAvatar, getAvatar, changePassword };

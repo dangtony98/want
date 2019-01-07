@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { changePassword } from '../../services/api/settings';
 
 export default class SettingsSecurity extends Component {
     constructor(props) {
@@ -26,7 +27,11 @@ export default class SettingsSecurity extends Component {
         const { newPassword, confirmPassword } = this.state;
         if (newPassword == confirmPassword) {
             // SEND POST REQUEST TO UPDATE PASSWORD
-            console.log(this.state);
+            const { oldPassword, newPassword } = this.state;
+            changePassword({
+                'current-password': oldPassword,
+                'new-password': newPassword
+            });
         } else {
             // THROW ERROR MESSAGE BECAUSE NEW PASSWORD != CONFIRM PASSWORD
         }

@@ -52,6 +52,15 @@
     }
 }
 
+.want-placeholder {
+    height: 30rem;
+    width: 100%;
+    border-radius: 0.5rem;
+    box-shadow: $box-shadow;
+    background-color: rgba($color-white, 0.2);
+    animation: fadeIn 1s;
+}
+
 .want-copied {
     font-weight: 300;
     color: $color-primary-0;

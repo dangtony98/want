@@ -31,14 +31,16 @@ export class HomeContent extends Component {
                     <h4 className="content-heading">Wants around You</h4>
                     <Filter />
                     <Sort />
-                    {wants != null ? wants.map((want) => (
+                    {wants.length != 0 ? (wants.map((want) => (
                         <Want
                             detailsModalType="NONE"
                             {...want}
                             key={want.id}
 
                         />
-                    )) : ''}
+                    ))) : (
+                        <div className="want-placeholder marg-t-sm"></div>
+                    )}
                 </div>
                 <div className="home-content__right">
                     <CurrentWants />
