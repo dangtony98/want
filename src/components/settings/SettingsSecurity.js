@@ -31,6 +31,12 @@ export default class SettingsSecurity extends Component {
             changePassword({
                 'current-password': oldPassword,
                 'new-password': newPassword
+            }, () => {
+                this.setState({
+                    oldPassword: '',
+                    newPassword: '',
+                    confirmPassword: ''                
+                });
             });
         } else {
             // THROW ERROR MESSAGE BECAUSE NEW PASSWORD != CONFIRM PASSWORD

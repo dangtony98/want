@@ -8,6 +8,7 @@ import PropTypes from 'prop-types';
 
 const profileDropdownOptions = {
     PROFILE: 'Profile',
+    FRIENDS: 'Friends',
     SETTINGS: 'Settings',
     HELP: 'Help',
     LOGOUT: 'Logout'
@@ -35,9 +36,12 @@ export class ProfileDropdown extends Component {
     }
 
     onButtonPressed(option) {
-        const { PROFILE, SETTINGS, HELP, LOGOUT } = profileDropdownOptions;
+        const { PROFILE, FRIENDS, SETTINGS, HELP, LOGOUT } = profileDropdownOptions;
         switch (option) {
             case PROFILE:
+                this.props.history.push('/');
+                break;
+            case FRIENDS:
                 this.props.history.push('/');
                 break;
             case SETTINGS:
@@ -59,7 +63,7 @@ export class ProfileDropdown extends Component {
     }
 
     render() {
-        const { PROFILE, SETTINGS, HELP, LOGOUT } = profileDropdownOptions;
+        const { PROFILE, FRIENDS, SETTINGS, HELP, LOGOUT } = profileDropdownOptions;
         const { email } = this.props;
         return (
             <div className="profile-dropdown" ref={this.setWrapperRef}>
@@ -70,7 +74,7 @@ export class ProfileDropdown extends Component {
                     </Link>
                 </div>
                 <hr className="hr"></hr>
-                {[PROFILE, SETTINGS, HELP, LOGOUT].map((option, index) => (
+                {[PROFILE, FRIENDS, SETTINGS, HELP, LOGOUT].map((option, index) => (
                     <button 
                         onClick={() => this.onButtonPressed(option)}
                         className="button-simple marg-t-sm"

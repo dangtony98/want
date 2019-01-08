@@ -73,7 +73,7 @@ export class Want extends Component {
     }
 
     applyCharacterLimit(description, limit) {
-        return `${description.substring(0, limit)}...`;
+        return `${description.substring(0, limit)}${description.length > limit ? '...' : ''}`;
     }
 
     render() {
@@ -100,15 +100,15 @@ export class Want extends Component {
                 style={(detailsModalType == 'NONE' && id == user.id) ? wantStyles.self : wantStyles.other}
             >
                 <div className="wrapper-flex-spaced wrapper-flex-spaced--top">
-                    <div className="wrapper-flex wrapper-flex--center marg-b-sm">
-                        <Link to="/profile">
+                    <div className="wrapper-flex wrapper-flex--center">
+                        <Link to="/profile" target="_blank" className="link">
                             <img 
                                 src={`${IMAGE_URL}/${user.avatar}`}
                                 className="want__image"
                             />
                         </Link>
                         <div className="marg-l-sm">
-                            <h4 className="want-text">
+                            <h4 className="want-text marg-e">
                                 <Link to="/profile" target="_blank" className="link">
                                     {user.first_name}
                                 </Link>
@@ -117,12 +117,14 @@ export class Want extends Component {
                                     className="button-simple"
                                 >{firstName}</button> */}
                             </h4>
-                            <h4 className="want-text">{`${moment(created_at).fromNow(true)} ago`}</h4>
+                            <h4 className="want-text marg-e">{`${moment(created_at).fromNow(true)} ago`}</h4>
                         </div>
                     </div>
                     {detailsModalType == 'NONE' ? 
                         <div className="wrapper-flex wrapper-flex--center">
-                            {copiedAnimation && <div className="want-copied">Copied</div>}
+                            <div>
+                                {copiedAnimation && <div className="want-copied">Copied</div>}
+                            </div>
                             <button
                                 onClick={this.onShareBtnPressed}
                                 className="button-icon"
@@ -138,12 +140,12 @@ export class Want extends Component {
                         </button>
                     }
                 </div>
-                <h4 className="want-text">{title}</h4>
+                <h4 className="want-text marg-t-sm marg-b-xs">{title}</h4>
                 <h4 className="want__pay">{numeral(cost / 100).format('$0,0.00')}</h4>
-                <h4 className="want-text">
+                <h4 className="want-text marg-t-xs marg-b-xs">
                     {categories.map((category) => (category.value == category_id ? category.label : ''))}
-                </h4>
-                <p className="want__description">
+                </h4>                
+                <p className="want-text">
                     {detailsModalType == 'NONE' ? this.applyCharacterLimit(description, 300) : description}
                 </p>
                 {(detailsModalType == 'NONE' || detailsModalType == 'STANDARD') && 

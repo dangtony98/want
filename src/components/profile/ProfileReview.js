@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
 export const ProfileReview = ({ review }) => {
@@ -32,15 +33,19 @@ export const ProfileReview = ({ review }) => {
                         className="want__image"
                     />
                     <div className="wrapper-flex-spaced--flex1 marg-l-sm">
-                        <h4 className="want__firstName">{firstName}</h4>
+                        <h4 className="want-text marg-e">
+                            <Link to="/profile" target="_blank" className="link">
+                                {firstName}
+                            </Link>
+                        </h4>
                         <div>
                             {renderRating(rating)}
                         </div>
                     </div>
                 </div>
-                <h4 className="want__timestamp">{timestamp}</h4>
+                <h4 className="want-text marg-e">{timestamp}</h4>
             </div>
-            <h4 className="want__title">{title}</h4>
+            <h4 className="want-text">{title}</h4>
             <p className="profile-review__review">{applyCharacterLimit(content, 300)}</p>
         </div>
     );

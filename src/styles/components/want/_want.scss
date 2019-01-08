@@ -16,6 +16,20 @@
         font-weight: 700;
     }
 
+    &__category {
+        display: inline-block;
+        height: 5rem;
+        padding: 1.5rem 2rem;
+        border-radius: 0.5rem;
+        color: $color-white;
+        background-color: $color-primary-1;
+        box-shadow: $box-shadow;
+        font-size: 1.5rem;
+        font-weight: 300;
+        outline: none;
+        transition: all 0.2s;
+    }
+
     &__image {
         height: 5rem;
         width: 5rem;
@@ -25,19 +39,12 @@
         box-shadow: $box-shadow;
     }
 
-    &__description {
-        margin-top: 1rem;
-        font-weight: 300;
-        color: $color-grey-dark;
-    }
-
     &__counter-button {
         margin-left: 2rem;
     }
 }
 
 .want-text {
-    margin: 0;
     color: $color-grey-dark;
 }
 

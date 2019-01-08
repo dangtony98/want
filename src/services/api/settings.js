@@ -39,10 +39,11 @@ const getAvatar = (props) => {
         }
     })
     .then((response) => {
-        // SEND POST REQUEST TO LOAD USER
+        // GET AVATAR SUCCESSFUL
         props.setPhoto(response.data);
     })
     .catch((error) => {
+        // GET AVATAR UNSUCCESSFUL
         console.log('Error: ' + error);
     });
 }
@@ -51,9 +52,7 @@ const getAvatar = (props) => {
 
 // CHANGES THE CURRENT USER'S PASSWORD
 
-const changePassword = (data) => {
-    console.log('Change password form submitted as: ');
-    console.log(data);
+const changePassword = (data, callback) => {
     axios.post(`${WANT_URL}/api/change-password`, data,
     {
         headers: { 
@@ -62,12 +61,11 @@ const changePassword = (data) => {
         }
     })
     .then((response) => {
-        // UPLOAD AVATAR SUCCESSFUL
-        console.log('changePassword() successful with response: ');
-        console.log(response);
+        // CHANGE PASSWORD SUCCESSFUL
+        callback();
     })
     .catch((error) => {
-        // UPLOAD AVATAR UNSUCCESSFUL
+        // CHANGE PASSWORD UNSUCCESSFUL
         console.log('Error: ' + error);
     });
 }
