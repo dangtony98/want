@@ -32,8 +32,6 @@ export class SetupBox extends Component {
                 selectedGridItems: [...prevState.selectedGridItems, gridItemState.selected]
             })
         });
-
-        console.log(this.state);
     }
 
     renderGridItems() {

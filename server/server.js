@@ -6,7 +6,12 @@ const publicPath = path.join(__dirname, '../public');
 
 app.use(express.static(publicPath));
 
-// INSTALL BODY-PARSER
+app.get('*.js', (req, res, next) => {
+    req.url = req.url + '.gz';
+    res.set('Content-Encoding', 'gzip');
+    next();
+});
+
 app.get('*', (req, res) => {
     res.sendFile(path.join(publicPath, 'index.html'));
 });

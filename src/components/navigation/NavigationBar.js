@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import NotificationBox from '../notifications/NotificationBox';
 import ProfileDropdown from '../dropdowns/ProfileDropdown';
@@ -48,7 +49,7 @@ export class NavigationBar extends Component {
     }
 
     onInboxButtonPressed() {
-        // TRANSITION TO INBOX PAGE
+        this.props.history.push("/inbox");
     }
 
     onProfileButtonPressed() {
@@ -134,4 +135,4 @@ const mapDispatchToProps = (dispatch) => ({
     setUser: (user) => dispatch(setUser(user))
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavigationBar);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(NavigationBar));

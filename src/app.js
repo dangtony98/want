@@ -11,6 +11,7 @@ import LoginPage from './components/pages/LoginPage';
 import SignupPage from './components/pages/SignupPage';
 import SetupPage from './components/pages/SetupPage';
 import ProfilePage from './components/pages/ProfilePage';
+import InboxPage from './components/pages/InboxPage';
 import SettingsPage from './components/pages/SettingsPage';
 import AboutUsPage from './components/pages/AboutUsPage';
 import TeamPage from './components/pages/TeamPage';
@@ -30,6 +31,7 @@ ReactDOM.render(
                 <Route path="/signup" component={SignupPage} />
                 <Route path="/setup" component={SetupPage} />
                 <Route path="/profile" component={RequireAuth(ProfilePage)} /> {/*RequireAuth Wrapper*/}
+                <Route path="/inbox" component={RequireAuth(InboxPage)} /> {/*RequireAuth Wrapper*/}
                 <Route path="/settings" component={RequireAuth(SettingsPage)} /> {/*RequireAuth Wrapper*/}
                 <Route path="/about" component={AboutUsPage} />
                 <Route path="/team" component={TeamPage} />
