@@ -4,7 +4,7 @@ import { Collapse } from 'react-collapse';
 import Select from 'react-select';
 import { invertSortIsExpanded } from '../../actions/layout';
 import { applyFilters } from '../../services/api/filter';
-import { updateFeed } from '../../actions/feed';
+import { updateFeed, setNextPageUrl } from '../../actions/feed';
 import { getCategories } from '../../services/api/filter';
 import { storeCategories } from '../../actions/filter';
 import PropTypes from 'prop-types';
@@ -67,31 +67,31 @@ export class Sort extends Component {
                 options: []
             },
             chosen: {
-                categories: { value: 1, label: 'None' },
+                categories: { value: 0, label: 'None' },
                 sort_by: { value: '', label: 'None' }
             }
         }
     }
 
     componentDidMount() {
-        let selectOptions = [];
+        let selectOptions = [{ value: 0, label: 'None' }];
 
         getCategories((categories) => {
             categories.forEach((category) => {
                 const option = { value: category.id, label: category.name };
                 selectOptions.push(option);
             });
-        });
 
-        this.setState({
-            ...this.state,
-            filter: {
-                ...this.state.filter,
-                options: selectOptions
-            }
+            this.setState({
+                ...this.state,
+                filter: {
+                    ...this.state.filter,
+                    options: selectOptions
+                }
+            });
+    
+            this.props.storeCategories(selectOptions);
         });
-
-        this.props.storeCategories(selectOptions);
     }
 
     handleChangeSelect(e, name) {
@@ -104,7 +104,7 @@ export class Sort extends Component {
         }, () => {
             const { categories, sort_by } = this.state.chosen;
             applyFilters({
-                categories: [categories.value == 1 ? '' : [categories.value]],
+                categories: [categories.value == 0 ? '' : [categories.value]],
                 sort_by: sort_by.value
             }, this.props);
         });
@@ -131,7 +131,7 @@ export class Sort extends Component {
                         : <i className="icon-dropdown fas fa-chevron-down"></i>}
                         
                     </button>
-                    {(categories != null && categories.value != 1) && <div className="sort-tab marg-l-sm">{categories.label}</div>}
+                    {(categories != null && categories.value != 0) && <div className="sort-tab marg-l-sm">{categories.label}</div>}
                     {(sort_by != null && sort_by.value != '') && <div className="sort-tab marg-l-sm">{sort_by.label}</div>}
                 </div>
                 <Collapse isOpened={sortIsExpanded}>
@@ -171,6 +171,7 @@ Sort.propTypes = {
     sortIsExpanded: PropTypes.bool.isRequired,
     invertSortIsExpanded: PropTypes.func.isRequired,
     updateFeed: PropTypes.func.isRequired,
+    setNextPageUrl: PropTypes.func.isRequired,
     storeCategories: PropTypes.func.isRequired
 }
 
@@ -181,6 +182,7 @@ const mapStateToProps = ({ layout }) => ({
 const mapDispatchToProps = (dispatch) => ({
     invertSortIsExpanded: () => dispatch(invertSortIsExpanded()),
     updateFeed: (feed) => dispatch(updateFeed(feed)),
+    setNextPageUrl: (url) => dispatch(setNextPageUrl(url)),
     storeCategories: (categories) => dispatch(storeCategories(categories))
 });
 

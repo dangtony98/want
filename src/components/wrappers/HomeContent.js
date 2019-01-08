@@ -25,6 +25,8 @@ export class HomeContent extends Component {
 
     handleLoadWants(page) {
         let next_page_url = this.props.next_page_url;
+        console.log('trying to get next page from url: ');
+        console.log(next_page_url);
         axios.get(next_page_url, 
             { 
                 headers: { 

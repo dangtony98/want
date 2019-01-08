@@ -30,6 +30,10 @@ const applyFilters = (filters, props) => {
             console.log('Filters response: ');
             console.log(response);
             props.updateFeed(response.data);
+            console.log('Filters next page url: ');
+            console.log(response.data.next_page_url);
+            props.setNextPageUrl(response.data.next_page_url);
+            // SET NEW NEXT PAGE URL
         })
         .catch((error) => {
             // FILTERS UNSUCCESSFULLY APPLIED
@@ -52,6 +56,8 @@ const getCategories = (callback) => {
         })
         .then((response) => {
             // CATEGORIES RETRIEVAL SUCCESSFUL
+            console.log('categories: ');
+            console.log(response.data);
             callback(response.data);
         })
         .catch((error) => {

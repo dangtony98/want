@@ -32,6 +32,7 @@ export class NavigationBar extends Component {
         super(props);
 
         this.onNotificationButtonPressed = this.onNotificationButtonPressed.bind(this);
+        this.onInboxButtonPressed = this.onInboxButtonPressed.bind(this);
         this.onProfileButtonPressed = this.onProfileButtonPressed.bind(this);
     }
 
@@ -44,6 +45,10 @@ export class NavigationBar extends Component {
     onNotificationButtonPressed() {
         this.props.invertNotificationBoxIsOpen();
         this.props.closeProfileDropdownIsOpen();
+    }
+
+    onInboxButtonPressed() {
+        // TRANSITION TO INBOX PAGE
     }
 
     onProfileButtonPressed() {
@@ -76,6 +81,12 @@ export class NavigationBar extends Component {
                                 style={notificationBoxIsOpen ? navigationStyles.notificationIcon.selected : navigationStyles.notificationIcon.unselected}
                                 id="icon-notification"
                             ></i>
+                        </button>
+                        <button
+                            onClick={this.onInboxButtonPressed} 
+                            className="button-icon"
+                        >
+                            <i className="icon-envelope fas fa-envelope marg-r-sm"></i>
                         </button>
                         <button
                             onClick={this.onProfileButtonPressed} 

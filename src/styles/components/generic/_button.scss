@@ -85,7 +85,8 @@
             color: $color-primary-2;
         }
 
-        .icon-notification {
+        .icon-notification,
+        .icon-envelope {
             color: $color-grey-light;
         }
 
@@ -95,10 +96,6 @@
 
         .icon-google {
             color: $color-google-1;
-        }
-        
-        .icon-linkedin {
-            color: $color-linkedin-1;
         }
     }
 
@@ -112,7 +109,8 @@
             color: $color-primary-3;
         }
 
-        .icon-notification {
+        .icon-notification,
+        .icon-envelope {
             color: $color-grey;
         }
 
@@ -122,10 +120,6 @@
 
         .icon-google {
             color: $color-google-2;
-        }
-
-        .icon-linkedin {
-            color: $color-linkedin-2;
         }
     }
 }

@@ -16,6 +16,8 @@ const getFeed = (props) => {
         })
         .then((response) => {
             // NEWSFEED RETRIEVAL SUCCESSFUL
+            console.log('getFeed() response: ');
+            console.log(response);
             props.updateFeed(response.data);
         })
         .catch((error) => {

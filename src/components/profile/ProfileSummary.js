@@ -13,12 +13,6 @@ const ProfileSummary = ({ summary }) => {
                     className="profile-summary__photo"
                 />
                 <div className="profile-summary__box">
-                    {/* <div className="wrapper-flex-spaced wrapper-flex-spaced--top"> */}
-                        <h2 className="profile-text">{summary.firstName}</h2>
-                        {/* <button className="button-icon">
-                            <i className="icon-linkedin fab fa-linkedin"></i>
-                        </button>
-                    </div> */}
                     <h4 className="profile-text marg-b-sm">{summary.shortDescription}</h4>
                     <hr className="hr"></hr>
                     <p className="profile-text marg-t-sm">{applyCharacterLimit(summary.description, 300)}</p>
