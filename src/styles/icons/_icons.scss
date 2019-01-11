@@ -1,9 +1,5 @@
 .icon-search {
     display: block;
-    // position: absolute;
-    // top: 50%;
-    // right: 0;
-    // transform: translate(-100%, -50%);
     font-size: 1.5rem;
     color: $color-grey-dark;
 }
@@ -103,4 +99,10 @@
 .icon-credit-card {
     color: $color-grey-dark;
     font-size: 3rem;
+}
+
+.icon-paperclip {
+    color: $color-primary-0;
+    font-size: 2rem;
+    transition: color 0.2s;
 }

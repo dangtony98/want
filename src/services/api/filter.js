@@ -14,9 +14,7 @@ const applySearchTerm = (searchTerm) => {
 // APPLIES SORT AND FILTER OPTIONS TO THE NEWSFEED
 
 const applyFilters = (filters, props) => {
-    console.log('Filters being applied: ');
-    console.log(filters);
-    axios.post(`${WANT_URL}/api/newsfeedNew`, {
+    axios.post(`${WANT_URL}/api/newsfeed`, {
             ...filters
         },
         { 
@@ -27,7 +25,7 @@ const applyFilters = (filters, props) => {
         })
         .then((response) => {
             // FILTERS SUCCESSFULLY APPLIED
-            console.log('Filters response: ');
+            console.log('applyFilters() response is: ');
             console.log(response);
             props.updateFeed(response.data);
             console.log('Filters next page url: ');

@@ -7,7 +7,11 @@ import { WANT_URL } from '../variables/variables';
 // PROPS: CONTAINS UPDATEFEED() FUNC
 
 const getFeed = (props) => {
-    axios.get(`${WANT_URL}/api/newsfeed`, 
+    console.log('getFeed(): ');
+    axios.post(`${WANT_URL}/api/newsfeed`, {
+            categories: [''],
+            sort_by: 'created_at#desc'
+        },
         { 
             headers: { 
                 Accept: 'application/json', 
@@ -16,7 +20,6 @@ const getFeed = (props) => {
         })
         .then((response) => {
             // NEWSFEED RETRIEVAL SUCCESSFUL
-            console.log('getFeed() response: ');
             console.log(response);
             props.updateFeed(response.data);
         })

@@ -25,18 +25,14 @@ export class HomeContent extends Component {
 
     handleLoadWants(page) {
         let next_page_url = this.props.next_page_url;
-        console.log('trying to get next page from url: ');
-        console.log(next_page_url);
-        console.log('sent in form is: ');
-        console.log({ 
-            categories: [this.props.chosen.categories.value == 0 ? '' : this.props.chosen.categories.value], 
-            sort_by: [this.props.chosen.sort_by.value]
-        });
-        axios.get(next_page_url, 
-            // { 
-            //     categories: [this.props.chosen.categories.value == 0 ? '' : this.props.chosen.categories.value], 
-            //     sort_by: [this.props.chosen.sort_by.value]
-            // },
+        console.log('handleLoadWants() method init');
+        console.log('next_page_url: ' + next_page_url);
+        console.log('hasMoreWants: ' + this.props.hasMoreWants);
+        axios.post(next_page_url, 
+            { 
+                categories: [this.props.chosen.categories.value == 0 ? '' : this.props.chosen.categories.value], 
+                sort_by: this.props.chosen.sort_by.value
+            },
             { 
                 headers: { 
                     Accept: 'application/json', 
@@ -45,16 +41,20 @@ export class HomeContent extends Component {
             })
             .then((response) => {
                 // NEWSFEED RETRIEVAL SUCCESSFUL
-                console.log('response is: ');
+                console.log('handleLoadWants() from HomeContent response is: ');
                 console.log(response);
+                console.log(response.data.next_page_url);
                 let wants = this.props.wants;
                 response.data.data.map((want) => {
                     wants.push(want);
                 });
+                
+                // UPDATE WANT LIST?
                 if (response.data.next_page_url != null) {
                     this.props.setNextPageUrl(response.data.next_page_url);
                 } else {
-                    this.props.setHasMoreWants(false);
+                    console.log('setHasMoreWants to false');
+                    // this.props.setHasMoreWants(false);
                 }
             })
             .catch((error) => {
@@ -66,6 +66,8 @@ export class HomeContent extends Component {
     render() {
         const { wants, hasMoreWants } = this.props;
         let wantArr = [];
+        console.log('wants from render: ');
+        console.log(wants);
         wants.map((want) => {
             wantArr.push(
                 <Want
@@ -110,6 +112,7 @@ HomeContent.propTypes = {
     hasMoreWants: PropTypes.bool,
     updateFeed: PropTypes.func.isRequired,
     setNextPageUrl: PropTypes.func.isRequired,
+    setHasMoreWants: PropTypes.func.isRequired,
     chosen: PropTypes.object.isRequired
 }
 

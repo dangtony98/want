@@ -9,6 +9,8 @@ const feed = {
 export default (state = feed, action) => {
     switch (action.type) {
         case UPDATE_FEED:
+            console.log('action feed: ');
+            console.log(action.feed);
             return {
                 ...state,
                 wants: action.feed ? action.feed.data : [],

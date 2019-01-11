@@ -6,6 +6,7 @@
     border-radius: 0.5rem;
     box-shadow: $box-shadow;
     background-color: $color-white;
+    overflow-wrap: break-word;
 
     &--feed {
         animation: fadeIn 1s;

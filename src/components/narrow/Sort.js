@@ -4,7 +4,7 @@ import { Collapse } from 'react-collapse';
 import Select from 'react-select';
 import { invertSortIsExpanded } from '../../actions/layout';
 import { applyFilters } from '../../services/api/filter';
-import { updateFeed, setNextPageUrl } from '../../actions/feed';
+import { updateFeed, setNextPageUrl, setHasMoreWants } from '../../actions/feed';
 import { getCategories } from '../../services/api/filter';
 import { storeCategories, updateChosenFilters } from '../../actions/filter';
 import PropTypes from 'prop-types';
@@ -108,6 +108,8 @@ export class Sort extends Component {
                 categories: [categories.value == 0 ? '' : [categories.value]],
                 sort_by: sort_by.value
             }, this.props);
+            this.props.setHasMoreWants(true);
+            console.log('setHasMoreWants to true');
         });
     }
 
@@ -174,6 +176,7 @@ Sort.propTypes = {
     invertSortIsExpanded: PropTypes.func.isRequired,
     updateFeed: PropTypes.func.isRequired,
     setNextPageUrl: PropTypes.func.isRequired,
+    setHasMoreWants: PropTypes.func.isRequired,
     storeCategories: PropTypes.func.isRequired,
     updateChosenFilters: PropTypes.func.isRequired
 }
@@ -186,6 +189,7 @@ const mapDispatchToProps = (dispatch) => ({
     invertSortIsExpanded: () => dispatch(invertSortIsExpanded()),
     updateFeed: (feed) => dispatch(updateFeed(feed)),
     setNextPageUrl: (url) => dispatch(setNextPageUrl(url)),
+    setHasMoreWants: (status) => dispatch(setHasMoreWants(status)),
     storeCategories: (categories) => dispatch(storeCategories(categories)),
     updateChosenFilters: (e, name) => dispatch(updateChosenFilters(e, name))
 });
