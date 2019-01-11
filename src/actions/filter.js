@@ -1,4 +1,4 @@
-import { UPDATE_SEARCH_TERM, STORE_CATEGORIES } from './constants';
+import { UPDATE_SEARCH_TERM, STORE_CATEGORIES, UPDATE_CHOSEN_FILTERS } from './constants';
 
 const updateSearchTerm = (searchTerm) => ({
     type: UPDATE_SEARCH_TERM,
@@ -8,6 +8,12 @@ const updateSearchTerm = (searchTerm) => ({
 const storeCategories = (categories) => ({
     type: STORE_CATEGORIES,
     categories
-})
+});
 
-export { updateSearchTerm, storeCategories };
+const updateChosenFilters = (e, name) => ({
+    type: UPDATE_CHOSEN_FILTERS,
+    e,
+    name
+});
+
+export { updateSearchTerm, storeCategories, updateChosenFilters };

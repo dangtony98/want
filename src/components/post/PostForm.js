@@ -59,6 +59,11 @@ class PostForm extends Component {
                 cost: '',
                 description: '',
                 category: null
+            },
+            elements: {
+                textarea: {
+                    charactersRemaining: null
+                }
             }
         }
     }
@@ -186,8 +191,10 @@ class PostForm extends Component {
                         placeholder="Enter a description"
                         autoComplete="off"
                         className="post-textarea textarea marg-t-sm"
+                        maxLength="500"
                         required
                     />
+                    <h4 className="want-text">{this.state.elements.textarea.charactersRemaining} characters remaining</h4>
                 </Collapse>
                 <div className="wrapper-flex wrapper-flex--center marg-t-sm">
                     <input

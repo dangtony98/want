@@ -25,7 +25,6 @@ export class NotificationBox extends Component {
     }
 
     handleClickOutside(event) {
-        if (event.target.id == 'icon-notification-button') console.log('woo');
         if (this.wrapperRef && !this.wrapperRef.contains(event.target) && event.target.id != 'icon-notification' && event.target.id != 'icon-notification-button') {
             this.props.closeNotificationBoxIsOpen();
         }

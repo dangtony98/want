@@ -6,7 +6,7 @@ import { invertSortIsExpanded } from '../../actions/layout';
 import { applyFilters } from '../../services/api/filter';
 import { updateFeed, setNextPageUrl } from '../../actions/feed';
 import { getCategories } from '../../services/api/filter';
-import { storeCategories } from '../../actions/filter';
+import { storeCategories, updateChosenFilters } from '../../actions/filter';
 import PropTypes from 'prop-types';
 
 const sortStyles = {
@@ -95,6 +95,7 @@ export class Sort extends Component {
     }
 
     handleChangeSelect(e, name) {
+        this.props.updateChosenFilters(e, name);
         this.setState({
             ...this.state,
             chosen: {
@@ -169,10 +170,12 @@ export class Sort extends Component {
 
 Sort.propTypes = {
     sortIsExpanded: PropTypes.bool.isRequired,
+    chosen: PropTypes.object.isRequired,
     invertSortIsExpanded: PropTypes.func.isRequired,
     updateFeed: PropTypes.func.isRequired,
     setNextPageUrl: PropTypes.func.isRequired,
-    storeCategories: PropTypes.func.isRequired
+    storeCategories: PropTypes.func.isRequired,
+    updateChosenFilters: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ layout }) => ({
@@ -183,7 +186,8 @@ const mapDispatchToProps = (dispatch) => ({
     invertSortIsExpanded: () => dispatch(invertSortIsExpanded()),
     updateFeed: (feed) => dispatch(updateFeed(feed)),
     setNextPageUrl: (url) => dispatch(setNextPageUrl(url)),
-    storeCategories: (categories) => dispatch(storeCategories(categories))
+    storeCategories: (categories) => dispatch(storeCategories(categories)),
+    updateChosenFilters: (e, name) => dispatch(updateChosenFilters(e, name))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Sort);

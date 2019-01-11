@@ -154,11 +154,11 @@ export class Want extends Component {
                             <button
                                 onClick={this.onAcceptBtnPressed} 
                                 className="button-simple marg-t-sm"
-                            >Accept</button>
+                            >{(detailsModalType == 'NONE' && id == user.id) ? 'Edit' : 'Accept'}</button>
                             <button
                                 onClick={this.onCounterOfferBtnPressed} 
                                 className="want__counter-button button-simple marg-t-sm"
-                            >Counteroffer</button>
+                            >{(detailsModalType == 'NONE' && id == user.id) ? 'Delete' : 'Counteroffer'}</button>
                         </div>
                         {detailsModalType == 'NONE' && 
                             <button

@@ -27,7 +27,16 @@ export class HomeContent extends Component {
         let next_page_url = this.props.next_page_url;
         console.log('trying to get next page from url: ');
         console.log(next_page_url);
+        console.log('sent in form is: ');
+        console.log({ 
+            categories: [this.props.chosen.categories.value == 0 ? '' : this.props.chosen.categories.value], 
+            sort_by: [this.props.chosen.sort_by.value]
+        });
         axios.get(next_page_url, 
+            // { 
+            //     categories: [this.props.chosen.categories.value == 0 ? '' : this.props.chosen.categories.value], 
+            //     sort_by: [this.props.chosen.sort_by.value]
+            // },
             { 
                 headers: { 
                     Accept: 'application/json', 
@@ -36,6 +45,8 @@ export class HomeContent extends Component {
             })
             .then((response) => {
                 // NEWSFEED RETRIEVAL SUCCESSFUL
+                console.log('response is: ');
+                console.log(response);
                 let wants = this.props.wants;
                 response.data.data.map((want) => {
                     wants.push(want);
@@ -98,13 +109,15 @@ HomeContent.propTypes = {
     next_page_url: PropTypes.string,
     hasMoreWants: PropTypes.bool,
     updateFeed: PropTypes.func.isRequired,
-    setNextPageUrl: PropTypes.func.isRequired
+    setNextPageUrl: PropTypes.func.isRequired,
+    chosen: PropTypes.object.isRequired
 }
 
-const mapStateToProps = ({ feed }) => ({
+const mapStateToProps = ({ feed, filter }) => ({
     wants: feed.wants,
     next_page_url: feed.next_page_url,
-    hasMoreWants: feed.hasMoreWants
+    hasMoreWants: feed.hasMoreWants,
+    chosen: filter.chosen
 });
 
 const mapDispatchToProps = (dispatch) => ({

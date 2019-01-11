@@ -1,8 +1,12 @@
-import { UPDATE_SEARCH_TERM, STORE_CATEGORIES } from '../actions/constants';
+import { UPDATE_SEARCH_TERM, STORE_CATEGORIES, UPDATE_CHOSEN_FILTERS } from '../actions/constants';
 
 const filter = {
     searchTerm: '',
-    categories: []
+    categories: [],
+    chosen: {
+        categories: { value: 0, label: 'None '},
+        sort_by: { value: '', label: 'None'}
+    }
 }
 
 export default (state = filter, action) => {
@@ -15,7 +19,15 @@ export default (state = filter, action) => {
         case STORE_CATEGORIES:
             return {
                 ...state,
-                categories: action.categories
+                categories: action.categories   
+            }
+        case UPDATE_CHOSEN_FILTERS:
+            return {
+                ...state,
+                chosen: {
+                    ...state.chosen,
+                    [action.name] : action.e
+                }
             }
         default:
             return state;
