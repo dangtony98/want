@@ -194,7 +194,7 @@ class PostForm extends Component {
                         maxLength="500"
                         required
                     />
-                    <h4 className="want-text">{this.state.elements.textarea.charactersRemaining} characters remaining</h4>
+                    {/* <h4 className="want-text">{this.state.elements.textarea.charactersRemaining} characters remaining</h4> */}
                 </Collapse>
                 <div className="wrapper-flex wrapper-flex--center marg-t-sm">
                     <input
