@@ -1,0 +1,13 @@
+.inbox-people {
+    height: auto;
+    width: 100%;
+
+    &__box {
+        height: 30rem;
+        background-color: $color-white;
+        padding: 2rem;
+        border: 1px solid $color-grey;
+        border-radius: 0.5rem;
+        box-shadow: $box-shadow;
+    }
+}
