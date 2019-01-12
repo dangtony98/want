@@ -43,6 +43,7 @@
     display: flex;
     justify-content: center;
     margin: 0 auto;
+    padding: 0 2rem;
 
     &__left {
         min-width: 36rem;
@@ -50,7 +51,7 @@
     }
 
     &__middle {
-        width: 75rem;
+        width: 62.5rem;
         padding: 1rem;
     }
 
@@ -64,6 +65,7 @@
     display: flex;
     justify-content: center;
     margin: 0 auto;
+    padding: 0 2rem;
 
     &__left {
         min-width: 36rem;
@@ -71,7 +73,8 @@
     }
 
     &__right {
-        min-width: 85rem;;
+        width: 85rem;
+        min-width: 60rem;
         padding: 1rem;
     }
 }

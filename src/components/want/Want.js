@@ -146,7 +146,7 @@ export class Want extends Component {
                     {categories.map((category) => (category.value == category_id ? category.label : ''))}
                 </h4>                
                 <p className="want-text">
-                    {detailsModalType == 'NONE' ? this.applyCharacterLimit(description, 300) : description}
+                    {detailsModalType == 'NONE' ? this.applyCharacterLimit(description, 200) : description}
                 </p>
                 {(detailsModalType == 'NONE' || detailsModalType == 'STANDARD') && 
                     <div className="wrapper-flex-spaced wrapper-flex-spaced--center">

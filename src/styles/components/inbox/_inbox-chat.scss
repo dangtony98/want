@@ -22,6 +22,17 @@
         border-top-right-radius: 0.5rem;
         border-top-left-radius: 0.5rem;
         color: $color-white;
+        text-align: center;
+    }
+
+    &__body {
+        display: flex;
+        flex-direction: column;
+        flex: 1;
+        width: 100%;
+        padding: 2rem;
+        word-wrap: break-word;
+        overflow: scroll;
     }
 
     &__bottom {
@@ -37,4 +48,24 @@
     height: 5rem;
     max-height: 10rem;
     flex: 1;
+}
+
+.inbox-message {
+    display: inline-block;
+    height: auto;
+    padding: 1rem 2rem;
+    border-radius: 2rem;
+
+    &__image {
+        height: 4rem;
+        width: 4rem;
+        border: 1px solid $color-primary-0;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+}
+
+.testx {
+    background-color: red;
+    justify-content: flex-end;
 }
