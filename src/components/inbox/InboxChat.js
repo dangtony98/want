@@ -15,13 +15,16 @@ export class InboxChat extends Component {
             // CHANGE CHAT CONTENTS
             messages: [],
             chatInput: '',
-            username: null
+            username: null,
+            photo: ''
         }
     }
 
     componentDidMount() {
         // MOUNT AND SUBSCRIBE NEW PUSHER & LOAD CHAT CONTENTS
-
+        console.log('local storage user: ');
+        console.log(JSON.parse(localStorage.getItem('user')));
+        
         const chat = {
             id: 1,
             wanter_id: 3,
@@ -67,11 +70,12 @@ export class InboxChat extends Component {
                 }
             ]
         }
-        
+
         this.setState({
             ...this.state,
             messages: chat.messages,
-            username: JSON.parse(localStorage.getItem('user')).id
+            username: JSON.parse(localStorage.getItem('user')).id,
+            photo: JSON.parse(localStorage.getItem('user')).avatar
         });
     }
 
@@ -93,7 +97,7 @@ export class InboxChat extends Component {
     }
 
     render() {
-        const { messages, chatInput, username } = this.state;
+        const { messages, chatInput, username, photo } = this.state;
         return (
             <div className="inbox-chat">
                 <h4 className="content-heading">Chat</h4>
@@ -109,6 +113,7 @@ export class InboxChat extends Component {
                         <InboxChatList 
                             messages={messages} 
                             username={username}
+                            photo={photo}
                         />
                     </div>
                     <div className="inbox-chat__bottom wrapper-flex wrapper-flex--center">

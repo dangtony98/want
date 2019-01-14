@@ -1,4 +1,5 @@
 import React from 'react';
+import { IMAGE_URL } from '../../services/variables/variables';
 
 // COMPONENT NEEDS LOGIC TO HANDLE LEFT OR RIGHT MESSAGE ALIGNMENT
 
@@ -25,7 +26,7 @@ const inboxChatListStyles = {
     }
 }
 
-export default ({ messages, username }) => {
+export default ({ messages, username, photo }) => {
     return (
         <div>
             {messages.map((message) => (
@@ -50,7 +51,13 @@ export default ({ messages, username }) => {
                         }
                     >
                         <h4 className="marg-e">{message.message}</h4>
-                    </div>        
+                    </div>  
+                    {message.user_id == username && 
+                        <img 
+                            src={`${IMAGE_URL}/${photo}`} 
+                            className="inbox-message__image marg-l-sm"
+                        />
+                    }      
                 </div>
             ))}
         </div>
