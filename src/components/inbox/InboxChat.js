@@ -16,13 +16,14 @@ export class InboxChat extends Component {
             messages: [],
             chatInput: '',
             username: null,
-            photo: ''
+            photo: '',
+            imageAttachment: 'one'
         }
     }
 
     componentDidMount() {
         // MOUNT AND SUBSCRIBE NEW PUSHER & LOAD CHAT CONTENTS
-        console.log('local storage user: ');
+        console.log('local storage userx: ');
         console.log(JSON.parse(localStorage.getItem('user')));
         
         const chat = {
@@ -79,6 +80,15 @@ export class InboxChat extends Component {
         });
     }
 
+    handleUploadFile(e) {
+        console.log('handleUploadFile() in InboxChat triggered. Upload file: ');
+        console.log(e.target.files[0]);
+        let reader = new FileReader();
+        reader.readAsDataURL(e.target.files[0]);
+        console.log('reader: ');
+        console.log(reader);
+    }
+
     handleTextChange(e) {
         this.setState({
             chatInput: e.target.value
@@ -90,6 +100,7 @@ export class InboxChat extends Component {
             e.preventDefault();
             // SEND MESSAGE
 
+            console.log('SEND TEXT!');
             this.setState({
                 chatInput: ''
             });
@@ -97,7 +108,7 @@ export class InboxChat extends Component {
     }
 
     render() {
-        const { messages, chatInput, username, photo } = this.state;
+        const { messages, chatInput, username, photo, imageAttachment } = this.state;
         return (
             <div className="inbox-chat">
                 <h4 className="content-heading">Chat</h4>
@@ -116,19 +127,41 @@ export class InboxChat extends Component {
                             photo={photo}
                         />
                     </div>
-                    <div className="inbox-chat__bottom wrapper-flex wrapper-flex--center">
-                        <Textarea 
-                            minRows={1}
-                            maxRows={5}
-                            value={chatInput}
-                            onKeyDown={this.onEnterPressed}
-                            onChange={this.handleTextChange}
-                            placeholder="Enter a message"
-                            className="inbox-chat-textarea textarea"
-                        />
-                        <button className="button-icon">
-                            <i className="icon-paperclip fas fa-paperclip marg-l-sm"></i>
-                        </button>
+                    <div className="inbox-chat__bottom">
+                        {imageAttachment &&
+                            <div className="inbox-chat__image-area marg-b-xs">
+                                <img 
+                                    src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3024&q=80"
+                                    className="inbox-photo-upload__image"
+                                />
+                            </div>
+                        }
+                        <div className="wrapper-flex wrapper-flex--center">
+                            <Textarea 
+                                minRows={1}
+                                maxRows={5}
+                                value={chatInput}
+                                onKeyDown={this.onEnterPressed}
+                                onChange={this.handleTextChange}
+                                placeholder="Enter a message"
+                                className="inbox-chat-textarea textarea"
+                            />
+                            <button className="button-icon marg-l-sm">
+                                <label 
+                                    htmlFor="inbox-photo-upload"
+                                    className="inbox-photo-upload__label"
+                                >
+                                    <i className="icon-paperclip fas fa-paperclip"></i>
+                                </label>
+                                <input 
+                                    type="file" 
+                                    id="inbox-photo-upload"
+                                    onChange={this.handleUploadFile} 
+                                    accept="image/png, impage/jpeg"
+                                    className="input-file" 
+                                />
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>

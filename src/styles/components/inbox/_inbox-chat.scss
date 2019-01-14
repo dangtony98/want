@@ -42,6 +42,11 @@
         border-bottom-left-radius: 0.5rem;
         border-top: 1px solid $color-grey;
     }
+
+    &__image-area {
+        height: auto;
+        width: 100%;
+    }
 }
 
 .inbox-chat-textarea {
@@ -55,6 +60,7 @@
     height: auto;
     padding: 1rem 2rem;
     border-radius: 2rem;
+    animation: fadeIn 0.2s;
 
     &__image {
         height: 4rem;
@@ -62,10 +68,20 @@
         border: 1px solid $color-primary-0;
         border-radius: 50%;
         object-fit: cover;
+        animation: fadeIn 0.2s;
     }
 }
 
-.testx {
-    background-color: red;
-    justify-content: flex-end;
+.inbox-photo-upload {
+    &__label {
+        cursor: pointer;
+    }
+
+    &__image {
+        height: 12rem;
+        width: 15rem;
+        border: 1px solid $color-primary-0;
+        border-radius: 2rem;
+        animation: fadeIn 0.2s;
+    }
 }
