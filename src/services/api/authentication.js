@@ -62,6 +62,7 @@ const logout = (props) => {
         .then((response) => {
             // AUTHENTICATION SUCCESSFUL
             localStorage.removeItem('token');
+            localStorage.removeItem('user');
             props.history.push('/login');
         })
         .catch((error) => {

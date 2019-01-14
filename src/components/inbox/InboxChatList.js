@@ -8,8 +8,6 @@ const inboxChatListStyles = {
             justifyContent: 'flex-end'
         },
         message: {
-            // color: 'rgb(255, 255, 255)',
-            // backgroundColor: 'rgb(88, 42, 114)',
             color: 'rgb(88, 42, 114)',
             backgroundColor: 'transparent',
             border: '1px solid rgb(88, 42, 114)'
@@ -27,15 +25,17 @@ const inboxChatListStyles = {
     }
 }
 
-export default ({ chats, username }) => {
-    console.log(chats);
-    console.log(username);
+export default ({ messages, username }) => {
     return (
         <div>
-            {chats.map((chat) => (
+            {messages.map((message) => (
                 <div 
                     className="wrapper-flex wrapper-flex--center marg-b-sm"
-                    style={chat.username == username ? inboxChatListStyles.self.wrapper : inboxChatListStyles.other.wrapper}
+                    style={
+                        message.user_id == username ? 
+                        inboxChatListStyles.self.wrapper : 
+                        inboxChatListStyles.other.wrapper
+                    }
                 >
                     {/* <img 
                         src="https://images.unsplash.com/photo-1530424590795-71c90b9c2f0c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1300&q=80" 
@@ -43,9 +43,13 @@ export default ({ chats, username }) => {
                     /> */}
                     <div 
                         className="inbox-message"
-                        style={chat.username == username ? inboxChatListStyles.self.message : inboxChatListStyles.other.message}
+                        style={
+                            message.user_id == username ? 
+                            inboxChatListStyles.self.message : 
+                            inboxChatListStyles.other.message
+                        }
                     >
-                        <h4 className="marg-e">{chat.message}</h4>
+                        <h4 className="marg-e">{message.message}</h4>
                     </div>        
                 </div>
             ))}

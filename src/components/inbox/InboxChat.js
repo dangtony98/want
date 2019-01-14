@@ -13,37 +13,65 @@ export class InboxChat extends Component {
 
         this.state = {
             // CHANGE CHAT CONTENTS
-            chats: [{
-                id: 123,
-                username: 'lisahwang@gmail.com',
-                message: "Hey I'm just not feeling too well right now. A hug or two would really be appreciated..."
-            }, {
-                id: 498,
-                username: 'dangtony98@gmail.com',
-                message: "Are you okay? Let me help you... Where are you staying?"
-            }, {
-                id: 291,
-                username: 'lisahwang@gmail.com',
-                message: "4022 Spruce Street."
-            }, {
-                id: 108,
-                username: 'lisahwang@gmail.com',
-                message: "Thanks so much..."
-            }, {
-                id: 183,
-                username: 'dangtony98@gmail.com',
-                message: "Ofc. I wanna make sure you're okay. I'll be over asap!"
-            }],
+            messages: [],
             chatInput: '',
-            username: ''
+            username: null
         }
     }
 
     componentDidMount() {
         // MOUNT AND SUBSCRIBE NEW PUSHER & LOAD CHAT CONTENTS
 
+        const chat = {
+            id: 1,
+            wanter_id: 3,
+            fulfiller_id: 10,
+            created_at: new Date(),
+            updated_at: new Date(),
+            messages: [
+                {
+                    id: 1,
+                    message: "Hey I'm just not feeling too well right now. A hug or two would really be appreciated...",
+                    user_id: 3,
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                    conversation_id: 1
+                }, {
+                    id: 2,
+                    message: "Are you okay? Let me help you... Where are you staying?",
+                    user_id: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).id : null,
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                    conversation_id: 1
+                }, {
+                    id: 3,
+                    message: "4022 Spruce Street.",
+                    user_id: 3,
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                    conversation_id: 1
+                }, {
+                    id: 4,
+                    message: "Thanks so much...",
+                    user_id: 3,
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                    conversation_id: 1
+                }, {
+                    id: 5,
+                    message: "Ofc. I wanna make sure you're okay. I'll be over asap!",
+                    user_id: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).id : null,
+                    created_at: new Date(),
+                    updated_at: new Date(),
+                    conversation_id: 1
+                }
+            ]
+        }
+        
         this.setState({
-            username: this.props.email
+            ...this.state,
+            messages: chat.messages,
+            username: JSON.parse(localStorage.getItem('user')).id
         });
     }
 
@@ -65,7 +93,7 @@ export class InboxChat extends Component {
     }
 
     render() {
-        const { chats, chatInput, username } = this.state;
+        const { messages, chatInput, username } = this.state;
         return (
             <div className="inbox-chat">
                 <h4 className="content-heading">Chat</h4>
@@ -79,7 +107,7 @@ export class InboxChat extends Component {
                     </div>
                     <div className="inbox-chat__body">
                         <InboxChatList 
-                            chats={chats} 
+                            messages={messages} 
                             username={username}
                         />
                     </div>
@@ -108,7 +136,7 @@ InboxChat.propTypes = {
 }
 
 const mapStateToProps = ({ admin }) => ({
-    email: admin.email
+    id: admin.id
 });
 
 export default connect(mapStateToProps)(InboxChat);

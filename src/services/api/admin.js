@@ -20,6 +20,7 @@ const getUser = (props) => {
         .then((response) => {
             // SEND POST REQUEST TO LOAD USER
             props.setUser(response.data.user);
+            localStorage.setItem('user', JSON.stringify(response.data.user));
         })
         .catch((error) => {
             console.log('Error: ' + error);
