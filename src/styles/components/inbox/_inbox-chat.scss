@@ -36,6 +36,7 @@
     }
 
     &__bottom {
+        height: auto;
         width: 100%;
         padding: 2rem;
         border-bottom-right-radius: 0.5rem;
@@ -46,6 +47,7 @@
     &__image-area {
         height: auto;
         width: 100%;
+        overflow: auto;
     }
 }
 
@@ -68,6 +70,7 @@
         border: 1px solid $color-primary-0;
         border-radius: 50%;
         object-fit: cover;
+        box-shadow: $box-shadow;
         animation: fadeIn 0.2s;
     }
 }
@@ -80,8 +83,10 @@
     &__image {
         height: 12rem;
         width: 15rem;
-        border: 1px solid $color-primary-0;
+        border: 1px solid $color-grey;
         border-radius: 2rem;
+        object-fit: cover;
+        box-shadow: $box-shadow;
         animation: fadeIn 0.2s;
     }
 }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import Pusher from 'pusher-js';
 import Textarea from 'react-textarea-autosize';
 import InboxChatList from './InboxChatList';
 import PropTypes from 'prop-types';
@@ -8,7 +9,10 @@ export class InboxChat extends Component {
     constructor(props) {
         super(props);
 
+        this.handleUploadFile = this.handleUploadFile.bind(this);
         this.handleTextChange = this.handleTextChange.bind(this);
+        this.enterImage = this.enterImage.bind(this);
+        this.leaveImage = this.leaveImage.bind(this);
         this.onEnterPressed = this.onEnterPressed.bind(this);
 
         this.state = {
@@ -17,14 +21,24 @@ export class InboxChat extends Component {
             chatInput: '',
             username: null,
             photo: '',
-            imageAttachment: 'one'
+            imageAttachments: []
         }
     }
 
     componentDidMount() {
         // MOUNT AND SUBSCRIBE NEW PUSHER & LOAD CHAT CONTENTS
-        console.log('local storage userx: ');
-        console.log(JSON.parse(localStorage.getItem('user')));
+
+        const pusher = new Pusher('78565ef6078f239cd16c', {
+            cluster: 'us2',
+            forceTLS: true,
+            encrypted: true
+        });
+
+        const channel = pusher.subscribe('chat.1');
+        channel.bind("App\\Events\\MessageSentEvent", (data) => {
+            console.log('Inside channel.bind -> data: ');
+            alert(JSON.stringify(data));
+        });
         
         const chat = {
             id: 1,
@@ -81,34 +95,53 @@ export class InboxChat extends Component {
     }
 
     handleUploadFile(e) {
-        console.log('handleUploadFile() in InboxChat triggered. Upload file: ');
-        console.log(e.target.files[0]);
-        let reader = new FileReader();
-        reader.readAsDataURL(e.target.files[0]);
-        console.log('reader: ');
-        console.log(reader);
+        for (let i = 0; i < e.target.files.length; i++) {
+            const reader = new FileReader();
+            const file = e.target.files[i];
+            reader.readAsDataURL(file);
+
+            reader.onload = (e) => {
+                this.setState({
+                    ...this.state,
+                    imageAttachments: [...this.state.imageAttachments, e.target.result]
+                });
+            }
+        }
     }
 
     handleTextChange(e) {
         this.setState({
+            ...this.state,
             chatInput: e.target.value
         });
     }
 
-    onEnterPressed(e) {
-        if(e.keyCode == 13 && e.shiftKey == false && /\S/.test(e.target.value)) {
-            e.preventDefault();
-            // SEND MESSAGE
+    enterImage(e) {
+        console.log('Entered image: ');
+        console.log(e.target);
+    }
 
-            console.log('SEND TEXT!');
+    leaveImage(e) {
+        console.log('Left image: ');
+        console.log(e.target);
+    }
+
+    onEnterPressed(e) {
+        const { imageAttachments } = this.state;
+        if((e.keyCode == 13 && e.shiftKey == false && /\S/.test(e.target.value)) || (e.keyCode == 13 && imageAttachments.length != 0)) {
+            e.preventDefault();
+            // SEND POST REQUEST TO SERVER WITH TRIMEMD (.TRIM()) MESSAGE WITH (OPTIONAL) IMAGE PAYLOAD
+            
             this.setState({
-                chatInput: ''
+                ...this.state,
+                chatInput: '',
+                imageAttachments: []
             });
         }
     }
 
     render() {
-        const { messages, chatInput, username, photo, imageAttachment } = this.state;
+        const { messages, chatInput, username, photo, imageAttachments } = this.state;
         return (
             <div className="inbox-chat">
                 <h4 className="content-heading">Chat</h4>
@@ -128,14 +161,16 @@ export class InboxChat extends Component {
                         />
                     </div>
                     <div className="inbox-chat__bottom">
-                        {imageAttachment &&
-                            <div className="inbox-chat__image-area marg-b-xs">
+                        <div className="inbox-chat__image-area wrapper-flex marg-b-xs">
+                            {imageAttachments.map((imageAttachment) => (
                                 <img 
-                                    src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=3024&q=80"
-                                    className="inbox-photo-upload__image"
+                                    src={imageAttachment}
+                                    className="inbox-photo-upload__image marg-r-xs"
+                                    onMouseEnter={this.enterImage}
+                                    onMouseLeave={this.leaveImage}
                                 />
-                            </div>
-                        }
+                            ))}
+                        </div>
                         <div className="wrapper-flex wrapper-flex--center">
                             <Textarea 
                                 minRows={1}
@@ -157,7 +192,8 @@ export class InboxChat extends Component {
                                     type="file" 
                                     id="inbox-photo-upload"
                                     onChange={this.handleUploadFile} 
-                                    accept="image/png, impage/jpeg"
+                                    accept="image/png, image/jpeg"
+                                    multiple="multiple"
                                     className="input-file" 
                                 />
                             </button>
