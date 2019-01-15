@@ -161,11 +161,11 @@ export class InboxChat extends Component {
                         />
                     </div>
                     <div className="inbox-chat__bottom">
-                        <div className="inbox-chat__image-area wrapper-flex marg-b-xs">
+                        <div className="inbox-chat__image-area wrapper-flex">
                             {imageAttachments.map((imageAttachment) => (
                                 <img 
                                     src={imageAttachment}
-                                    className="inbox-photo-upload__image marg-r-xs"
+                                    className="inbox-photo-upload__image marg-r-sm marg-b-sm"
                                     onMouseEnter={this.enterImage}
                                     onMouseLeave={this.leaveImage}
                                 />

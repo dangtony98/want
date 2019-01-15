@@ -47,7 +47,7 @@
     &__image-area {
         height: auto;
         width: 100%;
-        overflow: auto;
+        flex-wrap: wrap;
     }
 }
 
@@ -81,12 +81,13 @@
     }
 
     &__image {
-        height: 12rem;
-        width: 15rem;
+        height: 10rem;
+        width: 14rem;
         border: 1px solid $color-grey;
         border-radius: 2rem;
         object-fit: cover;
         box-shadow: $box-shadow;
         animation: fadeIn 0.2s;
+        transition: 0.2s;
     }
 }
