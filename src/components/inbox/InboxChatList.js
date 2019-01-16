@@ -55,8 +55,6 @@ export default class InboxChatList extends Component {
 
     render() {
         const { messages, sender, receiver } = this.props;
-        console.log('messages: ');
-        console.log(messages);
         return (
             <div className="inbox-chat-list">
                 {messages.map((message, index) => 
@@ -88,8 +86,6 @@ export default class InboxChatList extends Component {
                                     >
                                         <h4 className="marg-e">{message.message}</h4>
                                     </div>
-                                    
-                                    {/* INSERT CONDITIONAL TIME STAMP*/}
                                 </div>
                                 {(message.user_id == sender.id && (messages[index + 1] ? message.user_id != messages[index + 1].user_id : true)) ? 
                                     <img 

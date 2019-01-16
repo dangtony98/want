@@ -4,6 +4,7 @@ import Pusher from 'pusher-js';
 import Textarea from 'react-textarea-autosize';
 import InboxChatList from './InboxChatList';
 import { getMessages, sendMessage } from '../../services/api/inbox';
+import { WANT_URL } from '../../services/variables/variables';
 import PropTypes from 'prop-types';
  
 export class InboxChat extends Component {
@@ -27,22 +28,38 @@ export class InboxChat extends Component {
     }
 
     componentDidMount() {
+        Pusher.logToConsole = true;
+
         const pusher = new Pusher('78565ef6078f239cd16c', {
             cluster: 'us2',
-            encrypted: true        
+            encrypted: true,
+            authEndpoint: `${WANT_URL}/broadcasting/auth`,
+            auth: {
+                headers: { 
+                    Accept: 'application/json', 
+                    Authorization: `Bearer ${localStorage.getItem('token')}` 
+                }
+            }      
         });
 
-        const channel = pusher.subscribe('chat.1');
+        const channel = pusher.subscribe('private-chat.1');
         channel.bind("App\\Events\\MessageSentEvent", (data) => {
             console.log('Received a message from the other user.');
+            alert(JSON.parse(data));
             this.setState({
                 ...this.state,
-                messages: [this.state.messages, data]
+                messages: [...this.state.messages, data]
             })
+        });
+
+        channel.bind('pusher:subscription_error', function(status) {
+            console.log('error was: ');
+            console.log(status);
         });
 
         getMessages(1, (data) => {
             const adminIsSender = JSON.parse(localStorage.getItem('user')).id == data.wanter.id;
+
             this.setState({
                 ...this.state,
                 conversation_id: data.id,
