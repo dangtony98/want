@@ -121,12 +121,7 @@ export class InboxChat extends Component {
                 this.setState({
                     ...this.state,
                     chatInput: '',
-                    imageAttachments: [],
-                    messages: [...this.state.messages, {
-                        conversation_id: conversation_id,
-                        user_id: sender.id,
-                        message: chatInput.trim()
-                    }]
+                    imageAttachments: []
                 });
             });
         }
