@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { IMAGE_URL } from '../../services/variables/variables';
+import moment from 'moment';
 import PropTypes from 'prop-types';
 
 // GET TIME STAMPS GOING.
@@ -60,44 +61,60 @@ export default class InboxChatList extends Component {
             <div className="inbox-chat-list">
                 {messages.map((message, index) => 
                     (
-                        <div 
-                            className={`wrapper-flex wrapper-flex--center ${index != messages.length - 1 && 'marg-b-sm'}`}
-                            style={
-                                message.user_id == sender.id ? 
-                                inboxChatListStyles.sender.wrapper : 
-                                inboxChatListStyles.receiver.wrapper
-                            }
-                        >
-                            {(message.user_id != sender.id && (messages[index + 1] ? message.user_id != messages[index + 1].user_id : true)) ? 
-                                <img 
-                                    src={`${IMAGE_URL}/${receiver.avatar}`} 
-                                    className="inbox-message__image marg-r-sm"
-                                    style={inboxChatListStyles.receiver.image}
-                                /> : <div className="inbox-message__image-placeholder marg-r-sm"></div>
-                            }
-                            <div>
-                                <div 
-                                    className="inbox-message"
-                                    style={
-                                        message.user_id == sender.id ? 
-                                        inboxChatListStyles.sender.message : 
-                                        inboxChatListStyles.receiver.message
-                                    }
-                                >
-                                    <h4 className="marg-e">{message.message}</h4>
+                        <div className={`${index != messages.length - 1 && "marg-b-sm"}`}>
+                            <div 
+                                className={`wrapper-flex wrapper-flex--center`}
+                                style={
+                                    message.user_id == sender.id ? 
+                                    inboxChatListStyles.sender.wrapper : 
+                                    inboxChatListStyles.receiver.wrapper
+                                }
+                            >
+                                {(message.user_id != sender.id && (messages[index + 1] ? message.user_id != messages[index + 1].user_id : true)) ? 
+                                    <img 
+                                        src={`${IMAGE_URL}/${receiver.avatar}`} 
+                                        className="inbox-message__image marg-r-sm"
+                                        style={inboxChatListStyles.receiver.image}
+                                    /> : <div className="inbox-message__image-placeholder marg-r-sm"></div>
+                                }
+                                <div>
+                                    <div 
+                                        className="inbox-message"
+                                        style={
+                                            message.user_id == sender.id ? 
+                                            inboxChatListStyles.sender.message : 
+                                            inboxChatListStyles.receiver.message
+                                        }
+                                    >
+                                        <h4 className="marg-e">{message.message}</h4>
+                                    </div>
+                                    
+                                    {/* INSERT CONDITIONAL TIME STAMP*/}
                                 </div>
-                                {/* {((messages[index + 1] && message.user_id != messages[index + 1].user_id)) &&
-                                    <h4>{message.created_at}</h4>
-                                } */}
-                                {/* INSERT CONDITIONAL TIME STAMP*/}
+                                {(message.user_id == sender.id && (messages[index + 1] ? message.user_id != messages[index + 1].user_id : true)) ? 
+                                    <img 
+                                        src={`${IMAGE_URL}/${sender.avatar}`} 
+                                        className="inbox-message__image marg-l-sm"
+                                        style={inboxChatListStyles.sender.image}
+                                    /> : <div className="inbox-message__image-placeholder marg-l-sm"></div>
+                                }      
                             </div>
-                            {(message.user_id == sender.id && (messages[index + 1] ? message.user_id != messages[index + 1].user_id : true)) ? 
-                                <img 
-                                    src={`${IMAGE_URL}/${sender.avatar}`} 
-                                    className="inbox-message__image marg-l-sm"
-                                    style={inboxChatListStyles.sender.image}
-                                /> : <div className="inbox-message__image-placeholder marg-l-sm"></div>
-                            }      
+                            {(messages[index + 1] ? message.user_id != messages[index + 1].user_id : true) &&
+                                (
+                                    <div 
+                                        className="wrapper-flex wrapper-flex--center"
+                                        style={
+                                            message.user_id == sender.id ? 
+                                            inboxChatListStyles.sender.wrapper : 
+                                            inboxChatListStyles.receiver.wrapper
+                                        }
+                                    >
+                                        <h4 
+                                            className={`want-text ${message.user_id == sender.id ? 'marg-r-ml' : 'marg-l-ml'}`}
+                                        >{moment(message.created_at).format("dddd, h:mm A")}</h4>
+                                    </div>
+                                )
+                            }
                         </div>
                     )
                 )}
