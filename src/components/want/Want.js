@@ -3,6 +3,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { openDetailsModalIsExpanded, closeDetailsModalIsExpanded, openAcceptModalIsExpanded, setModalWantId, setDetailsModalType } from '../../actions/modal';
 import { getUser } from '../../services/api/profile';
+import { deleteWant } from '../../services/api/want';
+import { updateFeed } from '../../actions/feed';
+import { getFeed } from '../../services/api/feed';
 import PropTypes from 'prop-types';
 import { IMAGE_URL } from '../../services/variables/variables';
 import moment from 'moment';
@@ -23,6 +26,7 @@ export class Want extends Component {
 
         this.onProfileBtnPressed = this.onProfileBtnPressed.bind(this);
         this.onAcceptBtnPressed = this.onAcceptBtnPressed.bind(this);
+        this.onDeleteButtonPressed = this.onDeleteButtonPressed.bind(this);
         this.onCounterOfferBtnPressed = this.onCounterOfferBtnPressed.bind(this);
         this.onDetailsBtnPressed = this.onDetailsBtnPressed.bind(this);
         this.onShareBtnPressed = this.onShareBtnPressed.bind(this);
@@ -43,6 +47,12 @@ export class Want extends Component {
     onAcceptBtnPressed() {
         this.props.setModalWantId(this.props.wantId);
         this.props.openAcceptModalIsExpanded();
+    }
+
+    onDeleteButtonPressed(id) {
+        deleteWant(id, () => {
+            getFeed(this.props);
+        });
     }
 
     onCounterOfferBtnPressed() {
@@ -77,8 +87,9 @@ export class Want extends Component {
     }
 
     render() {
-        const { detailsModalType, categories, category_id, cost, created_at, description, id, title, user} = this.props;
+        const { detailsModalType, categories, category_id, cost, created_at, description, admin_id, title, user, id} = this.props;
         const { copiedAnimation } = this.state;
+        
         // SAMPLE FULFILLER OPTIONS
         const fulfillerOptions = [{
             firstName: 'Daria',
@@ -97,7 +108,7 @@ export class Want extends Component {
         return (
             <div 
                 className={`want ${detailsModalType == 'NONE' && 'want--feed marg-t-sm'}`}
-                style={(detailsModalType == 'NONE' && id == user.id) ? wantStyles.self : wantStyles.other}
+                style={(detailsModalType == 'NONE' && admin_id == user.id) ? wantStyles.self : wantStyles.other}
             >
                 <div className="wrapper-flex-spaced wrapper-flex-spaced--top">
                     <div className="wrapper-flex wrapper-flex--center">
@@ -154,11 +165,17 @@ export class Want extends Component {
                             <button
                                 onClick={this.onAcceptBtnPressed} 
                                 className="button-simple marg-t-sm"
-                            >{(detailsModalType == 'NONE' && id == user.id) ? 'Edit' : 'Accept'}</button>
-                            <button
+                            >{(detailsModalType == 'NONE' && admin_id == user.id) ? 'Edit' : 'Accept'}</button>
+                            {(detailsModalType == 'NONE' && admin_id == user.id) ? 
+                                (<button
+                                    onClick={() => this.onDeleteButtonPressed(id)} 
+                                    className="want__counter-button button-simple marg-t-sm"
+                                >Delete</button>) : 
+                                (<button
                                 onClick={this.onCounterOfferBtnPressed} 
                                 className="want__counter-button button-simple marg-t-sm"
-                            >{(detailsModalType == 'NONE' && id == user.id) ? 'Delete' : 'Counteroffer'}</button>
+                                >Counteroffer</button>)
+                            }
                         </div>
                         {detailsModalType == 'NONE' && 
                             <button
@@ -181,7 +198,7 @@ export class Want extends Component {
 }
 
 Want.propTypes = {
-    id: PropTypes.number,
+    admin_id: PropTypes.number,
     detailsModalType: PropTypes.string,
     category_id: PropTypes.number,
     cost: PropTypes.number,
@@ -194,11 +211,12 @@ Want.propTypes = {
     closeDetailsModalIsExpanded: PropTypes.func.isRequired,
     openAcceptModalIsExpanded: PropTypes.func.isRequired,
     setModalWantId: PropTypes.func.isRequired,
-    setDetailsModalType: PropTypes.func.isRequired
+    setDetailsModalType: PropTypes.func.isRequired,
+    updateFeed: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ admin, filter }) => ({
-    id: admin.id,
+    admin_id: admin.id,
     categories: filter.categories
 });
 
@@ -207,7 +225,8 @@ const mapDispatchToProps = (dispatch) => ({
     closeDetailsModalIsExpanded: () => dispatch(closeDetailsModalIsExpanded()),
     openAcceptModalIsExpanded: () => dispatch(openAcceptModalIsExpanded()),
     setModalWantId: (wantId) => dispatch(setModalWantId(wantId)),
-    setDetailsModalType: (modalType) => dispatch(setDetailsModalType(modalType))
+    setDetailsModalType: (modalType) => dispatch(setDetailsModalType(modalType)),
+    updateFeed: (feed) => dispatch(updateFeed(feed))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Want);

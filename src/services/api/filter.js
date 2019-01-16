@@ -12,6 +12,8 @@ const applySearchTerm = (searchTerm) => {
 // APPLYFILTERS() — POST
 
 // APPLIES SORT AND FILTER OPTIONS TO THE NEWSFEED
+// FILTERS: THE FILTER AND SORT OPTIONS
+// PROPS: CONTAINS UPDATEFEED() FUNC
 
 const applyFilters = (filters, props) => {
     axios.post(`${WANT_URL}/api/newsfeed`, {

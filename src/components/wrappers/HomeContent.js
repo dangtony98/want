@@ -82,7 +82,7 @@ export class HomeContent extends Component {
                 <div className="home-content__left">
                     <Post />
                 </div>
-                <div className="home-content__middle">
+                <div className="home-content__middle marg-b-sm">
                     <h4 className="content-heading">Wants around You</h4>
                     <Filter />
                     <Sort />

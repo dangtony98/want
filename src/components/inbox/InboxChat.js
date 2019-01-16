@@ -3,94 +3,70 @@ import { connect } from 'react-redux';
 import Pusher from 'pusher-js';
 import Textarea from 'react-textarea-autosize';
 import InboxChatList from './InboxChatList';
+import { getMessages, sendMessage } from '../../services/api/inbox';
 import PropTypes from 'prop-types';
  
 export class InboxChat extends Component {
     constructor(props) {
         super(props);
 
-        this.handleUploadFile = this.handleUploadFile.bind(this);
         this.handleTextChange = this.handleTextChange.bind(this);
+        this.handleUploadFile = this.handleUploadFile.bind(this);
         this.enterImage = this.enterImage.bind(this);
-        this.leaveImage = this.leaveImage.bind(this);
+        this.exitImage = this.exitImage.bind(this);
         this.onEnterPressed = this.onEnterPressed.bind(this);
 
         this.state = {
             // CHANGE CHAT CONTENTS
             messages: [],
             chatInput: '',
-            username: null,
-            photo: '',
-            imageAttachments: []
+            imageAttachments: [],
+            sender: null,
+            receiver: null
         }
     }
 
     componentDidMount() {
         // MOUNT AND SUBSCRIBE NEW PUSHER & LOAD CHAT CONTENTS
-
         const pusher = new Pusher('78565ef6078f239cd16c', {
             cluster: 'us2',
-            forceTLS: true,
             encrypted: true
         });
 
         const channel = pusher.subscribe('chat.1');
         channel.bind("App\\Events\\MessageSentEvent", (data) => {
-            console.log('Inside channel.bind -> data: ');
             alert(JSON.stringify(data));
         });
-        
-        const chat = {
-            id: 1,
-            wanter_id: 3,
-            fulfiller_id: 10,
-            created_at: new Date(),
-            updated_at: new Date(),
-            messages: [
-                {
-                    id: 1,
-                    message: "Hey I'm just not feeling too well right now. A hug or two would really be appreciated...",
-                    user_id: 3,
-                    created_at: new Date(),
-                    updated_at: new Date(),
-                    conversation_id: 1
-                }, {
-                    id: 2,
-                    message: "Are you okay? Let me help you... Where are you staying?",
-                    user_id: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).id : null,
-                    created_at: new Date(),
-                    updated_at: new Date(),
-                    conversation_id: 1
-                }, {
-                    id: 3,
-                    message: "4022 Spruce Street.",
-                    user_id: 3,
-                    created_at: new Date(),
-                    updated_at: new Date(),
-                    conversation_id: 1
-                }, {
-                    id: 4,
-                    message: "Thanks so much...",
-                    user_id: 3,
-                    created_at: new Date(),
-                    updated_at: new Date(),
-                    conversation_id: 1
-                }, {
-                    id: 5,
-                    message: "Ofc. I wanna make sure you're okay. I'll be over asap!",
-                    user_id: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')).id : null,
-                    created_at: new Date(),
-                    updated_at: new Date(),
-                    conversation_id: 1
-                }
-            ]
-        }
 
+        getMessages(1, (data) => {
+            console.log('Response data: ');
+            console.log(data);
+
+            // REWRITE WITH TERNARY OPERATOR!
+            if (JSON.parse(localStorage.getItem('user')).id == data.wanter.id) {
+                // ADMIN IS THE WANTER
+                this.setState({
+                    ...this.state,
+                    messages: data.messages,
+                    sender: data.wanter,
+                    receiver: data.fulfiller
+                });
+            } else {
+                // ADMIN IS THE FULFILLER
+                this.setState({
+                    ...this.state,
+                    messages: data.messages,
+                    sender: data.fulfiller,
+                    receiver: data.wanter
+                });
+            }
+        });
+    }
+
+    handleTextChange(e) {
         this.setState({
             ...this.state,
-            messages: chat.messages,
-            username: JSON.parse(localStorage.getItem('user')).id,
-            photo: JSON.parse(localStorage.getItem('user')).avatar
+            chatInput: e.target.value
         });
     }
 
@@ -101,29 +77,25 @@ export class InboxChat extends Component {
             reader.readAsDataURL(file);
 
             reader.onload = (e) => {
-                this.setState({
-                    ...this.state,
-                    imageAttachments: [...this.state.imageAttachments, e.target.result]
-                });
+                const { imageAttachments } = this.state;
+                if (imageAttachments.length < 8) {
+                    this.setState({
+                        ...this.state,
+                        imageAttachments: [...this.state.imageAttachments, e.target.result]
+                    });
+                } else {
+                    // SHOW ERROR MESSAGE INDICATING THAT THE IMAGE ATTACHMENT LIMIT (8) HAS BEEN REACHED
+                }
             }
         }
     }
 
-    handleTextChange(e) {
-        this.setState({
-            ...this.state,
-            chatInput: e.target.value
-        });
-    }
-
     enterImage(e) {
-        console.log('Entered image: ');
-        console.log(e.target);
+        // ENTERED IMAGE ATTACHMENT
     }
 
-    leaveImage(e) {
-        console.log('Left image: ');
-        console.log(e.target);
+    exitImage(e) {
+        // EXITED IMAGE ATTACHMENT
     }
 
     onEnterPressed(e) {
@@ -132,6 +104,12 @@ export class InboxChat extends Component {
             e.preventDefault();
             // SEND POST REQUEST TO SERVER WITH TRIMEMD (.TRIM()) MESSAGE WITH (OPTIONAL) IMAGE PAYLOAD
             
+            const { sender, chatInput } = this.state;
+            const payload = {
+                username: sender.id,
+                message: chatInput.trim()
+            }
+
             this.setState({
                 ...this.state,
                 chatInput: '',
@@ -141,7 +119,7 @@ export class InboxChat extends Component {
     }
 
     render() {
-        const { messages, chatInput, username, photo, imageAttachments } = this.state;
+        const { messages, chatInput, imageAttachments, sender, receiver } = this.state;
         return (
             <div className="inbox-chat">
                 <h4 className="content-heading">Chat</h4>
@@ -149,15 +127,15 @@ export class InboxChat extends Component {
                     <div className="inbox-chat__top wrapper-flex-spaced wrapper-flex-spaced--center">
                         <div></div>
                         <div>
-                            <h4 className="marg-e">Lisa</h4>
+                            <h4 className="marg-e">{receiver && receiver.first_name}</h4>
                         </div>
                         <div></div>
                     </div>
                     <div className="inbox-chat__body">
                         <InboxChatList 
                             messages={messages} 
-                            username={username}
-                            photo={photo}
+                            sender={sender}
+                            receiver={receiver}
                         />
                     </div>
                     <div className="inbox-chat__bottom">
@@ -167,7 +145,7 @@ export class InboxChat extends Component {
                                     src={imageAttachment}
                                     className="inbox-photo-upload__image marg-r-sm marg-b-sm"
                                     onMouseEnter={this.enterImage}
-                                    onMouseLeave={this.leaveImage}
+                                    onMouseLeave={this.exitImage}
                                 />
                             ))}
                         </div>

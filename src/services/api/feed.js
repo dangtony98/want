@@ -20,6 +20,7 @@ const getFeed = (props) => {
         })
         .then((response) => {
             // NEWSFEED RETRIEVAL SUCCESSFUL
+            console.log('the newsfeed: ');
             console.log(response);
             props.updateFeed(response.data);
         })
