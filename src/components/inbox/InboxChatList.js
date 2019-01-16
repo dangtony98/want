@@ -3,8 +3,6 @@ import { IMAGE_URL } from '../../services/variables/variables';
 import moment from 'moment';
 import PropTypes from 'prop-types';
 
-// GET TIME STAMPS GOING.
-
 const inboxChatListStyles = {
     sender: {
         wrapper: {

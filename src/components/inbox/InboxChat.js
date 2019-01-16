@@ -44,22 +44,23 @@ export class InboxChat extends Component {
 
         const channel = pusher.subscribe('private-chat.1');
         channel.bind("App\\Events\\MessageSentEvent", (data) => {
-            console.log('Received a message from the other user.');
-            alert(JSON.parse(data));
+            console.log('Received data: ');
+            console.log(data);
             this.setState({
                 ...this.state,
-                messages: [...this.state.messages, data]
+                messages: [...this.state.messages, data.message]
             })
         });
 
         channel.bind('pusher:subscription_error', function(status) {
-            console.log('error was: ');
+            console.log('pusher:subscription_error details: ');
             console.log(status);
         });
 
         getMessages(1, (data) => {
             const adminIsSender = JSON.parse(localStorage.getItem('user')).id == data.wanter.id;
-
+            console.log('Data: ');
+            console.log(data);
             this.setState({
                 ...this.state,
                 conversation_id: data.id,
