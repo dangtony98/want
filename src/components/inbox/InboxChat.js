@@ -17,7 +17,6 @@ export class InboxChat extends Component {
         this.onEnterPressed = this.onEnterPressed.bind(this);
 
         this.state = {
-            // CHANGE CHAT CONTENTS
             conversation_id: null,
             sender: null,
             receiver: null,
@@ -28,23 +27,22 @@ export class InboxChat extends Component {
     }
 
     componentDidMount() {
-        // MOUNT AND SUBSCRIBE NEW PUSHER & LOAD CHAT CONTENTS
         const pusher = new Pusher('78565ef6078f239cd16c', {
             cluster: 'us2',
-            encrypted: true
+            encrypted: true        
         });
 
         const channel = pusher.subscribe('chat.1');
         channel.bind("App\\Events\\MessageSentEvent", (data) => {
-            alert(JSON.stringify(data));
+            console.log('Received a message from the other user.');
+            this.setState({
+                ...this.state,
+                messages: [this.state.messages, data]
+            })
         });
 
         getMessages(1, (data) => {
-            console.log('Response dataz: ');
-            console.log(data);
-
             const adminIsSender = JSON.parse(localStorage.getItem('user')).id == data.wanter.id;
-
             this.setState({
                 ...this.state,
                 conversation_id: data.id,
@@ -96,20 +94,21 @@ export class InboxChat extends Component {
             e.preventDefault();
             // SEND POST REQUEST TO SERVER WITH TRIMEMD (.TRIM()) MESSAGE WITH (OPTIONAL) IMAGE PAYLOAD
             
-            console.log('onEnterPressed inside processing!');
-            const { conversation_id, chatInput } = this.state;
+            const { conversation_id, chatInput, sender } = this.state;
 
             sendMessage({
                 convo_id: conversation_id,
                 message: chatInput.trim()
-            }, (data) => {
-                console.log('Message sent! Response: ');
-                console.log(data);
-
+            }, () => {
                 this.setState({
                     ...this.state,
                     chatInput: '',
-                    imageAttachments: []
+                    imageAttachments: [],
+                    messages: [...this.state.messages, {
+                        conversation_id: conversation_id,
+                        user_id: sender.id,
+                        message: chatInput.trim()
+                    }]
                 });
             });
         }

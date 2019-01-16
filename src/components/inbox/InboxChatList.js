@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { IMAGE_URL } from '../../services/variables/variables';
 import PropTypes from 'prop-types';
 
+// GET TIME STAMPS GOING.
+
 const inboxChatListStyles = {
     sender: {
         wrapper: {
@@ -40,7 +42,6 @@ export default class InboxChatList extends Component {
 
     componentDidMount() {
         this.scrollToBottom();
-        // window.scrollTo(0, 0);
     }
 
     componentDidUpdate() {
