@@ -29,9 +29,28 @@ const getMessages = (convo_id, callback) => {
 // SENDMESSAGE() — POST
 
 // SEND A MESSAGE TO THE OTHER USER
+// CONTENT: CONTAINS THE CONVO_ID AND MESSAGE OF THE MESSAGE TO SEND
 
-const sendMessage = () => {
-
+const sendMessage = (content, callback) => {
+    console.log('inside sendMessage()');
+    axios.post(`${WANT_URL}/api/send-message`, {
+        ...content
+    },
+    { 
+        headers: { 
+            Accept: 'application/json', 
+            Authorization: `Bearer ${localStorage.getItem('token')}` 
+        }
+    })
+    .then((response) => {
+        // GET MESSAGES SUCCESSFUL
+        console.log('sendMessage() successful!');
+        callback(response);
+    })
+    .catch((error) => {
+        // GET MESSAGES UNSUCCESSFUL
+        console.log('Error: ' + error);
+    });
 }
 
 export { getMessages, sendMessage };

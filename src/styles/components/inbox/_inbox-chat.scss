@@ -30,7 +30,6 @@
         flex-direction: column;
         flex: 1;
         width: 100%;
-        padding: 2rem;
         word-wrap: break-word;
     }
 
@@ -52,7 +51,14 @@
 
 .inbox-chat-list {
     height: 100%;
+    padding: 2rem 2rem 0 2rem;
     overflow: scroll;
+
+    &__scrollholder {
+        height: 2rem;
+        width: 100%;
+        background-color: transparent;
+    }
 }
 
 .inbox-chat-textarea {

@@ -18,11 +18,12 @@ export class InboxChat extends Component {
 
         this.state = {
             // CHANGE CHAT CONTENTS
+            conversation_id: null,
+            sender: null,
+            receiver: null,
             messages: [],
             chatInput: '',
             imageAttachments: [],
-            sender: null,
-            receiver: null
         }
     }
 
@@ -39,27 +40,18 @@ export class InboxChat extends Component {
         });
 
         getMessages(1, (data) => {
-            console.log('Response data: ');
+            console.log('Response dataz: ');
             console.log(data);
 
-            // REWRITE WITH TERNARY OPERATOR!
-            if (JSON.parse(localStorage.getItem('user')).id == data.wanter.id) {
-                // ADMIN IS THE WANTER
-                this.setState({
-                    ...this.state,
-                    messages: data.messages,
-                    sender: data.wanter,
-                    receiver: data.fulfiller
-                });
-            } else {
-                // ADMIN IS THE FULFILLER
-                this.setState({
-                    ...this.state,
-                    messages: data.messages,
-                    sender: data.fulfiller,
-                    receiver: data.wanter
-                });
-            }
+            const adminIsSender = JSON.parse(localStorage.getItem('user')).id == data.wanter.id;
+
+            this.setState({
+                ...this.state,
+                conversation_id: data.id,
+                messages: data.messages,
+                sender: adminIsSender ? data.wanter : data.fulfiller,
+                receiver: adminIsSender ? data.fulfiller : data.wanter
+            });
         });
     }
 
@@ -104,16 +96,21 @@ export class InboxChat extends Component {
             e.preventDefault();
             // SEND POST REQUEST TO SERVER WITH TRIMEMD (.TRIM()) MESSAGE WITH (OPTIONAL) IMAGE PAYLOAD
             
-            const { sender, chatInput } = this.state;
-            const payload = {
-                username: sender.id,
-                message: chatInput.trim()
-            }
+            console.log('onEnterPressed inside processing!');
+            const { conversation_id, chatInput } = this.state;
 
-            this.setState({
-                ...this.state,
-                chatInput: '',
-                imageAttachments: []
+            sendMessage({
+                convo_id: conversation_id,
+                message: chatInput.trim()
+            }, (data) => {
+                console.log('Message sent! Response: ');
+                console.log(data);
+
+                this.setState({
+                    ...this.state,
+                    chatInput: '',
+                    imageAttachments: []
+                });
             });
         }
     }

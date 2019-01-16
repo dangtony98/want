@@ -38,50 +38,59 @@ export default class InboxChatList extends Component {
         this.scrollToBottom = this.scrollToBottom.bind(this);
     }
 
-    // componentDidMount() {
-    //     this.scrollToBottom();
-    // }
+    componentDidMount() {
+        this.scrollToBottom();
+        // window.scrollTo(0, 0);
+    }
 
-    // componentDidUpdate() {
-    //     this.scrollToBottom();
-    // }
+    componentDidUpdate() {
+        this.scrollToBottom();
+    }
 
     scrollToBottom() {
-        this.inboxChatListEnd.scrollIntoView({ behavior: "smooth" });
+        this.inboxChatListEnd.scrollIntoView({ block: "end", behavior: "smooth" });
     }
 
     render() {
         const { messages, sender, receiver } = this.props;
+        console.log('messages: ');
+        console.log(messages);
         return (
             <div className="inbox-chat-list">
                 {messages.map((message, index) => 
                     (
                         <div 
-                            className="wrapper-flex wrapper-flex--center marg-b-sm"
+                            className={`wrapper-flex wrapper-flex--center ${index != messages.length - 1 && 'marg-b-sm'}`}
                             style={
                                 message.user_id == sender.id ? 
                                 inboxChatListStyles.sender.wrapper : 
                                 inboxChatListStyles.receiver.wrapper
                             }
                         >
-                            {(message.user_id != sender.id && (index < 1 || message.user_id != messages[index - 1].user_id)) ? 
+                            {(message.user_id != sender.id && (messages[index + 1] ? message.user_id != messages[index + 1].user_id : true)) ? 
                                 <img 
                                     src={`${IMAGE_URL}/${receiver.avatar}`} 
                                     className="inbox-message__image marg-r-sm"
                                     style={inboxChatListStyles.receiver.image}
                                 /> : <div className="inbox-message__image-placeholder marg-r-sm"></div>
                             }
-                            <div 
-                                className="inbox-message"
-                                style={
-                                    message.user_id == sender.id ? 
-                                    inboxChatListStyles.sender.message : 
-                                    inboxChatListStyles.receiver.message
-                                }
-                            >
-                                <h4 className="marg-e">{message.message}</h4>
+                            <div>
+                                <div 
+                                    className="inbox-message"
+                                    style={
+                                        message.user_id == sender.id ? 
+                                        inboxChatListStyles.sender.message : 
+                                        inboxChatListStyles.receiver.message
+                                    }
+                                >
+                                    <h4 className="marg-e">{message.message}</h4>
+                                </div>
+                                {/* {((messages[index + 1] && message.user_id != messages[index + 1].user_id)) &&
+                                    <h4>{message.created_at}</h4>
+                                } */}
+                                {/* INSERT CONDITIONAL TIME STAMP*/}
                             </div>
-                            {(message.user_id == sender.id && (index < 1 || message.user_id != messages[index - 1].user_id)) ? 
+                            {(message.user_id == sender.id && (messages[index + 1] ? message.user_id != messages[index + 1].user_id : true)) ? 
                                 <img 
                                     src={`${IMAGE_URL}/${sender.avatar}`} 
                                     className="inbox-message__image marg-l-sm"
@@ -92,6 +101,7 @@ export default class InboxChatList extends Component {
                     )
                 )}
                 <div 
+                    className="inbox-chat-list__scrollholder"
                     style={{ float:"left", clear: "both", margin: '0' }}
                     ref={(el) => { this.inboxChatListEnd = el; }}>
                 </div>

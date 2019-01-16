@@ -5,6 +5,7 @@ import InboxChat from '../inbox/InboxChat';
 import Footer from '../footer/Footer';
 
 export default () => {
+    window.scrollTo(0, 0);
     return (
         <div className="inbox-page wrapper-flex-spaced wrapper-flex-spaced--column">
             <div>

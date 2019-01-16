@@ -6,7 +6,7 @@ import { WANT_URL } from '../variables/variables';
 // GETS A USER'S PUBLIC PROFILE GIVEN A USER'S ID
 // USERID: THE USER TO RETRIEVE
 
-const getUser = (userId, props) => {
+const getProfile = (userId, props) => {
 
 }
 
@@ -20,4 +20,4 @@ const getReviews = (page, callback) => {
     callback();
 }
 
-export { getUser, getReviews };
+export { getProfile, getReviews };
