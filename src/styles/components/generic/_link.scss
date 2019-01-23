@@ -4,10 +4,18 @@
     &:hover {
         .icon-facebook {
             color: $color-facebook-1;
+
+            &--white {
+                color: $color-white;
+            }
         }
 
         .icon-instagram {
             color: $color-instagram-1;
+
+            &--white {
+                color: $color-white;
+            }
         }
     }
 }

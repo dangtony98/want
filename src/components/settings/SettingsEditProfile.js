@@ -41,6 +41,8 @@ export class SettingsEditProfile extends Component {
         }, () => {
             const { photo } = this.state;
             const data = new FormData();
+            console.log('the data: ');
+            console.log(data);
             
             data.append('avatar', photo);
             uploadAvatar(data, () => {

@@ -21,7 +21,7 @@ export default () => {
                 className="information-jumbotron"
             >
                 <div className="information-jumbotron__box">
-                    <h1 className="marg-b-sm">Lorem ipsum.</h1>
+                    <h1 className="marg-b-sm">Lorem ipsum</h1>
                     <h3>
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit
                         , sed do eiusmod tempor incididunt ut labore et dolore magna 

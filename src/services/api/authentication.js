@@ -22,7 +22,7 @@ const checkAuthentication = (props, callback) => {
         .catch((error) => {
             // AUTHENTICATION UNSUCCESSFUL
             console.log('Error: ' + error);
-            props.history.push('/login');
+            props.history.push('/');
         });
 }
 
@@ -37,7 +37,7 @@ const login = (state, props) => {
         .then((response) => {
             // SEND POST REQUEST FOR AUTHENTICATION
             localStorage.setItem('token', response.data.token);
-            props.history.push("/");
+            props.history.push("/home");
         })
         .catch((error) => {
             console.log('Error: ' + error);
@@ -63,7 +63,7 @@ const logout = (props) => {
             // AUTHENTICATION SUCCESSFUL
             localStorage.removeItem('token');
             localStorage.removeItem('user');
-            props.history.push('/login');
+            props.history.push('/');
         })
         .catch((error) => {
             // AUTHENTICATION UNSUCCESSFUL
@@ -82,7 +82,7 @@ const register = (state, props) => {
         .then((response) => {
             // SEND POST REQUEST FOR REGISTRATION
             localStorage.setItem('token', response.data.token);
-            props.history.push("/");
+            props.history.push("/home");
         })
         .catch((error) => {
             console.log('Error: ' + error);

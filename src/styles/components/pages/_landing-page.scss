@@ -1,0 +1,46 @@
+.landing-page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: $color-grey-light;
+}
+
+.landing-jumbotron {
+    line-height: 3.25rem;
+    animation: fadeInUp 1s;
+}
+
+.landing-carousel {
+    position: relative;
+    height: 30rem;
+    width: 100%;
+    // background-color: orange;
+    border-radius: 2rem;
+
+    &__tab {
+        position: relative;
+        height:100%;
+        width: 100%;
+    }
+}
+
+.landing-heading {
+    color: $color-primary-0;
+}
+
+.landing-text {
+    color: $color-grey-dark;
+    font-weight: 300;
+
+    &--invert {
+        color: $color-white;
+    }
+}
+
+.landing-link {
+    color: $color-white;
+
+    &:visited {
+        color: $color-white;
+    }
+}

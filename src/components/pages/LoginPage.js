@@ -7,9 +7,9 @@ import PropTypes from 'prop-types';
 
 export class LoginPage extends Component {
     componentWillMount() {
-        checkAuthentication(this.props, () => {
-            this.props.history.push('/');
-        });
+        // checkAuthentication(this.props, () => {
+        //     this.props.history.push('/home');
+        // });
     }
 
     render() {

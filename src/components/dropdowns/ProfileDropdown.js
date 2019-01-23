@@ -39,10 +39,10 @@ export class ProfileDropdown extends Component {
         const { PROFILE, FRIENDS, SETTINGS, HELP, LOGOUT } = profileDropdownOptions;
         switch (option) {
             case PROFILE:
-                this.props.history.push('/');
+                this.props.history.push('/home');
                 break;
             case FRIENDS:
-                this.props.history.push('/');
+                this.props.history.push('/home');
                 break;
             case SETTINGS:
                 this.props.history.push('/settings');
@@ -69,7 +69,7 @@ export class ProfileDropdown extends Component {
             <div className="profile-dropdown" ref={this.setWrapperRef}>
                 <div className="marg-b-sm">
                     <h4 className="profile-dropdown-text">Signed in as</h4>
-                    <Link to="/" className="profile-dropdown-link link">
+                    <Link to="/home" className="profile-dropdown-link link">
                         <h4>{email.substring(0, email.indexOf('@'))}</h4>
                     </Link>
                 </div>

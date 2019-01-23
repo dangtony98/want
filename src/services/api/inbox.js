@@ -32,6 +32,8 @@ const getMessages = (convo_id, callback) => {
 // CONTENT: CONTAINS THE CONVO_ID AND MESSAGE OF THE MESSAGE TO SEND
 
 const sendMessage = (content, callback) => {
+    console.log('content being sent: ');
+    console.log(content);
     axios.post(`${WANT_URL}/api/send-message`, {
         ...content
     },
@@ -43,6 +45,7 @@ const sendMessage = (content, callback) => {
     })
     .then((response) => {
         // GET MESSAGES SUCCESSFUL
+        console.log('sendMessage() successful');
         callback();
     })
     .catch((error) => {

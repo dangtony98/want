@@ -67,7 +67,7 @@ export class NavigationBar extends Component {
                     </div>
                     <div>
                         <Link 
-                            to="/"
+                            to="/home"
                             className="navigation-link link"
                         >WANT</Link>
                     </div>

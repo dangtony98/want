@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import store from './store/store';
 
 // PAGES
+import LandingPage from './components/pages/LandingPage';
 import HomePage from './components/pages/HomePage';
 import LoginPage from './components/pages/LoginPage';
 import SignupPage from './components/pages/SignupPage';
@@ -26,7 +27,8 @@ ReactDOM.render(
     <Provider store={store}>
         <Router>
             <Switch>
-                <Route path="/" component={RequireAuth(HomePage)} exact /> {/*RequireAuth Wrapper*/}
+                <Route path="/" component={LandingPage} exact />
+                <Route path="/home" component={RequireAuth(HomePage)} exact /> {/*RequireAuth Wrapper*/}
                 <Route path="/login" component={LoginPage} />
                 <Route path="/signup" component={SignupPage} />
                 <Route path="/setup" component={SetupPage} />

@@ -23,7 +23,8 @@ export class InboxChat extends Component {
             receiver: null,
             messages: [],
             chatInput: '',
-            imageAttachments: [],
+            imageAttachmentsDisplay: [],
+            imageAttachments: []
         }
     }
 
@@ -44,7 +45,7 @@ export class InboxChat extends Component {
 
         const channel = pusher.subscribe('private-chat.1');
         channel.bind("App\\Events\\MessageSentEvent", (data) => {
-            console.log('Received data: ');
+            console.log('channel.bind() new data: ');
             console.log(data);
             this.setState({
                 ...this.state,
@@ -58,9 +59,9 @@ export class InboxChat extends Component {
         });
 
         getMessages(1, (data) => {
-            const adminIsSender = JSON.parse(localStorage.getItem('user')).id == data.wanter.id;
-            console.log('Data: ');
+            console.log('getMessages() data: ');
             console.log(data);
+            const adminIsSender = JSON.parse(localStorage.getItem('user')).id == data.wanter.id;
             this.setState({
                 ...this.state,
                 conversation_id: data.id,
@@ -84,12 +85,16 @@ export class InboxChat extends Component {
             const file = e.target.files[i];
             reader.readAsDataURL(file);
 
+            console.log('abc');
+            console.log(file);
+
             reader.onload = (e) => {
-                const { imageAttachments } = this.state;
-                if (imageAttachments.length < 8) {
+                const { imageAttachmentsDisplay } = this.state;
+                if (imageAttachmentsDisplay.length < 8) {
                     this.setState({
                         ...this.state,
-                        imageAttachments: [...this.state.imageAttachments, e.target.result]
+                        imageAttachmentsDisplay: [...this.state.imageAttachmentsDisplay, e.target.result],
+                        imageAttachments: [this.state.imageAttachments, file]
                     });
                 } else {
                     // SHOW ERROR MESSAGE INDICATING THAT THE IMAGE ATTACHMENT LIMIT (8) HAS BEEN REACHED
@@ -112,11 +117,24 @@ export class InboxChat extends Component {
             e.preventDefault();
             // SEND POST REQUEST TO SERVER WITH TRIMEMD (.TRIM()) MESSAGE WITH (OPTIONAL) IMAGE PAYLOAD
             
-            const { conversation_id, chatInput, sender } = this.state;
+            const { conversation_id, chatInput, imageAttachments } = this.state;
+            let data = new FormData();
+
+            console.log('imageAttachments length: ');
+            console.log(imageAttachments.length);
+            for (let i = 0; i < imageAttachments.length; i++) {
+                console.log('single image attachment: ');
+                console.log(imageAttachments[i]);
+                data.append('attachment[]', imageAttachments[i]);
+            }
+
+            console.log('hypothetical data: ');
+            console.log(data);
 
             sendMessage({
                 convo_id: conversation_id,
-                message: chatInput.trim()
+                message: chatInput.trim(),
+                attachment: data
             }, () => {
                 this.setState({
                     ...this.state,
@@ -128,7 +146,7 @@ export class InboxChat extends Component {
     }
 
     render() {
-        const { messages, chatInput, imageAttachments, sender, receiver } = this.state;
+        const { messages, chatInput, imageAttachmentsDisplay, sender, receiver } = this.state;
         return (
             <div className="inbox-chat">
                 <h4 className="content-heading">Chat</h4>
@@ -149,7 +167,7 @@ export class InboxChat extends Component {
                     </div>
                     <div className="inbox-chat__bottom">
                         <div className="inbox-chat__image-area wrapper-flex">
-                            {imageAttachments.map((imageAttachment) => (
+                            {imageAttachmentsDisplay.map((imageAttachment) => (
                                 <img 
                                     src={imageAttachment}
                                     className="inbox-photo-upload__image marg-r-sm marg-b-sm"

@@ -27,3 +27,11 @@
         color: $color-white;
     }
 }
+
+.navigation-link-dark {
+    color: $color-primary-0;
+    
+    &:visited {
+        color: $color-primary-0;
+    }
+}

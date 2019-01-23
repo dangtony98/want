@@ -7,6 +7,8 @@ import { WANT_URL } from '../variables/variables';
 // DATA: CONTAINS THE NEW IMAGE
 
 const uploadAvatar = (data, callback) => {
+    console.log('uploadAvatar content: ');
+    console.log(data);
     axios.post(`${WANT_URL}/api/avatar`, data,
     {
         headers: { 
@@ -16,7 +18,6 @@ const uploadAvatar = (data, callback) => {
     })
     .then((response) => {
         // UPLOAD AVATAR SUCCESSFUL
-        console.log('Avatar upload successful');
         callback();
     })
     .catch((error) => {
