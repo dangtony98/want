@@ -10,6 +10,11 @@ export class Post extends Component {
 
         this.setWrapperRef = this.setWrapperRef.bind(this);
         this.handleClickOutside = this.handleClickOutside.bind(this);
+        this.checkFormActive = this.checkFormActive.bind(this);
+
+        this.state = {
+            formIsActive: false
+        }
     }
 
     componentDidMount() {
@@ -26,9 +31,17 @@ export class Post extends Component {
 
     handleClickOutside(event) {
         // FIND WAY TO KEEP FORM OPEN WHEN ANY VALUE IS ACTIVE IN POSTFORM STATE
-        if (this.wrapperRef && !this.wrapperRef.contains(event.target) && this.props.postIsExpanded == true) {
+        const { formIsActive } = this.state;
+        const { postIsExpanded } = this.props;
+        if (this.wrapperRef && !this.wrapperRef.contains(event.target) && postIsExpanded == true && formIsActive == false) {
             this.props.closePostIsExpanded();
         }
+    }
+
+    checkFormActive(state) {
+        this.setState({
+            formIsActive: state
+        });
     }
 
     render() {
@@ -38,7 +51,9 @@ export class Post extends Component {
                 <div
                     ref={this.setWrapperRef} 
                     className="post-box">
-                    <PostForm />
+                    <PostForm 
+                        checkFormActive={this.checkFormActive}
+                    />
                 </div>
             </div>
         );

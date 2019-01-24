@@ -12,15 +12,6 @@ import { getCategories } from '../../services/api/filter';
 import numeral from 'numeral';
 
 const select = {
-    options: [
-        { value: 1, label: 'Purchase & Delivery' },
-        { value: 2, label: 'Home Services' },
-        { value: 3, label: 'Freelance' },
-        { value: 4, label: 'Transportation' },
-        { value: 5, label: 'Education' },
-        { value: 6, label: 'Entertainment' },
-        { value: 7, label: 'Other' }
-    ],
     styles: {
         control: (base, state) => ({
             ...base,
@@ -136,6 +127,13 @@ class PostForm extends Component {
                     ...this.state.chosen,
                     [e.target.name]: value
                 }
+            }, () => {
+                const { title, cost, description, category } = this.state.chosen;
+                if (title != '' || cost != '' || description != '' || category != null) {
+                    this.props.checkFormActive(true);
+                } else {
+                    this.props.checkFormActive(false);
+                }
             });
         }
     }
@@ -146,6 +144,13 @@ class PostForm extends Component {
             chosen: {
                 ...this.state.chosen,
                 category: e
+            }
+        }, () => {
+            const { title, cost, description, category } = this.state.chosen;
+            if (title != '' || cost != '' || description != '' || category != null) {
+                this.props.checkFormActive(true);
+            } else {
+                this.props.checkFormActive(false);
             }
         });
     }
@@ -224,7 +229,8 @@ class PostForm extends Component {
 PostForm.propTypes = {
     postIsExpanded: PropTypes.bool.isRequired,
     openPostIsExpanded: PropTypes.func.isRequired,
-    updateFeed: PropTypes.func.isRequired
+    updateFeed: PropTypes.func.isRequired,
+    checkFormActive: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ layout }) => ({
