@@ -120,7 +120,7 @@ export class Want extends Component {
                         </Link>
                         <div className="marg-l-sm">
                             <h4 className="want-text marg-e">
-                                <Link to="/profile" target="_blank" className="link">
+                                <Link to="/profile" target="_blank" className="want-link link">
                                     {user.first_name}
                                 </Link>
                                 {/* <button

@@ -109,7 +109,6 @@ export class Sort extends Component {
                 sort_by: sort_by.value
             }, this.props);
             this.props.setHasMoreWants(true);
-            console.log('setHasMoreWants to true');
         });
     }
 
@@ -126,7 +125,7 @@ export class Sort extends Component {
                 <div className="wrapper-flex wrapper-flex--center">
                     <button
                         onClick={this.onSortBtnPressed} 
-                        className="button"
+                        className="sort-button button"
                         style={sortIsExpanded ? sortStyles.button.selected : sortStyles.button.unselected}
                     >
                         Options
