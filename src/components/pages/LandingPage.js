@@ -40,7 +40,7 @@ export class LandingPage extends Component {
                 <div className="landing-content">
                     <div className="landing-content__left">
                         <Link 
-                            to="/landing" 
+                            to="/" 
                             className="navigation-link-dark link"
                         >
                             <h2>WANT</h2>
