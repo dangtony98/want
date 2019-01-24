@@ -1,0 +1,41 @@
+.landing-jumbotron {
+    line-height: 3.25rem;
+}
+
+.landing-carousel {
+    height: 15rem;
+    width: 75%;
+    border-radius: 2rem;
+    margin: 0 auto;
+    overflow: hidden;
+
+    &__tab {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 15rem;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+.landing-heading {
+    color: $color-primary-0;
+}
+
+.landing-text {
+    color: $color-grey-dark;
+    font-weight: 300;
+
+    &--invert {
+        color: $color-white;
+    }
+}
+
+.landing-link {
+    color: $color-white;
+
+    &:visited {
+        color: $color-white;
+    }
+}
