@@ -14,10 +14,12 @@ export default (ComposedComponent) => {
     }
 
     componentWillMount() {
-        checkAuthentication(this.props, () => { 
+        checkAuthentication(() => { 
             this.setState({
                 isAuthenticated: true
             });  
+        }, () => {
+            this.props.history.push('/');
         });
     }
 

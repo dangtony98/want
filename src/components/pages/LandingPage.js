@@ -13,8 +13,10 @@ export class LandingPage extends Component {
     }
 
     componentWillMount() {
-        checkAuthentication(this.props, () => {
+        checkAuthentication(() => {
             this.props.history.push('/home');
+        }, () => {
+
         });
     }
 
@@ -51,7 +53,7 @@ export class LandingPage extends Component {
                                 aliqua
                             </h2>
                         </div>
-                        <h4 className="landing-text">&copy; Want, Inc.</h4>
+                        <h4 className="landing-text">&copy; 2019 Want, Inc.</h4>
                     </div>
                     <div className="landing-content__right">
                         <div className="wrapper-flex-spaced wrapper-flex-spaced--center">

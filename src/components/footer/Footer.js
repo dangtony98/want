@@ -27,7 +27,7 @@ export default () => (
             </div>
             <hr className="hr marg-t-sm marg-b-sm"></hr>
             <div className="wrapper-flex-spaced">
-                <h4>&copy; Want, Inc.</h4>
+                <h4>&copy; 2019 Want, Inc.</h4>
                 <div className="wrapper-flex wrapper-flex--center">
                     <a 
                         href="https://www.facebook.com/" 

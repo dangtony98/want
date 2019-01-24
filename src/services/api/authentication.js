@@ -4,10 +4,10 @@ import { WANT_URL } from '../variables/variables';
 // CHECKAUTHENTICATION() — GET
 
 // GETS AN "AUTHENTICATED OR NOT" FROM THE SERVER BASED ON STORED TOKEN
-// PROPS: CONTAINS PUSH() FUNC
 // CALLBACK: THE SETSTATE CALLBACK TO ENABLE COMPONENT RENDERING IN HOC
+// CALLBACK2: THE ROUTE REDIRECT CALLBACK FOR WHEN USER IS NOT LOGGED IN
 
-const checkAuthentication = (props, callback) => {
+const checkAuthentication = (callback, callback2) => {
     axios.get(`${WANT_URL}/api/user`, 
         { 
             headers: { 
@@ -22,7 +22,7 @@ const checkAuthentication = (props, callback) => {
         .catch((error) => {
             // AUTHENTICATION UNSUCCESSFUL
             console.log('Error: ' + error);
-            props.history.push('/');
+            callback2();
         });
 }
 
