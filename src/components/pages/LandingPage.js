@@ -28,11 +28,12 @@ export class LandingPage extends Component {
         const settings = {
             arrows: false,
             dots: false,
-            speed: 500,
+            speed: 1000,
             slidesToShow: 1,
             slidesToScroll: 1,
-            autoplay: false,
-            autoplaySpeed: 1000
+            autoplay: true,
+            autoplaySpeed: 5000,
+            infinite: true
         } 
 
         return (
@@ -46,11 +47,9 @@ export class LandingPage extends Component {
                             <h2>WANT</h2>
                         </Link>
                         <div className="landing-jumbotron">
-                            <h1 className="landing-heading marg-b-sm">The future is here</h1>
+                            <h1 className="landing-heading marg-b-sm">Your favorite service platform</h1>
                             <h2 className="landing-text">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                                , sed do eiusmod tempor incididunt ut labore et dolore magna 
-                                aliqua
+                                Where people can request services that others can fulfill in exchange for money
                             </h2>
                         </div>
                         <h4 className="landing-text">&copy; 2019 Want, Inc.</h4>
@@ -70,8 +69,15 @@ export class LandingPage extends Component {
                         </div>
                         <div className="landing-carousel">
                             <Slider {...settings}>
-                                {/* <div className="landing-carousel__tab">One</div>
-                                <div className="landing-carousel__tab">Two</div> */}
+                                <div className="landing-carousel__tab">
+                                    <h1 className="landing-heading landing-text--invert marg-t-sm">Simple</h1>
+                                </div>
+                                <div className="landing-carousel__tab">
+                                    <h1 className="landing-heading landing-text--invert marg-t-sm">Safe</h1>
+                                </div>
+                                <div className="landing-carousel__tab">
+                                    <h1 className="landing-heading landing-text--invert marg-t-sm">Flexible</h1>
+                                </div>
                             </Slider>
                         </div>
                         <div className="wrapper-flex-spaced wrapper-flex-spaced--center">

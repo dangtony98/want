@@ -39,3 +39,12 @@ button {
     width: 0px;  /* remove scrollbar space */
     background: transparent;  /* optional: just make scrollbar invisible */
 }
+
+.slick-slider,
+.slick-slider * {
+    outline: none;
+}
+
+.slick-track {
+    display: flex;
+}
