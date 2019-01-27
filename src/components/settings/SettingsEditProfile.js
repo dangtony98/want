@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { uploadAvatar, getAvatar } from '../../services/api/settings';
-import { setPhoto } from '../../actions/admin';
+import { updateProfile } from '../../services/api/settings';
+import { setPhoto, setUser } from '../../actions/admin';
+import { getUser } from '../../services/api/admin';
 
 export class SettingsEditProfile extends Component {
     constructor(props) {
@@ -15,7 +17,7 @@ export class SettingsEditProfile extends Component {
             first_name: this.props.first_name,
             last_name: this.props.last_name,
             email: this.props.email,
-            subtitle: this.props.subtitle,
+            tag_line: this.props.tag_line,
             description: this.props.description,
             photo: null
         }
@@ -23,12 +25,12 @@ export class SettingsEditProfile extends Component {
 
     componentDidMount() {
         window.setTimeout(() => {
-            const { first_name, last_name, email, subtitle, description, photo } = this.props;
+            const { first_name, last_name, email, tag_line, description, photo } = this.props;
             this.setState({
                 first_name: first_name,
                 last_name: last_name,
                 email: email,
-                subtitle: subtitle,
+                tag_line: tag_line,
                 description: description,
                 photo: photo
             })
@@ -59,14 +61,22 @@ export class SettingsEditProfile extends Component {
 
     onFormSubmit(e) {
         e.preventDefault();
-        console.log(this.state);
-        // SEND POST REQUEST TO UPDATE PROFILE SETTINGS
-        // IF SUCCESSFUL RESPONSE, UPDATE ADMIN REDUCER WITH UPDATED INFO
+        const { first_name, last_name, email, tag_line, description } = this.state;
+        updateProfile({
+            first_name: first_name,
+            last_name: last_name,
+            email: email,
+            tag_line: tag_line,
+            description: description
+        }, () => {
+            getUser(this.props);
+        });
     }
     
     render() {
         const { photo } = this.props;
-        const { first_name, last_name, email, subtitle, description } = this.state;
+        const { first_name, last_name, email, tag_line, description } = this.state;
+
         return (
             <div className="settings-edit-profile">
                 <form onSubmit={this.onFormSubmit}>
@@ -131,12 +141,13 @@ export class SettingsEditProfile extends Component {
                         <h4 className="content-heading">Public Profile</h4>
                         <div className="settings-content__box">
                             <input 
-                                name="subtitle"
-                                value={subtitle}
+                                name="tag_line"
+                                value={tag_line}
                                 onChange={this.handleChange} 
                                 type="text"
-                                placeholder="Enter a subtitle" 
+                                placeholder="Enter a tag line" 
                                 className="input-text settings-input"
+                                maxLength="150"
                                 required 
                             />
                             <textarea
@@ -146,6 +157,7 @@ export class SettingsEditProfile extends Component {
                                 type="textarea"
                                 placeholder="Enter a description" 
                                 className="textarea settings-textarea marg-t-sm"
+                                maxLength="500"
                                 required 
                             />
                         </div>
@@ -164,13 +176,14 @@ const mapStateToProps = ({ admin }) => ({
     first_name: admin.first_name,
     last_name: admin.last_name,
     email: admin.email,
-    subtitle: admin.subtitle,
+    tag_line: admin.tag_line,
     description: admin.description,
     photo: admin.photo
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    setPhoto: (photo) => dispatch(setPhoto(photo))
+    setPhoto: (photo) => dispatch(setPhoto(photo)),
+    setUser: (user) => dispatch(setUser(user))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsEditProfile);

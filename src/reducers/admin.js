@@ -6,8 +6,8 @@ const admin = {
     first_name: null,
     last_name: null,
     email: null,
-    subtitle: 'Chef, amateur photographer, and cat lover',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.',
+    tag_line: '',
+    description: '',
     photo: null
 }
 
@@ -20,7 +20,9 @@ export default (state = admin, action) => {
                 first_name: action.user.first_name,
                 last_name: action.user.last_name,
                 email: action.user.email,
-                photo: `${IMAGE_URL}/${action.user.avatar}`
+                photo: `${IMAGE_URL}/${action.user.avatar}`,
+                tag_line: action.user.tag_line,
+                description: action.user.description
             };
         case SET_PHOTO:
             return {

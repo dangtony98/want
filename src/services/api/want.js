@@ -7,7 +7,6 @@ import { WANT_URL } from '../variables/variables';
 // ID: THE ID OF THE GIVEN WANT
 
 const deleteWant = (id, callback) => {
-    console.log('deleteWant() triggered with id: ' + id);
     axios.delete(`${WANT_URL}/api/want/${id}`,
         { 
             headers: { 

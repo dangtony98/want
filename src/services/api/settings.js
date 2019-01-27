@@ -5,10 +5,9 @@ import { WANT_URL } from '../variables/variables';
 
 // UPLOADS NEW PROFILE PICTURE TO THE SERVER
 // DATA: CONTAINS THE NEW IMAGE
+// CALLBACK: CALLBACK TO GET THE NEWLY UPDATED AVATAR
 
 const uploadAvatar = (data, callback) => {
-    console.log('uploadAvatar content: ');
-    console.log(data);
     axios.post(`${WANT_URL}/api/avatar`, data,
     {
         headers: { 
@@ -49,6 +48,30 @@ const getAvatar = (props) => {
     });
 }
 
+// UPDATEPROFILE() — POST
+
+// UPDATES THE USER'S FIRST NAME, LAST NAME, EMAIL, TAGLINE, AND DESCRIPTION
+// DATA: CONTAINS THE USER'S FIRST NAME, LAST NAME, EMAIL, TAGLINE, AND DESCRIPTION
+// CALLBACK: CALLBACK TO GET THE UPDATED USER'S PROFILE
+
+const updateProfile = (data, callback) => {
+    axios.post(`${WANT_URL}/api/update_profile`, data,
+    {
+        headers: { 
+            Accept: 'application/json', 
+            Authorization: `Bearer ${localStorage.getItem('token')}` 
+        }
+    })
+    .then((response) => {
+        // UPDATE PROFILE SUCCESSFUL
+        callback();
+    })
+    .catch((error) => {
+        // UPDATE PROFILE UNSUCCESSFUL
+        console.log('Error: ' + error);
+    });
+}
+
 // CHANGEPASSWORD() - POST
 
 // CHANGES THE CURRENT USER'S PASSWORD
@@ -71,4 +94,4 @@ const changePassword = (data, callback) => {
     });
 }
 
-export { uploadAvatar, getAvatar, changePassword };
+export { uploadAvatar, getAvatar, updateProfile, changePassword };
