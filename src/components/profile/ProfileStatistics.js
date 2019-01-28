@@ -10,7 +10,7 @@ const ProfileStatistics = ({ rating, statistics }) => (
                 <h4>Rating</h4>
             </div>
             <div className="profile-statistics__group marg-b-m">
-                <h2 className="profile-statistics__measure">{statistics.total_fulfilment}</h2>
+                <h2 className="profile-statistics__measure">{statistics.total_fulfillment}</h2>
                 <h4>Fulfillments</h4>
             </div>
             <div className="profile-statistics__group">
