@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { IMAGE_URL } from '../../services/variables/variables';
 
 const ProfileSummary = ({ summary }) => {
-    const applyCharacterLimit = (description, limit) => (`${description.substring(0, limit)}`);
+    const applyCharacterLimit = (description, limit) => (`${description.substring(0, limit)}${description.length > limit ? '...' : ''}`);
     return (
         <div className="profile-summary">
             <h4 className="content-heading">Profile Summary</h4>
