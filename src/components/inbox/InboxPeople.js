@@ -1,17 +1,13 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 
-export class InboxPeople extends Component {
-    render() {
-        return (
-            <div className="inbox-people">
-                <h4 className="content-heading">People</h4>
-                <div className="inbox-people__box">
+const InboxPeople = () => (
+    <div className="inbox-people">
+        <h4 className="content-heading">People</h4>
+        <div className="inbox-people__box">
 
-                </div>
-            </div>
-        );
-    }
-}
+        </div>
+    </div>
+);
 
 export default connect()(InboxPeople);

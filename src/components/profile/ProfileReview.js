@@ -1,9 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import moment from 'moment'
 import { IMAGE_URL } from '../../services/variables/variables';
 import PropTypes from 'prop-types';
 
 export const ProfileReview = ({ review }) => {
+    console.log('review');
+    console.log(review);
+
     const renderRating = (rating) => {
         let ratingArr = [];
         for (let i = 0; i < 5; i++) {
@@ -20,7 +24,7 @@ export const ProfileReview = ({ review }) => {
     }
     
     const applyCharacterLimit = (description, limit) => (`${description.substring(0, limit)}${description.length > limit ? '...' : ''}`);
-    
+
     return (
         <div className="profile-review">
             <div className="wrapper-flex-spaced wrapper-flex-spaced--top">
@@ -40,7 +44,7 @@ export const ProfileReview = ({ review }) => {
                         </div>
                     </div>
                 </div>
-                <h4 className="want-text marg-e">{review.created_at}</h4>
+                <h4 className="want-text marg-e">{review.created_at ? moment(review.created_at).format('MMMM YYYY') : moment(review.user.created_at).format('MMMM YYYY')}</h4>
             </div>
             <h4 className="want-text marg-e">{review.want.title}</h4>
             <p className="profile-review__review">{applyCharacterLimit(review.feedback, 300)}</p>

@@ -27,8 +27,6 @@ export class ProfilePage extends Component {
     }
 
     render() {
-        console.log('props');
-        console.log(this.props);
         console.log('state');
         console.log(this.state);
         const { data } = this.state;

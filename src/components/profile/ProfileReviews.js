@@ -52,9 +52,6 @@ export default class ProfileReviews extends Component {
         const { page } = this.state;
         const { PREV_PAGE, NEXT_PAGE } = paginationOptions;
 
-        console.log('reviews.data: ');
-        console.log(reviews.data);
-
         return (
             <div className="profile-reviews">
                 <h4 className="content-heading">Reviews</h4>

@@ -7,7 +7,6 @@ import { WANT_URL } from '../variables/variables';
 // PROPS: CONTAINS UPDATEFEED() FUNC
 
 const getFeed = (props) => {
-    console.log('getFeed(): ');
     axios.post(`${WANT_URL}/api/newsfeed`, {
             categories: [''],
             sort_by: 'created_at#desc'
