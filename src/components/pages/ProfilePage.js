@@ -41,7 +41,7 @@ export class ProfilePage extends Component {
                         rating={data.user[0].rating.current_rating} 
                         statistics={data.stats} 
                     />
-                    <ProfileReviews reviews={this.props.reviews} />
+                    <ProfileReviews reviews={data.review} />
                 </div>
                 <Footer />
             </div>

@@ -141,7 +141,7 @@ export class Want extends Component {
                         </button>
                     }
                 </div>
-                <h3 className="want-text marg-t-sm marg-b-xs">{title}</h3>
+                <h3 className="want-text marg-t-xs marg-b-xs">{title}</h3>
                 <h4 className="want__pay">{numeral(cost / 100).format('$0,0.00')}</h4>
                 {/* <h4 className="want-text marg-t-xs marg-b-xs">
                     {categories.map((category) => (category.value == category_id ? category.label : ''))}
