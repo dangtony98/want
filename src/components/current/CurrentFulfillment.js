@@ -50,7 +50,7 @@ export class CurrentFulfillment extends Component {
             >
                 <div className="current-fulfillment__content">
                     {/* <div className="wrapper-flex-spaced"> */}
-                        <h4 className="current-fulfillment__title">{this.applyCharacterLimit(body.title, 25)}</h4>
+                        <h4 className="current-fulfillment__title">{this.applyCharacterLimit(body.title, 40)}</h4>
                         {/* <div className="wrapper-flex wrapper-flex--center">
                             <h4 className="current-fulfillments-text">{`(+$${body.pay})`}</h4>
                             <button
