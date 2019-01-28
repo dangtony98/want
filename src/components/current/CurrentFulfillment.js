@@ -37,7 +37,7 @@ export class CurrentFulfillment extends Component {
     }
 
     applyCharacterLimit(description, limit) {
-        return `${description.substring(0, limit)}...`;
+        return `${description.substring(0, limit)}${description.length > limit ? '...' : ''}`;
     }
 
     render() {
@@ -49,9 +49,9 @@ export class CurrentFulfillment extends Component {
                 style={tabStyle(isMatched)}
             >
                 <div className="current-fulfillment__content">
-                    <div className="wrapper-flex-spaced">
+                    {/* <div className="wrapper-flex-spaced"> */}
                         <h4 className="current-fulfillment__title">{this.applyCharacterLimit(body.title, 25)}</h4>
-                        <div className="wrapper-flex wrapper-flex--center">
+                        {/* <div className="wrapper-flex wrapper-flex--center">
                             <h4 className="current-fulfillments-text">{`(+$${body.pay})`}</h4>
                             <button
                                 onClick={this.onEllipsisBtnPressed}
@@ -59,8 +59,8 @@ export class CurrentFulfillment extends Component {
                             >
                                 <i className="icon-ellipsis-h fas fa-ellipsis-h"></i>
                             </button>
-                        </div>
-                    </div>
+                        </div> */}
+                    {/* </div> */}
                     <h4 className="current-fulfillments-text">For {wanter.firstName != null ? <Link to="/profile" target="_blank" className="link">{wanter.firstName}</Link> : 'Undecided'}</h4>
                 </div>
             </div>

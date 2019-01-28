@@ -37,7 +37,7 @@ export class CurrentWant extends Component {
     }
 
     applyCharacterLimit(description, limit) {
-        return `${description.substring(0, limit)}...`;
+        return `${description.substring(0, limit)}${description.length > limit ? '...' : ''}`;
     }
 
     render() {
@@ -49,9 +49,9 @@ export class CurrentWant extends Component {
                 style={tabStyle(isMatched)}
             >
                 <div className="current-want__content">
-                    <div className="wrapper-flex-spaced">
-                        <h4 className="current-want__title">{this.applyCharacterLimit(body.title, 25)}</h4>
-                        <div className="wrapper-flex wrapper-flex--center">
+                    {/* <div className="wrapper-flex-spaced"> */}
+                        <h4 className="current-want__title">{this.applyCharacterLimit(body.title, 40)}</h4>
+                        {/* <div className="wrapper-flex wrapper-flex--center">
                             <h4 className="current-wants-text">{`(-$${body.pay})`}</h4>
                             <button
                                 onClick={this.onEllipsisBtnPressed}
@@ -59,8 +59,8 @@ export class CurrentWant extends Component {
                             >
                                 <i className="icon-ellipsis-h fas fa-ellipsis-h"></i>
                             </button>
-                        </div>
-                    </div>
+                        </div> */}
+                    {/* </div> */}
                     <h4 className="current-wants-text">{fulfiller.firstName != null ? <span>By <Link to="/profile" target="_blank" className="link">{fulfiller.firstName}</Link></span> : <Link to="/profile" className="link">Select a Fulfiller</Link>}</h4>
                 </div>
             </div>
