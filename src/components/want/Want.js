@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter, Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { openDetailsModalIsExpanded, closeDetailsModalIsExpanded, openAcceptModalIsExpanded, setModalWantId, setDetailsModalType } from '../../actions/modal';
-import { getUser } from '../../services/api/profile';
+import { getProfile } from '../../services/api/profile';
 import { deleteWant } from '../../services/api/want';
 import { updateFeed } from '../../actions/feed';
 import { getFeed } from '../../services/api/feed';
@@ -38,10 +39,8 @@ export class Want extends Component {
         }
     }
 
-    onProfileBtnPressed(userId) {
-        // SEND POST REQUEST TO RETRIEVE THE REQUESTED USER'S PROFILE INFORMATION
-        console.log('onProfileBtnPressed() triggered for user: ' + userId);
-        getUser(userId);
+    onProfileBtnPressed(id) {
+        this.props.history.push(`/profile/${id}`);
     }
 
     onAcceptBtnPressed() {
@@ -120,13 +119,13 @@ export class Want extends Component {
                         </Link>
                         <div className="marg-l-sm">
                             <h4 className="want-text marg-e">
-                                <Link to="/profile" target="_blank" className="want-link link">
+                                {/* <Link to="/profile" target="_blank" className="want-link link">
                                     {user.first_name}
-                                </Link>
-                                {/* <button
-                                    onClick={() => this.onProfileBtnPressed(userId)} 
+                                </Link> */}
+                                <button
+                                    onClick={() => this.onProfileBtnPressed(user.id)} 
                                     className="button-simple"
-                                >{firstName}</button> */}
+                                >{user.first_name}</button>
                             </h4>
                             <h4 className="want-text marg-e">{`${moment(created_at).fromNow(true)} ago`}</h4>
                         </div>
@@ -212,7 +211,8 @@ Want.propTypes = {
     openAcceptModalIsExpanded: PropTypes.func.isRequired,
     setModalWantId: PropTypes.func.isRequired,
     setDetailsModalType: PropTypes.func.isRequired,
-    updateFeed: PropTypes.func.isRequired
+    updateFeed: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ admin, filter }) => ({
@@ -229,4 +229,4 @@ const mapDispatchToProps = (dispatch) => ({
     updateFeed: (feed) => dispatch(updateFeed(feed))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Want);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Want));

@@ -69,6 +69,7 @@ export class SettingsEditProfile extends Component {
             tag_line: tag_line,
             description: description
         }, () => {
+            console.log('succeededx');
             getUser(this.props);
         });
     }

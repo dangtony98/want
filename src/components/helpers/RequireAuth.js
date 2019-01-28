@@ -27,7 +27,7 @@ export default (ComposedComponent) => {
         const { isAuthenticated } = this.state;
         return (
             <div>
-                {isAuthenticated && <ComposedComponent />}
+                {isAuthenticated && <ComposedComponent {...this.props} />}
             </div>
         );
     }

@@ -32,7 +32,8 @@ ReactDOM.render(
                 <Route path="/login" component={LoginPage} />
                 <Route path="/signup" component={SignupPage} />
                 <Route path="/setup" component={SetupPage} />
-                <Route path="/profile" component={RequireAuth(ProfilePage)} /> {/*RequireAuth Wrapper*/}
+                {/* <Route path="/profile" component={RequireAuth(ProfilePage)} exact /> RequireAuth Wrapper */}
+                <Route path="/profile/:id" component={RequireAuth(ProfilePage)} exact /> {/*RequireAuth Wrapper*/}
                 <Route path="/inbox" component={RequireAuth(InboxPage)} /> {/*RequireAuth Wrapper*/}
                 <Route path="/settings" component={RequireAuth(SettingsPage)} /> {/*RequireAuth Wrapper*/}
                 <Route path="/about" component={AboutUsPage} />
