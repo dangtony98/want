@@ -45,7 +45,7 @@ export const ProfileReview = ({ review }) => {
                 </div>
                 <h4 className="want-text marg-e">{timestamp}</h4>
             </div>
-            <h4 className="want-text">{title}</h4>
+            <h3 className="want-text">{title}</h3>
             <p className="profile-review__review">{applyCharacterLimit(content, 300)}</p>
         </div>
     );

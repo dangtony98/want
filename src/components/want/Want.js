@@ -106,7 +106,7 @@ export class Want extends Component {
             >
                 <div className="wrapper-flex-spaced wrapper-flex-spaced--top">
                     <div className="wrapper-flex wrapper-flex--center">
-                        <Link to="/profile" target="_blank" className="link">
+                        <Link to={`/profile/${user.id}`} target="_blank" className="link">
                             <img 
                                 src={`${IMAGE_URL}/${user.avatar}`}
                                 className="want__image"
