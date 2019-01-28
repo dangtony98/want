@@ -148,7 +148,7 @@ export class SettingsEditProfile extends Component {
                                 type="text"
                                 placeholder="Enter a tag line" 
                                 className="input-text settings-input"
-                                maxLength="150"
+                                maxLength="50"
                                 required 
                             />
                             <textarea
@@ -158,7 +158,7 @@ export class SettingsEditProfile extends Component {
                                 type="textarea"
                                 placeholder="Enter a description" 
                                 className="textarea settings-textarea marg-t-sm"
-                                maxLength="500"
+                                maxLength="1000"
                                 required 
                             />
                         </div>
