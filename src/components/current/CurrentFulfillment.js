@@ -61,7 +61,7 @@ export class CurrentFulfillment extends Component {
                             </button>
                         </div> */}
                     {/* </div> */}
-                    <h4 className="current-fulfillments-text">For {wanter.firstName != null ? <Link to="/profile" target="_blank" className="link">{wanter.firstName}</Link> : 'Undecided'}</h4>
+                    <h4 className="current-fulfillments-text">For {wanter.firstName != null ? <Link to="/profile" target="_blank" className="current-link link">{wanter.firstName}</Link> : 'Undecided'}</h4>
                 </div>
             </div>
         );

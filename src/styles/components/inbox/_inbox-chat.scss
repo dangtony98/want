@@ -106,3 +106,9 @@
         transition: 0.2s;
     }
 }
+
+.inbox-link {
+    &--invert {
+        color: $color-white;
+    }
+}

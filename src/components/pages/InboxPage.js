@@ -3,55 +3,68 @@ import NavigationBar from '../navigation/NavigationBar';
 import InboxPeople from '../inbox/InboxPeople';
 import InboxChat from '../inbox/InboxChat';
 import Footer from '../footer/Footer';
+import { getConvos } from '../../services/api/inbox';
 
 export default class InboxPage extends Component {
     constructor(props) {
         super(props);
 
+        this.handleInboxChat = this.handleInboxChat.bind(this);
+
         this.state = {
-            conversations: [{
-                conversation_id: 1,
-                updated_at: 'XYZ',
-                user: {
-                    first_name: 'Lisa',
-                    profile_picture: 'XYZ'
-                },
-                want: {
-                    id: 2,
-                    title: 'I need XYZ'
-                }
-            }, {
-                conversation_id: 2,
-                updated_at: 'XYZ',
-                user: {
-                    first_name: 'Matthew',
-                    profile_picture: '/avatar/XYZ'
-                },
-                want: {
-                    id: 2,
-                    title: 'I need XYZ'
-                }
-            }]
+            convos: [],
+            current_convo_id: null
         }
     }
 
     componentDidMount() {
         window.scrollTo(0, 0);
+        getConvos((response) => {
+            this.setState({
+                ...this.state,
+                convos: response.data,
+                current_convo_id: response.data.length != 0 ? response.data[0].id : null
+            })
+            console.log('getConvos() successful with responsex: ');
+            console.log(response.data);
+        });
+    }
 
-        // FETCH CURRENT CONVERSATIONS
+
+    handleInboxChat(convoid) {
+        console.log('handleInboxChat triggered with convoid ');
+        console.log(convoid);
+
+        this.setState({
+            ...this.state,
+            current_convo_id: convoid
+        });
     }
 
     render() {
+        const { convos, current_convo_id } = this.state;
         return (
             <div className="inbox-page wrapper-flex-spaced wrapper-flex-spaced--column">
                 <div>
                     <NavigationBar />
                     <div className="inbox-content">
                         <div className="inbox-content__left">
-                            <InboxPeople />
+                            <InboxPeople 
+                                convos={convos}
+                                handleInboxChat={this.handleInboxChat}
+                            />
                         </div>
                         <div className="inbox-content__right">
-                            <InboxChat />
+                            <h4 className="content-heading">Chat</h4>
+                            {current_convo_id ? (
+                                <InboxChat 
+                                    convoid={current_convo_id}
+                                />
+                            ) : (
+                                <div>
+                                    {/* PLACEHOLDER DIV */}
+                                </div>
+                            )}
                         </div>
                     </div>
                 </div>

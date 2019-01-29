@@ -1,6 +1,29 @@
 import axios from 'axios';
 import { WANT_URL } from '../variables/variables';
 
+// GETCONVOS — GET
+
+// GETS THE USER'S CURRENT ACTIVE CONVERSATIONS
+
+const getConvos = (callback) => {
+    axios.get(`${WANT_URL}/api/conversations`, 
+    { 
+        headers: { 
+            Accept: 'application/json', 
+            Authorization: `Bearer ${localStorage.getItem('token')}` 
+        }
+    })
+    .then((response) => {
+        // GET CONVERSATIONS SUCCESSFUL
+        callback(response);
+    })
+    .catch((error) => {
+        // GET CONVERSATIONS UNSUCCESSFUL
+        console.log('Error: ' + error);
+    });
+}
+
+
 // GETMESSAGES() — GET
 
 // GET MESSAGES FOR THE GIVEN CONVERSATION
@@ -54,4 +77,4 @@ const sendMessage = (content, callback) => {
     });
 }
 
-export { getMessages, sendMessage };
+export { getConvos, getMessages, sendMessage };

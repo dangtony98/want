@@ -61,7 +61,7 @@ export class CurrentWant extends Component {
                             </button>
                         </div> */}
                     {/* </div> */}
-                    <h4 className="current-wants-text">{fulfiller.firstName != null ? <span>By <Link to="/profile" target="_blank" className="link">{fulfiller.firstName}</Link></span> : <Link to="/profile" className="link">Select a Fulfiller</Link>}</h4>
+                    <h4 className="current-wants-text">{fulfiller.firstName != null ? <span>By <Link to="/profile" target="_blank" className="link">{fulfiller.firstName}</Link></span> : <Link to="/profile" className="current-link link">Select a Fulfiller</Link>}</h4>
                 </div>
             </div>
         );

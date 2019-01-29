@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Pusher from 'pusher-js';
 import Textarea from 'react-textarea-autosize';
+import { Link } from 'react-router-dom';
 import InboxChatList from './InboxChatList';
 import { getMessages, sendMessage } from '../../services/api/inbox';
 import { WANT_URL } from '../../services/variables/variables';
@@ -18,7 +19,7 @@ export class InboxChat extends Component {
         this.onEnterPressed = this.onEnterPressed.bind(this);
 
         this.state = {
-            conversation_id: null,
+            convo_id: null,
             sender: null,
             receiver: null,
             messages: [],
@@ -58,13 +59,15 @@ export class InboxChat extends Component {
             console.log(status);
         });
 
-        getMessages(1, (data) => {
+        const { convoid } = this.props;
+
+        getMessages(convoid, (data) => {
             console.log('getMessages() data: ');
             console.log(data);
             const adminIsSender = JSON.parse(localStorage.getItem('user')).id == data.wanter.id;
             this.setState({
                 ...this.state,
-                conversation_id: data.id,
+                convo_id: data.id,
                 messages: data.messages,
                 sender: adminIsSender ? data.wanter : data.fulfiller,
                 receiver: adminIsSender ? data.fulfiller : data.wanter
@@ -117,7 +120,7 @@ export class InboxChat extends Component {
             e.preventDefault();
             // SEND POST REQUEST TO SERVER WITH TRIMEMD (.TRIM()) MESSAGE WITH (OPTIONAL) IMAGE PAYLOAD
             
-            const { conversation_id, chatInput, imageAttachments } = this.state;
+            const { convo_id, chatInput, imageAttachments } = this.state;
             let data = new FormData();
 
             console.log('imageAttachments length: ');
@@ -132,7 +135,7 @@ export class InboxChat extends Component {
             console.log(data);
 
             sendMessage({
-                convo_id: conversation_id,
+                convo_id: convo_id,
                 message: chatInput.trim(),
                 attachment: data
             }, () => {
@@ -147,14 +150,21 @@ export class InboxChat extends Component {
 
     render() {
         const { messages, chatInput, imageAttachmentsDisplay, sender, receiver } = this.state;
+        console.log('receiver');
+        console.log(receiver);
         return (
             <div className="inbox-chat">
-                <h4 className="content-heading">Chat</h4>
                 <div className="inbox-chat__box">
                     <div className="inbox-chat__top wrapper-flex-spaced wrapper-flex-spaced--center">
                         <div></div>
                         <div>
-                            <h4 className="marg-e">{receiver && receiver.first_name}</h4>
+                            <h4 className="marg-e">
+                                {receiver &&
+                                    <Link to={`/profile/${receiver.id}`} target="_blank" className="inbox-link--invert link">
+                                        {receiver && receiver.first_name}
+                                    </Link>
+                                }
+                            </h4>
                         </div>
                         <div></div>
                     </div>

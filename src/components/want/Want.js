@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { openDetailsModalIsExpanded, closeDetailsModalIsExpanded, openAcceptModalIsExpanded, setModalWantId, setDetailsModalType } from '../../actions/modal';
-import { getProfile } from '../../services/api/profile';
 import { deleteWant } from '../../services/api/want';
 import { updateFeed } from '../../actions/feed';
 import { getFeed } from '../../services/api/feed';

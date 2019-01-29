@@ -35,7 +35,7 @@ export const ProfileReview = ({ review }) => {
                     />
                     <div className="wrapper-flex-spaced--flex1 marg-l-sm">
                         <h4 className="want-text marg-e">
-                            <Link to={`/profile/${review.user.id}`} target="_blank" className="link">
+                            <Link to={`/profile/${review.user.id}`} target="_blank" className="profile-review-link link">
                                 {review.user.first_name}
                             </Link>
                         </h4>
