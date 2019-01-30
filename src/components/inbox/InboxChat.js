@@ -44,7 +44,9 @@ export class InboxChat extends Component {
             }      
         });
 
-        const channel = pusher.subscribe('private-chat.1');
+        const { convoid } = this.props;
+
+        const channel = pusher.subscribe(`private-chat.${convoid}`);
         channel.bind("App\\Events\\MessageSentEvent", (data) => {
             console.log('channel.bind() new data: ');
             console.log(data);
@@ -58,8 +60,6 @@ export class InboxChat extends Component {
             console.log('pusher:subscription_error details: ');
             console.log(status);
         });
-
-        const { convoid } = this.props;
 
         getMessages(convoid, (data) => {
             console.log('getMessages() data: ');

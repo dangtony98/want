@@ -49,10 +49,12 @@ export default class InboxPage extends Component {
                     <NavigationBar />
                     <div className="inbox-content">
                         <div className="inbox-content__left">
-                            <InboxPeople 
-                                convos={convos}
-                                handleInboxChat={this.handleInboxChat}
-                            />
+                            {convos.length != 0 &&
+                                <InboxPeople 
+                                    convos={convos}
+                                    handleInboxChat={this.handleInboxChat}
+                                />
+                            }
                         </div>
                         <div className="inbox-content__right">
                             <h4 className="content-heading">Chat</h4>
