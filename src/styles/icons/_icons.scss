@@ -114,3 +114,13 @@
     font-size: 2rem;
     transition: color 0.2s;
 }
+
+.icon-user-edit {
+    color: $color-grey-dark;
+    font-size: 2rem;
+    transition: color 0.2s;
+
+    &:hover {
+        color: $color-primary-0;
+    }
+}

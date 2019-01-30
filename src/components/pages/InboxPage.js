@@ -57,11 +57,13 @@ export default class InboxPage extends Component {
                             }
                         </div>
                         <div className="inbox-content__right">
-                            <h4 className="content-heading">Chat</h4>
                             {current_convo_id ? (
-                                <InboxChat 
-                                    convoid={current_convo_id}
-                                />
+                                <div>
+                                    <h4 className="content-heading">Chat</h4>
+                                        <InboxChat 
+                                            convoid={current_convo_id}
+                                        />
+                                </div>
                             ) : (
                                 <div>
                                     {/* PLACEHOLDER DIV */}

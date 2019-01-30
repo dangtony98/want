@@ -39,7 +39,8 @@ export class ProfileDropdown extends Component {
         const { PROFILE, FRIENDS, SETTINGS, HELP, LOGOUT } = profileDropdownOptions;
         switch (option) {
             case PROFILE:
-                this.props.history.push('/home');
+                const adminId = JSON.parse(localStorage.getItem('user')).id;
+                this.props.history.push(`/profile/${adminId}`);
                 break;
             case FRIENDS:
                 this.props.history.push('/home');

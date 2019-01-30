@@ -1,8 +1,10 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { IMAGE_URL } from '../../services/variables/variables';
 
 const ProfileSummary = ({ summary }) => {
+    const adminId = JSON.parse(localStorage.getItem('user')).id;
     const applyCharacterLimit = (description, limit) => (`${description.substring(0, limit)}${description.length > limit ? '...' : ''}`);
     return (
         <div className="profile-summary">
@@ -13,7 +15,14 @@ const ProfileSummary = ({ summary }) => {
                     className="profile-summary__photo"
                 />
                 <div className="profile-summary__box">
-                    <h2 className="profile-text">{summary.first_name}</h2>
+                    <div className="wrapper-flex-spaced wrapper-flex-spaced--center">
+                        <h2 className="profile-text">{summary.first_name}</h2>
+                        {adminId == summary.id &&
+                            <Link to="/settings" className="link">
+                                <i className="icon-user-edit fas fa-user-edit"></i>
+                            </Link>
+                        }
+                    </div>
                     <h4 className="profile-text marg-b-sm">{summary.tag_line}</h4>
                     {summary.description && 
                         <div>
