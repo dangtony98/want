@@ -15,24 +15,29 @@ export default class ProfileReviews extends Component {
         this.handlePagination = this.handlePagination.bind(this);
 
         this.state = {
-            page: null,
+            current_page: null,
             reviews: [],
             first_page_url: null,
             next_page_url: null,
-            prev_page_url: null
+            prev_page_url: null,
+            total_reviews: null,
+            per_page: null
         }
     }
 
     componentDidMount() {
-        const { data, current_page, first_page_url, next_page_url, prev_page_url } = this.props.reviews;
+        const { data, current_page, first_page_url, next_page_url, prev_page_url, per_page } = this.props.reviews;
+        const { statistics } = this.props;
 
         this.setState({
             ...this.state,
-            page: current_page,
+            current_page: current_page,
             reviews: data,
             first_page_url: first_page_url,
             next_page_url: next_page_url,
-            prev_page_url: prev_page_url
+            prev_page_url: prev_page_url,
+            total_reviews: statistics.total_reviews,
+            per_page: per_page
         });
     }
 
@@ -40,10 +45,10 @@ export default class ProfileReviews extends Component {
         const { next_page_url, prev_page_url } = this.state;
         const { PREV_PAGE, NEXT_PAGE } = paginationOptions;
         if (paginationOption == PREV_PAGE) {
-            // SEND POST REQUEST TO DECREMENT PAGE
             getReviews(prev_page_url, (response) => {
                 this.setState(() => ({
-                    page: response.data.review.current_page,
+                    ...this.state,
+                    current_page: response.data.review.current_page,
                     reviews: response.data.review.data,
                     first_page_url: response.data.review.first_page_url,
                     next_page_url: response.data.review.next_page_url,
@@ -53,7 +58,8 @@ export default class ProfileReviews extends Component {
         } else if (paginationOption == NEXT_PAGE) {
             getReviews(next_page_url, (response) => {
                 this.setState(() => ({
-                    page: response.data.review.current_page,
+                    ...this.state,
+                    current_page: response.data.review.current_page,
                     reviews: response.data.review.data,
                     first_page_url: response.data.review.first_page_url,
                     next_page_url: response.data.review.next_page_url,
@@ -64,11 +70,11 @@ export default class ProfileReviews extends Component {
     }
 
     render() {
-        const { page, reviews, prev_page_url, next_page_url, } = this.state;
+        const { current_page, reviews, prev_page_url, next_page_url, total_reviews, per_page } = this.state;
         const { PREV_PAGE, NEXT_PAGE } = paginationOptions;
         return (
             <div className="profile-reviews">
-                <h4 className="content-heading">Reviews</h4>
+                <h4 className="content-heading">{`Reviews (Page ${current_page} of ${Math.ceil(total_reviews / per_page)})`}</h4>
                 {reviews.length > 0 ? (
                     <div>
                         <div className="profile-reviews__box">
@@ -88,7 +94,7 @@ export default class ProfileReviews extends Component {
                                         <button
                                             onClick={() => this.handlePagination(PREV_PAGE)} 
                                             className="button-simple"
-                                        >Page {page - 1}</button>
+                                        >Page {current_page - 1}</button>
                                     }
                                 </div>
                                 <div>
@@ -96,7 +102,7 @@ export default class ProfileReviews extends Component {
                                         <button
                                             onClick={() => this.handlePagination(NEXT_PAGE)} 
                                             className="button-simple"
-                                        >Page {page + 1}</button>
+                                        >Page {current_page + 1}</button>
                                     }
                                 </div>
                             </div>

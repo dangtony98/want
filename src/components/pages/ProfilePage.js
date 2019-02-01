@@ -39,7 +39,10 @@ export class ProfilePage extends Component {
                         rating={data.user[0].rating.current_rating} 
                         statistics={data.stats} 
                     />
-                    <ProfileReviews reviews={data.review} />
+                    <ProfileReviews 
+                        reviews={data.review} 
+                        statistics={data.stats}
+                    />
                 </div>
                 <Footer />
             </div>
