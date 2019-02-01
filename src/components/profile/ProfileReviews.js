@@ -74,7 +74,7 @@ export default class ProfileReviews extends Component {
         const { PREV_PAGE, NEXT_PAGE } = paginationOptions;
         return (
             <div className="profile-reviews">
-                <h4 className="content-heading">{`Reviews (Page ${current_page} of ${Math.ceil(total_reviews / per_page)})`}</h4>
+                <h4 className="content-heading">{Math.ceil(total_reviews / per_page) != 0 ? `Reviews — Page ${current_page} of ${Math.ceil(total_reviews / per_page)}` : 'Reviews'}</h4>
                 {reviews.length > 0 ? (
                     <div>
                         <div className="profile-reviews__box">
@@ -120,5 +120,6 @@ export default class ProfileReviews extends Component {
 }
 
 ProfileReviews.propTypes = {
-    reviews: PropTypes.array
+    reviews: PropTypes.array,
+    statistics: PropTypes.object
 }
