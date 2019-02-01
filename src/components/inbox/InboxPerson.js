@@ -6,6 +6,8 @@ import PropTypes from 'prop-types';
 export default class InboxPerson extends Component {
     constructor(props) {
         super(props);
+
+        this.onInboxPersonPressed = this.onInboxPersonPressed.bind(this);
         
         this.state = {
             receiver: null,
@@ -26,12 +28,19 @@ export default class InboxPerson extends Component {
         });
     }
 
+    onInboxPersonPressed() {
+
+    }
+
     render() {
         console.log('InboxPerson render: ');
         console.log(this.state);
         const { receiver } = this.state;
         return receiver ? (
-            <div className="inbox-person">
+            <div 
+                className="inbox-person"
+                onClick={this.onInboxPersonPressed}
+            >
                 <div className="wrapper-flex wrapper-flex--center">
                     <Link to={`/profile/${receiver.id}`} target="_blank" className="link">
                         <img 
