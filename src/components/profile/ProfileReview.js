@@ -5,9 +5,6 @@ import { IMAGE_URL } from '../../services/variables/variables';
 import PropTypes from 'prop-types';
 
 export const ProfileReview = ({ review }) => {
-    console.log('review');
-    console.log(review);
-
     const renderRating = (rating) => {
         let ratingArr = [];
         for (let i = 0; i < 5; i++) {

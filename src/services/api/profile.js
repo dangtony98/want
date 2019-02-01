@@ -28,11 +28,25 @@ const getProfile = (id, callback) => {
 // GETREVIEWS() — GET
 
 // GETS A SET OF REVIEWS GIVEN A REQUESTED PAGE
-// PAGE: THE PAGE TO RETRIEVE
+// URL: THE URL TO GET A SET OF REVIEWS
 // CALLBACK: THE SETSTATE CALLBACK TO ENABLE COMPONENT RERENDERING
 
-const getReviews = (page, callback) => {
-    callback();
+const getReviews = (url, callback) => {
+    axios.get(url, 
+    {
+        headers: { 
+            Accept: 'application/json', 
+            Authorization: `Bearer ${localStorage.getItem('token')}` 
+        }
+    })
+    .then((response) => {
+        // GET PROFILE SUCCESSFUL
+        callback(response);
+    })
+    .catch((error) => {
+        console.log('Error: ' + error);
+        // GET PROFILE UNSUCCESSFUL
+    });
 }
 
 export { getProfile, getReviews };

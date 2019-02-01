@@ -8,7 +8,8 @@ export default class InboxPerson extends Component {
         super(props);
         
         this.state = {
-            receiver: null
+            receiver: null,
+            want: null
         }
     }
 
