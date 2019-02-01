@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { IMAGE_URL } from '../../services/variables/variables';
 import moment from 'moment';
 import PropTypes from 'prop-types';
@@ -67,11 +68,13 @@ export default class InboxChatList extends Component {
                                 }
                             >
                                 {(message.user_id != sender.id && (messages[index + 1] ? message.user_id != messages[index + 1].user_id : true)) ? 
-                                    <img 
-                                        src={`${IMAGE_URL}/${receiver.avatar}`} 
-                                        className="inbox-message__image marg-r-sm"
-                                        style={inboxChatListStyles.receiver.image}
-                                    /> : <div className="inbox-message__image-placeholder marg-r-sm"></div>
+                                    <Link to={`/profile/${receiver.id}`} target="_blank" className="link">
+                                        <img 
+                                            src={`${IMAGE_URL}/${receiver.avatar}`} 
+                                            className="inbox-message__image marg-r-sm"
+                                            style={inboxChatListStyles.receiver.image}
+                                        />
+                                    </Link> : <div className="inbox-message__image-placeholder marg-r-sm"></div>
                                 }
                                 <div>
                                     <div 
@@ -86,11 +89,13 @@ export default class InboxChatList extends Component {
                                     </div>
                                 </div>
                                 {(message.user_id == sender.id && (messages[index + 1] ? message.user_id != messages[index + 1].user_id : true)) ? 
-                                    <img 
-                                        src={`${IMAGE_URL}/${sender.avatar}`} 
-                                        className="inbox-message__image marg-l-sm"
-                                        style={inboxChatListStyles.sender.image}
-                                    /> : <div className="inbox-message__image-placeholder marg-l-sm"></div>
+                                    <Link to={`/profile/${sender.id}`} target="_blank" className="link">
+                                        <img 
+                                            src={`${IMAGE_URL}/${sender.avatar}`} 
+                                            className="inbox-message__image marg-l-sm"
+                                            style={inboxChatListStyles.sender.image}
+                                        />
+                                    </Link> : <div className="inbox-message__image-placeholder marg-l-sm"></div>
                                 }      
                             </div>
                             {(messages[index + 1] ? message.user_id != messages[index + 1].user_id : true) &&
