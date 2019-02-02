@@ -10,31 +10,29 @@ export default class InboxPerson extends Component {
         this.onInboxPersonPressed = this.onInboxPersonPressed.bind(this);
         
         this.state = {
+            convo_id: null,
             receiver: null,
             want: null
         }
     }
 
     componentDidMount() {
-        console.log('Inside InboxPerson props: ');
-        console.log(this.props);
-
-        const { wanter, fulfiller } = this.props;
+        const { id, wanter, fulfiller } = this.props;
         const adminIsSender = JSON.parse(localStorage.getItem('user')).id == wanter.id;
 
         this.setState({
             ...this.state,
+            convo_id: id,
             receiver: adminIsSender ? fulfiller : wanter
         });
     }
 
     onInboxPersonPressed() {
-
+        const { convo_id } = this.state;
+        this.props.handleInboxChat(convo_id);
     }
 
     render() {
-        console.log('InboxPerson render: ');
-        console.log(this.state);
         const { receiver } = this.state;
         return receiver ? (
             <div 

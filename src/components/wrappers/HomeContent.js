@@ -12,6 +12,8 @@ import { getFeed } from '../../services/api/feed';
 import PropTypes from 'prop-types';
 import axios from 'axios';
 
+import { BarLoader } from 'react-spinners';
+
 export class HomeContent extends Component {
     constructor(props) {
         super(props);
@@ -77,6 +79,7 @@ export class HomeContent extends Component {
                 />
             )
         });
+
         return wants ? (
             <div className="home-content">
                 <div className="home-content__left">
@@ -86,6 +89,7 @@ export class HomeContent extends Component {
                     <h4 className="content-heading">Wants around You</h4>
                     <Filter />
                     <Sort />
+                    
                     <InfiniteScroll
                         pageStart={0}
                         loadMore={this.handleLoadWants}

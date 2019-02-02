@@ -8,7 +8,7 @@ import { getMessages, sendMessage } from '../../services/api/inbox';
 import { WANT_URL } from '../../services/variables/variables';
 import PropTypes from 'prop-types';
  
-export class InboxChat extends Component {
+export default class InboxChat extends Component {
     constructor(props) {
         super(props);
 
@@ -30,6 +30,7 @@ export class InboxChat extends Component {
     }
 
     componentDidMount() {
+        console.log('InboxChat componentDidMount()');
         Pusher.logToConsole = true;
 
         const pusher = new Pusher('78565ef6078f239cd16c', {
@@ -45,6 +46,7 @@ export class InboxChat extends Component {
         });
 
         const { convoid } = this.props;
+        console.log(`convoid: ${convoid}`);
 
         const channel = pusher.subscribe(`private-chat.${convoid}`);
         channel.bind("App\\Events\\MessageSentEvent", (data) => {
@@ -74,6 +76,55 @@ export class InboxChat extends Component {
             });
         });
     }
+
+    // componentWillReceiveProps() {
+    //     const { convoid } = this.props;
+
+    //     console.log('InboxChat componentWillReceiveProps with props: ');
+    //     console.log(this.props);
+
+    //     const pusher = new Pusher('78565ef6078f239cd16c', {
+    //         cluster: 'us2',
+    //         encrypted: true,
+    //         authEndpoint: `${WANT_URL}/broadcasting/auth`,
+    //         auth: {
+    //             headers: { 
+    //                 Accept: 'application/json', 
+    //                 Authorization: `Bearer ${localStorage.getItem('token')}` 
+    //             }
+    //         }      
+    //     });
+
+    //     const channel = pusher.subscribe(`private-chat.${convoid}`);
+    //     channel.bind("App\\Events\\MessageSentEvent", (data) => {
+    //         console.log('channel.bind() new data: ');
+    //         console.log(data);
+    //         this.setState({
+    //             ...this.state,
+    //             messages: [...this.state.messages, data.message]
+    //         })
+    //     });
+
+    //     channel.bind('pusher:subscription_error', function(status) {
+    //         console.log('pusher:subscription_error details: ');
+    //         console.log(status);
+    //     });
+
+    //     getMessages(convoid, (data) => {
+    //         console.log('getMessagesx() data: ');
+    //         console.log(data);
+    //         const adminIsSender = JSON.parse(localStorage.getItem('user')).id == data.wanter.id;
+    //         this.setState({
+    //             ...this.state,
+    //             convo_id: data.id,
+    //             messages: data.messages,
+    //             sender: adminIsSender ? data.wanter : data.fulfiller,
+    //             receiver: adminIsSender ? data.fulfiller : data.wanter
+    //         });
+
+    //         console.log('getMessages in componentWillReceiveProps');
+    //     });
+    // }
 
     handleTextChange(e) {
         this.setState({
@@ -150,8 +201,6 @@ export class InboxChat extends Component {
 
     render() {
         const { messages, chatInput, imageAttachmentsDisplay, sender, receiver } = this.state;
-        console.log('receiver');
-        console.log(receiver);
         return (
             <div className="inbox-chat">
                 <div className="inbox-chat__box">
@@ -223,9 +272,3 @@ export class InboxChat extends Component {
 InboxChat.propTypes = {
     email: PropTypes.string
 }
-
-const mapStateToProps = ({ admin }) => ({
-    id: admin.id
-});
-
-export default connect(mapStateToProps)(InboxChat);

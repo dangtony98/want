@@ -41,6 +41,9 @@ const getMessages = (convo_id, callback) => {
     })
     .then((response) => {
         // GET MESSAGES SUCCESSFUL
+        console.log(`getMessages convo_id: ${convo_id}`);
+        console.log('getMessages response: ');
+        console.log(response);
         callback(response.data);
     })
     .catch((error) => {

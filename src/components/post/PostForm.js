@@ -3,13 +3,14 @@ import { connect } from 'react-redux';
 import { Collapse } from 'react-collapse';
 import { animateScroll as scroll } from 'react-scroll';
 import Select from 'react-select';
-import PropTypes from 'prop-types';
+import { ClipLoader } from 'react-spinners';
 import { openPostIsExpanded } from '../../actions/layout';
 import { post } from '../../services/api/post';
 import { updateFeed } from '../../actions/feed';
 import { getFeed } from '../../services/api/feed';
 import { getCategories } from '../../services/api/filter';
 import numeral from 'numeral';
+import PropTypes from 'prop-types';
 
 const select = {
     styles: {
@@ -55,7 +56,8 @@ class PostForm extends Component {
                 textarea: {
                     charactersRemaining: null
                 }
-            }
+            },
+            loading: false
         }
     }
 
@@ -77,23 +79,31 @@ class PostForm extends Component {
     onFormSubmit(e) {
         e.preventDefault();
         const { title, cost, description, category } = this.state.chosen;
+
+        this.setState({
+            ...this.state,
+            loading: true
+        });
+
         if (title != '' && cost != '' && description != '' && category != null) {
             post({
                     ...this.state.chosen,
                     cost: numeral(numeral(`$${this.state.chosen.cost}`).format('$0,0.00'))._value * 100,
                     category: this.state.chosen.category.value
                 }, () => {
-                    this.setState({
-                        ...this.state,
-                        chosen: {
-                            title: '',
-                            cost: '',
-                            description: '',
-                            category: null
-                        }
-                    });
                     scroll.scrollToTop();
-                    getFeed(this.props);
+                    getFeed(this.props, () => {
+                        this.setState({
+                            ...this.state,
+                            chosen: {
+                                title: '',
+                                cost: '',
+                                description: '',
+                                category: null
+                            },
+                            loading: false
+                        });
+                    });
                 });
         }
     }
@@ -162,7 +172,7 @@ class PostForm extends Component {
     render() {
         const { postIsExpanded } = this.props;
         const { title, cost, description, category } = this.state.chosen;
-        const { options } = this.state;
+        const { options, loading } = this.state;
         return (
             <form onSubmit={this.onFormSubmit}>
                 <input
@@ -216,10 +226,21 @@ class PostForm extends Component {
                         max="100"
                         required
                     />
-                    <button
-                        type="submit"
-                        className="button-shaded marg-l-sm"
-                    >Post</button>  
+                    {loading ? (
+                        <div className="marg-l-sm">
+                            <ClipLoader
+                                sizeUnit={"px"}
+                                size={40}
+                                color={'rgb(88, 42, 114)'}
+                                loading={loading}
+                            />
+                        </div>
+                    ) : (
+                        <button
+                            type="submit"
+                            className="button-shaded marg-l-sm"
+                        >Post</button>  
+                    )}
                 </div>
             </form>
         );

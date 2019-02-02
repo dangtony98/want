@@ -12,13 +12,13 @@ export default class InboxPeople extends Component {
     }
 
     componentDidMount() {
-        console.log('InboxPeople componentDidMount()');
-        console.log(this.props.convos);
+        // console.log('InboxPeople componentDidMount()');
+        // console.log(this.props.convos);
     }
 
     render() {
         const { convos } = this.props;
-        console.log(this.props);
+        // console.log(this.props);
         return (
             <div className="inbox-people">
                 <h4 className="content-heading">People</h4>
@@ -26,6 +26,7 @@ export default class InboxPeople extends Component {
                     {convos.map((convo) => (
                         <InboxPerson 
                             {...convo}
+                            handleInboxChat={this.props.handleInboxChat}
                             key={convo.id}
                         />
                     ))}
