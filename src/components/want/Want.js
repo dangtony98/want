@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { openDetailsModalIsExpanded, closeDetailsModalIsExpanded, openAcceptModalIsExpanded, setModalWantId, setDetailsModalType } from '../../actions/modal';
-import { deleteWant } from '../../services/api/want';
+import { getWant, deleteWant } from '../../services/api/want';
 import { updateFeed } from '../../actions/feed';
 import { getFeed } from '../../services/api/feed';
 import PropTypes from 'prop-types';
@@ -53,9 +53,11 @@ export class Want extends Component {
     }
 
     onDetailsBtnPressed() {
-        this.props.setModalWantId(this.props.wantId);
-        this.props.setDetailsModalType('STANDARD');
-        this.props.openDetailsModalIsExpanded();
+        getWant(this.props.id, () => {
+            this.props.setModalWantId(this.props.id);
+            this.props.setDetailsModalType('STANDARD');
+            this.props.openDetailsModalIsExpanded();
+        });
     }
 
     onShareBtnPressed() {

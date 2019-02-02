@@ -3,12 +3,12 @@
     top: 50%;
     left: 50%;
     height: auto;
-    width: 73rem;
+    width: 62rem;
     transform: translate(-50%, -50%);
     border-radius: 0.5rem;
     background-color: $color-white;
     box-shadow: $box-shadow;
     outline: none;
     z-index: 2100;
-    animation: fadeInCenterFixed 0.5s;
+    animation: fadeInCenterFixed 1s;
 }

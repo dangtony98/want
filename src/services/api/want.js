@@ -1,6 +1,29 @@
 import axios from 'axios';
 import { WANT_URL } from '../variables/variables';
 
+// GETWANT() — GET
+
+// GETS A GIVEN WANT
+// ID: THE ID OF THE GIVEN WANT
+
+const getWant = (id, callback) => {
+    axios.get(`${WANT_URL}/api/want/${id}`,
+        { 
+            headers: { 
+                Accept: 'application/json', 
+                Authorization: `Bearer ${localStorage.getItem('token')}` 
+            }
+        })
+        .then((response) => {
+            // GET WANT SUCCESSFUL
+            callback(response);
+        })
+        .catch((error) => {
+            // GET WANT UNSUCCESSFUL
+            console.log('Error: ' + error);
+        });
+}
+
 // DELETEWANT() — DELETE
 
 // DELETES THE GIVEN WANT
@@ -16,7 +39,6 @@ const deleteWant = (id, callback) => {
         })
         .then((response) => {
             // DELETE WANT SUCCESSFUL
-            console.log('deleteWant() response: ');
             console.log(response);
             callback();
         })
@@ -26,4 +48,4 @@ const deleteWant = (id, callback) => {
         });
 }
 
-export { deleteWant };
+export { getWant, deleteWant };

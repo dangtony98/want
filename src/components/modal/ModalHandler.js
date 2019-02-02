@@ -11,11 +11,13 @@ const ModalHandler = ({ acceptModalIsExpanded, detailsModalIsExpanded, settingsP
             isOpen={acceptModalIsExpanded}
             closeTimeoutMS={150}
         />
-        <DetailsModal 
-            isOpen={detailsModalIsExpanded}
-            detailsModalType={detailsModalType}
-            closeTimeoutMS={150}
-        />
+        {detailsModalIsExpanded &&
+            <DetailsModal 
+                isOpen={detailsModalIsExpanded}
+                detailsModalType={detailsModalType}
+                closeTimeoutMS={150}
+            />
+        }
         <SettingsPaymentModal
             isOpen={settingsPaymentModalIsExpanded}
             closeTimeoutMS={150}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactModal from 'react-modal';
 import { closeDetailsModalIsExpanded } from '../../actions/modal';
+import { getWant } from '../../services/api/want';
 import Want from '../want/Want';
 import PropTypes from 'prop-types';
 
@@ -11,15 +12,42 @@ export class DetailsModal extends Component {
 
         this.retrieveWant = this.retrieveWant.bind(this);
         this.onOutsideModalPressed = this.onOutsideModalPressed.bind(this);
+
+        this.state = {
+            want: null
+        }
+    }
+
+    componentDidMount() {
+        const { id, detailsModalType } = this.props;
+        this.retrieveWant(id, detailsModalType);
     }
 
     componentWillMount() {
         ReactModal.setAppElement('body');
     }
 
-    retrieveWant(wantId, detailsModalType) {
-        // SEND GET REQUEST TO RETRIEVE WANT INFORMATION
-        // IF SUCCESSFUL RESPONSE, RETURN WANT COMPONENT
+    retrieveWant(id, detailsModalType) {
+        getWant(id, (response) => {
+            const props = {
+                detailsModalType: detailsModalType,
+                id: response.data.want.id,
+                user: response.data.want.user,
+                created_at: response.data.want.created_at,
+                title: response.data.want.title,
+                cost: response.data.want.cost,
+                description: response.data.want.description
+            }
+
+            this.setState({
+                ...this.state,
+                want: (
+                    <Want 
+                        {...props}
+                    />
+                )
+            });
+        });
     }
 
     onOutsideModalPressed() {
@@ -27,9 +55,8 @@ export class DetailsModal extends Component {
     }
 
     render() {
-        const { isOpen, modalWantId, wants, detailsModalType } = this.props;
-        // console.log('modalWantId: ' + modalWantId);
-        // console.log('detailsModalType: ' + detailsModalType);
+        const { isOpen } = this.props;
+        const { want } = this.state;
         return (
             <ReactModal 
                 isOpen={isOpen}
@@ -37,21 +64,7 @@ export class DetailsModal extends Component {
                 overlayClassName="modal-overlay"
                 onRequestClose={this.onOutsideModalPressed}
             >
-            {/* TRIGGER retrieveWant() HERE */}
-                {/* {wants.map((want) => {
-                    return want.wantId == modalWantId &&
-                        <Want
-                            detailsModalType={detailsModalType}
-                            wantId={want.wantId}
-                            firstName={want.firstName}
-                            photo={want.photo}
-                            timestamp={want.timestamp}
-                            title={want.title}
-                            pay={want.pay}
-                            description={want.description}
-                            key={want.wantId}
-                        />
-                })} */}
+                { want && want}
             </ReactModal>
         );
     }
@@ -59,14 +72,13 @@ export class DetailsModal extends Component {
 
 DetailsModal.propTypes = {
     isOpen: PropTypes.bool.isRequired,
-    modalWantId: PropTypes.string,
-    wants: PropTypes.array,
+    detailsModalType: PropTypes.string,
+    id: PropTypes.number,
     closeDetailsModalIsExpanded: PropTypes.func.isRequired
 }
 
-const mapStateToProps = ({ modal, feed }) => ({
-    modalWantId: modal.modalWantId,
-    wants: feed.wants
+const mapStateToProps = ({ modal }) => ({
+    id: modal.modalWantId
 });
 
 const mapDispatchToProps = (dispatch) => ({
