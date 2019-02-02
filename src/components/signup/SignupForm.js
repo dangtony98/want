@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
+import { ClipLoader } from 'react-spinners';
 import { register } from '../../services/api/authentication';
 import PropTypes from 'prop-types';
 
@@ -15,16 +16,32 @@ export class SignupForm extends Component {
             last_name: '',
             email: '',
             password: '',
-            repassword: ''
+            repassword: '',
+            loading: false
         }
     }
 
     onFormSubmit(e) {
         e.preventDefault();
         const { first_name, last_name, email, password, repassword } = this.state;
+
+        this.setState({
+            ...this.state,
+            loading: true
+        });
+
         if (first_name != '' && last_name != '' && email != '' && password != '' && repassword != '') {
             if (password == repassword) {
-                register(this.state, this.props);
+                register({
+                    first_name: first_name,
+                    last_name: last_name,
+                    email: email,
+                    password: password
+                }, this.props, () => {
+                    this.setState({
+                        loading: false
+                    });
+                });
             } else {
                 // DISPLAY PASSWORD DOESN'T MATCH REPASSWORD ERROR
             }
@@ -38,7 +55,7 @@ export class SignupForm extends Component {
     }
 
     render() {
-        const { first_name, last_name, email, password, repassword } = this.state;
+        const { first_name, last_name, email, password, repassword, loading } = this.state;
         return (
             <form onSubmit={this.onFormSubmit}>
                 <input
@@ -91,7 +108,18 @@ export class SignupForm extends Component {
                     className="login-input input-text marg-b-sm"
                     required
                 />
-                <button className="signup-button button-shaded">Create account</button>
+                {loading ? (
+                    <div className="text-align-c">
+                        <ClipLoader
+                            sizeUnit={"px"}
+                            size={40}
+                            color={'rgb(88, 42, 114)'}
+                            loading={true}
+                        />
+                    </div>
+                ) : (
+                    <button className="signup-button button-shaded">Create account</button>
+                )}
             </form>
         );
     }

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router';
+import { ClipLoader } from 'react-spinners';
 import { login } from '../../services/api/authentication';
 import PropTypes from 'prop-types';
 
@@ -12,15 +13,30 @@ export class LoginForm extends Component {
 
         this.state = {
             email: '',
-            password: ''
+            password: '',
+            loading: false
         }
     }
 
     onFormSubmit(e) {
         e.preventDefault();
+
+        this.setState({
+            ...this.state,
+            loading: true
+        });
+
         const { email, password } = this.state;        
         if (email != '' && password != '') {
-            login(this.state, this.props);
+            login({ 
+                email: email, 
+                password: password 
+            }, this.props, () => {
+                this.setState({
+                    ...this.state,
+                    loading: false
+                })
+            });
         }
     }
 
@@ -31,7 +47,7 @@ export class LoginForm extends Component {
     }
 
     render() {
-        const { email, password } = this.state;
+        const { email, password, loading } = this.state;
         return (
             <form onSubmit={this.onFormSubmit}>
                 <input
@@ -54,7 +70,18 @@ export class LoginForm extends Component {
                     className="input-text settings-input marg-b-sm"
                     required
                 />
-                <button className="login-button button-shaded">Login</button>
+                {loading ? (
+                    <div>
+                        <ClipLoader
+                            sizeUnit={"px"}
+                            size={40}
+                            color={'rgb(88, 42, 114)'}
+                            loading={loading}
+                        />
+                    </div>
+                ) : (
+                    <button className="login-button button-shaded">Login</button>
+                )}
             </form>
         );
     }

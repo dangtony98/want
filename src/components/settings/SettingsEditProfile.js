@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { ClipLoader } from 'react-spinners';
 import { uploadAvatar, getAvatar } from '../../services/api/settings';
 import { updateProfile } from '../../services/api/settings';
 import { setPhoto, setUser } from '../../actions/admin';
@@ -19,7 +20,8 @@ export class SettingsEditProfile extends Component {
             email: this.props.email,
             tag_line: this.props.tag_line,
             description: this.props.description,
-            photo: null
+            photo: null,
+            loading: false
         }
     }
 
@@ -27,6 +29,7 @@ export class SettingsEditProfile extends Component {
         window.setTimeout(() => {
             const { first_name, last_name, email, tag_line, description, photo } = this.props;
             this.setState({
+                ...this.state,
                 first_name: first_name,
                 last_name: last_name,
                 email: email,
@@ -62,6 +65,12 @@ export class SettingsEditProfile extends Component {
     onFormSubmit(e) {
         e.preventDefault();
         const { first_name, last_name, email, tag_line, description } = this.state;
+
+        this.setState({
+            ...this.state,
+            loading: true
+        });
+
         updateProfile({
             first_name: first_name,
             last_name: last_name,
@@ -69,14 +78,17 @@ export class SettingsEditProfile extends Component {
             tag_line: tag_line,
             description: description
         }, () => {
-            console.log('succeededx');
+            this.setState({
+                ...this.state,
+                loading: false
+            });
             getUser(this.props);
         });
     }
     
     render() {
         const { photo } = this.props;
-        const { first_name, last_name, email, tag_line, description } = this.state;
+        const { first_name, last_name, email, tag_line, description, loading } = this.state;
 
         return (
             <div className="settings-edit-profile">
@@ -165,7 +177,18 @@ export class SettingsEditProfile extends Component {
                     </div>
                     <div className="settings-update wrapper-flex-spaced">
                         <div></div>
-                        <button type="submit" className="button-shaded">Update</button>
+                        {loading ? (
+                            <div className="marg-r-sm">
+                                <ClipLoader
+                                    sizeUnit={"px"}
+                                    size={40}
+                                    color={'rgb(88, 42, 114)'}
+                                    loading={true}
+                                />
+                            </div>
+                        ) : (
+                            <button type="submit" className="button-shaded">Update</button>
+                        )}
                     </div>
                 </form>
             </div>

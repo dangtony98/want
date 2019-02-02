@@ -31,16 +31,19 @@ const checkAuthentication = (callback, callback2) => {
 // POSTS EMAIL AND PASSWORD TO THE SERVER FOR AUTHENTICATION
 // STATE: CONTAINS EMAIL AND PASSWORD
 // PROPS: CONTAINS PUSH() FUNC
+// CALLBACK: CALLBACK TO EXECUTE UPON LOGGING IN
 
-const login = (state, props) => {
+const login = (state, props, callback, callback2) => {
     axios.post(`${WANT_URL}/api/login`, state)
         .then((response) => {
             // SEND POST REQUEST FOR AUTHENTICATION
             localStorage.setItem('token', response.data.token);
             props.history.push("/home");
+            callback();
         })
         .catch((error) => {
             console.log('Error: ' + error);
+            callback();
         });
 }
 
@@ -76,16 +79,19 @@ const logout = (props) => {
 // POSTS FIRST NAME, LAST NAME, EMAIL, AND PASSWORD TO TEH SERVER FOR REGISTRATION
 // STATE: CONTAINS FIRST NAME, LAST NAME, EMAIL, PASSWORD, AND REPASSWORD
 // PROPS: CONTAINS PUSH() FUNC
+// CALLBACK: CALLBACK TO EXECUTE UPON REGISTRATION
 
-const register = (state, props) => {
+const register = (state, props, callback) => {
     axios.post(`${WANT_URL}/api/register`, state)
         .then((response) => {
             // SEND POST REQUEST FOR REGISTRATION
             localStorage.setItem('token', response.data.token);
             props.history.push("/home");
+            callback();
         })
         .catch((error) => {
             console.log('Error: ' + error);
+            callback();
         });
 }
 
