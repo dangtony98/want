@@ -14,12 +14,10 @@ const ModalHandler = ({ settingsPaymentModalIsExpanded }) => (
 
 ModalHandler.propTypes = {
     settingsPaymentModalIsExpanded: PropTypes.bool.isRequired,
-    detailsModalType: PropTypes.string
 }
 
 const mapStateToProps = ({ modal }) => ({
-    settingsPaymentModalIsExpanded: modal.settingsPaymentModalIsExpanded,
-    detailsModalType: modal.detailsModalType
+    settingsPaymentModalIsExpanded: modal.settingsPaymentModalIsExpanded
 });
 
 export default connect(mapStateToProps)(ModalHandler);

@@ -1,6 +1,5 @@
 import React from 'react';
 import NavigationBar from '../navigation/NavigationBar';
-import ModalHandler from '../modal/ModalHandler';
 import Footer from '../footer/Footer';
 
 const AboutUsStyles = {
@@ -18,7 +17,6 @@ export default () => {
     window.scrollTo(0, 0);
     return (
         <div className="information-page">   
-            <ModalHandler />
             <NavigationBar />
             <div 
                 style={AboutUsStyles.jumbotron}

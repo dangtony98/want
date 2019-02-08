@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter, Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
-import { openDetailsModalIsExpanded, closeDetailsModalIsExpanded, openAcceptModalIsExpanded, setModalWantId, setDetailsModalType } from '../../actions/modal';
 import { getWant, deleteWant } from '../../services/api/want';
 import { updateFeed } from '../../actions/feed';
 import { getFeed } from '../../services/api/feed';
@@ -10,15 +9,6 @@ import PropTypes from 'prop-types';
 import { IMAGE_URL } from '../../services/variables/variables';
 import moment from 'moment';
 import numeral from 'numeral';
-
-const wantStyles = {
-    self: {
-        // border: '1px solid rgb(88, 42, 114)'
-    },
-    other: {
-        // border: '1px solid rgb(189,195,199)'
-    }
-}
 
 export class Want extends Component {
     constructor(props) {
@@ -29,7 +19,6 @@ export class Want extends Component {
         this.onCounterOfferBtnPressed = this.onCounterOfferBtnPressed.bind(this);
         this.onDetailsBtnPressed = this.onDetailsBtnPressed.bind(this);
         this.onShareBtnPressed = this.onShareBtnPressed.bind(this);
-        this.onCloseBtnPressed = this.onCloseBtnPressed.bind(this);
         this.applyCharacterLimit = this.applyCharacterLimit.bind(this);
 
         this.state = {
@@ -38,8 +27,7 @@ export class Want extends Component {
     }
 
     onAcceptBtnPressed() {
-        this.props.setModalWantId(this.props.wantId);
-        this.props.openAcceptModalIsExpanded();
+
     }
 
     onDeleteButtonPressed(id) {
@@ -54,9 +42,7 @@ export class Want extends Component {
 
     onDetailsBtnPressed() {
         getWant(this.props.id, () => {
-            this.props.setModalWantId(this.props.id);
-            this.props.setDetailsModalType('STANDARD');
-            this.props.openDetailsModalIsExpanded();
+
         });
     }
 
@@ -73,16 +59,12 @@ export class Want extends Component {
         }
     }
 
-    onCloseBtnPressed() {
-        this.props.closeDetailsModalIsExpanded();
-    }
-
     applyCharacterLimit(description, limit) {
         return `${description.substring(0, limit)}${description.length > limit ? '...' : ''}`;
     }
 
     render() {
-        const { detailsModalType, categories, category_id, cost, created_at, description, admin_id, title, user, id} = this.props;
+        const { categories, category_id, cost, created_at, description, admin_id, title, user, id} = this.props;
         const { copiedAnimation } = this.state;
         
         const fulfillerOptions = [{
@@ -101,8 +83,7 @@ export class Want extends Component {
         
         return (
             <div 
-                className={`want ${detailsModalType == 'NONE' && 'want--feed marg-t-sm'}`}
-                style={(detailsModalType == 'NONE' && admin_id == user.id) ? wantStyles.self : wantStyles.other}
+                className="want want--feed marg-t-sm"
             >
                 <div className="wrapper-flex-spaced wrapper-flex-spaced--top">
                     <div className="wrapper-flex wrapper-flex--center">
@@ -121,7 +102,6 @@ export class Want extends Component {
                             <h4 className="want-text marg-e">{`${moment(created_at).fromNow(true)} ago`}</h4>
                         </div>
                     </div>
-                    {detailsModalType == 'NONE' ? 
                         <div className="wrapper-flex wrapper-flex--center">
                             <div>
                                 {copiedAnimation && <div className="want-copied">Copied</div>}
@@ -133,55 +113,34 @@ export class Want extends Component {
                                 <i className="icon-share fas fa-share-alt"></i>
                             </button>
                         </div>
-                         :
-                        <button
-                            onClick={this.onCloseBtnPressed} 
-                            className="button-icon">
-                            <i className="icon-close fas fa-times"></i>
-                        </button>
-                    }
                 </div>
                 <h3 className="want-text marg-t-xs marg-b-xs">{title}</h3>
                 <h4 className="want__pay">{numeral(cost / 100).format('$0,0.00')}</h4>
-                {/* <h4 className="want-text marg-t-xs marg-b-xs">
-                    {categories.map((category) => (category.value == category_id ? category.label : ''))}
-                </h4>                 */}
                 <p className="want-text">
-                    {detailsModalType == 'NONE' ? this.applyCharacterLimit(description, 200) : description}
+                    {this.applyCharacterLimit(description, 200)}
                 </p>
-                {(detailsModalType == 'NONE' || detailsModalType == 'STANDARD') && 
-                    <div className="wrapper-flex-spaced wrapper-flex-spaced--center">
-                        <div className="wrapper-flex">
-                            <button
-                                onClick={this.onAcceptBtnPressed} 
-                                className="button-simple marg-t-sm"
-                            >{(detailsModalType == 'NONE' && admin_id == user.id) ? 'Edit' : 'Accept'}</button>
-                            {(detailsModalType == 'NONE' && admin_id == user.id) ? 
-                                (<button
-                                    onClick={() => this.onDeleteButtonPressed(id)} 
-                                    className="want__counter-button button-simple marg-t-sm"
-                                >Delete</button>) : 
-                                (<button
-                                onClick={this.onCounterOfferBtnPressed} 
+                <div className="wrapper-flex-spaced wrapper-flex-spaced--center">
+                    <div className="wrapper-flex">
+                        <button
+                            onClick={this.onAcceptBtnPressed} 
+                            className="button-simple marg-t-sm"
+                        >{(admin_id == user.id) ? 'Edit' : 'Accept'}</button>
+                        {(admin_id == user.id) ? 
+                            (<button
+                                onClick={() => this.onDeleteButtonPressed(id)} 
                                 className="want__counter-button button-simple marg-t-sm"
-                                >Counteroffer</button>)
-                            }
-                        </div>
-                        {detailsModalType == 'NONE' && 
-                            <button
-                                onClick={this.onDetailsBtnPressed} 
-                                className="want__accept-button button-simple marg-t-sm"
-                            >Details</button>
+                            >Delete</button>) : 
+                            (<button
+                            onClick={this.onCounterOfferBtnPressed} 
+                            className="want__counter-button button-simple marg-t-sm"
+                            >Counteroffer</button>)
                         }
                     </div>
-                }
-                {detailsModalType == 'BIDDING' &&
-                    fulfillerOptions.map((fulfiller) => (
-                        <div>
-                            {fulfiller.firstName}
-                        </div>
-                    ))
-                }
+                    <button
+                        onClick={this.onDetailsBtnPressed} 
+                        className="want__accept-button button-simple marg-t-sm"
+                    >Details</button>
+                </div>
             </div>
         );
     }
@@ -189,7 +148,6 @@ export class Want extends Component {
 
 Want.propTypes = {
     admin_id: PropTypes.number,
-    detailsModalType: PropTypes.string,
     category_id: PropTypes.number,
     cost: PropTypes.number,
     created_at: PropTypes.string,
@@ -197,11 +155,6 @@ Want.propTypes = {
     id: PropTypes.number,
     title: PropTypes.string,
     user: PropTypes.object,
-    openDetailsModalIsExpanded: PropTypes.func.isRequired,
-    closeDetailsModalIsExpanded: PropTypes.func.isRequired,
-    openAcceptModalIsExpanded: PropTypes.func.isRequired,
-    setModalWantId: PropTypes.func.isRequired,
-    setDetailsModalType: PropTypes.func.isRequired,
     updateFeed: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired
 }
@@ -212,11 +165,6 @@ const mapStateToProps = ({ admin, filter }) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    openDetailsModalIsExpanded: () => dispatch(openDetailsModalIsExpanded()),
-    closeDetailsModalIsExpanded: () => dispatch(closeDetailsModalIsExpanded()),
-    openAcceptModalIsExpanded: () => dispatch(openAcceptModalIsExpanded()),
-    setModalWantId: (wantId) => dispatch(setModalWantId(wantId)),
-    setDetailsModalType: (modalType) => dispatch(setDetailsModalType(modalType)),
     updateFeed: (feed) => dispatch(updateFeed(feed))
 });
 

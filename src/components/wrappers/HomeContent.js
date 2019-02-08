@@ -73,7 +73,6 @@ export class HomeContent extends Component {
         wants.map((want) => {
             wantArr.push(
                 <Want
-                    detailsModalType="NONE"
                     {...want}
                     key={want.id}
                 />

@@ -1,5 +1,4 @@
 import React from 'react';
-import ModalHandler from '../modal/ModalHandler';
 import NavigationBar from '../navigation/NavigationBar';
 import HomeContent from '../wrappers/HomeContent';
 
@@ -8,7 +7,6 @@ export default () => {
 
     return (
         <div className="home-page">
-            <ModalHandler />
             <NavigationBar />
             <HomeContent />
         </div>
