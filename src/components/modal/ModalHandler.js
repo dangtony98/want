@@ -1,23 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import AcceptModal from './AcceptModal';
-import DetailsModal from './DetailsModal';
 import SettingsPaymentModal from './SettingsPaymentModal';
 import PropTypes from 'prop-types';
 
 const ModalHandler = ({ acceptModalIsExpanded, detailsModalIsExpanded, settingsPaymentModalIsExpanded, detailsModalType }) => (
     <div>
-        <AcceptModal 
-            isOpen={acceptModalIsExpanded}
-            closeTimeoutMS={150}
-        />
-        {detailsModalIsExpanded &&
-            <DetailsModal 
-                isOpen={detailsModalIsExpanded}
-                detailsModalType={detailsModalType}
-                closeTimeoutMS={150}
-            />
-        }
         <SettingsPaymentModal
             isOpen={settingsPaymentModalIsExpanded}
             closeTimeoutMS={150}
