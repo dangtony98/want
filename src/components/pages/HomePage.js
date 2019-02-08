@@ -12,8 +12,6 @@ export default () => {
         <div className="home-page">
             <ModalHandler />
             <NavigationBar />
-            {/* <ChatWidget />
-            <ChatBox /> */}
             <HomeContent />
         </div>
     );

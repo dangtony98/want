@@ -17,11 +17,15 @@ const ProfileSummary = ({ summary }) => {
                 <div className="profile-summary__box">
                     <div className="wrapper-flex-spaced wrapper-flex-spaced--center">
                         <h2 className="profile-text">{summary.first_name}</h2>
-                        {adminId == summary.id &&
+                        {adminId == summary.id ? (
                             <Link to="/settings" className="link">
                                 <i className="icon-user-edit fas fa-user-edit"></i>
                             </Link>
-                        }
+                        ) : (
+                            <Link to="/inbox" className="link">
+                                <i className="icon-comment-alt fas fa-comment-alt"></i>                            
+                            </Link>
+                        )}
                     </div>
                     <h4 className="profile-text marg-b-sm">{summary.tag_line}</h4>
                     {summary.description && 

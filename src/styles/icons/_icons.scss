@@ -104,6 +104,16 @@
     transition: color 0.2s;
 }
 
+.icon-comment-alt {
+    color: $color-grey-dark;
+    font-size: 2rem;
+    transition: color 0.2s;
+
+    &:hover {
+        color: $color-primary-0;
+    }
+}
+
 .icon-credit-card {
     color: $color-grey-dark;
     font-size: 3rem;

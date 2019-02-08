@@ -27,22 +27,17 @@ export default class InboxPage extends Component {
             }, () => {
                 console.log('getConvos() successful with responsex: ');
                 console.log(response.data);
-                console.log(this.state.current_convo_id);
             });
         });
     }
 
 
     handleInboxChat(convoid) {
-        // console.log('handleInboxChat triggered with convoid ');
-        // console.log(convoid);
-
         this.setState({
             ...this.state,
             current_convo_id: convoid
         }, () => {
-            // console.log('new convo: ');
-            // console.log(this.state);
+            // EXECUTES AFTER THE CURRENT CONVO ID IS UPDATED
         });
     }
 
@@ -56,7 +51,7 @@ export default class InboxPage extends Component {
                         <div className="inbox-content__left">
                             {convos.length != 0 &&
                                 <InboxPeople 
-                                    convos={convos}
+                                    {...this.state}
                                     handleInboxChat={this.handleInboxChat}
                                 />
                             }
@@ -64,7 +59,6 @@ export default class InboxPage extends Component {
                         <div className="inbox-content__right">
                             {current_convo_id ? (
                                 <div>
-                                    {console.log(`change with ${current_convo_id}??`)}
                                     <h4 className="content-heading">Chat</h4>
                                         <InboxChat 
                                             convoid={current_convo_id}

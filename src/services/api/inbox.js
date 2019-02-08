@@ -23,6 +23,31 @@ const getConvos = (callback) => {
     });
 }
 
+// CREATECONVO() — POST
+
+// CREATES A NEW CONNVERSATION BETWEEN A GIVEN WANTER AND A GIVEN FULFILLER WITH AN OPTIONAL WANT
+// CONTENT: CONTAINS  
+
+const createConvo = (content) => {
+    axios.post(`${WANT_URL}/api/conversation`, {
+        ...content
+    },
+    { 
+        headers: {
+            Accept: 'application/json', 
+            Authorization: `Bearer ${localStorage.getItem('token')}` 
+        }
+    })
+    .then((response) => {
+        // CREATE CONVERSATIONNS SUCCESSFUL
+        console.log('createConvo() successful with response: ');
+        console.log(response);
+    })
+    .catch((error) => {
+        // CREATE CONVERSATIONS UNSUCCESSFUL
+        console.log('Error: ' + error);
+    });
+}
 
 // GETMESSAGES() — GET
 
@@ -55,11 +80,9 @@ const getMessages = (convo_id, callback) => {
 // SENDMESSAGE() — POST
 
 // SEND A MESSAGE TO THE OTHER USER
-// CONTENT: CONTAINS THE CONVO_ID AND MESSAGE OF THE MESSAGE TO SEND
+// CONTENT: CONTAINS THE CONVO_ID AND MESSAGE TO SEND
 
 const sendMessage = (content, callback) => {
-    console.log('content being sent: ');
-    console.log(content);
     axios.post(`${WANT_URL}/api/send-message`, {
         ...content
     },
@@ -70,14 +93,14 @@ const sendMessage = (content, callback) => {
         }
     })
     .then((response) => {
-        // GET MESSAGES SUCCESSFUL
+        // SEND MESSAGES SUCCESSFUL
         console.log('sendMessage() successful');
         callback();
     })
     .catch((error) => {
-        // GET MESSAGES UNSUCCESSFUL
+        // SEND MESSAGES UNSUCCESSFUL
         console.log('Error: ' + error);
     });
 }
 
-export { getConvos, getMessages, sendMessage };
+export { getConvos, createConvo, getMessages, sendMessage };

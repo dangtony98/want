@@ -17,8 +17,7 @@ export default class InboxPeople extends Component {
     }
 
     render() {
-        const { convos } = this.props;
-        // console.log(this.props);
+        const { convos, current_convo_id } = this.props;
         return (
             <div className="inbox-people">
                 <h4 className="content-heading">People</h4>
@@ -26,6 +25,7 @@ export default class InboxPeople extends Component {
                     {convos.map((convo) => (
                         <InboxPerson 
                             {...convo}
+                            currentConvoid={current_convo_id}
                             handleInboxChat={this.props.handleInboxChat}
                             key={convo.id}
                         />
