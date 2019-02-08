@@ -85,7 +85,6 @@ export class Want extends Component {
         const { detailsModalType, categories, category_id, cost, created_at, description, admin_id, title, user, id} = this.props;
         const { copiedAnimation } = this.state;
         
-        // SAMPLE FULFILLER OPTIONS
         const fulfillerOptions = [{
             firstName: 'Daria',
             rating: 4.72,

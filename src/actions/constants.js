@@ -3,11 +3,6 @@
 export const SET_USER = 'SET_USER';
 export const SET_PHOTO = 'SET_PHOTO';
 
-// CHAT CONSTANTS
-
-export const UPDATE_CHAT_INPUT = 'UPDATE_CHAT_INPUT';
-export const SEND_MESSAGE = 'SEND_MESSAGE';
-
 // FEED CONSTANTS
 
 export const UPDATE_FEED = 'UPDATE_FEED';

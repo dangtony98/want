@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import SettingsPaymentModal from './SettingsPaymentModal';
 import PropTypes from 'prop-types';
 
-const ModalHandler = ({ acceptModalIsExpanded, detailsModalIsExpanded, settingsPaymentModalIsExpanded, detailsModalType }) => (
+const ModalHandler = ({ settingsPaymentModalIsExpanded }) => (
     <div>
         <SettingsPaymentModal
             isOpen={settingsPaymentModalIsExpanded}
@@ -13,15 +13,11 @@ const ModalHandler = ({ acceptModalIsExpanded, detailsModalIsExpanded, settingsP
 );
 
 ModalHandler.propTypes = {
-    acceptModalIsExpanded: PropTypes.bool.isRequired,
-    detailsModalIsExpanded: PropTypes.bool.isRequired,
     settingsPaymentModalIsExpanded: PropTypes.bool.isRequired,
     detailsModalType: PropTypes.string
 }
 
 const mapStateToProps = ({ modal }) => ({
-    acceptModalIsExpanded: modal.acceptModalIsExpanded,
-    detailsModalIsExpanded: modal.detailsModalIsExpanded,
     settingsPaymentModalIsExpanded: modal.settingsPaymentModalIsExpanded,
     detailsModalType: modal.detailsModalType
 });
