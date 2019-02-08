@@ -131,7 +131,7 @@ export default class InboxChat extends Component {
                         imageAttachments: [this.state.imageAttachments, file]
                     });
                 } else {
-                    // SHOW ERROR MESSAGE INDICATING THAT THE IMAGE ATTACHMENT LIMIT (8) HAS BEEN REACHED
+                    // SHOW ERROR MESSAGE INDICATING THAT THE IMAGE ATTACHMENT LIMIT (8) HAS BEEN REACHED.
                 }
             }
         }
