@@ -18,10 +18,12 @@ export default class InboxChat extends Component {
         this.onEnterPressed = this.onEnterPressed.bind(this);
 
         this.state = {
+            pusher: null,
             convo_id: null,
             sender: null,
             receiver: null,
             messages: [],
+            disabledInput: true,
             chatInput: '',
             imageAttachmentsDisplay: [],
             imageAttachments: []
@@ -29,6 +31,7 @@ export default class InboxChat extends Component {
     }
 
     componentDidMount() {
+        console.log('componentDidMount() with convo_id: ' + this.props.convoid);
         Pusher.logToConsole = true;
 
         const pusher = new Pusher('78565ef6078f239cd16c', {
@@ -43,36 +46,43 @@ export default class InboxChat extends Component {
             }      
         });
 
-        const { convoid } = this.props;
+        this.setState({
+            ...this.state,
+            pusher: pusher,
+            disabledInput: true
+        }, () => {
+            const { convoid } = this.props;
 
-        const channel = pusher.subscribe(`private-chat.${convoid}`);
-        channel.bind("App\\Events\\MessageSentEvent", (data) => {
-            this.setState({
-                ...this.state,
-                messages: [...this.state.messages, data.message]
-            })
-        });
-
-        channel.bind('pusher:subscription_error', function(status) {
-            console.log('pusher:subscription_error details: ');
-            console.log(status);
-        });
-
-        getMessages(convoid, (data) => {
-            const adminIsSender = JSON.parse(localStorage.getItem('user')).id == data.wanter.id;
-            this.setState({
-                ...this.state,
-                convo_id: data.id,
-                messages: data.messages,
-                sender: adminIsSender ? data.wanter : data.fulfiller,
-                receiver: adminIsSender ? data.fulfiller : data.wanter
+            const channel = pusher.subscribe(`private-chat.${convoid}`);
+            channel.bind("App\\Events\\MessageSentEvent", (data) => {
+                this.setState({
+                    ...this.state,
+                    messages: [...this.state.messages, data.message]
+                })
+            });
+    
+            channel.bind('pusher:subscription_error', function(status) {
+                console.log('pusher:subscription_error details: ');
+                console.log(status);
+            });
+    
+            getMessages(convoid, (data) => {
+                const adminIsSender = JSON.parse(localStorage.getItem('user')).id == data.wanter.id;
+                this.setState({
+                    ...this.state,
+                    convo_id: data.id,
+                    messages: data.messages,
+                    sender: adminIsSender ? data.wanter : data.fulfiller,
+                    receiver: adminIsSender ? data.fulfiller : data.wanter,
+                    disabledInput: false
+                });
             });
         });
     }
 
     componentWillReceiveProps(nextProps) {
+        console.log('componentWillReceiveProps() with convo_id: ' + nextProps.convoid);
         const { convoid } = nextProps;
-
         const pusher = new Pusher('78565ef6078f239cd16c', {
             cluster: 'us2',
             encrypted: true,
@@ -84,18 +94,15 @@ export default class InboxChat extends Component {
                 }
             }      
         });
+        console.log('pusher allChannels(): ');
+        console.log(pusher.allChannels());
 
         const channel = pusher.subscribe(`private-chat.${convoid}`);
-        channel.bind("App\\Events\\MessageSentEvent", (data) => {
-            this.setState({
-                ...this.state,
-                messages: [...this.state.messages, data.message]
-            })
-        });
+        channel.unbind();
 
-        channel.bind('pusher:subscription_error', function(status) {
-            console.log('pusher:subscription_error details: ');
-            console.log(status);
+        this.setState({
+            ...this.state,
+            disabledInput: true
         });
 
         getMessages(convoid, (data) => {
@@ -105,7 +112,21 @@ export default class InboxChat extends Component {
                 convo_id: data.id,
                 messages: data.messages,
                 sender: adminIsSender ? data.wanter : data.fulfiller,
-                receiver: adminIsSender ? data.fulfiller : data.wanter
+                receiver: adminIsSender ? data.fulfiller : data.wanter,
+                disabledInput: false
+            }, () => {
+                channel.bind("App\\Events\\MessageSentEvent", (data) => {
+                    this.setState({
+                        ...this.state,
+                        messages: [...this.state.messages, data.message]
+                    });
+                    console.log('xac');
+                });
+        
+                channel.bind('pusher:subscription_error', function(status) {
+                    console.log('pusher:subscription_error details: ');
+                    console.log(status);
+                });
             });
         });
     }
@@ -154,16 +175,9 @@ export default class InboxChat extends Component {
             const { convo_id, chatInput, imageAttachments } = this.state;
             let data = new FormData();
 
-            console.log('imageAttachments length: ');
-            console.log(imageAttachments.length);
             for (let i = 0; i < imageAttachments.length; i++) {
-                console.log('single image attachment: ');
-                console.log(imageAttachments[i]);
                 data.append('attachment[]', imageAttachments[i]);
             }
-
-            console.log('hypothetical data: ');
-            console.log(data);
 
             sendMessage({
                 convo_id: convo_id,
@@ -175,12 +189,14 @@ export default class InboxChat extends Component {
                     chatInput: '',
                     imageAttachments: []
                 });
+                // TRIGGER GETCONVOS AGAIN IF CURRENT CONVO ISN'T ALREADY ON TOP
+                console.log('onEnterPressed() after sendMessage()');
             });
         }
     }
 
     render() {
-        const { messages, chatInput, imageAttachmentsDisplay, sender, receiver } = this.state;
+        const { messages, disabledInput, chatInput, imageAttachmentsDisplay, sender, receiver } = this.state;
         return (
             <div className="inbox-chat">
                 <div className="inbox-chat__box">
@@ -223,6 +239,7 @@ export default class InboxChat extends Component {
                                 onKeyDown={this.onEnterPressed}
                                 onChange={this.handleTextChange}
                                 placeholder="Enter a message"
+                                disabled={disabledInput}
                                 className="inbox-chat-textarea textarea"
                             />
                             <button className="button-icon marg-l-sm">

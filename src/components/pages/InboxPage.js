@@ -20,25 +20,31 @@ export default class InboxPage extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);
         getConvos((response) => {
+            console.log('getConvos response: ');
+            console.log(response);
             this.setState({
                 ...this.state,
                 convos: response.data,
                 current_convo_id: response.data.length != 0 ? response.data[0].id : null
             }, () => {
-                console.log('getConvos() successful with responsex: ');
-                console.log(response.data);
+
             });
         });
     }
 
 
     handleInboxChat(convoid) {
-        this.setState({
-            ...this.state,
-            current_convo_id: convoid
-        }, () => {
-            // EXECUTES AFTER THE CURRENT CONVO ID IS UPDATED
-        });
+        if (this.state.current_convo_id == convoid) {
+            console.log("handleInboxChat(): don't change the current_convo_id.");
+        } else {
+            console.log("handleInboxChat(): change the current_convo_id.");
+            this.setState({
+                ...this.state,
+                current_convo_id: convoid
+            }, () => {
+                // EXECUTES AFTER THE CURRENT CONVO ID IS UPDATED
+            });
+        }
     }
 
     render() {

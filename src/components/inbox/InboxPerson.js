@@ -29,8 +29,6 @@ export default class InboxPerson extends Component {
 
     componentDidMount() {
         const { id, wanter, fulfiller, want, created_at } = this.props;
-        console.log('InboxPerson componentDidMount()');
-        console.log(this.props);
         const adminIsSender = JSON.parse(localStorage.getItem('user')).id == wanter.id;
 
         this.setState({
@@ -88,5 +86,7 @@ InboxPerson.propTypes = {
     id: PropTypes.number,
     wanter: PropTypes.object,
     fulfiller: PropTypes.object,
+    want: PropTypes.object,
+    created_at: PropTypes.instanceOf(Date),
     currentConvoid: PropTypes.number
 }

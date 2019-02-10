@@ -26,9 +26,10 @@ const getConvos = (callback) => {
 // CREATECONVO() — POST
 
 // CREATES A NEW CONNVERSATION BETWEEN A GIVEN WANTER AND A GIVEN FULFILLER WITH AN OPTIONAL WANT
-// CONTENT: CONTAINS  
+// CONTENT: CONTAINS WANTER_ID AND FULFILLER_ID
+// CALLBACK: CALLBACK TO PUSH TO THE INBOX PAGE
 
-const createConvo = (content) => {
+const createConvo = (content, callback) => {
     axios.post(`${WANT_URL}/api/conversation`, {
         ...content
     },
@@ -42,6 +43,7 @@ const createConvo = (content) => {
         // CREATE CONVERSATIONNS SUCCESSFUL
         console.log('createConvo() successful with response: ');
         console.log(response);
+        callback();
     })
     .catch((error) => {
         // CREATE CONVERSATIONS UNSUCCESSFUL
@@ -66,9 +68,6 @@ const getMessages = (convo_id, callback) => {
     })
     .then((response) => {
         // GET MESSAGES SUCCESSFUL
-        console.log(`getMessages convo_id: ${convo_id}`);
-        console.log('getMessages response: ');
-        console.log(response);
         callback(response.data);
     })
     .catch((error) => {

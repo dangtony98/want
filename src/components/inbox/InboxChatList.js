@@ -40,16 +40,12 @@ export default class InboxChatList extends Component {
         this.scrollToBottom = this.scrollToBottom.bind(this);
     }
 
-    componentDidMount() {
-        this.scrollToBottom();
-    }
-
     componentDidUpdate() {
         this.scrollToBottom();
     }
 
     scrollToBottom() {
-        this.inboxChatListEnd.scrollIntoView({ block: "end", behavior: "smooth" });
+        this.inboxChatListEnd.scrollIntoView({ block: "end" });
     }
 
     render() {
@@ -122,7 +118,7 @@ export default class InboxChatList extends Component {
                     style={{ float:"left", clear: "both", margin: '0' }}
                     ref={(el) => { this.inboxChatListEnd = el; }}>
                 </div>
-            </div>
+            </div>            
         );
     }
 }

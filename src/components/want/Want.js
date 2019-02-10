@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { withRouter, Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import { getWant, deleteWant } from '../../services/api/want';
 import { updateFeed } from '../../actions/feed';
@@ -14,19 +13,20 @@ export class Want extends Component {
     constructor(props) {
         super(props);
 
-        this.onAcceptBtnPressed = this.onAcceptBtnPressed.bind(this);
+        this.onAcceptButtonPressed = this.onAcceptButtonPressed.bind(this);
         this.onDeleteButtonPressed = this.onDeleteButtonPressed.bind(this);
-        this.onCounterOfferBtnPressed = this.onCounterOfferBtnPressed.bind(this);
-        this.onDetailsBtnPressed = this.onDetailsBtnPressed.bind(this);
-        this.onShareBtnPressed = this.onShareBtnPressed.bind(this);
+        this.onCounterOfferButtonPressed = this.onCounterOfferButtonPressed.bind(this);
+        this.onCommentsButtonPressed = this.onCommentsButtonPressed.bind(this);
+        this.onShareButtonPressed = this.onShareButtonPressed.bind(this);
         this.applyCharacterLimit = this.applyCharacterLimit.bind(this);
 
         this.state = {
-            copiedAnimation: false
+            copiedAnimation: false,
+            expanded: false
         }
     }
 
-    onAcceptBtnPressed() {
+    onAcceptButtonPressed() {
 
     }
 
@@ -36,20 +36,18 @@ export class Want extends Component {
         });
     }
 
-    onCounterOfferBtnPressed() {
+    onCounterOfferButtonPressed() {
 
     }
 
-    onDetailsBtnPressed() {
-        getWant(this.props.id, () => {
+    onCommentsButtonPressed() {
 
-        });
     }
 
-    onShareBtnPressed() {
+    onShareButtonPressed() {
         // TRIGGER SHARE ANIMATION
         if (!this.state.copiedAnimation) {
-            this.setState({ copiedAnimation: true }, () => {
+            this.setState({ ...this.state, copiedAnimation: true }, () => {
                 window.setTimeout(() => {
                     this.setState({
                         copiedAnimation: false
@@ -65,21 +63,7 @@ export class Want extends Component {
 
     render() {
         const { categories, category_id, cost, created_at, description, admin_id, title, user, id} = this.props;
-        const { copiedAnimation } = this.state;
-        
-        const fulfillerOptions = [{
-            firstName: 'Daria',
-            rating: 4.72,
-            counterOffer: 7.5
-        }, {
-            firstName: 'Ethan',
-            rating: 4.64,
-            counterOffer: 6
-        }, {
-            firstName: 'Peter',
-            rating: 4.31,
-            counterOffer: 10
-        }];
+        const { copiedAnimation, expanded } = this.state;
         
         return (
             <div 
@@ -107,7 +91,7 @@ export class Want extends Component {
                                 {copiedAnimation && <div className="want-copied">Copied</div>}
                             </div>
                             <button
-                                onClick={this.onShareBtnPressed}
+                                onClick={this.onShareButtonPressed}
                                 className="button-icon"
                             >
                                 <i className="icon-share fas fa-share-alt"></i>
@@ -117,12 +101,12 @@ export class Want extends Component {
                 <h3 className="want-text marg-t-xs marg-b-xs">{title}</h3>
                 <h4 className="want__pay">{numeral(cost / 100).format('$0,0.00')}</h4>
                 <p className="want-text">
-                    {this.applyCharacterLimit(description, 200)}
+                    {expanded ? description : this.applyCharacterLimit(description, 200)}
                 </p>
                 <div className="wrapper-flex-spaced wrapper-flex-spaced--center">
                     <div className="wrapper-flex">
                         <button
-                            onClick={this.onAcceptBtnPressed} 
+                            onClick={this.onAcceptButtonPressed} 
                             className="button-simple marg-t-sm"
                         >{(admin_id == user.id) ? 'Edit' : 'Accept'}</button>
                         {(admin_id == user.id) ? 
@@ -131,15 +115,15 @@ export class Want extends Component {
                                 className="want__counter-button button-simple marg-t-sm"
                             >Delete</button>) : 
                             (<button
-                            onClick={this.onCounterOfferBtnPressed} 
+                            onClick={this.onCounterOfferButtonPressed} 
                             className="want__counter-button button-simple marg-t-sm"
                             >Counteroffer</button>)
                         }
                     </div>
                     <button
-                        onClick={this.onDetailsBtnPressed} 
+                        onClick={this.onCommentsButtonPressed} 
                         className="want__accept-button button-simple marg-t-sm"
-                    >Details</button>
+                    >Comments (0)</button>
                 </div>
             </div>
         );
@@ -156,7 +140,6 @@ Want.propTypes = {
     title: PropTypes.string,
     user: PropTypes.object,
     updateFeed: PropTypes.func.isRequired,
-    history: PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ admin, filter }) => ({
@@ -168,4 +151,4 @@ const mapDispatchToProps = (dispatch) => ({
     updateFeed: (feed) => dispatch(updateFeed(feed))
 });
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Want));
+export default connect(mapStateToProps, mapDispatchToProps)(Want);
