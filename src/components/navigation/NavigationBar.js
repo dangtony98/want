@@ -10,6 +10,14 @@ import { getUser } from '../../services/api/admin';
 import PropTypes from 'prop-types';
 
 const navigationStyles = {
+    navigationBar: {
+        standard: {
+            backgroundColor: 'rgb(88, 42, 114)'
+        },
+        special: {
+            backgroundColor: 'rgb(219,112,147)'
+        }
+    },
     notificationIcon: {
         selected: {
             color: '#9775AA'
@@ -61,7 +69,10 @@ export class NavigationBar extends Component {
         const { photo, notificationBoxIsOpen, profileDropdownIsOpen } = this.props;
         return (
             <div>
-                <div className="navigation-bar">
+                <div 
+                    className="navigation-bar"
+                    style={navigationStyles.navigationBar.standard}
+                >
                     <div className="navigation-bar__placeholder-box">
 
                     </div>

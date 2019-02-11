@@ -18,25 +18,24 @@ export default class InboxPerson extends Component {
         super(props);
 
         this.onInboxPersonPressed = this.onInboxPersonPressed.bind(this);
+        this.applyCharacterLimit = this.applyCharacterLimit.bind(this);
         
         this.state = {
             convo_id: null,
             receiver: null,
-            want: null,
-            created_at: null
+            want: null
         }
     }
 
     componentDidMount() {
-        const { id, wanter, fulfiller, want, created_at } = this.props;
+        const { id, wanter, fulfiller, want } = this.props;
         const adminIsSender = JSON.parse(localStorage.getItem('user')).id == wanter.id;
 
         this.setState({
             ...this.state,
             convo_id: id,
             receiver: adminIsSender ? fulfiller : wanter,
-            want: want,
-            created_at: created_at
+            want: want
         });
     }
 
@@ -45,9 +44,13 @@ export default class InboxPerson extends Component {
         this.props.handleInboxChat(convo_id);
     }
 
+    applyCharacterLimit(description, limit) {
+        return `${description.substring(0, limit)}${description.length > limit ? '...' : ''}`;
+    }
+
     render() {
-        const { convo_id, receiver, want, created_at } = this.state;
-        const { currentConvoid } = this.props;
+        const { convo_id, receiver, want } = this.state;
+        const { currentConvoid, updated_at } = this.props;
         return receiver ? (
             <div 
                 className="inbox-person"
@@ -68,9 +71,9 @@ export default class InboxPerson extends Component {
                                     {receiver.first_name}
                                 </Link>
                             </h4>
-                            <h4 className="want-text marg-e">{`${moment(created_at).fromNow(true)}`}</h4>
+                            <h4 className="want-text marg-e">{`${moment(updated_at).fromNow(true)}`}</h4>
                         </div>
-                        <h4 className="want-text marg-e">{want ? want.title : 'Conversation'}</h4>
+                        <h4 className="want-text marg-e">{want ? this.applyCharacterLimit(want.title, 30) : '-'}</h4>
                     </div>
                 </div>
             </div>

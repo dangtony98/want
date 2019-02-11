@@ -3,11 +3,11 @@
     width: 100%;
 
     &__box {
-        height: auto;
+        height: 47rem;
         background-color: $color-white;
         border: 1px solid $color-grey;
         border-radius: 0.5rem;
         box-shadow: $box-shadow;
-        overflow: hidden;
+        overflow: scroll;
     }
 }

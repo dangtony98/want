@@ -94,8 +94,6 @@ export default class InboxChat extends Component {
                 }
             }      
         });
-        console.log('pusher allChannels(): ');
-        console.log(pusher.allChannels());
 
         const channel = pusher.subscribe(`private-chat.${convoid}`);
         channel.unbind();
@@ -190,6 +188,7 @@ export default class InboxChat extends Component {
                     imageAttachments: []
                 });
                 // TRIGGER GETCONVOS AGAIN IF CURRENT CONVO ISN'T ALREADY ON TOP
+                this.props.handleInboxPeopleOrder(convo_id);
                 console.log('onEnterPressed() after sendMessage()');
             });
         }

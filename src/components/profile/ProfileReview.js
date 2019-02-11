@@ -26,10 +26,12 @@ export const ProfileReview = ({ review }) => {
         <div className="profile-review">
             <div className="wrapper-flex-spaced wrapper-flex-spaced--top">
                 <div className="wrapper-flex wrapper-flex--center marg-b-sm">
-                    <img
-                        src={`${IMAGE_URL}/${review.user.avatar}`}
-                        className="want__image"
-                    />
+                    <Link to={`/profile/${review.user.id}`} target="_blank" className="link">
+                        <img
+                            src={`${IMAGE_URL}/${review.user.avatar}`}
+                            className="want__image"
+                        />
+                    </Link>
                     <div className="wrapper-flex-spaced--flex1 marg-l-sm">
                         <h4 className="want-text marg-e">
                             <Link to={`/profile/${review.user.id}`} target="_blank" className="profile-review-link link">

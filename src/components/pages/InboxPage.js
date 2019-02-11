@@ -10,6 +10,7 @@ export default class InboxPage extends Component {
         super(props);
 
         this.handleInboxChat = this.handleInboxChat.bind(this);
+        this.handleInboxPeopleOrder = this.handleInboxPeopleOrder.bind(this);
 
         this.state = {
             convos: [],
@@ -47,6 +48,25 @@ export default class InboxPage extends Component {
         }
     }
 
+    handleInboxPeopleOrder(convoid) {
+        const { convos } = this.state;
+        if (convos[0].id == convoid) {
+            // DO NOTHING
+        } else {
+            getConvos((response) => {
+                console.log('getConvos response: ');
+                console.log(response);
+                this.setState({
+                    ...this.state,
+                    convos: response.data,
+                    current_convo_id: response.data.length != 0 ? response.data[0].id : null
+                }, () => {
+    
+                });
+            });
+        }
+    }
+
     render() {
         const { convos, current_convo_id } = this.state;
         return (
@@ -68,6 +88,7 @@ export default class InboxPage extends Component {
                                     <h4 className="content-heading">Chat</h4>
                                         <InboxChat 
                                             convoid={current_convo_id}
+                                            handleInboxPeopleOrder={this.handleInboxPeopleOrder}
                                         />
                                 </div>
                             ) : (
