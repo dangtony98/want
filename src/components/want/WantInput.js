@@ -32,10 +32,10 @@ export class WantInput extends Component {
 
     render() {
         const { wantInput } = this.state;
-        const { photo } = this.props;
+        const { admin_id, photo } = this.props;
         return (
             <div className="wrapper-flex wrapper-flex--top">
-                <Link to={`/profile/2`} target="_blank" className="link">
+                <Link to={`/profile/${admin_id}`} target="_blank" className="link">
                     <img 
                         src={photo}
                         className="want__image marg-r-sm"
@@ -57,6 +57,7 @@ export class WantInput extends Component {
 }
 
 const mapStateToProps = ({ admin }) => ({
+    admin_id: admin.id,
     photo: admin.photo
 });
 
