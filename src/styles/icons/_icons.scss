@@ -46,7 +46,7 @@
 
 .icon-share {
     color: $color-primary-0;
-    font-size: 1.5rem;
+    font-size: 2rem;
     transition: color 0.2s;
 }
 
@@ -146,6 +146,16 @@
 }
 
 .icon-user-edit {
+    color: $color-primary-0;
+    font-size: 2rem;
+    transition: color 0.2s;
+
+    &:hover {
+        color: $color-primary-1;
+    }
+}
+
+.icon-heart {
     color: $color-primary-0;
     font-size: 2rem;
     transition: color 0.2s;

@@ -46,15 +46,15 @@ export class Want extends Component {
 
     onShareButtonPressed() {
         // TRIGGER SHARE ANIMATION
-        if (!this.state.copiedAnimation) {
-            this.setState({ ...this.state, copiedAnimation: true }, () => {
-                window.setTimeout(() => {
-                    this.setState({
-                        copiedAnimation: false
-                    });
-                }, 900);
-            });
-        }
+        // if (!this.state.copiedAnimation) {
+        //     this.setState({ ...this.state, copiedAnimation: true }, () => {
+        //         window.setTimeout(() => {
+        //             this.setState({
+        //                 copiedAnimation: false
+        //             });
+        //         }, 900);
+        //     });
+        // }
     }
 
     applyCharacterLimit(description, limit) {
@@ -87,14 +87,20 @@ export class Want extends Component {
                         </div>
                     </div>
                         <div className="wrapper-flex wrapper-flex--center">
-                            <div>
+                            {/* <div>
                                 {copiedAnimation && <div className="want-copied">Copied</div>}
-                            </div>
+                            </div> */}
                             <button
                                 onClick={this.onShareButtonPressed}
                                 className="button-icon"
                             >
-                                <i className="icon-share fas fa-share-alt"></i>
+                                <i class="icon-share fas fa-share"></i>
+                            </button>
+                            <button
+                                onClick={this.onShareButtonPressed}
+                                className="button-icon"
+                            >
+                                <i class="icon-heart far fa-heart"></i>
                             </button>
                         </div>
                 </div>
