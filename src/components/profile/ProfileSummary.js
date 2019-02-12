@@ -10,11 +10,11 @@ export class ProfileSummary extends Component {
         super(props);
 
         this.onMessageButtonPressed = this.onMessageButtonPressed.bind(this);
+        this.onAddFriendButtonPressed = this.onAddFriendButtonPressed.bind(this);
         this.applyCharacterLimit = this.applyCharacterLimit.bind(this);
     }
 
     onMessageButtonPressed() {
-        console.log('onMessageButtonPressed()');
         const { summary } = this.props;
         createConvo({
             wanter_id: JSON.parse(localStorage.getItem('user')).id,
@@ -23,6 +23,10 @@ export class ProfileSummary extends Component {
         }, () => {
             this.props.history.push('/inbox');
         });
+    }
+
+    onAddFriendButtonPressed() {
+
     }
 
     applyCharacterLimit(description, limit) {
@@ -48,12 +52,21 @@ export class ProfileSummary extends Component {
                                     <i className="icon-user-edit fas fa-user-edit"></i>
                                 </Link>
                             ) : (
-                                <button
-                                    onClick={this.onMessageButtonPressed}
-                                    className="button-icon"
-                                >
-                                    <i className="icon-comment-alt fas fa-comment-alt"></i>
-                                </button>
+                                <div className="wrapper-flex wrapper-flex--center">
+                                    <button
+                                        onClick={this.onMessageButtonPressed}
+                                        className="button-icon"
+                                    >
+                                        <i className="icon-comment-alt fas fa-comment-alt"></i>
+                                    </button>
+                                    <button
+                                        onClick={this.onAddFriendButtonPressed}
+                                        className="button-icon"
+                                    >
+                                        <i class="icon-plus fas fa-plus"></i>                                 
+                                    </button>
+                                </div>
+                                
                             )}
                         </div>
                         <h4 className="profile-text marg-b-sm">{summary.tag_line}</h4>

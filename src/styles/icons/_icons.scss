@@ -105,6 +105,26 @@
 }
 
 .icon-comment-alt {
+    color: $color-primary-0;
+    font-size: 2rem;
+    transition: color 0.2s;
+
+    &:hover {
+        color: $color-primary-1;
+    }
+}
+
+.icon-plus {
+    color: $color-primary-0;
+    font-size: 2rem;
+    transition: color 0.2s;
+
+    &:hover {
+        color: $color-primary-1;
+    }
+}
+
+.icon-plug {
     color: $color-grey-dark;
     font-size: 2rem;
     transition: color 0.2s;
