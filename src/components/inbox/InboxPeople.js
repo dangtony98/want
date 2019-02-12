@@ -20,7 +20,7 @@ export default class InboxPeople extends Component {
         const { convos, current_convo_id } = this.props;
         return (
             <div className="inbox-people">
-                <h4 className="content-heading">People</h4>
+                <h4 className="content-heading">{`People (${convos.length})`}</h4>
                 <div className="inbox-people__box">
                     {convos.map((convo) => (
                         <InboxPerson 

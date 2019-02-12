@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 const inboxPersonStyle = {
     selected: {
-        backgroundColor: 'rgba(151, 117, 170, 0.1)'
+        backgroundColor: 'rgba(151, 117, 170, 0.2)'
     },
     unselected: {
         backgroundColor: '#fff'
@@ -50,12 +50,12 @@ export default class InboxPerson extends Component {
 
     render() {
         const { convo_id, receiver, want } = this.state;
-        const { currentConvoid, updated_at } = this.props;
+        const { currentConvoid, id, updated_at } = this.props;
         return receiver ? (
             <div 
                 className="inbox-person"
                 onClick={this.onInboxPersonPressed}
-                style={currentConvoid == convo_id ? inboxPersonStyle.selected : inboxPersonStyle.unselected}
+                style={currentConvoid == id ? inboxPersonStyle.selected : inboxPersonStyle.unselected}
             >
                 <div className="wrapper-flex wrapper-flex--center">
                     <Link to={`/profile/${receiver.id}`} target="_blank" className="link">

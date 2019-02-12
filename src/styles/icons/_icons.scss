@@ -146,11 +146,11 @@
 }
 
 .icon-user-edit {
-    color: $color-grey-dark;
+    color: $color-primary-0;
     font-size: 2rem;
     transition: color 0.2s;
 
     &:hover {
-        color: $color-primary-0;
+        color: $color-primary-1;
     }
 }
