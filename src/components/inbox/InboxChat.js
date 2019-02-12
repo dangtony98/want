@@ -167,9 +167,8 @@ export default class InboxChat extends Component {
     onEnterPressed(e) {
         const { imageAttachments } = this.state;
         if((e.keyCode == 13 && e.shiftKey == false && /\S/.test(e.target.value)) || (e.keyCode == 13 && imageAttachments.length != 0)) {
-            e.preventDefault();
             // SEND POST REQUEST TO SERVER WITH TRIMEMD (.TRIM()) MESSAGE WITH (OPTIONAL) IMAGE PAYLOAD
-            
+            e.preventDefault();
             const { convo_id, chatInput, imageAttachments } = this.state;
             let data = new FormData();
 

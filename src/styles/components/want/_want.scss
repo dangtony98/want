@@ -67,3 +67,11 @@
 .want-link {
     color: $color-primary-0;
 }
+
+.want-input {
+    height: 5rem;
+    max-height: 10rem;
+    &-textarea {
+        flex: 1
+    }
+}

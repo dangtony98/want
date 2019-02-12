@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import WantInput from './WantInput';
 import { getWant, deleteWant } from '../../services/api/want';
 import { updateFeed } from '../../actions/feed';
 import { getFeed } from '../../services/api/feed';
@@ -131,6 +132,14 @@ export class Want extends Component {
                         className="want__accept-button button-simple marg-t-sm"
                     >Comments (0)</button>
                 </div>
+                {admin_id != user.id &&
+                    <div>
+                        <hr className="hr marg-t-sm marg-b-sm"></hr>
+                        <WantInput 
+                            id={id}
+                        />
+                    </div>
+                }
             </div>
         );
     }
