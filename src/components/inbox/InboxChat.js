@@ -3,7 +3,7 @@ import Pusher from 'pusher-js';
 import Textarea from 'react-textarea-autosize';
 import { Link } from 'react-router-dom';
 import InboxChatList from './InboxChatList';
-import { getMessages, sendMessage } from '../../services/api/inbox';
+import { getMessages, sendMessage, seenMessages } from '../../services/api/inbox';
 import { WANT_URL } from '../../services/variables/variables';
 import PropTypes from 'prop-types';
  
@@ -75,6 +75,8 @@ export default class InboxChat extends Component {
                     sender: adminIsSender ? data.wanter : data.fulfiller,
                     receiver: adminIsSender ? data.fulfiller : data.wanter,
                     disabledInput: false
+                }, () => {
+                    seenMessages(convoid);
                 });
             });
         });
@@ -96,7 +98,7 @@ export default class InboxChat extends Component {
         });
 
         const channel = pusher.subscribe(`private-chat.${convoid}`);
-        channel.unbind();
+        channel.unbind("App\\Events\\MessageSentEvent");
 
         this.setState({
             ...this.state,
@@ -113,18 +115,7 @@ export default class InboxChat extends Component {
                 receiver: adminIsSender ? data.fulfiller : data.wanter,
                 disabledInput: false
             }, () => {
-                channel.bind("App\\Events\\MessageSentEvent", (data) => {
-                    this.setState({
-                        ...this.state,
-                        messages: [...this.state.messages, data.message]
-                    });
-                    console.log('xac');
-                });
-        
-                channel.bind('pusher:subscription_error', function(status) {
-                    console.log('pusher:subscription_error details: ');
-                    console.log(status);
-                });
+                seenMessages(convoid);
             });
         });
     }

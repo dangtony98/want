@@ -62,7 +62,6 @@ export class NavigationBar extends Component {
 
     render() {
         const { photo, notificationBoxIsOpen, profileDropdownIsOpen } = this.props;
-        console.log('NavigationBar X');
         return (
             <div>
                 <div 

@@ -22,7 +22,6 @@ export class Want extends Component {
         this.applyCharacterLimit = this.applyCharacterLimit.bind(this);
 
         this.state = {
-            copiedAnimation: false,
             expanded: false
         }
     }
@@ -46,16 +45,7 @@ export class Want extends Component {
     }
 
     onShareButtonPressed() {
-        // TRIGGER SHARE ANIMATION
-        // if (!this.state.copiedAnimation) {
-        //     this.setState({ ...this.state, copiedAnimation: true }, () => {
-        //         window.setTimeout(() => {
-        //             this.setState({
-        //                 copiedAnimation: false
-        //             });
-        //         }, 900);
-        //     });
-        // }
+
     }
 
     applyCharacterLimit(description, limit) {
@@ -64,7 +54,7 @@ export class Want extends Component {
 
     render() {
         const { categories, category_id, cost, created_at, description, admin_id, title, user, id} = this.props;
-        const { copiedAnimation, expanded } = this.state;
+        const { expanded } = this.state;
         
         return (
             <div 
@@ -88,15 +78,13 @@ export class Want extends Component {
                         </div>
                     </div>
                         <div className="wrapper-flex wrapper-flex--center">
-                            {/* <div>
-                                {copiedAnimation && <div className="want-copied">Copied</div>}
-                            </div> */}
-                            <button
+                            {/* <button
                                 onClick={this.onShareButtonPressed}
                                 className="button-icon"
-                            >
-                                <i class="icon-share fas fa-share"></i>
-                            </button>
+                            > */}
+                                {/* <i class="icon-share fas fa-share"></i> */}
+                                {/* <i class="icon-share fas fa-link"></i>
+                            </button> */}
                             <button
                                 onClick={this.onShareButtonPressed}
                                 className="button-icon"

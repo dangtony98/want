@@ -93,7 +93,6 @@ const sendMessage = (content, callback) => {
     })
     .then((response) => {
         // SEND MESSAGES SUCCESSFUL
-        console.log('sendMessage() successful');
         callback();
     })
     .catch((error) => {
@@ -102,4 +101,27 @@ const sendMessage = (content, callback) => {
     });
 }
 
-export { getConvos, createConvo, getMessages, sendMessage };
+const seenMessages = (convo_id) => {
+    console.log('seenMessages convo_id: ' + convo_id);
+    axios.post(`${WANT_URL}/api/seen-message`, {
+        convo_id: convo_id
+    },
+    { 
+        headers: { 
+            Accept: 'application/json', 
+            Authorization: `Bearer ${localStorage.getItem('token')}` 
+        }
+    })
+    .then((response) => {
+        // SEND MESSAGES SUCCESSFUL
+        console.log('seenMessage() successful with response: ');
+        console.log(response);
+    })
+    .catch((error) => {
+        // SEND MESSAGES UNSUCCESSFUL
+        console.log('Error: ' + error);
+
+    });
+}
+
+export { getConvos, createConvo, getMessages, sendMessage, seenMessages };
