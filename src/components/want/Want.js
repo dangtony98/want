@@ -105,13 +105,13 @@ export class Want extends Component {
                             </button>
                         </div>
                 </div>
-                <h3 className="want-text marg-t-xs marg-b-xs">{title}</h3>
+                <h2 className="want__title marg-t-xs marg-b-xs">{title}</h2>
                 <h4 className="want__pay">{numeral(cost / 100).format('$0,0.00')}</h4>
                 <p className="want-text">
                     {expanded ? description : this.applyCharacterLimit(description, 200)}
                 </p>
-                <div className="wrapper-flex-spaced wrapper-flex-spaced--center">
-                    <div className="wrapper-flex">
+                <div className="wrapper-flex-spaced wrapper-flex-spaced--bottom">
+                    <div className="wrapper-flex wrapper-flex--center">
                         <button
                             onClick={this.onAcceptButtonPressed} 
                             className="button-simple marg-t-sm"
@@ -127,10 +127,7 @@ export class Want extends Component {
                             >Counteroffer</button>)
                         }
                     </div>
-                    <button
-                        onClick={this.onCommentsButtonPressed} 
-                        className="want__accept-button button-simple marg-t-sm"
-                    >Comments (0)</button>
+                    <h4 className="want-text marg-e marg-t-sm">Comments (0)</h4>
                 </div>
                 {admin_id != user.id &&
                     <div>

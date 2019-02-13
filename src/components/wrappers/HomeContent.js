@@ -97,10 +97,10 @@ export class HomeContent extends Component {
                         {wantArr}
                     </InfiniteScroll>
                 </div>
-                <div className="home-content__right">
+                {/* <div className="home-content__right">
                     <CurrentWants />
                     <CurrentFulfillments />
-                </div>
+                </div> */}
             </div>
         ) : (
             // CONTENT TO DISPLAY IF FEED CANNOT BE LOADED

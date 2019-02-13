@@ -8,7 +8,11 @@
     }
 
     &--top {
-        align-items: flex-start;
+        align-items: start;
+    }
+
+    &--bottom {
+        align-items: end;
     }
     
     &--center {
@@ -25,7 +29,11 @@
     }
 
     &--top {
-        align-items: flex-start;
+        align-items: start;
+    }
+
+    &--bottom {
+        align-items: end;
     }
 
     &--center {

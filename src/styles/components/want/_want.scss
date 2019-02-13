@@ -12,6 +12,11 @@
         animation: fadeIn 1s;
     }
 
+    &__title {
+        color: $color-grey-dark;
+        font-weight: 400;
+    }
+
     &__pay {
         color: $color-primary-0;
         font-weight: 700;
