@@ -34,7 +34,7 @@ export class Filter extends Component {
                     type="text"
                     value={searchTerm}
                     onChange={this.onSearchTyped}
-                    placeholder="Search for a Want to fulfill"
+                    placeholder="Search for a post or user with @"
                     autoComplete="off"
                     className="filter-search input-text"
                 ></input>

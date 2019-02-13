@@ -41,7 +41,6 @@ export class NavigationBar extends Component {
         super(props);
 
         this.onNotificationButtonPressed = this.onNotificationButtonPressed.bind(this);
-        this.onInboxButtonPressed = this.onInboxButtonPressed.bind(this);
         this.onProfileButtonPressed = this.onProfileButtonPressed.bind(this);
     }
 
@@ -56,10 +55,6 @@ export class NavigationBar extends Component {
         this.props.closeProfileDropdownIsOpen();
     }
 
-    onInboxButtonPressed() {
-        this.props.history.push("/inbox");
-    }
-
     onProfileButtonPressed() {
         this.props.invertProfileDropdownIsOpen();
         this.props.closeNotificationBoxIsOpen();
@@ -67,6 +62,7 @@ export class NavigationBar extends Component {
 
     render() {
         const { photo, notificationBoxIsOpen, profileDropdownIsOpen } = this.props;
+        console.log('NavigationBar X');
         return (
             <div>
                 <div 
@@ -85,7 +81,7 @@ export class NavigationBar extends Component {
                     <div className="wrapper-flex wrapper-flex--center">
                         <button
                             onClick={this.onNotificationButtonPressed} 
-                            className="button-icon"
+                            className="button-icon marg-e"
                             id="icon-notification-button"
                         >
                             <i 
@@ -94,12 +90,18 @@ export class NavigationBar extends Component {
                                 id="icon-notification"
                             ></i>
                         </button>
-                        <button
-                            onClick={this.onInboxButtonPressed} 
-                            className="button-icon"
-                        >
+                        <Link to="/inbox" className="link">
                             <i className="icon-envelope fas fa-envelope marg-r-sm"></i>
+                        </Link>
+                        <button className="button-icon marg-e">
+                        <Link to="/home" className="link">
+                            {/* <i class="icon-tasks fas fa-tasks marg-r-sm"></i> */}
+                            <i class="icon-tasks fas fa-th-list marg-r-sm"></i>
+                            {/* <i class="icon-tasks fas fa-list-ul marg-r-sm"></i> */}
+                            {/* <i class="icon-tasks fas fa-list-alt marg-r-sm"></i> */}
+                        </Link>
                         </button>
+                        
                         <button
                             onClick={this.onProfileButtonPressed} 
                             className="button-icon"
