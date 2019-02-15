@@ -50,7 +50,7 @@ export default class InboxPerson extends Component {
 
     render() {
         const { convo_id, receiver, want } = this.state;
-        const { currentConvoid, id, updated_at } = this.props;
+        const { currentConvoid, id, updated_at, unseen_count } = this.props;
         return receiver ? (
             <div 
                 className="inbox-person"
@@ -73,7 +73,16 @@ export default class InboxPerson extends Component {
                             </h4>
                             <h4 className="want-text marg-e">{`${moment(updated_at).fromNow(true)}`}</h4>
                         </div>
-                        <h4 className="want-text marg-e">{want ? this.applyCharacterLimit(want.title, 30) : '-'}</h4>
+                        <div className="wrapper-flex-spaced wrapper-flex-spaced--center">
+                            <h4 className="want-text marg-e">{want ? this.applyCharacterLimit(want.title, 20) : '-'}</h4>
+                            {unseen_count != 0 && (
+                                <h4 className="marg-e">
+                                    <span className="inbox-person__unseen">
+                                        {unseen_count}
+                                    </span>
+                                </h4>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
