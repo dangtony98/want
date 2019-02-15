@@ -12,7 +12,7 @@
     }
 
     &--bottom {
-        align-items: end;
+        align-items: flex-end;
     }
     
     &--center {
@@ -33,7 +33,7 @@
     }
 
     &--bottom {
-        align-items: end;
+        align-items: flex-end;
     }
 
     &--center {
@@ -60,6 +60,7 @@
 
     &__middle {
         width: 62.5rem;
+        // width: 72rem;
         padding: 1rem;
     }
 
@@ -82,7 +83,7 @@
     }
 
     &__right {
-        width: 85rem;
+        width: 72rem;
         min-width: 60rem;
         padding: 1rem;
     }

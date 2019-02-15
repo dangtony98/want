@@ -56,7 +56,7 @@ export default class InboxChatList extends Component {
                     (
                         <div className={`${index != messages.length - 1 && "marg-b-sm"}`}>
                             <div 
-                                className={`wrapper-flex wrapper-flex--center`}
+                                className="wrapper-flex wrapper-flex--bottom"
                                 style={
                                     message.user_id == sender.id ? 
                                     inboxChatListStyles.sender.wrapper : 
@@ -85,7 +85,7 @@ export default class InboxChatList extends Component {
                                     </div>
                                 </div>
                                 {(message.user_id == sender.id && (messages[index + 1] ? message.user_id != messages[index + 1].user_id : true)) ? 
-                                    <Link to={`/profile/${sender.id}`} target="_blank" className="link">
+                                    <Link to={`/profile/${sender.id}`} target="_blank" className="link marg-e">
                                         <img 
                                             src={`${IMAGE_URL}/${sender.avatar}`} 
                                             className="inbox-message__image marg-l-sm"
