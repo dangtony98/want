@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroller';
+import { InstantSearch, Hits, Configure, Highlight } from 'react-instantsearch-dom';
 import { updateFeed, setNextPageUrl, setHasMoreWants } from '../../actions/feed';
 import Post from '../post/Post';
 import Filter from '../narrow/Filter';
@@ -11,8 +12,6 @@ import CurrentFulfillments from '../current/CurrentFulfillments';
 import { getFeed } from '../../services/api/feed';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-
-import { BarLoader } from 'react-spinners';
 
 export class HomeContent extends Component {
     constructor(props) {
@@ -85,10 +84,20 @@ export class HomeContent extends Component {
                     <Post />
                 </div>
                 <div className="home-content__middle marg-b-sm">
-                    <h4 className="content-heading">Wants around You</h4>
-                    <Filter />
-                    <Sort />
-                    
+                    <h4 className="content-heading">Newsfeed</h4>
+                    <InstantSearch 
+                        appId="latency"
+                        apiKey="3d9875e51fbd20c7754e65422f7ce5e1"
+                        indexName="bestbuy"
+                    >
+                        <Filter />
+                        <Sort />
+                        <Configure hitsPerPage={5} />
+                        <Hits
+                            hitComponent={Product}
+                            className="marg-t-sm marg-b-sm"
+                        />
+                    </InstantSearch>
                     <InfiniteScroll
                         pageStart={0}
                         loadMore={this.handleLoadWants}
@@ -108,6 +117,19 @@ export class HomeContent extends Component {
         )
     }
 }
+
+const Product = ({ hit }) => {
+    return (
+      <div style={{ marginTop: '10px' }}>
+        <span>
+            <Highlight 
+                attribute="name" 
+                hit={hit} 
+            />
+        </span>
+      </div>
+    );
+  }
 
 HomeContent.propTypes = {
     wants: PropTypes.array,

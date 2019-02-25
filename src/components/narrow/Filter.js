@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { connectSearchBox } from  'react-instantsearch-dom';
 import PropTypes from 'prop-types';
 import { updateSearchTerm } from '../../actions/filter';
 
@@ -21,7 +22,7 @@ export class Filter extends Component {
     }
 
     render() {
-        const { searchTerm } = this.props;
+        const { searchTerm, currentRefinement, refine } = this.props;
         return (
             <div className="filter">
                 <button 
@@ -30,14 +31,22 @@ export class Filter extends Component {
                 >
                     <i className="icon-search fas fa-search"></i>
                 </button>
-                <input
+                {/* <input
                     type="text"
                     value={searchTerm}
                     onChange={this.onSearchTyped}
                     placeholder="Search for a post or user with @"
                     autoComplete="off"
                     className="filter-search input-text"
-                ></input>
+                ></input> */}
+                <input 
+                    type="text"
+                    value={currentRefinement}
+                    onChange={(e) => refine(e.target.value)}
+                    placeholder="We are currently hooking up Algolia Search"
+                    autoComplete="off"
+                    className="filter-search input-text"
+                />
             </div>
         );
     }
@@ -56,4 +65,4 @@ const mapDispatchToProps = (dispatch) => ({
     updateSearchTerm: (searchTerm) => dispatch(updateSearchTerm(searchTerm))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+export default connectSearchBox(connect(mapStateToProps, mapDispatchToProps)(Filter));

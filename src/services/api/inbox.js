@@ -51,6 +51,31 @@ const createConvo = (content, callback) => {
     });
 }
 
+// GETUNREADMESSAGESTOTAL() — GET
+
+// GETS TOTAL COUNT OF UNREAD MESSAGES/CONVERSATIONS
+// CALLBACK: CALLBACK TO DISPLAY COUNT IN NAVIGATION BAR
+
+const getUnreadMessagesTotal = (callback) => {
+    axios.get(`${WANT_URL}/api/total-unread-message`, 
+    { 
+        headers: { 
+            Accept: 'application/json', 
+            Authorization: `Bearer ${localStorage.getItem('token')}` 
+        }
+    })
+    .then((response) => {
+        // GET CONVERSATIONS SUCCESSFUL
+        console.log('getUnreadMessagesTotal response: ');
+        console.log(response);
+        callback(response.data.unseen_count);
+    })
+    .catch((error) => {
+        // GET CONVERSATIONS UNSUCCESSFUL
+        console.log('Error: ' + error);
+    });
+}
+
 // GETMESSAGES() — GET
 
 // GET MESSAGES FOR THE GIVEN CONVERSATION
@@ -124,4 +149,11 @@ const seenMessages = (convo_id) => {
     });
 }
 
-export { getConvos, createConvo, getMessages, sendMessage, seenMessages };
+export { 
+    getConvos, 
+    createConvo, 
+    getUnreadMessagesTotal, 
+    getMessages, 
+    sendMessage, 
+    seenMessages 
+};

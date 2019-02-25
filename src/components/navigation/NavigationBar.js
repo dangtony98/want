@@ -7,6 +7,7 @@ import ProfileDropdown from '../dropdowns/ProfileDropdown';
 import { setUser } from '../../actions/admin';
 import { closeNotificationBoxIsOpen, invertNotificationBoxIsOpen, closeProfileDropdownIsOpen, invertProfileDropdownIsOpen } from '../../actions/layout';
 import { getUser } from '../../services/api/admin';
+import { getUnreadMessagesTotal } from '../../services/api/inbox';
 import PropTypes from 'prop-types';
 
 const navigationStyles = {
@@ -42,12 +43,22 @@ export class NavigationBar extends Component {
 
         this.onNotificationButtonPressed = this.onNotificationButtonPressed.bind(this);
         this.onProfileButtonPressed = this.onProfileButtonPressed.bind(this);
+
+        this.state = {
+            unseen_count: null
+        }
     }
 
     componentDidMount() {
         this.props.closeNotificationBoxIsOpen();
         this.props.closeProfileDropdownIsOpen();
         getUser(this.props);
+        getUnreadMessagesTotal((response) => {
+            this.setState({
+                ...this.state,
+                unseen_count: response
+            });
+        });
     }
 
     onNotificationButtonPressed() {
