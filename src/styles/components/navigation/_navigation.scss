@@ -18,6 +18,26 @@
     &__placeholder-box {
         width: 18rem;
     }
+
+    &__mount {
+        position: relative;
+    }
+
+    &__badge {
+        position: absolute;
+        display: block;
+        top: 1rem;
+        right: -1rem;
+        height: 2.25rem;
+        width: 2.25rem;
+        line-height: 2.25rem;
+        border-radius: 50%;
+        background-color: $color-red;
+        color: $color-white;
+        font-size: 1rem;
+        font-weight: 300;
+        text-align: center;
+    }
 }
 
 .navigation-link {

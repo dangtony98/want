@@ -10,6 +10,9 @@ import { IMAGE_URL } from '../../services/variables/variables';
 import moment from 'moment';
 import numeral from 'numeral';
 
+import { Highlight } from 'react-instantsearch-dom';
+
+
 export class Want extends Component {
     constructor(props) {
         super(props);
@@ -53,6 +56,8 @@ export class Want extends Component {
     }
 
     render() {
+        console.log('Want props');
+        console.log(this.props);
         const { categories, category_id, cost, created_at, description, admin_id, title, user, id} = this.props;
         const { expanded } = this.state;
         

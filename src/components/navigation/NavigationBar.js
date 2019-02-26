@@ -73,6 +73,7 @@ export class NavigationBar extends Component {
 
     render() {
         const { photo, notificationBoxIsOpen, profileDropdownIsOpen } = this.props;
+        const { unseen_count } = this.state;
         return (
             <div>
                 <div 
@@ -100,8 +101,13 @@ export class NavigationBar extends Component {
                                 id="icon-notification"
                             ></i>
                         </button>
-                        <Link to="/inbox" className="link">
-                            <i className="icon-envelope fas fa-envelope marg-r-sm"></i>
+                        <Link to="/inbox" className="navigation-bar__mount link marg-r-sm">
+                            <i className="icon-envelope fas fa-envelope"></i>
+                            {(unseen_count != null && unseen_count != 0) &&
+                                <span className="navigation-bar__badge">
+                                    {unseen_count}
+                                </span>
+                            }
                         </Link>
                         <button className="button-icon marg-e">
                         <Link to="/home" className="link">
@@ -111,7 +117,6 @@ export class NavigationBar extends Component {
                             {/* <i class="icon-tasks fas fa-list-alt marg-r-sm"></i> */}
                         </Link>
                         </button>
-                        
                         <button
                             onClick={this.onProfileButtonPressed} 
                             className="button-icon"

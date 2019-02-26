@@ -85,19 +85,21 @@ export class HomeContent extends Component {
                 </div>
                 <div className="home-content__middle marg-b-sm">
                     <h4 className="content-heading">Newsfeed</h4>
-                    <InstantSearch 
-                        appId="latency"
-                        apiKey="3d9875e51fbd20c7754e65422f7ce5e1"
-                        indexName="bestbuy"
+                    {/* <InstantSearch 
+                        appId="F4OYFK126T"
+                        apiKey="0b5b337016e53d122a72c477668057e5"
+                        indexName="wants"
                     >
                         <Filter />
                         <Sort />
                         <Configure hitsPerPage={5} />
                         <Hits
-                            hitComponent={Product}
+                            hitComponent={Want}
                             className="marg-t-sm marg-b-sm"
                         />
-                    </InstantSearch>
+                    </InstantSearch> */}
+                    <Filter />
+                    <Sort />
                     <InfiniteScroll
                         pageStart={0}
                         loadMore={this.handleLoadWants}
@@ -119,11 +121,13 @@ export class HomeContent extends Component {
 }
 
 const Product = ({ hit }) => {
+    console.log('Product: ');
+    console.log(hit);
     return (
       <div style={{ marginTop: '10px' }}>
         <span>
             <Highlight 
-                attribute="name" 
+                attribute="title" 
                 hit={hit} 
             />
         </span>
