@@ -34,11 +34,11 @@ export class WantInput extends Component {
         const { wantInput } = this.state;
         const { admin_id, photo } = this.props;
         return (
-            <div className="wrapper-flex wrapper-flex--top">
+            <div className="wrapper-flex wrapper-flex--center">
                 <Link to={`/profile/${admin_id}`} target="_blank" className="link">
                     <img 
                         src={photo}
-                        className="want__image marg-r-sm"
+                        className="profile-picture--mini marg-r-sm"
                     />
                 </Link>
                 <Textarea 
@@ -47,8 +47,8 @@ export class WantInput extends Component {
                     value={wantInput}
                     onKeyDown={this.onEnterPressed}
                     onChange={this.handleTextChange}
-                    placeholder="Enter a comment"
-                    className="want-input-textarea textarea"
+                    placeholder="Write a comment"
+                    className="want-input-textarea textarea--mini"
                     disabled={false}
                 />
             </div>

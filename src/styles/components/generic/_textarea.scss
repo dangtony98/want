@@ -12,4 +12,20 @@
     &:focus {    
         border: 1px solid $color-primary-0;
     }
+
+    &--mini {
+        display: block;
+        padding: 0.75rem 1rem;
+        border-radius: 0.5rem;
+        border: 1px solid $color-grey;
+        font-size: 1.25rem;
+        font-weight: 300;
+        outline: none;
+        resize: none;
+        line-height: 2rem;
+
+        &:focus {    
+            border: 1px solid $color-primary-0;
+        }
+    }
 }

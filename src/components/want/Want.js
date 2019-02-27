@@ -81,7 +81,7 @@ export class Want extends Component {
                         <Link to={`/profile/${user.id}`} target="_blank" className="link">
                             <img 
                                 src={`${IMAGE_URL}/${user.avatar}`}
-                                className="want__image"
+                                className="profile-picture"
                             />
                         </Link>
                         <div className="marg-l-sm">

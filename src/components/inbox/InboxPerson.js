@@ -61,7 +61,7 @@ export default class InboxPerson extends Component {
                     <Link to={`/profile/${receiver.id}`} target="_blank" className="link">
                         <img 
                             src={`${IMAGE_URL}/${receiver.avatar}`}
-                            className="want__image"
+                            className="profile-picture"
                         />
                     </Link>
                     <div className="marg-l-sm wrapper-flex-spaced--flex1">

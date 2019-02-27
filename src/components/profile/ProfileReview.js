@@ -29,7 +29,7 @@ export const ProfileReview = ({ review }) => {
                     <Link to={`/profile/${review.user.id}`} target="_blank" className="link">
                         <img
                             src={`${IMAGE_URL}/${review.user.avatar}`}
-                            className="want__image"
+                            className="profile-picture"
                         />
                     </Link>
                     <div className="wrapper-flex-spaced--flex1 marg-l-sm">
