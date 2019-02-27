@@ -19,7 +19,8 @@
         width: 18rem;
 
         &--mini {
-            width: 10rem;
+            display: flex;
+            width: auto;
         }
     }
 

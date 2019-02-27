@@ -146,7 +146,7 @@ export class Sort extends Component {
                                     options={options}
                                     onChange={(e) => this.handleChangeSelect(e, name)}
                                     styles={select.styles}
-                                    className="select" 
+                                    className="sort-select select" 
                                     required
                                 />
                             }
@@ -158,7 +158,7 @@ export class Sort extends Component {
                                 options={select.sort.options}
                                 onChange={(e) => this.handleChangeSelect(e, select.sort.name)}
                                 styles={select.styles}
-                                className="select" 
+                                className="sort-select select" 
                                 required
                             />
                         </div>
