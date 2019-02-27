@@ -106,7 +106,7 @@ export class NavigationBar extends Component {
                                 }
                             </Link>
                         </div>
-                        </MediaQuery>
+                    </MediaQuery>
                     <div>
                         <Link 
                             to="/home"
@@ -136,12 +136,12 @@ export class NavigationBar extends Component {
                             </Link>
                         </MediaQuery>
                         <button className="button-icon marg-e">
-                        <Link to="/home" className="link">
+                        {/* <Link to="/home" className="link"> */}
                             {/* <i class="icon-tasks fas fa-tasks marg-r-sm"></i> */}
-                            <i class="icon-tasks fas fa-th-list marg-r-sm"></i>
+                            <i className="icon-tasks fas fa-th-list marg-r-xs"></i>
                             {/* <i class="icon-tasks fas fa-list-ul marg-r-sm"></i> */}
                             {/* <i class="icon-tasks fas fa-list-alt marg-r-sm"></i> */}
-                        </Link>
+                        {/* </Link> */}
                         </button>
                         <button
                             onClick={this.onProfileButtonPressed} 
