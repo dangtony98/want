@@ -12,6 +12,7 @@ import CurrentFulfillments from '../current/CurrentFulfillments';
 import { getFeed } from '../../services/api/feed';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import MediaQuery from 'react-responsive';
 
 export class HomeContent extends Component {
     constructor(props) {
@@ -80,9 +81,11 @@ export class HomeContent extends Component {
 
         return wants ? (
             <div className="home-content">
-                <div className="home-content__left">
-                    <Post />
-                </div>
+                <MediaQuery query="(min-width: 900px)">
+                    <div className="home-content__left">
+                        <Post />
+                    </div>
+                </MediaQuery>
                 <div className="home-content__middle marg-b-sm">
                     <h4 className="content-heading">Newsfeed</h4>
                     {/* <InstantSearch 

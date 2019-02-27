@@ -26,12 +26,12 @@
     &__badge {
         position: absolute;
         display: block;
-        top: 1rem;
+        top: -1rem;
         right: -1rem;
-        height: 2.25rem;
-        width: 2.25rem;
+        height: 2rem;
+        width: 2rem;
         line-height: 2.25rem;
-        border-radius: 50%;
+        border-radius: 25%;
         background-color: $color-red;
         color: $color-white;
         font-size: 1rem;
