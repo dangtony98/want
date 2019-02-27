@@ -35,12 +35,12 @@ export class WantInput extends Component {
         const { admin_id, photo } = this.props;
         return (
             <div className="wrapper-flex wrapper-flex--center">
-                <Link to={`/profile/${admin_id}`} target="_blank" className="link">
+                {/* <Link to={`/profile/${admin_id}`} target="_blank" className="link"> */}
                     <img 
                         src={photo}
                         className="profile-picture--mini marg-r-sm"
                     />
-                </Link>
+                {/* </Link> */}
                 <Textarea 
                     minRows={1}
                     maxRows={3}
