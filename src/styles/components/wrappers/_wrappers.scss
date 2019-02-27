@@ -45,6 +45,10 @@
     }
 }
 
+.content-heading {
+    color: $color-grey-dark;
+}
+
 // PAGE WRAPPERS
 
 .home-content {
@@ -89,8 +93,25 @@
     }
 }
 
-.content-heading {
-    color: $color-grey-dark;
+.profile-content {
+    width: 100%;
+    margin: 0 auto;
+    background-color: blue;
+
+    &__left {
+
+    }
+
+    &__middle {
+        margin: 0 auto;
+        width: 72rem;
+        padding: 1rem;
+        background-color: red;
+    }
+
+    &__right {
+
+    }
 }
 
 .landing-content {

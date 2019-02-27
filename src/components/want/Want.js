@@ -5,13 +5,12 @@ import WantInput from './WantInput';
 import { getWant, deleteWant } from '../../services/api/want';
 import { updateFeed } from '../../actions/feed';
 import { getFeed } from '../../services/api/feed';
-import PropTypes from 'prop-types';
 import { IMAGE_URL } from '../../services/variables/variables';
 import moment from 'moment';
 import numeral from 'numeral';
-
+import MediaQuery from 'react-responsive';
 import { Highlight } from 'react-instantsearch-dom';
-
+import PropTypes from 'prop-types';
 
 export class Want extends Component {
     constructor(props) {
@@ -135,10 +134,12 @@ export class Want extends Component {
                 </div>
                 {admin_id != user.id &&
                     <div>
-                        <hr className="hr marg-t-sm marg-b-sm"></hr>
-                        <WantInput 
-                            id={id}
-                        />
+                        <MediaQuery query="(min-width: 375px)">
+                            <hr className="hr marg-t-sm marg-b-sm"></hr>
+                            <WantInput 
+                                id={id}
+                            />
+                        </MediaQuery>
                     </div>
                 }
             </div>

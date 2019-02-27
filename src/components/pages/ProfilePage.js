@@ -6,6 +6,7 @@ import ProfileStatistics from '../profile/ProfileStatistics';
 import ProfileReviews from '../profile/ProfileReviews';
 import Footer from '../footer/Footer';
 import { getProfile } from '../../services/api/profile';
+import MediaQuery from 'react-responsive';
 import PropTypes from 'prop-types';
 
 export class ProfilePage extends Component {
@@ -31,18 +32,24 @@ export class ProfilePage extends Component {
         console.log(this.state);
         const { data } = this.state;
         return data ? (
-            <div className="profile-page wrapper-flex-spaced wrapper-flex-spaced--column">
+            <div className="profile-page">
                 <NavigationBar />
-                <ProfileSummary summary={data.user[0]} />
-                <div className="profile-bottom wrapper-flex">
-                    <ProfileStatistics
-                        rating={data.user[0].rating.current_rating} 
-                        statistics={data.stats} 
-                    />
-                    <ProfileReviews 
-                        reviews={data.review} 
-                        statistics={data.stats}
-                    />
+                <div className="profile-content">
+                    <div className="profile-content__middle">
+                        <ProfileSummary summary={data.user[0]} />
+                    </div>
+                    {/* <div className="profile-bottom wrapper-flex">
+                        <MediaQuery query="(min-width: 900px)">
+                            <ProfileStatistics
+                                rating={data.user[0].rating.current_rating} 
+                                statistics={data.stats} 
+                            />
+                        </MediaQuery>
+                        <ProfileReviews 
+                            reviews={data.review} 
+                            statistics={data.stats}
+                        />
+                    </div> */}
                 </div>
                 <Footer />
             </div>

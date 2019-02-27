@@ -39,11 +39,11 @@ export class ProfileSummary extends Component {
         return (
             <div className="profile-summary">
                 <h4 className="content-heading">Profile Summary</h4>
-                <div className="wrapper-flex">
-                    <img 
+                {/* <div className="wrapper-flex"> */}
+                    {/* <img 
                         src={`${IMAGE_URL}/${summary.avatar}`} 
                         className="profile-summary__photo"
-                    />
+                    /> */}
                     <div className="profile-summary__box">
                         <div className="wrapper-flex-spaced wrapper-flex-spaced--center">
                             <h2 className="profile-text">{summary.first_name}</h2>
@@ -79,7 +79,7 @@ export class ProfileSummary extends Component {
                             </div>
                         }
                     </div>
-                </div>
+                {/* </div> */}
             </div>
         );
     }
