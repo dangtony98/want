@@ -36,15 +36,6 @@
         transition: all 0.2s;
     }
 
-    &__image {
-        height: 5rem;
-        width: 5rem;
-        object-fit: cover;
-        border-radius: 50%;
-        border: 1px solid $color-grey;
-        box-shadow: $box-shadow;
-    }
-
     &__counter-button {
         margin-left: 2rem;
     }

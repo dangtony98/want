@@ -46,7 +46,7 @@ export class Post extends Component {
 
     render() {
         return (
-            <div className="post">
+            <div className="post marg-b-sm">
                 <h4 className="content-heading">Post a Want</h4>
                 <div
                     ref={this.setWrapperRef} 

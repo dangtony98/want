@@ -87,6 +87,9 @@ export class HomeContent extends Component {
                     </div>
                 </MediaQuery>
                 <div className="home-content__middle marg-b-sm">
+                    <MediaQuery query="(max-width: 900px)">
+                        <Post />
+                    </MediaQuery>
                     <h4 className="content-heading">Newsfeed</h4>
                     {/* <InstantSearch 
                         appId="F4OYFK126T"

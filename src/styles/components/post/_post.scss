@@ -1,6 +1,11 @@
 .post {
     position: fixed;
     width: 34rem;
+
+    @include tablet-portrait {
+        position: relative;
+        width: 100%;
+    } 
 }
 
 .post-box {
