@@ -17,16 +17,31 @@ export class Want extends Component {
     constructor(props) {
         super(props);
 
+        this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
         this.onAcceptButtonPressed = this.onAcceptButtonPressed.bind(this);
         this.onDeleteButtonPressed = this.onDeleteButtonPressed.bind(this);
         this.onCounterOfferButtonPressed = this.onCounterOfferButtonPressed.bind(this);
-        this.onCommentsButtonPressed = this.onCommentsButtonPressed.bind(this);
         this.onShareButtonPressed = this.onShareButtonPressed.bind(this);
         this.applyCharacterLimit = this.applyCharacterLimit.bind(this);
 
         this.state = {
-            expanded: false
+            expanded: false,
+            width: 0,
+            height: 0
         }
+    }
+
+    componentDidMount() {
+        this.updateWindowDimensions();
+        window.addEventListener('resize', this.updateWindowDimensions);
+      }
+
+    componentWillUnmount() {
+        window.removeEventListener('resize', this.updateWindowDimensions);
+    }
+    
+    updateWindowDimensions() {
+        this.setState({ ...this.state, width: window.innerWidth, height: window.innerHeight });
     }
 
     onAcceptButtonPressed() {
@@ -43,10 +58,6 @@ export class Want extends Component {
 
     }
 
-    onCommentsButtonPressed() {
-
-    }
-
     onShareButtonPressed() {
 
     }
@@ -59,8 +70,8 @@ export class Want extends Component {
         console.log('Want props');
         console.log(this.props);
         const { categories, category_id, cost, created_at, description, admin_id, title, user, id} = this.props;
-        const { expanded } = this.state;
-        
+        const { expanded, width } = this.state;
+        console.log('width from Want: ' + this.state.width);
         return (
             <div 
                 className="want want--feed marg-t-sm"
@@ -101,7 +112,7 @@ export class Want extends Component {
                 <h2 className="want__title marg-t-xs marg-b-xs">{title}</h2>
                 <h4 className="want__pay">{numeral(cost / 100).format('$0,0.00')}</h4>
                 <p className="want-text">
-                    {expanded ? description : this.applyCharacterLimit(description, 200)}
+                    {expanded ? description : (width > 500 ? this.applyCharacterLimit(description, 200) : this.applyCharacterLimit(description, 100))}
                 </p>
                 <div className="wrapper-flex-spaced wrapper-flex-spaced--bottom">
                     <div className="wrapper-flex wrapper-flex--center">
@@ -120,7 +131,7 @@ export class Want extends Component {
                             >Counteroffer</button>)
                         }
                     </div>
-                    <h4 className="want-text marg-e marg-t-sm">Comments (0)</h4>
+                    <h4 className="want-text marg-e marg-t-sm"></h4>
                 </div>
                 {admin_id != user.id &&
                     <div>
