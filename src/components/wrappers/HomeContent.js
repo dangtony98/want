@@ -81,7 +81,7 @@ export class HomeContent extends Component {
 
         return wants ? (
             <div className="home-content">
-                <MediaQuery query="(min-width: 900px)">
+                <MediaQuery query="(min-width: 800px)">
                     <div className="home-content__left">
                         <Post />
                     </div>
