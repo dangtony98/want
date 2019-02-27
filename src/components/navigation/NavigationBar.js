@@ -8,6 +8,7 @@ import { setUser } from '../../actions/admin';
 import { closeNotificationBoxIsOpen, invertNotificationBoxIsOpen, closeProfileDropdownIsOpen, invertProfileDropdownIsOpen } from '../../actions/layout';
 import { getUser } from '../../services/api/admin';
 import { getUnreadMessagesTotal } from '../../services/api/inbox';
+import MediaQuery from 'react-responsive';
 import PropTypes from 'prop-types';
 
 const navigationStyles = {
@@ -80,9 +81,32 @@ export class NavigationBar extends Component {
                     className="navigation-bar"
                     style={navigationStyles.navigationBar.standard}
                 >
-                    <div className="navigation-bar__placeholder-box">
-
-                    </div>
+                    <MediaQuery query="(min-width: 600px)">
+                        <div className="navigation-bar__placeholder-box"></div>
+                    </MediaQuery>
+                    <MediaQuery query="(max-width: 600px)">
+                        <div className="navigation-bar__placeholder-box--mini">
+                            <button
+                                onClick={this.onNotificationButtonPressed} 
+                                className="button-icon marg-e"
+                                id="icon-notification-button"
+                            >
+                                <i 
+                                    className="icon-notification fas fa-bell marg-r-sm"
+                                    style={notificationBoxIsOpen ? navigationStyles.notificationIcon.selected : navigationStyles.notificationIcon.unselected}
+                                    id="icon-notification"
+                                ></i>
+                            </button>
+                            <Link to="/inbox" className="navigation-bar__mount link marg-r-sm">
+                                <i className="icon-envelope fas fa-envelope"></i>
+                                {(unseen_count != null && unseen_count != 0) &&
+                                    <span className="navigation-bar__badge">
+                                        {unseen_count}
+                                    </span>
+                                }
+                            </Link>
+                        </div>
+                        </MediaQuery>
                     <div>
                         <Link 
                             to="/home"
@@ -90,25 +114,27 @@ export class NavigationBar extends Component {
                         >WANT</Link>
                     </div>
                     <div className="wrapper-flex wrapper-flex--center">
-                        <button
-                            onClick={this.onNotificationButtonPressed} 
-                            className="button-icon marg-e"
-                            id="icon-notification-button"
-                        >
-                            <i 
-                                className="icon-notification fas fa-bell marg-r-sm"
-                                style={notificationBoxIsOpen ? navigationStyles.notificationIcon.selected : navigationStyles.notificationIcon.unselected}
-                                id="icon-notification"
-                            ></i>
-                        </button>
-                        <Link to="/inbox" className="navigation-bar__mount link marg-r-sm">
-                            <i className="icon-envelope fas fa-envelope"></i>
-                            {(unseen_count != null && unseen_count != 0) &&
-                                <span className="navigation-bar__badge">
-                                    {unseen_count}
-                                </span>
-                            }
-                        </Link>
+                        <MediaQuery query="(min-width: 600px)">
+                            <button
+                                onClick={this.onNotificationButtonPressed} 
+                                className="button-icon marg-e"
+                                id="icon-notification-button"
+                            >
+                                <i 
+                                    className="icon-notification fas fa-bell marg-r-sm"
+                                    style={notificationBoxIsOpen ? navigationStyles.notificationIcon.selected : navigationStyles.notificationIcon.unselected}
+                                    id="icon-notification"
+                                ></i>
+                            </button>
+                            <Link to="/inbox" className="navigation-bar__mount link marg-r-sm">
+                                <i className="icon-envelope fas fa-envelope"></i>
+                                {(unseen_count != null && unseen_count != 0) &&
+                                    <span className="navigation-bar__badge">
+                                        {unseen_count}
+                                    </span>
+                                }
+                            </Link>
+                        </MediaQuery>
                         <button className="button-icon marg-e">
                         <Link to="/home" className="link">
                             {/* <i class="icon-tasks fas fa-tasks marg-r-sm"></i> */}

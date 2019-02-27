@@ -10,9 +10,9 @@ import Want from '../want/Want';
 import CurrentWants from '../current/CurrentWants';
 import CurrentFulfillments from '../current/CurrentFulfillments';
 import { getFeed } from '../../services/api/feed';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import MediaQuery from 'react-responsive';
+import PropTypes from 'prop-types';
 
 export class HomeContent extends Component {
     constructor(props) {

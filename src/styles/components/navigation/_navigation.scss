@@ -17,6 +17,10 @@
 
     &__placeholder-box {
         width: 18rem;
+
+        &--mini {
+            width: 10rem;
+        }
     }
 
     &__mount {
