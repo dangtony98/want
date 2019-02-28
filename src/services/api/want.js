@@ -48,4 +48,30 @@ const deleteWant = (id, callback) => {
         });
 }
 
-export { getWant, deleteWant };
+// BOOKMARKWANT() — POST
+
+// BOOKMARKS THE GIVEN WANT
+// ID: THE ID OF THE GIVEN WANT
+// CALLBACK: CALLBACK TO UPDATE FILLED/UNFILLED HEART BASED ON REQUEST RESPONSE
+
+const bookmarkWant = (id, callback) => {
+    axios.post(`${WANT_URL}/api/bookmark`, {
+        want_id: id
+    },
+    { 
+        headers: {
+            Accept: 'application/json', 
+            Authorization: `Bearer ${localStorage.getItem('token')}` 
+        }
+    })
+    .then((response) => {
+        // BOOKMARK WANT SUCCESSFUL
+        callback();
+    })
+    .catch((error) => {
+        // BOOKMARK WANT UNSUCCESSFUL
+        console.log('Error: ' + error);
+    });
+}
+
+export { getWant, deleteWant, bookmarkWant };

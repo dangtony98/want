@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import WantInput from './WantInput';
-import { getWant, deleteWant } from '../../services/api/want';
+import { getWant, deleteWant, bookmarkWant } from '../../services/api/want';
 import { updateFeed } from '../../actions/feed';
 import { getFeed } from '../../services/api/feed';
 import { IMAGE_URL } from '../../services/variables/variables';
@@ -17,16 +17,17 @@ export class Want extends Component {
         super(props);
 
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+        this.onBookmarkWantPressed = this.onBookmarkWantPressed.bind(this);
         this.onAcceptButtonPressed = this.onAcceptButtonPressed.bind(this);
         this.onDeleteButtonPressed = this.onDeleteButtonPressed.bind(this);
         this.onCounterOfferButtonPressed = this.onCounterOfferButtonPressed.bind(this);
-        this.onShareButtonPressed = this.onShareButtonPressed.bind(this);
         this.applyCharacterLimit = this.applyCharacterLimit.bind(this);
 
         this.state = {
             expanded: false,
             width: 0,
-            height: 0
+            height: 0,
+            bookmarked: false
         }
     }
 
@@ -43,6 +44,15 @@ export class Want extends Component {
         this.setState({ ...this.state, width: window.innerWidth, height: window.innerHeight });
     }
 
+    onBookmarkWantPressed(id) {
+        bookmarkWant(id, () => {
+            this.setState({
+                ...this.state,
+                bookmarked: true
+            });
+        });
+    }
+
     onAcceptButtonPressed() {
 
     }
@@ -57,20 +67,15 @@ export class Want extends Component {
 
     }
 
-    onShareButtonPressed() {
-
-    }
-
     applyCharacterLimit(description, limit) {
         return `${description.substring(0, limit)}${description.length > limit ? '...' : ''}`;
     }
 
     render() {
-        console.log('Want props');
-        console.log(this.props);
+        // console.log('Want props');
+        // console.log(this.props);
         const { categories, category_id, cost, created_at, description, admin_id, title, user, id} = this.props;
-        const { expanded, width } = this.state;
-        console.log('width from Want: ' + this.state.width);
+        const { expanded, width, bookmarked } = this.state;
         return (
             <div 
                 className="want want--feed marg-t-sm"
@@ -93,18 +98,15 @@ export class Want extends Component {
                         </div>
                     </div>
                         <div className="wrapper-flex wrapper-flex--center">
-                            {/* <button
-                                onClick={this.onShareButtonPressed}
-                                className="button-icon"
-                            > */}
-                                {/* <i class="icon-share fas fa-share"></i> */}
-                                {/* <i class="icon-share fas fa-link"></i>
-                            </button> */}
                             <button
-                                onClick={this.onShareButtonPressed}
+                                onClick={() => this.onBookmarkWantPressed(id)}
                                 className="button-icon"
                             >
-                                <i class="icon-heart far fa-heart"></i>
+                                {bookmarked ? (
+                                    <i className="icon-bookmark fas fa-bookmark"></i>
+                                ) : (
+                                    <i className="icon-bookmark far fa-bookmark"></i>
+                                )}
                             </button>
                         </div>
                 </div>
