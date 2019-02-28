@@ -134,7 +134,7 @@ export class Want extends Component {
                 </div>
                 {admin_id != user.id &&
                     <div>
-                        <MediaQuery query="(min-width: 375px)">
+                        <MediaQuery query="(max-width: 375px)">
                             <hr className="hr marg-t-sm marg-b-sm"></hr>
                             <WantInput 
                                 id={id}
