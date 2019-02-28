@@ -10,11 +10,6 @@
     color: $color-grey-dark;
 }
 
-.icon-chat {
-    color: $color-white;
-    font-size: 2rem;
-}
-
 .icon-dollar {
     color: $color-white;
     font-size: 1.5rem;
@@ -169,4 +164,9 @@
     color: $color-white;
     font-size: 1.85rem;
     transition: color 0.2s;
+}
+
+.icon-pen {
+    color: $color-white;
+    font-size: 1.75rem;
 }

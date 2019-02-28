@@ -1,0 +1,16 @@
+.post-widget {
+    position: fixed;
+    bottom: 2rem;
+    right: 3rem;
+    height: auto;
+    width: auto;
+    padding: 2rem;
+    border-radius: 50%;
+    background-color: $color-primary-0;
+    box-shadow: $box-shadow;
+    transition: background-color 0.2s;
+
+    &:hover {
+        background-color: $color-primary-1;
+    }
+}

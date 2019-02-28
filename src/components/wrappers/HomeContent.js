@@ -14,6 +14,8 @@ import axios from 'axios';
 import MediaQuery from 'react-responsive';
 import PropTypes from 'prop-types';
 
+import PostWidget from '../widgets/PostWidget';
+
 export class HomeContent extends Component {
     constructor(props) {
         super(props);
@@ -81,15 +83,18 @@ export class HomeContent extends Component {
 
         return wants ? (
             <div className="home-content">
+                <MediaQuery query="(max-width: 900px)">
+                    <PostWidget />
+                </MediaQuery>
                 <MediaQuery query="(min-width: 900px)">
                     <div className="home-content__left">
                         <Post />
                     </div>
                 </MediaQuery>
                 <div className="home-content__middle marg-b-sm">
-                    <MediaQuery query="(max-width: 900px)">
+                    {/* <MediaQuery query="(max-width: 900px)">
                         <Post />
-                    </MediaQuery>
+                    </MediaQuery> */}
                     <h4 className="content-heading">Newsfeed</h4>
                     {/* <InstantSearch 
                         appId="F4OYFK126T"
