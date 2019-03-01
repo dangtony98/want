@@ -46,7 +46,7 @@ export class LandingContentLeft extends Component {
                 </Link>
                 <div className="landing-jumbotron">
                     <h1 className="landing-heading marg-b-sm">
-                        Your favorite service app
+                        Your favorite app
                     </h1>
                     <h2 className="landing-text">
                         Where people can request services that others can fulfill in exchange for money
