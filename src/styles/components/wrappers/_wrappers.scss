@@ -3,6 +3,10 @@
 .wrapper-flex {
     display: flex;
 
+    &--around {
+        justify-content: space-around;
+    }
+
     &--column {
         flex-direction: column;
     }
