@@ -100,7 +100,6 @@
 .profile-content {
     width: 100%;
     margin: 0 auto;
-    background-color: blue;
 
     &__left {
 
@@ -108,9 +107,8 @@
 
     &__middle {
         margin: 0 auto;
-        width: 72rem;
+        width: 98rem;
         padding: 1rem;
-        background-color: red;
     }
 
     &__right {
@@ -133,7 +131,7 @@
         background-color: $color-white;
 
         @include mobile {
-            padding: 2rem;
+            padding: 4rem;
         }
     }
 

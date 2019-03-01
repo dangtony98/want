@@ -38,7 +38,7 @@ export class ProfilePage extends Component {
                     <div className="profile-content__middle">
                         <ProfileSummary summary={data.user[0]} />
                     </div>
-                    {/* <div className="profile-bottom wrapper-flex">
+                    <div className="profile-bottom wrapper-flex">
                         <MediaQuery query="(min-width: 900px)">
                             <ProfileStatistics
                                 rating={data.user[0].rating.current_rating} 
@@ -49,7 +49,7 @@ export class ProfilePage extends Component {
                             reviews={data.review} 
                             statistics={data.stats}
                         />
-                    </div> */}
+                    </div>
                 </div>
                 <Footer />
             </div>
