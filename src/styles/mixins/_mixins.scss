@@ -5,3 +5,7 @@
 @mixin tablet-portrait {
     @media (max-width: 900px) { @content; }
 }
+
+@mixin tablet-landscape {
+    @media (max-width: 1200px) { @content; }
+}

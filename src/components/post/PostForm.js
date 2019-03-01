@@ -92,7 +92,8 @@ class PostForm extends Component {
                     category: this.state.chosen.category.value
                 }, () => {
                     scroll.scrollToTop();
-                    getFeed(this.props, () => {
+                    getFeed((response) => {
+                        this.props.updateFeed(response.data);
                         this.setState({
                             ...this.state,
                             chosen: {

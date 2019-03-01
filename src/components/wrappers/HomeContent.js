@@ -12,9 +12,8 @@ import CurrentFulfillments from '../current/CurrentFulfillments';
 import { getFeed } from '../../services/api/feed';
 import axios from 'axios';
 import MediaQuery from 'react-responsive';
-import PropTypes from 'prop-types';
-
 import PostWidget from '../widgets/PostWidget';
+import PropTypes from 'prop-types';
 
 export class HomeContent extends Component {
     constructor(props) {
@@ -24,7 +23,12 @@ export class HomeContent extends Component {
     }
 
     componentDidMount() {
-        getFeed(this.props);
+        getFeed((response) => {
+            console.log('getFeed() response in HomeContent: ');
+            console.log(response);
+            console.log(response.data.data[0].bookmark);
+            this.props.updateFeed(response.data);
+        });
     }
 
     handleLoadWants(page) {
@@ -70,8 +74,6 @@ export class HomeContent extends Component {
     render() {
         const { wants, hasMoreWants } = this.props;
         let wantArr = [];
-        console.log('wants from render: ');
-        console.log(wants);
         wants.map((want) => {
             wantArr.push(
                 <Want

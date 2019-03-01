@@ -1,5 +1,10 @@
 .landing-jumbotron {
-    line-height: 3.25rem;
+    line-height: 5rem;
+    text-align: left;
+
+    @include tablet-portrait {
+        text-align: center;
+    }    
 }
 
 .landing-carousel {

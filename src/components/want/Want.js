@@ -27,13 +27,21 @@ export class Want extends Component {
             expanded: false,
             width: 0,
             height: 0,
-            bookmarked: false
+            bookmark: false
         }
     }
 
     componentDidMount() {
         this.updateWindowDimensions();
         window.addEventListener('resize', this.updateWindowDimensions);
+        const { bookmark } = this.props;
+
+        if (bookmark != null) {
+            this.setState({
+                ...this.state,
+                bookmark: true
+            });
+        }
       }
 
     componentWillUnmount() {
@@ -48,7 +56,7 @@ export class Want extends Component {
         bookmarkWant(id, () => {
             this.setState({
                 ...this.state,
-                bookmarked: true
+                bookmark: true
             });
         });
     }
@@ -59,7 +67,9 @@ export class Want extends Component {
 
     onDeleteButtonPressed(id) {
         deleteWant(id, () => {
-            getFeed(this.props);
+            getFeed((response) => {
+                this.props.updateFeed(response.data);
+            });
         });
     }
 
@@ -72,10 +82,8 @@ export class Want extends Component {
     }
 
     render() {
-        // console.log('Want props');
-        // console.log(this.props);
-        const { categories, category_id, cost, created_at, description, admin_id, title, user, id} = this.props;
-        const { expanded, width, bookmarked } = this.state;
+        const { categories, category_id, cost, created_at, description, admin_id, title, user, id, bookmark} = this.props;
+        const { expanded, width } = this.state;
         return (
             <div 
                 className="want want--feed marg-t-sm"
@@ -102,7 +110,7 @@ export class Want extends Component {
                                 onClick={() => this.onBookmarkWantPressed(id)}
                                 className="button-icon"
                             >
-                                {bookmarked ? (
+                                {this.state.bookmark ? (
                                     <i className="icon-bookmark fas fa-bookmark"></i>
                                 ) : (
                                     <i className="icon-bookmark far fa-bookmark"></i>

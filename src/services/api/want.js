@@ -66,6 +66,8 @@ const bookmarkWant = (id, callback) => {
     })
     .then((response) => {
         // BOOKMARK WANT SUCCESSFUL
+        console.log('bookmarkWant() response: ');
+        console.log(response);
         callback();
     })
     .catch((error) => {

@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import { checkAuthentication } from '../../services/api/authentication';
 import LandingContentLeft from '../landing/LandingContentLeft';
 import LandingContentRight from '../landing/LandingContentRight';
+import MediaQuery from 'react-responsive';
 import PropTypes from 'prop-types';
 
 export class LandingPage extends Component {
@@ -19,7 +20,9 @@ export class LandingPage extends Component {
             <div className="landing-page">
                 <div className="landing-content">
                     <LandingContentLeft />
-                    <LandingContentRight />
+                    <MediaQuery query="(min-width: 1200px)">
+                        <LandingContentRight />
+                    </MediaQuery>
                 </div>
             </div>
         );
