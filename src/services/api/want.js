@@ -76,4 +76,27 @@ const bookmarkWant = (id, callback) => {
     });
 }
 
-export { getWant, deleteWant, bookmarkWant };
+const unbookmarkWant = (id, callback) => {
+    axios.delete(`${WANT_URL}/api/bookmark`,
+        { 
+            headers: { 
+                Accept: 'application/json', 
+                Authorization: `Bearer ${localStorage.getItem('token')}` 
+            },
+            data: {
+                bookmark_id: id
+            }
+        })
+        .then((response) => {
+            // UNBOOKMARK WANT SUCCESSFUL
+            console.log('unbookmarkWant() response: ');
+            console.log(response);
+            callback();
+        })
+        .catch((error) => {
+            // UNBOOKMARK WANT UNSUCCESSFUL
+            console.log('Error: ' + error);
+        });
+}
+
+export { getWant, deleteWant, bookmarkWant, unbookmarkWant };

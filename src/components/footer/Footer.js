@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 export default () => (
     <div className="footer marg-t-m">
         <div className="footer__box">
-            <div className="wrapper-flex">
+            <div className="footer__box--content">
                 <div className="footer__column">
                     <h4 className="footer-heading">Brand</h4>
                     <h4><Link to="/about" className="footer-link link">About Us</Link></h4>

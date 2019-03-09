@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import WantInput from './WantInput';
-import { getWant, deleteWant, bookmarkWant } from '../../services/api/want';
+import { getWant, deleteWant, bookmarkWant, unbookmarkWant } from '../../services/api/want';
 import { updateFeed } from '../../actions/feed';
 import { getFeed } from '../../services/api/feed';
 import { IMAGE_URL } from '../../services/variables/variables';
@@ -27,7 +27,7 @@ export class Want extends Component {
             expanded: false,
             width: 0,
             height: 0,
-            bookmark: false
+            isBookmarked: null
         }
     }
 
@@ -39,7 +39,12 @@ export class Want extends Component {
         if (bookmark != null) {
             this.setState({
                 ...this.state,
-                bookmark: true
+                isBookmarked: true
+            });
+        } else {
+            this.setState({
+                ...this.state,
+                isBookmarked: false
             });
         }
       }
@@ -52,13 +57,26 @@ export class Want extends Component {
         this.setState({ ...this.state, width: window.innerWidth, height: window.innerHeight });
     }
 
-    onBookmarkWantPressed(id) {
-        bookmarkWant(id, () => {
-            this.setState({
-                ...this.state,
-                bookmark: true
+    onBookmarkWantPressed(id, bookmark) {
+        const { isBookmarked } = this.state;
+
+        if (isBookmarked == false) {
+            console.log('Attempt bookmark with Want id: ' + id);
+            bookmarkWant(id, () => {
+                this.setState({
+                    ...this.state,
+                    isBookmarked: true
+                });
             });
-        });
+        } else {
+            console.log('Attempt unbookmark with bookmark_id: ' + bookmark.id);
+            unbookmarkWant(bookmark.id, () => {
+                this.setState({
+                    ...this.state,
+                    isBookmarked: false
+                });
+            });
+        }
     }
 
     onAcceptButtonPressed() {
@@ -107,10 +125,10 @@ export class Want extends Component {
                     </div>
                         <div className="wrapper-flex wrapper-flex--center">
                             <button
-                                onClick={() => this.onBookmarkWantPressed(id)}
+                                onClick={() => this.onBookmarkWantPressed(id, bookmark)}
                                 className="button-icon"
                             >
-                                {this.state.bookmark ? (
+                                {this.state.isBookmarked ? (
                                     <i className="icon-bookmark fas fa-bookmark"></i>
                                 ) : (
                                     <i className="icon-bookmark far fa-bookmark"></i>

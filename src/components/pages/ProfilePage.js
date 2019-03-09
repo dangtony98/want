@@ -32,7 +32,7 @@ export class ProfilePage extends Component {
         console.log(this.state);
         const { data } = this.state;
         return data ? (
-            <div className="profile-page">
+            <div className="profile-page wrapper-flex-spaced wrapper-flex-spaced--column">
                 <NavigationBar />
                 <div className="profile-content">
                     <div className="profile-content__middle">
