@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "bundle": "webpack",
+    "build": "webpack",
     "dev-server": "webpack-dev-server",
-    "build": "node server/server.js"
+    "start": "node server/server.js"
   },
   "author": "Tuan Dang",
   "license": "ISC",
