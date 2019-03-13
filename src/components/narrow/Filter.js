@@ -16,7 +16,10 @@ export class Filter extends Component {
         console.log('onSearchButtonPresssed() triggered');
     }
 
-    onSearchTyped(e) {
+    onSearchTyped(refine, e) {
+        console.log('Inside onSearchTyped()');
+        refine(e.target.value);
+        console.log(e);
         const searchTerm = e.target.value;
         this.props.updateSearchTerm(searchTerm);
     }
@@ -34,7 +37,7 @@ export class Filter extends Component {
                 <input
                     type="text"
                     value={searchTerm}
-                    onChange={this.onSearchTyped}
+                    onChange={(e) => this.onSearchTyped(refine, e)}
                     placeholder="Search for a post or user with @"
                     autoComplete="off"
                     className="filter-search input-text"
@@ -65,6 +68,6 @@ const mapDispatchToProps = (dispatch) => ({
     updateSearchTerm: (searchTerm) => dispatch(updateSearchTerm(searchTerm))
 });
 
-// export default connectSearchBox(connect(mapStateToProps, mapDispatchToProps)(Filter));
+export default connectSearchBox(connect(mapStateToProps, mapDispatchToProps)(Filter));
 
-export default connect(mapStateToProps, mapDispatchToProps)(Filter);
+// export default connect(mapStateToProps, mapDispatchToProps)(Filter);

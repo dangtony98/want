@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroller';
-import { InstantSearch, Hits, Configure, Highlight } from 'react-instantsearch-dom';
+import { InstantSearch, Hits, Configure, Highlight, connectHits } from 'react-instantsearch-dom';
 import { updateFeed, setNextPageUrl, setHasMoreWants } from '../../actions/feed';
 import Post from '../post/Post';
 import Filter from '../narrow/Filter';
@@ -20,6 +20,10 @@ export class HomeContent extends Component {
         super(props);
         
         this.handleLoadWants = this.handleLoadWants.bind(this);
+
+        this.state = {
+            searchTerm: ''
+        }
     }
 
     componentDidMount() {
@@ -72,7 +76,9 @@ export class HomeContent extends Component {
     }
 
     render() {
-        const { wants, hasMoreWants } = this.props;
+        const { wants, hasMoreWants, searchTerm } = this.props;
+        console.log('HomeContent props: ');
+        console.log(this.props);
         let wantArr = [];
         wants.map((want) => {
             wantArr.push(
@@ -98,28 +104,30 @@ export class HomeContent extends Component {
                         <Post />
                     </MediaQuery> */}
                     <h4 className="content-heading">Newsfeed</h4>
-                    {/* <InstantSearch 
-                        appId="F4OYFK126T"
-                        apiKey="0b5b337016e53d122a72c477668057e5"
-                        indexName="wants"
-                    >
-                        <Filter />
-                        <Sort />
-                        <Configure hitsPerPage={5} />
-                        <Hits
-                            hitComponent={Want}
-                            className="marg-t-sm marg-b-sm"
-                        />
-                    </InstantSearch> */}
-                    <Filter />
-                    <Sort />
-                    <InfiniteScroll
-                        pageStart={0}
-                        loadMore={this.handleLoadWants}
-                        hasMore={hasMoreWants}
-                    >   
-                        {wantArr}
-                    </InfiniteScroll>
+                    <InstantSearch 
+                            appId="F4OYFK126T"
+                            apiKey="0b5b337016e53d122a72c477668057e5"
+                            indexName="wants"
+                        >
+                            <Filter />
+                            <Sort />
+                            {searchTerm == '' ? (
+                                <InfiniteScroll
+                                    pageStart={0}
+                                    loadMore={this.handleLoadWants}
+                                    hasMore={hasMoreWants}
+                                >   
+                                    {wantArr}
+                                </InfiniteScroll>
+                            ) : (
+                                <div>
+                                    <Configure hitsPerPage={5} />
+                                    <WantHits 
+                                        className="marg-t-sm marg-b-sm"
+                                    />
+                                </div>
+                            )}
+                        </InstantSearch>
                 </div>
                 {/* <div className="home-content__right">
                     <CurrentWants />
@@ -133,20 +141,20 @@ export class HomeContent extends Component {
     }
 }
 
-const Product = ({ hit }) => {
-    console.log('Product: ');
-    console.log(hit);
+const WantList = ({ hits }) => {
     return (
-      <div style={{ marginTop: '10px' }}>
-        <span>
-            <Highlight 
-                attribute="title" 
-                hit={hit} 
-            />
-        </span>
-      </div>
+        <div>
+            {hits.map((hit) => (
+                <Want 
+                    {...hit}
+                    hit={hit}
+                />
+            ))}
+        </div>
     );
-  }
+}
+
+const WantHits = connectHits(WantList);
 
 HomeContent.propTypes = {
     wants: PropTypes.array,
@@ -155,20 +163,22 @@ HomeContent.propTypes = {
     updateFeed: PropTypes.func.isRequired,
     setNextPageUrl: PropTypes.func.isRequired,
     setHasMoreWants: PropTypes.func.isRequired,
-    chosen: PropTypes.object.isRequired
+    chosen: PropTypes.object.isRequired,
+    searchTerm: PropTypes.string.isRequired
 }
 
 const mapStateToProps = ({ feed, filter }) => ({
     wants: feed.wants,
     next_page_url: feed.next_page_url,
     hasMoreWants: feed.hasMoreWants,
-    chosen: filter.chosen
+    chosen: filter.chosen,
+    searchTerm: filter.searchTerm
 });
 
 const mapDispatchToProps = (dispatch) => ({
     updateFeed: (feed) => dispatch(updateFeed(feed)),
     setNextPageUrl: (url) => dispatch(setNextPageUrl(url)),
-    setHasMoreWants: (status) => dispatch(setHasMoreWants(status))
+    setHasMoreWants: (status) => dispatch(setHasMoreWants(status)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(HomeContent);

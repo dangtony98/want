@@ -136,7 +136,9 @@ export class Want extends Component {
                             </button>
                         </div>
                 </div>
-                <h2 className="want__title marg-t-xs marg-b-xs">{title}</h2>
+                <h2 className="want__title marg-t-xs marg-b-xs">
+                    {!this.props.hit ? title : <Highlight hit={this.props.hit} attribute="title" />}
+                </h2>
                 <h4 className="want__pay">{numeral(cost / 100).format('$0,0.00')}</h4>
                 <p className="want-text">
                     {expanded ? description : (width > 500 ? this.applyCharacterLimit(description, 200) : this.applyCharacterLimit(description, 100))}
