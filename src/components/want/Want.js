@@ -24,7 +24,7 @@ export class Want extends Component {
         this.applyCharacterLimit = this.applyCharacterLimit.bind(this);
 
         this.state = {
-            expanded: false,
+            expanded: true,
             width: 0,
             height: 0,
             isBookmarked: null
@@ -141,7 +141,7 @@ export class Want extends Component {
                 </h2>
                 <h4 className="want__pay">{numeral(cost / 100).format('$0,0.00')}</h4>
                 <p className="want-text">
-                    {expanded ? description : (width > 500 ? this.applyCharacterLimit(description, 200) : this.applyCharacterLimit(description, 100))}
+                    {expanded ? (!this.props.hit ? description : <Highlight hit={this.props.hit} attribute="description" />) : (width > 500 ? this.applyCharacterLimit(description, 200) : this.applyCharacterLimit(description, 100))}
                 </p>
                 <div className="wrapper-flex-spaced wrapper-flex-spaced--bottom">
                     <div className="wrapper-flex wrapper-flex--center">
