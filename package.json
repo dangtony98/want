@@ -4,9 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "bundle": "webpack",
+    "build": "webpack",
     "dev-server": "webpack-dev-server",
-    "build": "node server/server.js"
+    "start": "node server/server.js",
+    "heroku-postbuild": "echo Skip build on Heroku"
   },
   "author": "Tuan Dang",
   "license": "ISC",
@@ -54,5 +55,6 @@
     "react-textarea-autosize": "^7.0.4",
     "redux": "^4.0.0",
     "redux-form": "^7.4.2"
-  }
+  },
+  "heroku-run-build-script": true
 }
