@@ -110,15 +110,17 @@ export class HomeContent extends Component {
                             indexName="wants"
                         >
                             <Filter />
-                            <Sort />
                             {searchTerm == '' ? (
-                                <InfiniteScroll
-                                    pageStart={0}
-                                    loadMore={this.handleLoadWants}
-                                    hasMore={hasMoreWants}
-                                >   
-                                    {wantArr}
-                                </InfiniteScroll>
+                                <div>
+                                    <Sort />
+                                    <InfiniteScroll
+                                        pageStart={0}
+                                        loadMore={this.handleLoadWants}
+                                        hasMore={hasMoreWants}
+                                    >   
+                                        {wantArr}
+                                    </InfiniteScroll>
+                                </div>
                             ) : (
                                 <div>
                                     <Configure hitsPerPage={5} />
