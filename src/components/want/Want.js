@@ -27,7 +27,7 @@ export class Want extends Component {
             expanded: true,
             width: 0,
             height: 0,
-            isBookmarked: null
+            bookmark_id: null,
         }
     }
 
@@ -39,14 +39,9 @@ export class Want extends Component {
         if (bookmark != null) {
             this.setState({
                 ...this.state,
-                isBookmarked: true
+                bookmark_id: bookmark.id
             });
-        } else {
-            this.setState({
-                ...this.state,
-                isBookmarked: false
-            });
-        }
+        } 
       }
 
     componentWillUnmount() {
@@ -57,23 +52,24 @@ export class Want extends Component {
         this.setState({ ...this.state, width: window.innerWidth, height: window.innerHeight });
     }
 
-    onBookmarkWantPressed(id, bookmark) {
-        const { isBookmarked } = this.state;
+    onBookmarkWantPressed(id) {
+        const { bookmark_id } = this.state;
 
-        if (isBookmarked == false) {
+        if (bookmark_id == null) {
             console.log('Attempt bookmark with Want id: ' + id);
-            bookmarkWant(id, () => {
+            bookmarkWant(id, (response) => {
+                console.log('bookmarkWant response id: ' + response.data.id);
                 this.setState({
                     ...this.state,
-                    isBookmarked: true
+                    bookmark_id: response.data.id
                 });
             });
         } else {
-            console.log('Attempt unbookmark with bookmark_id: ' + bookmark.id);
-            unbookmarkWant(bookmark.id, () => {
+            console.log('Attempt unbookmark with bookmark_id: ' + bookmark_id);
+            unbookmarkWant(bookmark_id, () => {
                 this.setState({
                     ...this.state,
-                    isBookmarked: false
+                    bookmark_id: null
                 });
             });
         }
@@ -101,7 +97,7 @@ export class Want extends Component {
 
     render() {
         const { categories, category_id, cost, created_at, description, admin_id, title, user, id, bookmark} = this.props;
-        const { expanded, width } = this.state;
+        const { expanded, width, bookmark_id } = this.state;
         return (
             <div 
                 className="want want--feed marg-t-sm"
@@ -125,10 +121,10 @@ export class Want extends Component {
                     </div>
                         <div className="wrapper-flex wrapper-flex--center">
                             <button
-                                onClick={() => this.onBookmarkWantPressed(id, bookmark)}
+                                onClick={() => this.onBookmarkWantPressed(id)}
                                 className="button-icon"
                             >
-                                {this.state.isBookmarked ? (
+                                {bookmark_id != null ? (
                                     <i className="icon-bookmark fas fa-bookmark"></i>
                                 ) : (
                                     <i className="icon-bookmark far fa-bookmark"></i>
