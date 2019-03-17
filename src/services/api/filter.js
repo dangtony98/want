@@ -56,8 +56,6 @@ const getCategories = (callback) => {
         })
         .then((response) => {
             // CATEGORIES RETRIEVAL SUCCESSFUL
-            console.log('categories: ');
-            console.log(response.data);
             callback(response.data);
         })
         .catch((error) => {

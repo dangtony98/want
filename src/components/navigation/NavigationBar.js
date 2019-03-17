@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
+import Pusher from 'pusher-js';
 import NotificationBox from '../notifications/NotificationBox';
 import ProfileDropdown from '../dropdowns/ProfileDropdown';
 import { setUser } from '../../actions/admin';
 import { closeNotificationBoxIsOpen, invertNotificationBoxIsOpen, closeProfileDropdownIsOpen, invertProfileDropdownIsOpen } from '../../actions/layout';
 import { getUser } from '../../services/api/admin';
 import { getUnreadMessagesTotal } from '../../services/api/inbox';
+import { WANT_URL } from '../../services/variables/variables';
 import MediaQuery from 'react-responsive';
 import PropTypes from 'prop-types';
 
@@ -59,6 +61,33 @@ export class NavigationBar extends Component {
                 ...this.state,
                 unseen_count: response
             });
+        });
+
+        const pusher = new Pusher('78565ef6078f239cd16c', {
+            cluster: 'us2',
+            encrypted: true,
+            authEndpoint: `${WANT_URL}/broadcasting/auth`,
+            auth: {
+                headers: { 
+                    Accept: 'application/json', 
+                    Authorization: `Bearer ${localStorage.getItem('token')}` 
+                }
+            }      
+        });
+
+        // SET UP PUSHER NOTIFICATIONS IN PROGRESS...
+
+        console.log('NavigationBar Pusher Notifications section reached.');
+        const admin = JSON.parse(localStorage.getItem('user'));
+        const channel = pusher.subscribe(`private-App.User.${admin.id}`);
+        channel.bind("App\\Notifications\\NotifyMessageOwner", (data) => {
+            console.log('Notification detected: ');
+            console.log(data);
+        });
+
+        channel.bind('pusher:subscription_error', function(status) {
+            console.log('pusher:subscription_error details: ');
+            console.log(status);
         });
     }
 

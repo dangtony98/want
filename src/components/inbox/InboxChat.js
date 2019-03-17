@@ -31,7 +31,6 @@ export default class InboxChat extends Component {
     }
 
     componentDidMount() {
-        console.log('componentDidMount() with convo_id: ' + this.props.convoid);
         Pusher.logToConsole = true;
 
         const pusher = new Pusher('78565ef6078f239cd16c', {
@@ -83,7 +82,6 @@ export default class InboxChat extends Component {
     }
 
     componentWillReceiveProps(nextProps) {
-        console.log('componentWillReceiveProps() with convo_id: ' + nextProps.convoid);
         const { convoid } = nextProps;
         const pusher = new Pusher('78565ef6078f239cd16c', {
             cluster: 'us2',

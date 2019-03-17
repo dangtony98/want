@@ -66,8 +66,6 @@ const getUnreadMessagesTotal = (callback) => {
     })
     .then((response) => {
         // GET CONVERSATIONS SUCCESSFUL
-        console.log('getUnreadMessagesTotal response: ');
-        console.log(response);
         callback(response.data.unseen_count);
     })
     .catch((error) => {
