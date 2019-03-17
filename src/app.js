@@ -28,13 +28,14 @@ ReactDOM.render(
         <Router>
             <Switch>
                 <Route path="/" component={LandingPage} exact />
-                <Route path="/home" component={RequireAuth(HomePage)} exact /> {/*RequireAuth Wrapper*/}
+                <Route path="/home" component={RequireAuth(HomePage)} exact />
                 <Route path="/login" component={LoginPage} />
                 <Route path="/signup" component={SignupPage} />
                 <Route path="/setup" component={SetupPage} />
-                <Route path="/profile/:id" component={RequireAuth(ProfilePage)} exact /> {/*RequireAuth Wrapper*/}
-                <Route path="/inbox" component={RequireAuth(InboxPage)} /> {/*RequireAuth Wrapper*/}
-                <Route path="/settings" component={RequireAuth(SettingsPage)} /> {/*RequireAuth Wrapper*/}
+                <Route path="/want/:id" component={RequireAuth(HomePage)} exact />
+                <Route path="/profile/:id" component={RequireAuth(ProfilePage)} exact />
+                <Route path="/inbox" component={RequireAuth(InboxPage)} />
+                <Route path="/settings" component={RequireAuth(SettingsPage)} />
                 <Route path="/about" component={AboutUsPage} />
                 <Route path="/team" component={TeamPage} />
                 <Route path="/press" component={PressPage} />

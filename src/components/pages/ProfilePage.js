@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import NavigationBar from '../navigation/NavigationBar';
 import ProfileSummary from '../profile/ProfileSummary';
 import ProfileStatistics from '../profile/ProfileStatistics';
@@ -7,9 +6,8 @@ import ProfileReviews from '../profile/ProfileReviews';
 import Footer from '../footer/Footer';
 import { getProfile } from '../../services/api/profile';
 import MediaQuery from 'react-responsive';
-import PropTypes from 'prop-types';
 
-export class ProfilePage extends Component {
+export default class ProfilePage extends Component {
     constructor(props) {
         super(props);
 
@@ -28,8 +26,6 @@ export class ProfilePage extends Component {
     }
 
     render() {
-        console.log('state');
-        console.log(this.state);
         const { data } = this.state;
         return data ? (
             <div className="profile-page wrapper-flex-spaced wrapper-flex-spaced--column">
@@ -60,17 +56,3 @@ export class ProfilePage extends Component {
         );
     }
 }
-
-ProfilePage.propTypes = {
-    summary: PropTypes.object.isRequired,
-    statistics: PropTypes.object.isRequired,
-    reviews: PropTypes.array
-}
-
-const mapStateToProps = ({ profile }) => ({
-    summary: profile.summary,
-    statistics: profile.statistics,
-    reviews: profile.reviews
-});
-
-export default connect(mapStateToProps)(ProfilePage);

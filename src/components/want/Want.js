@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 import WantInput from './WantInput';
-import { getWant, deleteWant, bookmarkWant, unbookmarkWant } from '../../services/api/want';
+import { deleteWant, bookmarkWant, unbookmarkWant } from '../../services/api/want';
 import { updateFeed } from '../../actions/feed';
 import { getFeed } from '../../services/api/feed';
 import { IMAGE_URL } from '../../services/variables/variables';
@@ -17,6 +18,7 @@ export class Want extends Component {
         super(props);
 
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+        this.onWantPressed = this.onWantPressed.bind(this);
         this.onBookmarkWantPressed = this.onBookmarkWantPressed.bind(this);
         this.onAcceptButtonPressed = this.onAcceptButtonPressed.bind(this);
         this.onDeleteButtonPressed = this.onDeleteButtonPressed.bind(this);
@@ -50,6 +52,10 @@ export class Want extends Component {
     
     updateWindowDimensions() {
         this.setState({ ...this.state, width: window.innerWidth, height: window.innerHeight });
+    }
+
+    onWantPressed() {
+        console.log('Want Pressed!');
     }
 
     onBookmarkWantPressed(id) {
@@ -101,6 +107,7 @@ export class Want extends Component {
         return (
             <div 
                 className="want want--feed marg-t-sm"
+                onClick={this.onWantPressed}
             >
                 <div className="wrapper-flex-spaced wrapper-flex-spaced--top">
                     <div className="wrapper-flex wrapper-flex--center">
@@ -153,10 +160,13 @@ export class Want extends Component {
                             (<button
                             onClick={this.onCounterOfferButtonPressed} 
                             className="want__counter-button button-simple marg-t-sm"
-                            >Counteroffer</button>)
+                            >Counter</button>)
                         }
                     </div>
-                    <h4 className="want-text marg-e marg-t-sm"></h4>
+                    <button className="button-simple marg-t-sm">
+                        View
+                    </button>
+                    {/* <h4 className="want-text marg-e marg-t-sm">Test</h4> */}
                 </div>
                 {admin_id != user.id &&
                     <div>
