@@ -91,7 +91,8 @@ export class ProfileDropdown extends Component {
 
 ProfileDropdown.propTypes = {
     email: PropTypes.string,
-    closeProfileDropdownIsOpen: PropTypes.func.isRequired
+    closeProfileDropdownIsOpen: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ admin }) => ({

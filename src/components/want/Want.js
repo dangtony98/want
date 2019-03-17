@@ -18,11 +18,10 @@ export class Want extends Component {
         super(props);
 
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
-        this.onWantPressed = this.onWantPressed.bind(this);
         this.onBookmarkWantPressed = this.onBookmarkWantPressed.bind(this);
-        this.onAcceptButtonPressed = this.onAcceptButtonPressed.bind(this);
-        this.onDeleteButtonPressed = this.onDeleteButtonPressed.bind(this);
-        this.onCounterOfferButtonPressed = this.onCounterOfferButtonPressed.bind(this);
+        this.onAcceptBtnPressed = this.onAcceptBtnPressed.bind(this);
+        this.onDeleteBtnPressed = this.onDeleteBtnPressed.bind(this);
+        this.onCounterBtnPressed = this.onCounterBtnPressed.bind(this);
         this.applyCharacterLimit = this.applyCharacterLimit.bind(this);
 
         this.state = {
@@ -54,10 +53,6 @@ export class Want extends Component {
         this.setState({ ...this.state, width: window.innerWidth, height: window.innerHeight });
     }
 
-    onWantPressed() {
-        console.log('Want Pressed!');
-    }
-
     onBookmarkWantPressed(id) {
         const { bookmark_id } = this.state;
 
@@ -81,11 +76,11 @@ export class Want extends Component {
         }
     }
 
-    onAcceptButtonPressed() {
-
+    onAcceptBtnPressed() {
+        console.log('onAcceptBtnPressed()');
     }
 
-    onDeleteButtonPressed(id) {
+    onDeleteBtnPressed(id) {
         deleteWant(id, () => {
             getFeed((response) => {
                 this.props.updateFeed(response.data);
@@ -93,8 +88,8 @@ export class Want extends Component {
         });
     }
 
-    onCounterOfferButtonPressed() {
-
+    onCounterBtnPressed() {
+        console.log('onCounterBtnPressed()');
     }
 
     applyCharacterLimit(description, limit) {
@@ -105,10 +100,7 @@ export class Want extends Component {
         const { categories, category_id, cost, created_at, description, admin_id, title, user, id, bookmark} = this.props;
         const { expanded, width, bookmark_id } = this.state;
         return (
-            <div 
-                className="want want--feed marg-t-sm"
-                onClick={this.onWantPressed}
-            >
+            <div className="want want--feed marg-t-sm">
                 <div className="wrapper-flex-spaced wrapper-flex-spaced--top">
                     <div className="wrapper-flex wrapper-flex--center">
                         <Link to={`/profile/${user.id}`} target="_blank" className="link">
@@ -149,24 +141,25 @@ export class Want extends Component {
                 <div className="wrapper-flex-spaced wrapper-flex-spaced--bottom">
                     <div className="wrapper-flex wrapper-flex--center">
                         <button
-                            onClick={this.onAcceptButtonPressed} 
+                            onClick={this.onAcceptBtnPressed} 
                             className="button-simple marg-t-sm"
                         >{(admin_id == user.id) ? 'Edit' : 'Accept'}</button>
                         {(admin_id == user.id) ? 
                             (<button
-                                onClick={() => this.onDeleteButtonPressed(id)} 
+                                onClick={() => this.onDeleteBtnPressed(id)} 
                                 className="want__counter-button button-simple marg-t-sm"
                             >Delete</button>) : 
                             (<button
-                            onClick={this.onCounterOfferButtonPressed} 
+                            onClick={this.onCounterBtnPressed} 
                             className="want__counter-button button-simple marg-t-sm"
                             >Counter</button>)
                         }
                     </div>
-                    <button className="button-simple marg-t-sm">
-                        View
-                    </button>
-                    {/* <h4 className="want-text marg-e marg-t-sm">Test</h4> */}
+                    <h4 className="want-text marg-e marg-t-sm">
+                        <Link to={`/want/${id}`} target="_blank" className="want-link link">
+                            More
+                        </Link>
+                    </h4>
                 </div>
                 {admin_id != user.id &&
                     <div>
@@ -193,6 +186,7 @@ Want.propTypes = {
     title: PropTypes.string,
     user: PropTypes.object,
     updateFeed: PropTypes.func.isRequired,
+    history: PropTypes.object.isRequired
 }
 
 const mapStateToProps = ({ admin, filter }) => ({
@@ -204,4 +198,4 @@ const mapDispatchToProps = (dispatch) => ({
     updateFeed: (feed) => dispatch(updateFeed(feed))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Want);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Want));

@@ -11,6 +11,7 @@ import HomePage from './components/pages/HomePage';
 import LoginPage from './components/pages/LoginPage';
 import SignupPage from './components/pages/SignupPage';
 import SetupPage from './components/pages/SetupPage';
+import WantPage from './components/pages/WantPage';
 import ProfilePage from './components/pages/ProfilePage';
 import InboxPage from './components/pages/InboxPage';
 import SettingsPage from './components/pages/SettingsPage';
@@ -32,7 +33,7 @@ ReactDOM.render(
                 <Route path="/login" component={LoginPage} />
                 <Route path="/signup" component={SignupPage} />
                 <Route path="/setup" component={SetupPage} />
-                <Route path="/want/:id" component={RequireAuth(HomePage)} exact />
+                <Route path="/want/:id" component={RequireAuth(WantPage)} exact />
                 <Route path="/profile/:id" component={RequireAuth(ProfilePage)} exact />
                 <Route path="/inbox" component={RequireAuth(InboxPage)} />
                 <Route path="/settings" component={RequireAuth(SettingsPage)} />

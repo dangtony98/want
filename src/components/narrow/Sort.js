@@ -128,7 +128,7 @@ export class Sort extends Component {
                         className="sort-button button"
                         style={sortIsExpanded ? sortStyles.button.selected : sortStyles.button.unselected}
                     >
-                        Options
+                        Filters
                         { sortIsExpanded ? <i className="icon-dropdown fas fa-chevron-up"></i>
                         : <i className="icon-dropdown fas fa-chevron-down"></i>}
                         
