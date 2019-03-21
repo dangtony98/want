@@ -21,8 +21,6 @@ export default class WantPage extends Component {
 
     componentDidMount() {
         getWant(this.props.match.params.id, (response) => {
-            console.log('getWant() response: ');
-            console.log(response.data.want);
             const admin_id = JSON.parse(localStorage.getItem('user')).id;
             this.setState({
                 ...this.state,
@@ -38,71 +36,73 @@ export default class WantPage extends Component {
         return (
             <div className="want-page">
                 <NavigationBar />
-                <div className="want-content__middle">
-                    {want && (
-                        // <div>
-                        //     {`Want is here with id: ${want.id} and title: ${want.title}`}
-                        // </div>
-                        <div className="want marg-t-sm">
-                            <div className="wrapper-flex-spaced wrapper-flex-spaced--top">
-                                <div className="wrapper-flex wrapper-flex--center">
-                                    <Link to={`/profile/${want.user.id}`} target="_blank" className="link">
-                                        <img 
-                                            src={`${IMAGE_URL}/${want.user.avatar}`}
-                                            className="profile-picture"
-                                        />
-                                    </Link>
-                                    <div className="marg-l-sm">
-                                        <h4 className="want-text marg-e">
-                                            <Link to={`/profile/${want.user.id}`} target="_blank" className="want-link link">
-                                                {want.user.first_name}
+                <div className="want-content">
+                    <div className="want-content__middle">
+                        {want && (
+                            <div>
+                                <h4 className="content-heading">Want Post</h4>
+                                <div className="want">
+                                    <div className="wrapper-flex-spaced wrapper-flex-spaced--top">
+                                        <div className="wrapper-flex wrapper-flex--center">
+                                            <Link to={`/profile/${want.user.id}`} target="_blank" className="link">
+                                                <img 
+                                                    src={`${IMAGE_URL}/${want.user.avatar}`}
+                                                    className="profile-picture"
+                                                />
                                             </Link>
-                                        </h4>
-                                        <h4 className="want-text marg-e">{`${moment(want.created_at).fromNow(true)} ago`}</h4>
+                                            <div className="marg-l-sm">
+                                                <h4 className="want-text marg-e">
+                                                    <Link to={`/profile/${want.user.id}`} target="_blank" className="want-link link">
+                                                        {want.user.first_name}
+                                                    </Link>
+                                                </h4>
+                                                <h4 className="want-text marg-e">{`${moment(want.created_at).fromNow(true)} ago`}</h4>
+                                            </div>
+                                        </div>
+                                        {/* <button
+                                            onClick={() => this.onBookmarkWantPressed(id)}
+                                            className="button-icon"
+                                        >
+                                            {bookmark_id != null ? (
+                                                <i className="icon-bookmark fas fa-bookmark"></i>
+                                            ) : (
+                                                <i className="icon-bookmark far fa-bookmark"></i>
+                                            )}
+                                        </button> */}
                                     </div>
+                                    <h2 className="want__title marg-t-xs marg-b-xs">
+                                        {want.title}
+                                    </h2>
+                                    <h4 className="want__pay">{numeral(want.cost / 100).format('$0,0.00')}</h4>
+                                    <p className="want-text">
+                                        {want.description}
+                                    </p>
+                                    <div className="wrapper-flex wrapper-flex--center">
+                                        <button
+                                            onClick={this.onAcceptBtnPressed} 
+                                            className="button-simple marg-t-sm"
+                                        >{(admin_id == want.user.id) ? 'Edit' : 'Accept'}</button>
+                                        {(admin_id == want.user.id) ? 
+                                            (<button
+                                                onClick={() => this.onDeleteBtnPressed(id)} 
+                                                className="want__counter-button button-simple marg-t-sm"
+                                            >Delete</button>) : 
+                                            (<button
+                                            onClick={this.onCounterBtnPressed} 
+                                            className="want__counter-button button-simple marg-t-sm"
+                                            >Counter</button>)
+                                        }
+                                    </div>
+                                    <MediaQuery query="(min-width: 400px)">
+                                        <hr className="hr marg-t-sm marg-b-sm"></hr>
+                                        <WantInput 
+                                            id={want.id}
+                                        />
+                                    </MediaQuery>
                                 </div>
-                                {/* <button
-                                    onClick={() => this.onBookmarkWantPressed(id)}
-                                    className="button-icon"
-                                >
-                                    {bookmark_id != null ? (
-                                        <i className="icon-bookmark fas fa-bookmark"></i>
-                                    ) : (
-                                        <i className="icon-bookmark far fa-bookmark"></i>
-                                    )}
-                                </button> */}
                             </div>
-                            <h2 className="want__title marg-t-xs marg-b-xs">
-                                {want.title}
-                            </h2>
-                            <h4 className="want__pay">{numeral(want.cost / 100).format('$0,0.00')}</h4>
-                            <p className="want-text">
-                                {want.description}
-                            </p>
-                            <div className="wrapper-flex wrapper-flex--center">
-                                <button
-                                    onClick={this.onAcceptBtnPressed} 
-                                    className="button-simple marg-t-sm"
-                                >{(admin_id == want.user.id) ? 'Edit' : 'Accept'}</button>
-                                {(admin_id == want.user.id) ? 
-                                    (<button
-                                        onClick={() => this.onDeleteBtnPressed(id)} 
-                                        className="want__counter-button button-simple marg-t-sm"
-                                    >Delete</button>) : 
-                                    (<button
-                                    onClick={this.onCounterBtnPressed} 
-                                    className="want__counter-button button-simple marg-t-sm"
-                                    >Counter</button>)
-                                }
-                            </div>
-                            <MediaQuery query="(min-width: 400px)">
-                                <hr className="hr marg-t-sm marg-b-sm"></hr>
-                                <WantInput 
-                                    id={want.id}
-                                />
-                            </MediaQuery>
-                        </div>
-                    )}
+                        )}
+                    </div>
                 </div>
             </div>
         )

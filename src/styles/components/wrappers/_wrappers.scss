@@ -147,10 +147,14 @@
 }
 
 .want-content {
+    display: flex;
+    margin: 0 auto;
+    padding: 0 2rem;
+
     &__middle {
         margin: 0 auto;
-        min-width: 22.5rem;
         width: 62.5rem;
+        min-width: 22.5rem;
         padding: 1rem;
     }
 }
