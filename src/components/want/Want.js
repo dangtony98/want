@@ -118,18 +118,16 @@ export class Want extends Component {
                             <h4 className="want-text marg-e">{`${moment(created_at).fromNow(true)} ago`}</h4>
                         </div>
                     </div>
-                        <div className="wrapper-flex wrapper-flex--center">
-                            <button
-                                onClick={() => this.onBookmarkWantPressed(id)}
-                                className="button-icon"
-                            >
-                                {bookmark_id != null ? (
-                                    <i className="icon-bookmark fas fa-bookmark"></i>
-                                ) : (
-                                    <i className="icon-bookmark far fa-bookmark"></i>
-                                )}
-                            </button>
-                        </div>
+                    <button
+                        onClick={() => this.onBookmarkWantPressed(id)}
+                        className="button-icon"
+                    >
+                        {bookmark_id != null ? (
+                            <i className="icon-bookmark fas fa-bookmark"></i>
+                        ) : (
+                            <i className="icon-bookmark far fa-bookmark"></i>
+                        )}
+                    </button>
                 </div>
                 <h2 className="want__title marg-t-xs marg-b-xs">
                     {!this.props.hit ? title : <Highlight hit={this.props.hit} attribute="title" />}
@@ -156,21 +154,17 @@ export class Want extends Component {
                         }
                     </div>
                     <h4 className="want-text marg-e marg-t-sm">
-                        <Link to={`/want/${id}`} target="_blank" className="want-link link">
+                        <Link to={`/want/${id}`} className="want-link link">
                             More
                         </Link>
                     </h4>
                 </div>
-                {admin_id != user.id &&
-                    <div>
-                        <MediaQuery query="(min-width: 400px)">
-                            <hr className="hr marg-t-sm marg-b-sm"></hr>
-                            <WantInput 
-                                id={id}
-                            />
-                        </MediaQuery>
-                    </div>
-                }
+                <MediaQuery query="(min-width: 400px)">
+                    <hr className="hr marg-t-sm marg-b-sm"></hr>
+                    <WantInput 
+                        id={id}
+                    />
+                </MediaQuery>
             </div>
         );
     }

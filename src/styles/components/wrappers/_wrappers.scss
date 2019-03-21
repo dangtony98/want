@@ -145,3 +145,12 @@
         background-color: $color-primary-0;
     }
 }
+
+.want-content {
+    &__middle {
+        margin: 0 auto;
+        min-width: 22.5rem;
+        width: 62.5rem;
+        padding: 1rem;
+    }
+}

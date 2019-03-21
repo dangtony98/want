@@ -171,7 +171,7 @@ export class Sort extends Component {
 
 Sort.propTypes = {
     sortIsExpanded: PropTypes.bool.isRequired,
-    chosen: PropTypes.object.isRequired,
+    chosen: PropTypes.object,
     invertSortIsExpanded: PropTypes.func.isRequired,
     updateFeed: PropTypes.func.isRequired,
     setNextPageUrl: PropTypes.func.isRequired,
