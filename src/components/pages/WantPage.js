@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavigationBar from '../navigation/NavigationBar';
+import WantComments from '../want/WantComments';
 import WantInput from '../../components/want/WantInput';
 import { Link } from 'react-router-dom';
 import { getWant } from '../../services/api/want';
@@ -21,6 +22,8 @@ export default class WantPage extends Component {
 
     componentDidMount() {
         getWant(this.props.match.params.id, (response) => {
+            console.log('getWant() response: ');
+            console.log(response.data.want);
             const admin_id = JSON.parse(localStorage.getItem('user')).id;
             this.setState({
                 ...this.state,
@@ -93,12 +96,12 @@ export default class WantPage extends Component {
                                             >Counter</button>)
                                         }
                                     </div>
-                                    <MediaQuery query="(min-width: 400px)">
-                                        <hr className="hr marg-t-sm marg-b-sm"></hr>
-                                        <WantInput 
-                                            id={want.id}
-                                        />
-                                    </MediaQuery>
+                                    <hr className="hr marg-t-sm marg-b-sm"></hr>
+                                    <WantComments />
+                                    <hr className="hr marg-t-sm marg-b-sm"></hr>
+                                    <WantInput 
+                                        id={want.id}
+                                    />
                                 </div>
                             </div>
                         )}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
+import WantComments from './WantComments';
 import WantInput from './WantInput';
 import { deleteWant, bookmarkWant, unbookmarkWant } from '../../services/api/want';
 import { updateFeed } from '../../actions/feed';
@@ -97,7 +98,7 @@ export class Want extends Component {
     }
 
     render() {
-        const { categories, category_id, cost, created_at, description, admin_id, title, user, id, bookmark} = this.props;
+        const { categories, category_id, cost, created_at, description, admin_id, title, user, id, comments, bookmark} = this.props;
         const { expanded, width, bookmark_id } = this.state;
         return (
             <div className="want want--feed marg-t-sm">
@@ -161,6 +162,10 @@ export class Want extends Component {
                 </div>
                 <MediaQuery query="(min-width: 400px)">
                     <hr className="hr marg-t-sm marg-b-sm"></hr>
+                    <WantComments 
+                        comments={comments}
+                    />
+                    {/* <hr className="hr marg-t-sm marg-b-sm"></hr> */}
                     <WantInput 
                         id={id}
                     />
@@ -179,6 +184,7 @@ Want.propTypes = {
     id: PropTypes.number,
     title: PropTypes.string,
     user: PropTypes.object,
+    comments: PropTypes.array.isRequired,
     updateFeed: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired
 }

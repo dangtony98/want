@@ -34,7 +34,7 @@ export class WantInput extends Component {
         const { wantInput } = this.state;
         const { admin_id, photo } = this.props;
         return (
-            <div className="wrapper-flex wrapper-flex--center">
+            <div className="wrapper-flex wrapper-flex--top">
                 {/* <Link to={`/profile/${admin_id}`} target="_blank" className="link"> */}
                     <img 
                         src={photo}

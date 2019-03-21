@@ -63,7 +63,7 @@ export class ProfileSummary extends Component {
                                         onClick={this.onAddFriendButtonPressed}
                                         className="button-icon"
                                     >
-                                        <i class="icon-plus fas fa-plus"></i>                                 
+                                        <i className="icon-plus fas fa-plus"></i>                                 
                                     </button>
                                 </div>
                                 
