@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Textarea from 'react-textarea-autosize';
+import { commentWant } from '../../services/api/want';
 
 export class WantInput extends Component {
     constructor(props) {
@@ -23,10 +24,26 @@ export class WantInput extends Component {
     }
 
     onEnterPressed(e) {
+        const { wantInput } = this.state;
+        const { id, appendComment } = this.props;
         if(e.keyCode == 13 && e.shiftKey == false && /\S/.test(e.target.value)) {
-            // SEND POST REQUEST TO COMMENT
             e.preventDefault();
-            console.log('Comment on Want with id: ' + this.props.id);            
+            commentWant(wantInput.trim(), id, () => {
+                const user = JSON.parse(localStorage.getItem('user'));
+                appendComment({
+                    id: Math.round(Math.random() * 100),
+                    user: {
+                        id: user.id,
+                        avatar: user.avatar
+                    },
+                    body: wantInput.trim(),
+                    created_at: new Date()
+                });
+                this.setState({
+                    ...this.state,
+                    wantInput: ''
+                });
+            });      
         }
     }
 
@@ -35,12 +52,12 @@ export class WantInput extends Component {
         const { admin_id, photo } = this.props;
         return (
             <div className="wrapper-flex wrapper-flex--top">
-                {/* <Link to={`/profile/${admin_id}`} target="_blank" className="link"> */}
+                <Link to={`/profile/${admin_id}`} className="link">
                     <img 
                         src={photo}
-                        className="profile-picture--mini marg-r-sm"
+                        className="profile-picture--mini marg-r-xs"
                     />
-                {/* </Link> */}
+                </Link>
                 <Textarea 
                     minRows={1}
                     maxRows={3}

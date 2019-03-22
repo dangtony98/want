@@ -17,9 +17,7 @@ export class Filter extends Component {
     }
 
     onSearchTyped(refine, e) {
-        console.log('Inside onSearchTyped()');
         refine(e.target.value);
-        console.log(e);
         const searchTerm = e.target.value;
         this.props.updateSearchTerm(searchTerm);
     }

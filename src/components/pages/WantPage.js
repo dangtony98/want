@@ -1,13 +1,11 @@
 import React, { Component } from 'react';
 import NavigationBar from '../navigation/NavigationBar';
-import WantComments from '../want/WantComments';
 import WantInput from '../../components/want/WantInput';
 import { Link } from 'react-router-dom';
 import { getWant } from '../../services/api/want';
 import moment from 'moment';
 import numeral from 'numeral';
 import { IMAGE_URL } from '../../services/variables/variables';
-import MediaQuery from 'react-responsive';
 
 export default class WantPage extends Component {
     constructor(props) {
@@ -96,8 +94,8 @@ export default class WantPage extends Component {
                                             >Counter</button>)
                                         }
                                     </div>
-                                    <hr className="hr marg-t-sm marg-b-sm"></hr>
-                                    <WantComments />
+                                    {/* <hr className="hr marg-t-sm marg-b-sm"></hr>
+                                    <WantComments /> */}
                                     <hr className="hr marg-t-sm marg-b-sm"></hr>
                                     <WantInput 
                                         id={want.id}

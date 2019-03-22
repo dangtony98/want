@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
-import WantComments from './WantComments';
+import WantComment from './WantComment';
 import WantInput from './WantInput';
 import { deleteWant, bookmarkWant, unbookmarkWant } from '../../services/api/want';
 import { updateFeed } from '../../actions/feed';
@@ -23,6 +23,7 @@ export class Want extends Component {
         this.onAcceptBtnPressed = this.onAcceptBtnPressed.bind(this);
         this.onDeleteBtnPressed = this.onDeleteBtnPressed.bind(this);
         this.onCounterBtnPressed = this.onCounterBtnPressed.bind(this);
+        this.appendComment = this.appendComment.bind(this);
         this.applyCharacterLimit = this.applyCharacterLimit.bind(this);
 
         this.state = {
@@ -30,6 +31,7 @@ export class Want extends Component {
             width: 0,
             height: 0,
             bookmark_id: null,
+            comments: []
         }
     }
 
@@ -44,6 +46,11 @@ export class Want extends Component {
                 bookmark_id: bookmark.id
             });
         } 
+        
+        this.setState({
+            ...this.state,
+            comments: !this.props.hit ? this.props.comments : []
+        })
       }
 
     componentWillUnmount() {
@@ -58,16 +65,13 @@ export class Want extends Component {
         const { bookmark_id } = this.state;
 
         if (bookmark_id == null) {
-            console.log('Attempt bookmark with Want id: ' + id);
             bookmarkWant(id, (response) => {
-                console.log('bookmarkWant response id: ' + response.data.id);
                 this.setState({
                     ...this.state,
                     bookmark_id: response.data.id
                 });
             });
         } else {
-            console.log('Attempt unbookmark with bookmark_id: ' + bookmark_id);
             unbookmarkWant(bookmark_id, () => {
                 this.setState({
                     ...this.state,
@@ -93,13 +97,20 @@ export class Want extends Component {
         console.log('onCounterBtnPressed()');
     }
 
+    appendComment(comment) {
+        this.setState({
+            ...this.state,
+            comments: [...this.state.comments, comment]
+        });
+    }
+
     applyCharacterLimit(description, limit) {
         return `${description.substring(0, limit)}${description.length > limit ? '...' : ''}`;
     }
 
     render() {
-        const { categories, category_id, cost, created_at, description, admin_id, title, user, id, comments, bookmark} = this.props;
-        const { expanded, width, bookmark_id } = this.state;
+        const { categories, category_id, cost, created_at, description, admin_id, title, user, id, bookmark} = this.props;
+        const { expanded, width, bookmark_id, comments } = this.state;
         return (
             <div className="want want--feed marg-t-sm">
                 <div className="wrapper-flex-spaced wrapper-flex-spaced--top">
@@ -161,14 +172,21 @@ export class Want extends Component {
                     </h4>
                 </div>
                 <MediaQuery query="(min-width: 400px)">
-                    <hr className="hr marg-t-sm marg-b-sm"></hr>
-                    <WantComments 
-                        comments={comments}
-                    />
-                    {/* <hr className="hr marg-t-sm marg-b-sm"></hr> */}
-                    <WantInput 
-                        id={id}
-                    />
+                    {!this.props.hit &&
+                        <div>
+                            <hr className="hr marg-t-sm marg-b-sm"></hr>
+                            {comments.map((comment) => (
+                                <WantComment 
+                                    comment={comment}
+                                    key={comment.id}
+                                />    
+                            ))}
+                            <WantInput 
+                                id={id}
+                                appendComment={this.appendComment}
+                            />
+                        </div>
+                    }
                 </MediaQuery>
             </div>
         );
@@ -184,7 +202,7 @@ Want.propTypes = {
     id: PropTypes.number,
     title: PropTypes.string,
     user: PropTypes.object,
-    comments: PropTypes.array.isRequired,
+    comments: PropTypes.array,
     updateFeed: PropTypes.func.isRequired,
     history: PropTypes.object.isRequired
 }

@@ -77,8 +77,6 @@ export class HomeContent extends Component {
 
     render() {
         const { wants, hasMoreWants, searchTerm } = this.props;
-        console.log('HomeContent props: ');
-        console.log(this.props);
         let wantArr = [];
         wants.map((want) => {
             wantArr.push(
@@ -150,6 +148,7 @@ const WantList = ({ hits }) => {
                 <Want 
                     {...hit}
                     hit={hit}
+                    key={hit.id}
                 />
             ))}
         </div>

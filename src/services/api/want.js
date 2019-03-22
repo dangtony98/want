@@ -99,4 +99,31 @@ const unbookmarkWant = (id, callback) => {
         });
 }
 
-export { getWant, deleteWant, bookmarkWant, unbookmarkWant };
+const commentWant = (comment_body, id, callback) => {
+    axios.post(`${WANT_URL}/api/comment`, {
+        comment_body,
+        want_id: id
+    },
+    { 
+        headers: {
+            Accept: 'application/json', 
+            Authorization: `Bearer ${localStorage.getItem('token')}` 
+        }
+    })
+    .then((response) => {
+        // COMMENT WANT SUCCESSFUL
+        console.log('commentWant() response: ');
+        console.log(response);
+        callback();
+    })
+    .catch((error) => {
+        // COMMENT WANT UNSUCCESSFUL
+        console.log('Error: ' + error);
+    });
+}
+
+const replyWant = () => {
+
+}
+
+export { getWant, deleteWant, bookmarkWant, unbookmarkWant, commentWant, replyWant };
