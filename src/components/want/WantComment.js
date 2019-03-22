@@ -38,7 +38,7 @@ export default class WantComment extends Component {
                             {comment.body}
                     </div>
                     <div className="wrapper-flex wrapper-flex--center marg-t-xxs">
-                        <h5 className="want-text marg-r-sm">{moment(comment.created_at).fromNow(true)}</h5>
+                        <h5 className="want-text marg-r-xs">{moment(comment.created_at).fromNow(true)}</h5>
                         <button
                             onClick={this.onReplyBtnPressed} 
                             className="button-simple link"
