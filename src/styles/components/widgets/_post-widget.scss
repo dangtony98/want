@@ -2,15 +2,15 @@
     position: fixed;
     bottom: 2rem;
     right: 3rem;
-    height: auto;
-    width: auto;
-    padding: 2rem;
+    height: 6rem;
+    width: 6rem;
+    display: flex;
+    justify-content:center;
+    align-content:center;
     border-radius: 50%;
-    background-color: $color-primary-0;
+    border: 2px solid $color-primary-0;
+    background-color: $color-white;
     box-shadow: $box-shadow;
     transition: background-color 0.2s;
-
-    &:hover {
-        background-color: $color-primary-1;
-    }
+    z-index: 10;
 }
