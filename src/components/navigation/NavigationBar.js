@@ -78,17 +78,21 @@ export class NavigationBar extends Component {
         // SET UP PUSHER NOTIFICATIONS IN PROGRESS...
 
         console.log('NavigationBar Pusher Notifications section reached.');
-        const admin = JSON.parse(localStorage.getItem('user'));
-        const channel = pusher.subscribe(`private-App.User.${admin.id}`);
-        channel.bind("App\\Notifications\\NotifyMessageOwner", (data) => {
-            console.log('Notification detected: ');
-            console.log(data);
-        });
 
-        channel.bind('pusher:subscription_error', function(status) {
-            console.log('pusher:subscription_error details: ');
-            console.log(status);
-        });
+        const admin = JSON.parse(localStorage.getItem('user'));
+
+        if (admin) {
+            const channel = pusher.subscribe(`private-App.User.${admin.id}`);
+            channel.bind("App\\Notifications\\NotifyMessageOwner", (data) => {
+                console.log('Notification detected: ');
+                console.log(data);
+            });
+    
+            channel.bind('pusher:subscription_error', function(status) {
+                console.log('pusher:subscription_error details: ');
+                console.log(status);
+            });
+        }
     }
 
     onNotificationButtonPressed() {
