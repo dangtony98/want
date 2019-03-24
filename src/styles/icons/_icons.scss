@@ -170,3 +170,13 @@
     color: $color-white;
     font-size: 1.75rem;
 }
+
+.icon-trash {
+    color: $color-primary-0;
+    font-size: 1.25rem;
+    transition: color 0.2s;
+
+    &:hover {
+        color: $color-primary-1;
+    }
+}
