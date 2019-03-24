@@ -62,6 +62,7 @@
     height: 5rem;
     max-height: 10rem;
     &-textarea {
+        background-color: $color-grey-light;
         flex: 1
     }
 }
@@ -75,4 +76,8 @@
     font-size: 1.25rem;
     font-weight: 300;
     color: $color-grey-dark;
+}
+
+.want-comment-block {
+    width: 100%;
 }

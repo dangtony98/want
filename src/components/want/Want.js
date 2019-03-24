@@ -178,11 +178,13 @@ export class Want extends Component {
                             {comments.map((comment) => (
                                 <WantComment 
                                     comment={comment}
+                                    wantId={id}
                                     key={comment.id}
                                 />    
                             ))}
                             <WantInput 
-                                id={id}
+                                reply={false}
+                                wantId={id}
                                 appendComment={this.appendComment}
                             />
                         </div>

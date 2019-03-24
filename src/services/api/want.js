@@ -76,6 +76,12 @@ const bookmarkWant = (id, callback) => {
     });
 }
 
+// UNBOOKMARKWANT() — POST
+
+// UNNBOOKMARKS THE GIVEN WANT
+// ID: THE ID OF THE GIVEN WANT
+// CALLBACK: CALLBACK TO UPDATE FILLED/UNFILLED HEART BASED ON REQUEST RESPONSE
+
 const unbookmarkWant = (id, callback) => {
     axios.delete(`${WANT_URL}/api/bookmark`,
         { 
@@ -99,6 +105,12 @@ const unbookmarkWant = (id, callback) => {
         });
 }
 
+// COMMENTWANT() — POST
+
+// COMMENT_BODY: THE COMMENT CONTENTS
+// ID: THE ID OF THE GIVEN WANT
+// CALLBACK: CALLBACK TO POST COMMENT ON FRONTEND
+
 const commentWant = (comment_body, id, callback) => {
     axios.post(`${WANT_URL}/api/comment`, {
         comment_body,
@@ -112,8 +124,6 @@ const commentWant = (comment_body, id, callback) => {
     })
     .then((response) => {
         // COMMENT WANT SUCCESSFUL
-        console.log('commentWant() response: ');
-        console.log(response);
         callback();
     })
     .catch((error) => {
@@ -122,8 +132,35 @@ const commentWant = (comment_body, id, callback) => {
     });
 }
 
-const replyWant = () => {
+// REPLYWANT() — POST
 
+// COMMENT_BODY: THE REPLY CONTENTS
+// ID: THE ID OF THE GIVEN WANT
+// ID2: THE ID OF THE GIVEN COMMENT
+// CALLBACK: CALLBACK TO POST REPLY ON FRONTEND
+
+const replyWant = (comment_body, id, id2, callback) => {
+    axios.post(`${WANT_URL}/api/reply`, {
+        comment_body,
+        want_id: id,
+        comment_id: id2
+    },
+    { 
+        headers: {
+            Accept: 'application/json', 
+            Authorization: `Bearer ${localStorage.getItem('token')}` 
+        }
+    })
+    .then((response) => {
+        // REPLY WANT SUCCESSFUL
+        console.log('replyWant() response: ');
+        console.log(response);
+        callback();
+    })
+    .catch((error) => {
+        // REPLY WANT UNSUCCESSFUL
+        console.log('Error: ' + error);
+    });
 }
 
 export { getWant, deleteWant, bookmarkWant, unbookmarkWant, commentWant, replyWant };
