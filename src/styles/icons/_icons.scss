@@ -180,3 +180,13 @@
         color: $color-primary-1;
     }
 }
+
+.icon-chevron {
+    color: $color-primary-0;
+    font-size: 1.5rem;
+    transition: color 0.2s;
+
+    &:hover {
+        color: $color-primary-1;
+    }
+}

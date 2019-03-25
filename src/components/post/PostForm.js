@@ -182,7 +182,7 @@ class PostForm extends Component {
                     onChange={this.handleChange} 
                     onFocus={this.onInputFocus}
                     type="text"
-                    placeholder="Enter a title"
+                    placeholder="What do you need help with?"
                     autoComplete="off"
                     className="post-input input-text"
                     required
@@ -195,6 +195,7 @@ class PostForm extends Component {
                             onChange={this.handleChangeSelect}
                             styles={select.styles}
                             className="select marg-t-sm" 
+                            placeholder="What type of want is it?"
                             required
                         />
                     }
@@ -204,7 +205,7 @@ class PostForm extends Component {
                         value={description}
                         onChange={this.handleChange} 
                         type="text"
-                        placeholder="Enter a description"
+                        placeholder="Tell them more about what you want..."
                         autoComplete="off"
                         className="post-textarea textarea marg-t-sm"
                         maxLength="500"
@@ -220,7 +221,7 @@ class PostForm extends Component {
                         type="number"
                         step="0.01"
                         pattern="^\d*(\.\d{0,2})?$"
-                        placeholder="Enter an offer"
+                        placeholder="$0.00"
                         autoComplete="off"
                         className="post-input input-text"
                         min="0"
