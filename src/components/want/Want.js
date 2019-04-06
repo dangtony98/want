@@ -141,9 +141,11 @@ export class Want extends Component {
                         )}
                     </button>
                 </div>
-                <h2 className="want__title marg-t-xs marg-b-xs">
-                    {!this.props.hit ? title : <Highlight hit={this.props.hit} attribute="title" />}
-                </h2>
+                <Link to={`/want/${id}`} className="want-link link">
+                    <h2 className="want__title marg-t-xs marg-b-xs">
+                        {!this.props.hit ? title : <Highlight hit={this.props.hit} attribute="title" />}
+                    </h2>
+                </Link>
                 <h4 className="want__pay">{numeral(cost / 100).format('$0,0.00')}</h4>
                 <p className="want-text">
                     {expanded ? (!this.props.hit ? description : <Highlight hit={this.props.hit} attribute="description" />) : (width > 500 ? this.applyCharacterLimit(description, 200) : this.applyCharacterLimit(description, 100))}

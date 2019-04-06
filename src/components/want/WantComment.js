@@ -60,8 +60,9 @@ export default class WantComment extends Component {
     appendReply(reply) {
         this.setState({
             ...this.state,
-            replies: [...this.state.replies, reply]
-        })
+            replies: [...this.state.replies, reply],
+            collapsedReplies: false
+        });
     }
 
     render() {

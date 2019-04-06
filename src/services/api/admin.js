@@ -8,8 +8,9 @@ import { WANT_URL } from '../variables/variables';
 
 // GETS USER ADMIN DATA
 // PROPS: CONTAINS SETUSER() FUNC
+// CALLBACK: CALLBACK TO TRIGGER ONCE USER IS SAVED IN LOCAL STORAGE
 
-const getUser = (props) => {
+const getUser = (props, callback) => {
     axios.get(`${WANT_URL}/api/user`, 
         {
             headers: { 
@@ -21,6 +22,7 @@ const getUser = (props) => {
             // SEND POST REQUEST TO LOAD USER
             props.setUser(response.data.user);
             localStorage.setItem('user', JSON.stringify(response.data.user));
+            callback();
         })
         .catch((error) => {
             console.log('Error: ' + error);

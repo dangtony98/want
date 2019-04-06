@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import NavigationBar from '../navigation/NavigationBar';
+import WantComment from '../../components/want/WantComment';
 import WantInput from '../../components/want/WantInput';
 import { Link } from 'react-router-dom';
 import { getWant } from '../../services/api/want';
@@ -11,10 +12,13 @@ export default class WantPage extends Component {
     constructor(props) {
         super(props);
 
+        this.appendComment = this.appendComment.bind(this);
+
         this.state = {
             want: null,
             admin_id: null,
             bookmark_id: null,
+            collapsedComments: false
         }
     }
 
@@ -31,9 +35,25 @@ export default class WantPage extends Component {
         });
     }
 
+    toggleCollapse() {
+        this.setState((prevState) => ({
+            ...this.state,
+            collapsedComments: !prevState.collapsedComments
+        }));
+    }
+
+    appendComment(comment) {
+        this.setState({
+            ...this.state,
+            want: {
+                ...this.state.want,
+                comments: [...this.state.want.comments, comment]
+            }
+        });
+    }
+
     render() {
-        const { want } = this.state;
-        const { admin_id } = this.state;
+        const { admin_id, want, collapsedComments } = this.state;
         return (
             <div className="want-page">
                 <NavigationBar />
@@ -94,11 +114,26 @@ export default class WantPage extends Component {
                                             >Counter</button>)
                                         }
                                     </div>
-                                    {/* <hr className="hr marg-t-sm marg-b-sm"></hr>
-                                    <WantComments /> */}
                                     <hr className="hr marg-t-sm marg-b-sm"></hr>
-                                    <WantInput 
-                                        id={want.id}
+                                    {/* {(want.comments.length > 0) && (
+                                        <button
+                                            onClick={this.toggleCollapse}
+                                            className="button-simple link marg-l-xs"
+                                        ></button>
+                                    )} */}
+                                    {!collapsedComments && (
+                                        want.comments.map((comment) => (
+                                            <WantComment 
+                                                comment={comment}
+                                                wantId={want.id}
+                                                key={comment.id}
+                                            />
+                                        ))
+                                    )}
+                                    <WantInput
+                                        reply={false} 
+                                        wantId={want.id}
+                                        appendComment={this.appendComment}
                                     />
                                 </div>
                             </div>
