@@ -12,10 +12,10 @@
         border: 1px solid $color-grey;
         border-radius: 0.5rem;
         box-shadow: $box-shadow;
-        overflow: hidden;
     }
 
     &__top {
+        display: relative;
         width: 100%;
         padding: 2rem;
         background-color: $color-primary-0;
@@ -31,9 +31,11 @@
         flex: 1;
         width: 100%;
         word-wrap: break-word;
+        overflow: scroll;
     }
 
     &__bottom {
+        display: relative;
         height: auto;
         width: 100%;
         padding: 2rem;

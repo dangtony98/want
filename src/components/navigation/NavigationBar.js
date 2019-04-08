@@ -46,19 +46,19 @@ const navigationStyles = {
 export class NavigationBar extends Component {
     constructor(props) {
         super(props);
-
-        this.onNotificationButtonPressed = this.onNotificationButtonPressed.bind(this);
-        this.onProfileButtonPressed = this.onProfileButtonPressed.bind(this);
+        
+        this.setNotificationDropdown = this.setNotificationDropdown.bind(this);
+        this.setProfileDropdown = this.setProfileDropdown.bind(this);
 
         this.state = {
             notifications: [],
-            unseen_count: null
+            unseen_count: null,
+            notificationDropdownIsOpen: false,
+            profileDropdownIsOpen: false
         }
     }
 
     componentDidMount() {
-        this.props.closeNotificationBoxIsOpen();
-        this.props.closeProfileDropdownIsOpen();
         getUser(this.props, () => {
             getNotifications((response) => {
                 this.setState({
@@ -100,19 +100,25 @@ export class NavigationBar extends Component {
         });
     }
 
-    onNotificationButtonPressed() {
-        this.props.invertNotificationBoxIsOpen();
-        this.props.closeProfileDropdownIsOpen();
+    setNotificationDropdown(value) {
+        this.setState({
+            ...this.state,
+            notificationDropdownIsOpen: value,
+            profileDropdownIsOpen: false
+        });
     }
 
-    onProfileButtonPressed() {
-        this.props.invertProfileDropdownIsOpen();
-        this.props.closeNotificationBoxIsOpen();
+    setProfileDropdown(value) {
+        this.setState({
+            ...this.state,
+            profileDropdownIsOpen: value,
+            notificationBoxIsOpen: false
+        });
     }
 
     render() {
-        const { photo, notificationBoxIsOpen, profileDropdownIsOpen } = this.props;
-        const { notifications, unseen_count, hidden } = this.state;
+        const { photo } = this.props;
+        const { notifications, unseen_count, notificationDropdownIsOpen, profileDropdownIsOpen } = this.state;
         return (
             <div>
                 <Headroom>
@@ -126,13 +132,13 @@ export class NavigationBar extends Component {
                     <MediaQuery query="(max-width: 600px)">
                         <div className="navigation-bar__placeholder-box--mini">
                             <button
-                                onClick={this.onNotificationButtonPressed} 
+                                onClick={() => this.setNotificationDropdown(!notificationDropdownIsOpen)} 
                                 className="button-icon marg-e"
                                 id="icon-notification-button"
                             >
                                 <i 
                                     className="icon-notification fas fa-bell marg-r-sm"
-                                    style={notificationBoxIsOpen ? navigationStyles.notificationIcon.selected : navigationStyles.notificationIcon.unselected}
+                                    style={notificationDropdownIsOpen ? navigationStyles.notificationIcon.selected : navigationStyles.notificationIcon.unselected}
                                     id="icon-notification"
                                 ></i>
                             </button>
@@ -155,13 +161,13 @@ export class NavigationBar extends Component {
                     <div className="wrapper-flex wrapper-flex--center">
                         <MediaQuery query="(min-width: 600px)">
                             <button
-                                onClick={this.onNotificationButtonPressed} 
+                                onClick={() => this.setNotificationDropdown(!notificationDropdownIsOpen)} 
                                 className="button-icon navigation-bar__mount marg-e marg-r-sm"
                                 id="icon-notification-button"
                             >
                                 <i 
                                     className="icon-notification navigation-bar__mount fas fa-bell"
-                                    style={notificationBoxIsOpen ? navigationStyles.notificationIcon.selected : navigationStyles.notificationIcon.unselected}
+                                    style={notificationDropdownIsOpen ? navigationStyles.notificationIcon.selected : navigationStyles.notificationIcon.unselected}
                                     id="icon-notification"
                                 >
                                     {(notifications.length > 0) &&
@@ -187,7 +193,7 @@ export class NavigationBar extends Component {
                         {/* </Link> */}
                         </button>
                         <button
-                            onClick={this.onProfileButtonPressed} 
+                            onClick={() => this.setProfileDropdown(!profileDropdownIsOpen)} 
                             className="button-icon"
                             id="profile-picture--mini-button"
                         >
@@ -200,7 +206,7 @@ export class NavigationBar extends Component {
                         </button>
                     </div>
                 </div>
-                {notificationBoxIsOpen && <NotificationBox />}
+                {notificationDropdownIsOpen && <NotificationBox />}
                 {profileDropdownIsOpen && <ProfileDropdown />}
                 </Headroom>
             </div>
@@ -210,26 +216,14 @@ export class NavigationBar extends Component {
 
 NavigationBar.propTypes = {
     photo: PropTypes.string,
-    notificationBoxIsOpen: PropTypes.bool,
-    profileDropdownIsOpen: PropTypes.bool,
-    closeNotificationBoxIsOpen: PropTypes.func.isRequired,
-    invertNotificationBoxIsOpen: PropTypes.func.isRequired,
-    closeProfileDropdownIsOpen: PropTypes.func.isRequired,
-    invertProfileDropdownIsOpen: PropTypes.func.isRequired,
     setUser: PropTypes.func.isRequired
 }
 
-const mapStateToProps = ({ admin, layout }) => ({
-    photo: admin.photo,
-    notificationBoxIsOpen: layout.notificationBoxIsOpen,
-    profileDropdownIsOpen: layout.profileDropdownIsOpen
+const mapStateToProps = ({ admin }) => ({
+    photo: admin.photo
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    closeNotificationBoxIsOpen: () => dispatch(closeNotificationBoxIsOpen()),
-    invertNotificationBoxIsOpen: () => dispatch(invertNotificationBoxIsOpen()),
-    closeProfileDropdownIsOpen: () => dispatch(closeProfileDropdownIsOpen()),
-    invertProfileDropdownIsOpen: () => dispatch(invertProfileDropdownIsOpen()),
     setUser: (user) => dispatch(setUser(user))
 })
 

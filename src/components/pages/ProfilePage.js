@@ -19,6 +19,8 @@ export default class ProfilePage extends Component {
     componentDidMount() {
         window.scrollTo(0, 0);
         getProfile(this.props.match.params.id, (response) => {
+            console.log('profile: ');
+            console.log(response.data);
             this.setState({
                 data: response.data
             })
