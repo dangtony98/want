@@ -14,6 +14,8 @@ import { WANT_URL } from '../../services/variables/variables';
 import MediaQuery from 'react-responsive';
 import PropTypes from 'prop-types';
 
+import Headroom from 'react-headroom';
+
 const navigationStyles = {
     navigationBar: {
         standard: {
@@ -110,9 +112,10 @@ export class NavigationBar extends Component {
 
     render() {
         const { photo, notificationBoxIsOpen, profileDropdownIsOpen } = this.props;
-        const { notifications, unseen_count } = this.state;
+        const { notifications, unseen_count, hidden } = this.state;
         return (
             <div>
+                <Headroom>
                 <div 
                     className="navigation-bar"
                     style={navigationStyles.navigationBar.standard}
@@ -199,6 +202,7 @@ export class NavigationBar extends Component {
                 </div>
                 {notificationBoxIsOpen && <NotificationBox />}
                 {profileDropdownIsOpen && <ProfileDropdown />}
+                </Headroom>
             </div>
         );
     }
