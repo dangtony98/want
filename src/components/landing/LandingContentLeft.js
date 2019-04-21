@@ -49,7 +49,7 @@ export class LandingContentLeft extends Component {
                         Your favorite app
                     </h1>
                     <h2 className="landing-text">
-                        Where people can request services that others can fulfill in exchange for money
+                        Connecting your local community around needs
                     </h2>
                     <MediaQuery query="(max-width: 1200px)">
                         <div className={`wrapper-flex ${width < 900 && 'wrapper-flex--around'} marg-t-m`}>

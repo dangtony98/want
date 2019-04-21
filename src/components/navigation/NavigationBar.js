@@ -6,7 +6,6 @@ import Pusher from 'pusher-js';
 import NotificationBox from '../notifications/NotificationBox';
 import ProfileDropdown from '../dropdowns/ProfileDropdown';
 import { setUser } from '../../actions/admin';
-import { closeNotificationBoxIsOpen, invertNotificationBoxIsOpen, closeProfileDropdownIsOpen, invertProfileDropdownIsOpen } from '../../actions/layout';
 import { getUser } from '../../services/api/admin';
 import { getUnreadMessagesTotal } from '../../services/api/inbox';
 import { getNotifications } from '../../services/api/notifications';
@@ -112,7 +111,7 @@ export class NavigationBar extends Component {
         this.setState({
             ...this.state,
             profileDropdownIsOpen: value,
-            notificationBoxIsOpen: false
+            notificationDropdownIsOpen: false
         });
     }
 
@@ -121,7 +120,12 @@ export class NavigationBar extends Component {
         const { notifications, unseen_count, notificationDropdownIsOpen, profileDropdownIsOpen } = this.state;
         return (
             <div>
-                <Headroom>
+                <Headroom
+                    onUnpin={() => { 
+                        this.setNotificationDropdown(false); 
+                        this.setProfileDropdown(false);
+                    }}
+                >
                 <div 
                     className="navigation-bar"
                     style={navigationStyles.navigationBar.standard}

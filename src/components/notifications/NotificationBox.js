@@ -49,17 +49,10 @@ export class NotificationBox extends Component {
 
 NotificationBox.propTypes = {
     notifications: PropTypes.array,
-    closeNotificationBoxIsOpen: PropTypes.func.isRequired
 }
 
 const mapStateToProps = ({ notifications }) => ({
     notifications: notifications.notifications
 });
 
-const mapDispatchToProps = (dispatch) => ({
-    closeNotificationBoxIsOpen: () => dispatch(closeNotificationBoxIsOpen())
-});
-
-
-
-export default connect(mapStateToProps, mapDispatchToProps)(NotificationBox);
+export default connect(mapStateToProps)(NotificationBox);
