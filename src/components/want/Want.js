@@ -150,7 +150,7 @@ export class Want extends Component {
                 <p className="want-text">
                     {expanded ? (!this.props.hit ? description : <Highlight hit={this.props.hit} attribute="description" />) : (width > 500 ? this.applyCharacterLimit(description, 200) : this.applyCharacterLimit(description, 100))}
                 </p>
-                {/* <div className="wrapper-flex-spaced wrapper-flex-spaced--bottom">
+                <div className="wrapper-flex-spaced wrapper-flex-spaced--bottom">
                     <div className="wrapper-flex wrapper-flex--center">
                         <button
                             onClick={this.onAcceptBtnPressed} 
@@ -172,7 +172,7 @@ export class Want extends Component {
                             More
                         </Link>
                     </h4>
-                </div> */}
+                </div>
                 <MediaQuery query="(min-width: 400px)">
                     {!this.props.hit &&
                         <div>
