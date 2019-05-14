@@ -8,7 +8,7 @@
     width: 100%;
     padding: 1rem 2rem;
     color: $color-white;
-    background-color: $color-primary-0;
+    background-color: $color-white;
     box-shadow: $box-shadow;
     font-size: 2rem;
     font-weight: 700;
@@ -48,10 +48,10 @@
 }
 
 .navigation-link {
-    color: $color-white;
+    color: $color-primary-0;
     
     &:visited {
-        color: $color-white;
+        color: $color-primary-0;
     }
 }
 

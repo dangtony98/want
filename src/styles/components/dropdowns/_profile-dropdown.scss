@@ -1,17 +1,16 @@
 .profile-dropdown {
     position: fixed;
-    top: 5.4rem;
+    top: 6rem;
     right: 2rem;
     height: auto;
     // width: 28.125rem;
     width: 21rem;
     padding: 2rem;
     background-color: $color-white;
-    border: 1px solid $color-grey;
     border-bottom-left-radius: 0.5rem;
     border-bottom-right-radius: 0.5rem;
     box-shadow: $box-shadow;
-    z-index: 200;
+    z-index: 300;
     animation: fadeInDown 0.2s;
 }
 

@@ -26,18 +26,18 @@ const navigationStyles = {
     },
     notificationIcon: {
         selected: {
-            color: '#9775AA'
+            color: 'rgb(151, 117, 170)'
         },
         unselected: {
-            color: '#FFF'
+            color: 'rgb(88, 42, 114)'
         }
     },
     profilePictureMini: {
         selected: {
-            border: '1px solid #9775AA'
+            border: '1px solid rgb(151, 117, 170)'
         },
         unselected: {
-            border: '1px solid #FFF'
+            border: '1px solid rgb(88, 42, 114)'
         }
     }
 }
@@ -128,7 +128,7 @@ export class NavigationBar extends Component {
                 >
                 <div 
                     className="navigation-bar"
-                    style={navigationStyles.navigationBar.standard}
+                    // style={navigationStyles.navigationBar.standard}
                 >
                     <MediaQuery query="(min-width: 600px)">
                         <div className="navigation-bar__placeholder-box"></div>
