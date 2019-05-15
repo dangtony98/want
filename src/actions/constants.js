@@ -6,6 +6,7 @@ export const SET_PHOTO = 'SET_PHOTO';
 // FEED CONSTANTS
 
 export const UPDATE_FEED = 'UPDATE_FEED';
+export const ADD_WANTS = 'ADD_WANTS';
 export const SET_NEXT_PAGE_URL = 'SET_NEXT_PAGE_URL';
 export const SET_HAS_MORE_WANTS = 'SET_HAS_MORE_WANTS';
 

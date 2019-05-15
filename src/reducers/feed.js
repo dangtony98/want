@@ -1,4 +1,4 @@
-import { UPDATE_FEED, SET_NEXT_PAGE_URL, SET_HAS_MORE_WANTS } from '../actions/constants';
+import { UPDATE_FEED, ADD_WANTS, SET_NEXT_PAGE_URL, SET_HAS_MORE_WANTS } from '../actions/constants';
 
 const feed = {
     wants: [],
@@ -9,12 +9,15 @@ const feed = {
 export default (state = feed, action) => {
     switch (action.type) {
         case UPDATE_FEED:
-            console.log('action feed: ');
-            console.log(action.feed);
             return {
                 ...state,
                 wants: action.feed ? action.feed.data : [],
                 next_page_url: action.feed ? action.feed.next_page_url : null
+            }
+        case ADD_WANTS:            
+            return {
+                ...state,
+                wants: [...state.wants, ...action.wants]
             }
         case SET_NEXT_PAGE_URL:
             return {

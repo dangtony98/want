@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroller';
 import { InstantSearch, Hits, Configure, Highlight, connectHits } from 'react-instantsearch-dom';
-import { updateFeed, setNextPageUrl, setHasMoreWants } from '../../actions/feed';
+import { updateFeed, addWants, setNextPageUrl, setHasMoreWants } from '../../actions/feed';
 import Post from '../post/Post';
 import Filter from '../narrow/Filter';
 import Sort from '../narrow/Sort';
@@ -37,9 +37,6 @@ export class HomeContent extends Component {
 
     handleLoadWants(page) {
         let next_page_url = this.props.next_page_url;
-        console.log('handleLoadWants() method init');
-        console.log('next_page_url: ' + next_page_url);
-        console.log('hasMoreWants: ' + this.props.hasMoreWants);
         axios.post(next_page_url, 
             { 
                 categories: [this.props.chosen.categories.value == 0 ? '' : this.props.chosen.categories.value], 
@@ -53,20 +50,11 @@ export class HomeContent extends Component {
             })
             .then((response) => {
                 // NEWSFEED RETRIEVAL SUCCESSFUL
-                console.log('handleLoadWants() from HomeContent response is: ');
-                console.log(response);
-                console.log(response.data.next_page_url);
-                let wants = this.props.wants;
-                response.data.data.map((want) => {
-                    wants.push(want);
-                });
-                
-                // UPDATE WANT LIST?
+                this.props.addWants(response.data.data);
                 if (response.data.next_page_url != null) {
                     this.props.setNextPageUrl(response.data.next_page_url);
                 } else {
-                    console.log('setHasMoreWants to false');
-                    // this.props.setHasMoreWants(false);
+                    this.props.setHasMoreWants(false);
                 }
             })
             .catch((error) => {
@@ -178,6 +166,7 @@ const mapStateToProps = ({ feed, filter }) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     updateFeed: (feed) => dispatch(updateFeed(feed)),
+    addWants: (want) => dispatch(addWants(want)),
     setNextPageUrl: (url) => dispatch(setNextPageUrl(url)),
     setHasMoreWants: (status) => dispatch(setHasMoreWants(status)),
 });
