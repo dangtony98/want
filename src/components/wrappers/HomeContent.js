@@ -6,6 +6,7 @@ import { updateFeed, addWants, setNextPageUrl, setHasMoreWants } from '../../act
 import Post from '../post/Post';
 import Filter from '../narrow/Filter';
 import Sort from '../narrow/Sort';
+import Carousel from '../carousel/Carousel';
 import Want from '../want/Want';
 import CurrentWants from '../current/CurrentWants';
 import CurrentFulfillments from '../current/CurrentFulfillments';
@@ -99,6 +100,7 @@ export class HomeContent extends Component {
                             {searchTerm == '' ? (
                                 <div>
                                     <Sort />
+                                    <Carousel />
                                     <InfiniteScroll
                                         pageStart={0}
                                         loadMore={this.handleLoadWants}
