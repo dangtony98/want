@@ -6,7 +6,7 @@ import { updateFeed, addWants, setNextPageUrl, setHasMoreWants } from '../../act
 import Post from '../post/Post';
 import Filter from '../narrow/Filter';
 import Sort from '../narrow/Sort';
-import Carousel from '../carousel/Carousel';
+import Slider from '../slider/Slider';
 import Want from '../want/Want';
 import CurrentWants from '../current/CurrentWants';
 import CurrentFulfillments from '../current/CurrentFulfillments';
@@ -29,9 +29,6 @@ export class HomeContent extends Component {
 
     componentDidMount() {
         getFeed((response) => {
-            console.log('getFeed() response in HomeContent: ');
-            console.log(response);
-            console.log(response.data.data[0].bookmark);
             this.props.updateFeed(response.data);
         });
     }
@@ -100,7 +97,7 @@ export class HomeContent extends Component {
                             {searchTerm == '' ? (
                                 <div>
                                     <Sort />
-                                    <Carousel />
+                                    <Slider />
                                     <InfiniteScroll
                                         pageStart={0}
                                         loadMore={this.handleLoadWants}

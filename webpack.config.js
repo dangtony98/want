@@ -3,7 +3,7 @@ const path = require('path');
 
 module.exports = {
     devtool: 'source-map',
-    mode: 'production',
+    mode: 'development',
     entry: path.join(__dirname, '/src/app.js'),
     output: {
         path: path.join(__dirname, 'public'),
