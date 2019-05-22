@@ -43,7 +43,6 @@
         border: none;
         background-color: $color-white;
         box-shadow: $box-shadow;
-        z-index: 1000;
         transition: all 0.2s;
 
         &:hover {
@@ -62,12 +61,4 @@
 
 .slider-text {
     color: $color-white;
-}
-
-.slick-initialized {
-    overflow: hidden;
-}
-
-.slick-list {
-    overflow: hidden;
 }

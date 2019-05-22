@@ -30,6 +30,7 @@ export class HomeContent extends Component {
     componentDidMount() {
         getFeed((response) => {
             this.props.updateFeed(response.data);
+            console.log(response.data);
         });
     }
 
