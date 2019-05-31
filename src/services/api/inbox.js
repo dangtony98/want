@@ -124,6 +124,11 @@ const sendMessage = (content, callback) => {
     });
 }
 
+// SEENMESSAGES() — position: 
+
+// MARK ALL NEW MESSAGES AS SEEN
+// CONVO_ID: THE ID OF THE CONVERSATION
+
 const seenMessages = (convo_id) => {
     console.log('seenMessages convo_id: ' + convo_id);
     axios.post(`${WANT_URL}/api/seen-message`, {

@@ -8,7 +8,7 @@ import ProfileDropdown from '../dropdowns/ProfileDropdown';
 import { setUser } from '../../actions/admin';
 import { getUser } from '../../services/api/admin';
 import { getUnreadMessagesTotal } from '../../services/api/inbox';
-import { getNotifications } from '../../services/api/notifications';
+import { getNotifications, markNotifications } from '../../services/api/notifications';
 import { WANT_URL } from '../../services/variables/variables';
 import MediaQuery from 'react-responsive';
 import PropTypes from 'prop-types';
@@ -100,6 +100,15 @@ export class NavigationBar extends Component {
     }
 
     setNotificationDropdown(value) {
+        if (value) {
+            markNotifications(() => {
+                this.setState({
+                    ...this.state,
+                    notifications: []
+                });
+            });
+        }
+
         this.setState({
             ...this.state,
             notificationDropdownIsOpen: value,

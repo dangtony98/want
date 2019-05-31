@@ -7,6 +7,8 @@ import { getMessages, sendMessage, seenMessages } from '../../services/api/inbox
 import { WANT_URL } from '../../services/variables/variables';
 import PropTypes from 'prop-types';
  
+import axios from 'axios';
+
 export default class InboxChat extends Component {
     constructor(props) {
         super(props);

@@ -25,4 +25,28 @@ const getNotifications = (callback) => {
     });
 }
 
-export { getNotifications };
+// MARKNOTIFICATIONS — POST
+
+// MARKS THE USER'S NOTIFICATIONS AS READ
+
+const markNotifications = (callback) => {
+    axios.post(`${WANT_URL}/api/mark-notifiactions-read`, {
+        
+    },
+    { 
+        headers: { 
+            Accept: 'application/json', 
+            Authorization: `Bearer ${localStorage.getItem('token')}` 
+        }
+    })
+    .then((response) => {
+        // MARK NOTIFICATIONS SUCCESSFUL
+        callback();
+    })
+    .catch((error) => {
+        // MARK NOTIFICATIONS UNSUCCESSFUL
+        console.log('Error: ' + error);
+    });
+}
+
+export { getNotifications, markNotifications };

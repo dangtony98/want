@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 import CustomSlider from 'react-slick';
 
-const NextArrow = (props) => {
-    const { onClick } = props;
-    return (
-        <button
-            className="slider__arrow--right"
-            onClick={onClick}
-        >
-            <i className="icon-chevron fas fa-chevron-right"></i>
-        </button>
-    );
-}
+const NextArrow = ({ onClick }) => (
+    <button
+        className="slider__arrow--right"
+        onClick={onClick}
+    >
+        <i className="icon-chevron fas fa-chevron-right"></i>
+    </button>
+);
 
 export default class Slider extends Component {
     render() {
@@ -31,13 +28,15 @@ export default class Slider extends Component {
         return (
             <div className="slider marg-t-sm">
                 <CustomSlider {...settings}>
-                    <div className="slider__tab slider__tab--1">
+                    <div 
+                        className="slider__tab slider__tab--1"
+                    >
                         <div className="slider__tab--content">
                             <h1 className="slider-text">
                                 Popular
                             </h1>
                             <h3 className="slider-text marg-t-sm">
-                                A selection of most-saved Wants around you
+                                Nearby Wants based on most bookmarked
                             </h3>
                         </div>
                     </div>
@@ -47,7 +46,7 @@ export default class Slider extends Component {
                                 School
                             </h1>
                             <h3 className="slider-text marg-t-sm">
-                                A selection of nearby Wants based on your classes
+                                Nearby Wants based on your classes
                             </h3>
                         </div>
                     </div>

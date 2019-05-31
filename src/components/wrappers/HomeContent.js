@@ -30,7 +30,6 @@ export class HomeContent extends Component {
     componentDidMount() {
         getFeed((response) => {
             this.props.updateFeed(response.data);
-            console.log(response.data);
         });
     }
 
@@ -90,32 +89,32 @@ export class HomeContent extends Component {
                     </MediaQuery> */}
                     <h4 className="content-heading">Newsfeed</h4>
                     <InstantSearch 
-                            appId="F4OYFK126T"
-                            apiKey="0b5b337016e53d122a72c477668057e5"
-                            indexName="wants"
-                        >
-                            <Filter />
-                            {searchTerm == '' ? (
-                                <div>
-                                    <Sort />
-                                    <Slider />
-                                    <InfiniteScroll
-                                        pageStart={0}
-                                        loadMore={this.handleLoadWants}
-                                        hasMore={hasMoreWants}
-                                    >   
-                                        {wantArr}
-                                    </InfiniteScroll>
-                                </div>
-                            ) : (
-                                <div>
-                                    <Configure hitsPerPage={5} />
-                                    <WantHits 
-                                        className="marg-t-sm marg-b-sm"
-                                    />
-                                </div>
-                            )}
-                        </InstantSearch>
+                        appId="F4OYFK126T"
+                        apiKey="0b5b337016e53d122a72c477668057e5"
+                        indexName="wants"
+                    >
+                        <Filter />
+                        {searchTerm == '' ? (
+                            <div>
+                                <Sort />
+                                <Slider />
+                                <InfiniteScroll
+                                    pageStart={0}
+                                    loadMore={this.handleLoadWants}
+                                    hasMore={hasMoreWants}
+                                >   
+                                    {wantArr}
+                                </InfiniteScroll>
+                            </div>
+                        ) : (
+                            <div>
+                                <Configure hitsPerPage={5} />
+                                <WantHits 
+                                    className="marg-t-sm marg-b-sm"
+                                />
+                            </div>
+                        )}
+                    </InstantSearch>
                 </div>
                 {/* <div className="home-content__right">
                     <CurrentWants />

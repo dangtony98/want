@@ -150,6 +150,8 @@ class PostForm extends Component {
     }
 
     handleChangeSelect(e) {
+        console.log('change is: ');
+        console.log(e);
         this.setState({
             ...this.state,
             chosen: {

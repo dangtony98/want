@@ -27,8 +27,6 @@ export default class InboxPage extends Component {
                 ...this.state,
                 convos: response.data,
                 current_convo_id: response.data.length != 0 ? response.data[0].id : null
-            }, () => {
-
             });
         });
     }
