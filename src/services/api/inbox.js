@@ -130,7 +130,6 @@ const sendMessage = (content, callback) => {
 // CONVO_ID: THE ID OF THE CONVERSATION
 
 const seenMessages = (convo_id) => {
-    console.log('seenMessages convo_id: ' + convo_id);
     axios.post(`${WANT_URL}/api/seen-message`, {
         convo_id: convo_id
     },
@@ -142,8 +141,6 @@ const seenMessages = (convo_id) => {
     })
     .then((response) => {
         // SEND MESSAGES SUCCESSFUL
-        console.log('seenMessage() successful with response: ');
-        console.log(response);
     })
     .catch((error) => {
         // SEND MESSAGES UNSUCCESSFUL

@@ -2,47 +2,13 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import moment from 'moment';
 import { Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { IMAGE_URL, WANT_URL } from '../../services/variables/variables';
 
-const notificationOptions = {
-    ACCEPTED_WANT: 'Accepted Want',
-    COUNTERED_WANT: 'Countered Want',
-    PAYMENT_REQUEST: 'Payment Request',
-    ANNOUNCEMENT: 'Announcement'
-}
-
-const NotificationTab = ({ notification }) => {
-    const { photo, timestamp } = notification;
-
-    const generateSubject = (notification) => {
-        const { link, firstName, title } = notification;
-        const { ACCEPTED_WANT, COUNTERED_WANT, PAYMENT_REQUEST, ANNOUNCEMENT } = notificationOptions;
-        let end;
-
-        switch(notification.type) {
-            case ACCEPTED_WANT:
-                end = `accepted: ${applyCharacterLimit(title, 12)}`;
-                break;
-            case COUNTERED_WANT:
-                end = `countered: ${applyCharacterLimit(title, 12)}`;
-                break;
-            case PAYMENT_REQUEST:
-                end = `requests payment for: ${applyCharacterLimit(title, 4)}`;
-                break;
-            case ANNOUNCEMENT:
-                end = 'issued an announcement';
-                break 
-            default:
-                end = '';
-                break;
-        }
-
-        return (
-            <div>
-                <Link to={link} target="_blank" className="link">{firstName}</Link> {end}
-            </div>
-        )
-    }
+export default ({ notification }) => {
+    console.log('NotificationTab: ');
+    console.log(notification);
+    const { data, created_at } = notification;
+    const { user, verb, message } = data;
 
     const applyCharacterLimit = (description, limit) => {
         return `${description.substring(0, limit)}...`;
@@ -50,23 +16,16 @@ const NotificationTab = ({ notification }) => {
 
     return (
         <div className="notification-tab notification-tab--border wrapper-flex wrapper-flex--center">
-            <Link to="/profile">
+            <Link to={`/profile/${data.user.id}`}>
                 <img
-                    src={photo}
+                    src={`${IMAGE_URL}/${data.user.avatar}`}
                     className="notification-tab__image"
                 />
             </Link>
             <div className="marg-l-sm">
-                <h4 className="notification-text">{generateSubject(notification)}</h4>
-                <h4 className="notification-text">{`${moment(timestamp).fromNow(true)} ago`}</h4>
+                <h4 className="notification-text">{`${user.first_name} ${verb} ${message}`}</h4>
+                <h4 className="notification-text">{`${moment(created_at).fromNow(true)} ago`}</h4>
             </div>
         </div>
     )
 }
-
-NotificationTab.propTypes = {
-    photo: PropTypes.string,
-    timestamp: PropTypes.object
-}
-
-export default connect()(NotificationTab);

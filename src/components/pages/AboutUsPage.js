@@ -36,10 +36,12 @@ export default () => {
                 <div className="information-box">
                     <h2 className="information-text">Goals</h2>
                     <p className="information-text marg-t-sm">
-                        Lorem ipsum dolor sit amet, consectetur adipiscing elit
-                        , sed do eiusmod tempor incididunt ut labore et dolore magna 
-                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco 
-                        laboris nisi ut aliquip ex ea commodo consequat...
+                        We believe that in every community, there are people who need various goods and services and others
+                        who can satiate these needs; these needs can range from house-cleaning, to tutoring, to even DJing at a party. 
+                        Often times, communities are rich in skills and interests but lack a medium by which people
+                        can connect with one another to help each other out in exchange for money. As such, Want aims to 
+                        be the central medium by which people can post their needs and get them done quickly; we help create
+                        opportunities.
                     </p>
                     <p className="information-text marg-t-sm">
                         Lorem ipsum dolor sit amet, consectetur adipiscing elit

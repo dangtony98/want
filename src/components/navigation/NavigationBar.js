@@ -51,6 +51,7 @@ export class NavigationBar extends Component {
 
         this.state = {
             notifications: [],
+            unseen_notifications_count: 0,
             unseen_count: null,
             notificationDropdownIsOpen: false,
             profileDropdownIsOpen: false
@@ -58,11 +59,18 @@ export class NavigationBar extends Component {
     }
 
     componentDidMount() {
+        Pusher.logToConsole = true;
+        console.log('NavigationBar componentDidMount()');
         getUser(this.props, () => {
             getNotifications((response) => {
                 this.setState({
                     ...this.state,
-                    notifications: response.data
+                    notifications: response.data,
+                    unseen_notifications_count: response.data.length
+                }, () => {
+                    console.log('Fetched notifications: ');
+                    console.log(response.data);
+                    console.log(this.state);
                 });
             });
 
@@ -87,9 +95,20 @@ export class NavigationBar extends Component {
         
             const admin = JSON.parse(localStorage.getItem('user'));
             const channel = pusher.subscribe(`private-App.User.${admin.id}`);
-            channel.bind("App\\Notifications\\NotifyMessageOwner", (data) => {
+            // channel.bind("App\\Notifications\\NotifyMessageOwner", (data) => {
+            //     console.log('Notification detected: ');
+            //     console.log(data);
+            // });
+
+            channel.bind("Illuminate\\Notifications\\Events\\BroadcastNotificationCreated", (data) => {
                 console.log('Notification detected: ');
                 console.log(data);
+                this.setState((prevState) => ({
+                    ...this.state,
+                    notifications: [...prevState.notifications, data],
+                    unseen_notifications_count: prevState.unseen_notifications_count + 1,
+                    unseen_count: prevState.unseen_count + 1
+                }));
             });
     
             channel.bind('pusher:subscription_error', function(status) {
@@ -101,10 +120,10 @@ export class NavigationBar extends Component {
 
     setNotificationDropdown(value) {
         if (value) {
-            markNotifications(() => {
+            markNotifications((prevState) => {
                 this.setState({
                     ...this.state,
-                    notifications: []
+                    unseen_notifications_count: 0
                 });
             });
         }
@@ -126,7 +145,7 @@ export class NavigationBar extends Component {
 
     render() {
         const { photo } = this.props;
-        const { notifications, unseen_count, notificationDropdownIsOpen, profileDropdownIsOpen } = this.state;
+        const { notifications, unseen_notifications_count, unseen_count, notificationDropdownIsOpen, profileDropdownIsOpen } = this.state;
         return (
             <div>
                 <Headroom
@@ -183,9 +202,9 @@ export class NavigationBar extends Component {
                                     style={notificationDropdownIsOpen ? navigationStyles.notificationIcon.selected : navigationStyles.notificationIcon.unselected}
                                     id="icon-notification"
                                 >
-                                    {(notifications.length > 0) &&
+                                    {(unseen_notifications_count > 0) &&
                                         <span className="navigation-bar__badge">
-                                            {notifications.length}
+                                            {unseen_notifications_count}
                                         </span>
                                     }
                                 </i>
@@ -219,7 +238,11 @@ export class NavigationBar extends Component {
                         </button>
                     </div>
                 </div>
-                {notificationDropdownIsOpen && <NotificationBox />}
+                {notificationDropdownIsOpen && (
+                    <NotificationBox 
+                        notifications={notifications}
+                    />
+                )}
                 {profileDropdownIsOpen && <ProfileDropdown />}
                 </Headroom>
             </div>

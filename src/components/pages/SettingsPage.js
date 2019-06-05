@@ -10,6 +10,8 @@ import Footer from '../footer/footer';
 import { changeSelectedPreference } from '../../actions/settings';
 import PropTypes from 'prop-types';
 
+import { getCards } from '../../services/api/payment';
+
 // FINALIZE PROPTYPES FOR THIS COMPONENT
 // CONSIDER DEFINING ENUMS FOR "SETTINGS CONTENT"
 
@@ -30,6 +32,8 @@ export class SettingsPage extends Component {
     componentDidMount() {
         this.props.changeSelectedPreference('Edit Profile');
         window.scrollTo(0, 0);
+
+        getCards();
     }
 
     render() {

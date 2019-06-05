@@ -99,6 +99,5 @@ InboxPerson.propTypes = {
     wanter: PropTypes.object,
     fulfiller: PropTypes.object,
     want: PropTypes.object,
-    created_at: PropTypes.instanceOf(Date),
     currentConvoid: PropTypes.number
 }

@@ -33,7 +33,7 @@ export default class InboxChat extends Component {
     }
 
     componentDidMount() {
-        Pusher.logToConsole = true;
+        // Pusher.logToConsole = true;
 
         const pusher = new Pusher('78565ef6078f239cd16c', {
             cluster: 'us2',
@@ -56,6 +56,8 @@ export default class InboxChat extends Component {
 
             const channel = pusher.subscribe(`private-chat.${convoid}`);
             channel.bind("App\\Events\\MessageSentEvent", (data) => {
+                console.log('Message detected: ');
+                console.log(data);
                 this.setState({
                     ...this.state,
                     messages: [...this.state.messages, data.message]

@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
 import NotificationTab from './NotificationTab';
 import { closeNotificationBoxIsOpen } from '../../actions/layout';
 import PropTypes from 'prop-types';
 
-export class NotificationBox extends Component {
+export default class NotificationBox extends Component {
     constructor(props) {
         super(props);
 
@@ -46,13 +45,3 @@ export class NotificationBox extends Component {
         );
     }
 }
-
-NotificationBox.propTypes = {
-    notifications: PropTypes.array,
-}
-
-const mapStateToProps = ({ notifications }) => ({
-    notifications: notifications.notifications
-});
-
-export default connect(mapStateToProps)(NotificationBox);

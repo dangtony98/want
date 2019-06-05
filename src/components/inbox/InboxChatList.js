@@ -23,12 +23,12 @@ const inboxChatListStyles = {
             justifyContent: 'flex-start'
         },
         message: {
-            color: 'rgb(127,140,141)',
+            color: 'rgb(90, 95, 96)',
             backgroundColor: 'transparent',
-            border: '1px solid rgb(189,195,199)'
+            border: '1px solid rgb(90, 95, 96)'
         },
         image: {
-            border: '1px solid rgb(189,195,199)'
+            border: '1px solid rgb(90, 95, 96)'
         }
     }
 }
@@ -54,7 +54,10 @@ export default class InboxChatList extends Component {
             <div className="inbox-chat-list">
                 {messages.map((message, index) => 
                     (
-                        <div className={`${index != messages.length - 1 && "marg-b-sm"}`}>
+                        <div 
+                            className={`${index != messages.length - 1 && "marg-b-sm"}`}
+                            key={message.id}
+                        >
                             <div 
                                 className="wrapper-flex wrapper-flex--bottom"
                                 style={
