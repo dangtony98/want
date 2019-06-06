@@ -35,7 +35,7 @@ export class SettingsPaymentModal extends Component {
             ccExpiryMonth,
             ccExpiryYear,
             cvvNumber
-        }, (response) => {
+        }, () => {
             getCards((response) => {
                 this.props.storeCards(response.data.data);
             });
@@ -55,9 +55,32 @@ export class SettingsPaymentModal extends Component {
     }
 
     handleChange(e) {
-        this.setState({
-            [e.target.name]: e.target.value
-        });
+        console.log(e);
+        const newChar = e.target.value.charCodeAt(e.target.value.length - 1);
+        const length = e.target.value.split(' ').join('').length;
+        // console.log(newChar);
+        // console.log(length);
+        if (length % 4 == 0) console.log('length is factor of 4');
+        if (e.target.name == 'card_no' || e.target.name == 'ccExpiryMonth' || e.target.name == 'ccExpiryYear' || e.target.name == 'cvvNumber') {
+            const newChar = e.target.value.charCodeAt(e.target.value.length - 1);
+            if (newChar >= 48 && newChar <= 57 || isNaN(newChar)) {
+                // if (e.target.value.charCodeAt(e.target.value.length - 2) == 32) {
+                    this.setState({
+                        [e.target.name]: e.target.value
+                    });
+                // } else {
+                    // this.setState({
+                    //     [e.target.name]: length % 4 == 0 ? e.target.value + ' ' : e.target.value
+                    // });
+                // }
+            };
+        } else {
+            if (newChar >= 65 && newChar <= 122 || isNaN(newChar) || newChar == 32) {
+                this.setState({
+                    [e.target.name]: e.target.value
+                });
+            }
+        }
     }
 
     onFormSubmit(e) {
@@ -107,6 +130,7 @@ export class SettingsPaymentModal extends Component {
                                 placeholder="Enter the card number"
                                 autoComplete="off"
                                 className="input-text settings-input marg-t-sm"
+                                maxLength={30}
                             />
                             <div className="wrapper-flex">
                                 <input 
@@ -117,6 +141,7 @@ export class SettingsPaymentModal extends Component {
                                     placeholder="MM"
                                     autoComplete="off"
                                     className="input-text settings-input marg-t-sm"
+                                    maxLength={2}
                                 />
                                 <input
                                     name="ccExpiryYear"
@@ -126,6 +151,7 @@ export class SettingsPaymentModal extends Component {
                                     placeholder="YYYY"
                                     autoComplete="off"
                                     className="input-text settings-input marg-t-sm marg-l-sm marg-r-sm"
+                                    maxLength={4}
                                 />
                                 <input
                                     name="cvvNumber"
@@ -135,6 +161,8 @@ export class SettingsPaymentModal extends Component {
                                     placeholder="CVV"
                                     autoComplete="off"
                                     className="input-text settings-input marg-t-sm"
+                                    pattern="[0-9]+"
+                                    maxLength={3}
                                 />
                             </div>
                             <div className="wrapper-flex-spaced marg-t-sm">

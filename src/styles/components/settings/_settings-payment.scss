@@ -1,11 +1,17 @@
 .settings-payment {
+
+    &__card-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        grid-gap: 2rem;
+    }
+
     &__card-box {
         display: flex;
         flex-direction: column;
         align-items: flex-start;
         justify-content: space-between;
         height: 20rem;
-        width: 20rem;
         padding: 2rem;
         border: 1px solid $color-grey;
         border-radius: 0.5rem;
@@ -21,7 +27,7 @@
 
     &__add-card-box {
         height: 20rem;
-        width: 20rem;
+        width: 22rem;
         margin: 0;
         border: 1px solid $color-grey;
         border-radius: 0.5rem;
