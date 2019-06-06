@@ -1,20 +1,8 @@
-import { CHANGE_SELECTED_PREFERENCE } from '../actions/constants';
+import { CHANGE_SELECTED_PREFERENCE, STORE_CARDS } from '../actions/constants';
 
 const settings = {
     selectedPreference: null,
-    savedCards: [{
-        id: 'card_1DcpzsHKfw8WktKFWZRjbR10',
-        last4: '4242',
-        brand: 'Visa',
-        exp_month: 11,
-        exp_year: 2023
-    }, {
-        id: 'card_1FcnmsHKfc1WstKFFkwjbR20',
-        last4: '9283',
-        brand: 'Master',
-        exp_month: 12,
-        exp_year: 2023
-    }]
+    cards: []
 }
 
 export default (state = settings, action) => {
@@ -23,6 +11,11 @@ export default (state = settings, action) => {
             return {
                 ...state,
                 selectedPreference: action.preference
+            }
+        case STORE_CARDS:
+            return {
+                ...state,
+                cards: action.cards
             }
         default:
             return state;

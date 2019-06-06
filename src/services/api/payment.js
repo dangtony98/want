@@ -1,15 +1,65 @@
 import axios from 'axios';
 import { WANT_URL } from '../variables/variables';
 
-const addCard = (details) => {
+// ADDCARD() — POST
 
+// ADDS A CARD TO THE USER'S WANT ACCOUNT
+// DETAILS: CONTAINS ccExpiryYear, ccExpiryMonth, card_no
+// CALLBACK: CALLBACK TO TRIGGER UPON SUCCESSFUL REQUEST
+
+const addCard = (details, callback) => {
+    axios.post(`${WANT_URL}/api/card`, {
+        ...details
+    },
+    { 
+        headers: {
+            Accept: 'application/json', 
+            Authorization: `Bearer ${localStorage.getItem('token')}` 
+        }
+    })
+    .then((response) => {
+        // ADD CARD SUCCESSFUL
+        callback(response);
+    })
+    .catch((error) => {
+        // ADD CARD UNSUCCESSFUL
+        console.log('Error: ' + error);
+    });
 }
 
-const deleteCard = (id) => {
+// DELETECARD() — DELETE
 
+// DELETES A CARD FROM THE USER'S WANT ACCOUNT
+// ID: THE ID OF THE CARD TO DELETE
+// CALLBACK:  CALLBACK TO TRIGGER UPON SUCCESSFUL REQUEST
+
+const deleteCard = (id, callback) => {
+    axios.delete(`${WANT_URL}/api/card`,
+    { 
+        headers: { 
+            Accept: 'application/json', 
+            Authorization: `Bearer ${localStorage.getItem('token')}` 
+        },
+        data: {
+            card_id: id
+        }
+    })
+    .then((response) => {
+        // DELETE CARD SUCCESSFUL
+        callback();
+    })
+    .catch((error) => {
+        // DELETE CARD UNSUCCESSFUL
+        console.log('Error: ' + error);
+    });
 }
 
-const getCards = () => {
+// GETCARDS() — GET 
+
+// RETRIEVES LIST OF CARDS FROM THE USER'S WANT ACCOUNT
+// CALLBACK: CALLBACK TO TRIGGER UPON SUCCESSFUL REQUEST
+
+const getCards = (callback) => {
     axios.get(`${WANT_URL}/api/card`, 
     {
         headers: { 
@@ -18,11 +68,11 @@ const getCards = () => {
         }
     })
     .then((response) => {
-        // SEND POST REQUEST TO LOAD USER
-        console.log('getCard successful with response: ');
-        console.log(response);
+        // GET CARDS SUCCESSFUL
+        callback(response);
     })
     .catch((error) => {
+        // GET CARDS UNSUCCESSFUL
         console.log('Error: ' + error);
     });
 }

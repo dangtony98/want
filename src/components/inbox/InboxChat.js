@@ -33,7 +33,7 @@ export default class InboxChat extends Component {
     }
 
     componentDidMount() {
-        // Pusher.logToConsole = true;
+        Pusher.logToConsole = true;
 
         const pusher = new Pusher('78565ef6078f239cd16c', {
             cluster: 'us2',

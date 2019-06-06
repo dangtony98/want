@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import ReactModal from 'react-modal';
 import { closeSettingsPaymentModalIsExpanded } from '../../actions/modal';
-import { runInThisContext } from 'vm';
+import { storeCards } from '../../actions/settings';
+import { addCard, getCards } from '../../services/api/payment';
 
 export class SettingsPaymentModal extends Component {
     constructor(props) {
@@ -15,10 +16,10 @@ export class SettingsPaymentModal extends Component {
 
         this.state = {
             name: '',
-            cardNumber: '',
-            month: '',
-            year: '',
-            cvv: ''
+            card_no: '',
+            ccExpiryMonth: '',
+            ccExpiryYear: '',
+            cvvNumber: ''
         }
     }  
 
@@ -27,17 +28,29 @@ export class SettingsPaymentModal extends Component {
     }
 
     onSaveButtonPressed() {
-        console.log('Save button pressed!');
+        const { card_no, ccExpiryMonth, ccExpiryYear, cvvNumber} = this.state;
+
+        addCard({
+            card_no,
+            ccExpiryMonth,
+            ccExpiryYear,
+            cvvNumber
+        }, (response) => {
+            getCards((response) => {
+                this.props.storeCards(response.data.data);
+            });
+            this.props.closeSettingsPaymentModalIsExpanded();
+        });
     }
 
     onOutsideModalPressed() {
         this.props.closeSettingsPaymentModalIsExpanded();
         this.setState({
             name: '',
-            cardNumber: '',
-            month: '',
-            year: '',
-            cvv: ''
+            card_no: '',
+            ccExpiryMonth: '',
+            ccExpiryYear: '',
+            cvvNumber: ''
         });
     }
 
@@ -56,7 +69,7 @@ export class SettingsPaymentModal extends Component {
 
     render() {
         const { isOpen } = this.props;
-        const { name, cardNumber, month, year, cvv } = this.state;
+        const { name, card_no, ccExpiryMonth, ccExpiryYear, cvvNumber } = this.state;
 
         return (
             <ReactModal
@@ -87,8 +100,8 @@ export class SettingsPaymentModal extends Component {
                                 className="input-text settings-input marg-t-sm"
                             />
                             <input 
-                                name="cardNumber"
-                                value={cardNumber}
+                                name="card_no"
+                                value={card_no}
                                 onChange={this.handleChange} 
                                 type="text"
                                 placeholder="Enter the card number"
@@ -97,8 +110,8 @@ export class SettingsPaymentModal extends Component {
                             />
                             <div className="wrapper-flex">
                                 <input 
-                                    name="month"
-                                    value={month}
+                                    name="ccExpiryMonth"
+                                    value={ccExpiryMonth}
                                     onChange={this.handleChange} 
                                     type="text"
                                     placeholder="MM"
@@ -106,8 +119,8 @@ export class SettingsPaymentModal extends Component {
                                     className="input-text settings-input marg-t-sm"
                                 />
                                 <input
-                                    name="year"
-                                    value={year} 
+                                    name="ccExpiryYear"
+                                    value={ccExpiryYear} 
                                     onChange={this.handleChange} 
                                     type="text"
                                     placeholder="YYYY"
@@ -115,8 +128,8 @@ export class SettingsPaymentModal extends Component {
                                     className="input-text settings-input marg-t-sm marg-l-sm marg-r-sm"
                                 />
                                 <input
-                                    name="cvv"
-                                    value={cvv}
+                                    name="cvvNumber"
+                                    value={cvvNumber}
                                     onChange={this.handleChange} 
                                     type="text"
                                     placeholder="CVV"
@@ -149,7 +162,8 @@ export class SettingsPaymentModal extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => ({
-    closeSettingsPaymentModalIsExpanded: () => dispatch(closeSettingsPaymentModalIsExpanded())
+    closeSettingsPaymentModalIsExpanded: () => dispatch(closeSettingsPaymentModalIsExpanded()),
+    storeCards: (cards) => dispatch(storeCards(cards))
 })
 
 export default connect(null, mapDispatchToProps)(SettingsPaymentModal);

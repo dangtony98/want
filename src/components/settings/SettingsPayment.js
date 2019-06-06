@@ -1,29 +1,41 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { openSettingsPaymentModalIsExpanded } from '../../actions/modal';
+import { storeCards } from '../../actions/settings';
+import { getCards, deleteCard } from '../../services/api/payment';
 
 export class SettingsPayment extends Component {
     constructor(props) {
         super(props);
 
-        this.onAddCardBtnPressed = this.onAddCardBtnPressed.bind(this);
         this.onRemoveCardBtnPressed = this.onRemoveCardBtnPressed.bind(this);
         this.onFormSubmit = this.onFormSubmit.bind(this);
 
         this.state = {
-            savedCards: this.props.savedCards
+            savedCards: []
         }
     }
 
-    onAddCardBtnPressed() {
-        // TRIGGER ADD CARD MODAL
-        this.props.openSettingsPaymentModalIsExpanded();
-        console.log('Should trigger the add card modal');
+    componentDidMount() {
+        getCards((response) => {
+            this.props.storeCards(response.data.data);
+        });
+    }
+
+    componentWillReceiveProps(nextProps) {
+        const { cards } = nextProps;
+        this.setState({
+            ...this.state,
+            savedCards: cards
+        });
     }
 
     onRemoveCardBtnPressed(id) {
-        // REMOVE RESPECTIVE CARD
-        console.log(`Should remove card with id of ${id}`);
+        deleteCard(id, () => {
+            getCards((response) => {
+                this.props.storeCards(response.data.data);
+            });
+        });
     }
 
     onFormSubmit(e) {
@@ -35,7 +47,6 @@ export class SettingsPayment extends Component {
 
     render() {
         const { savedCards } = this.state;
-
         // CONSIDER REVISING DIV STRUCTURE TO CSS GRID LAYOUT
         return (
             <div className="settings-edit-profile">
@@ -64,7 +75,7 @@ export class SettingsPayment extends Component {
                             </div>
                         ))}
                         <button
-                            onClick={this.onAddCardBtnPressed} 
+                            onClick={() => this.props.openSettingsPaymentModalIsExpanded()} 
                             className="settings-payment__add-card-box"
                         >
                             Add a new card
@@ -77,11 +88,12 @@ export class SettingsPayment extends Component {
 }
 
 const mapStateToProps = ({ settings }) => ({
-    savedCards: settings.savedCards
+    cards: settings.cards
 });
 
 const mapDispatchToProps = (dispatch) => ({
-    openSettingsPaymentModalIsExpanded: () => dispatch(openSettingsPaymentModalIsExpanded())
+    openSettingsPaymentModalIsExpanded: () => dispatch(openSettingsPaymentModalIsExpanded()),
+    storeCards: (cards) => dispatch(storeCards(cards))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(SettingsPayment);
