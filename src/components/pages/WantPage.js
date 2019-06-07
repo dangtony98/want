@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import recombee from 'recombee-js-api-client';
+import { Link } from 'react-router-dom';
 import NavigationBar from '../navigation/NavigationBar';
 import WantComment from '../../components/want/WantComment';
 import WantInput from '../../components/want/WantInput';
-import { Link } from 'react-router-dom';
+import { client } from '../../app';
 import { getWant } from '../../services/api/want';
 import moment from 'moment';
 import numeral from 'numeral';
@@ -18,7 +20,8 @@ export default class WantPage extends Component {
             want: null,
             admin_id: null,
             bookmark_id: null,
-            collapsedComments: false
+            collapsedComments: false,
+            startTime: null
         }
     }
 
@@ -30,8 +33,24 @@ export default class WantPage extends Component {
             this.setState({
                 ...this.state,
                 want: response.data.want,
-                admin_id
+                admin_id,
+                startTime: new Date()
             });
+        });
+    }
+
+    componentWillUnmount() {
+        const { startTime } = this.state;
+        const admin_id = JSON.parse(localStorage.getItem('user')).id;
+
+        // timeElapsed is in seconds.
+        const timeElapsed = Math.round((new Date() - startTime) / 1000);
+
+        client.send(new recombee.AddDetailView(String(admin_id), String(this.props.match.params.id), {
+            'timestamp': new Date(),
+            'duration': timeElapsed
+        }), () => {
+            console.log('Recombee Want view ')
         });
     }
 
