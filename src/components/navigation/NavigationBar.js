@@ -105,7 +105,7 @@ export class NavigationBar extends Component {
                 console.log(data);
                 this.setState((prevState) => ({
                     ...this.state,
-                    notifications: [...prevState.notifications, data],
+                    notifications: [data, ...prevState.notifications],
                     unseen_notifications_count: prevState.unseen_notifications_count + 1,
                     unseen_count: prevState.unseen_count + 1
                 }));

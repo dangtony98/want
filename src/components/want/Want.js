@@ -1,13 +1,16 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import recombee from 'recombee-js-api-client';
 import { Link } from 'react-router-dom';
 import WantComment from './WantComment';
 import WantInput from './WantInput';
 import { deleteWant, bookmarkWant, unbookmarkWant } from '../../services/api/want';
 import { updateFeed } from '../../actions/feed';
 import { getFeed } from '../../services/api/feed';
+import { createConvo } from '../../services/api/inbox';
 import { IMAGE_URL } from '../../services/variables/variables';
+import { client } from '../../app';
 import moment from 'moment';
 import numeral from 'numeral';
 import MediaQuery from 'react-responsive';
@@ -19,6 +22,7 @@ export class Want extends Component {
         super(props);
 
         this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
+        this.onMessageButtonPressed = this.onMessageButtonPressed.bind(this);
         this.onBookmarkWantPressed = this.onBookmarkWantPressed.bind(this);
         this.onAcceptBtnPressed = this.onAcceptBtnPressed.bind(this);
         this.onDeleteBtnPressed = this.onDeleteBtnPressed.bind(this);
@@ -61,8 +65,20 @@ export class Want extends Component {
         this.setState({ ...this.state, width: window.innerWidth, height: window.innerHeight });
     }
 
+    onMessageButtonPressed() {
+        const { id, user } = this.props;
+        createConvo({
+            wanter_id: JSON.parse(localStorage.getItem('user')).id,
+            fulfiller_id: user.id,
+            want_id: id
+        }, () => {
+            this.props.history.push('/inbox');
+        });
+    }
+
     onBookmarkWantPressed(id) {
         const { bookmark_id } = this.state;
+        const { admin_id } = this.props;
 
         if (bookmark_id == null) {
             bookmarkWant(id, (response) => {
@@ -70,6 +86,11 @@ export class Want extends Component {
                     ...this.state,
                     bookmark_id: response.data.id
                 });
+                client.send(new recombee.AddBookmark(String(admin_id), String(id), {
+                    'timestamp': new Date()
+                }), () => {
+                    console.log('Recombee bookmark sent');
+                  });
             });
         } else {
             unbookmarkWant(bookmark_id, () => {
@@ -130,18 +151,28 @@ export class Want extends Component {
                             <h4 className="want-text marg-e">{`${moment(created_at).fromNow(true)} ago`}</h4>
                         </div>
                     </div>
-                    <button
-                        onClick={() => this.onBookmarkWantPressed(id)}
-                        className="button-icon"
-                    >
-                        {bookmark_id != null ? (
-                            <i className="icon-bookmark fas fa-bookmark"></i>
-                        ) : (
-                            <i className="icon-bookmark far fa-bookmark"></i>
-                        )}
-                    </button>
+                    {(admin_id != user.id) && (
+                        <div className="wrapper-flex wrapper-flex--center">
+                            <button
+                                onClick={this.onMessageButtonPressed}
+                                className="button-icon"
+                            >
+                                <i className="icon-comment-alt fas fa-comment-alt"></i>
+                            </button>
+                            <button
+                                onClick={() => this.onBookmarkWantPressed(id)}
+                                className="button-icon"
+                            >
+                                {bookmark_id != null ? (
+                                    <i className="icon-bookmark fas fa-bookmark"></i>
+                                ) : (
+                                    <i className="icon-bookmark far fa-bookmark"></i>
+                                )}
+                            </button>
+                        </div>
+                    )}
                 </div>
-                <Link to={`/want/${id}`} className="want-link link">
+                <Link to={`/want/${id}`} target="_blank" className="want-link link">
                     <h2 className="want__title marg-t-xs marg-b-xs">
                         {!this.props.hit ? title : <Highlight hit={this.props.hit} attribute="title" />}
                     </h2>
@@ -150,7 +181,7 @@ export class Want extends Component {
                 <p className="want-text">
                     {expanded ? (!this.props.hit ? description : <Highlight hit={this.props.hit} attribute="description" />) : (width > 500 ? this.applyCharacterLimit(description, 200) : this.applyCharacterLimit(description, 100))}
                 </p>
-                <div className="wrapper-flex-spaced wrapper-flex-spaced--bottom">
+                {/* <div className="wrapper-flex-spaced wrapper-flex-spaced--bottom">
                     <div className="wrapper-flex wrapper-flex--center">
                         <button
                             onClick={this.onAcceptBtnPressed} 
@@ -172,7 +203,7 @@ export class Want extends Component {
                             More
                         </Link>
                     </h4>
-                </div>
+                </div> */}
                 <MediaQuery query="(min-width: 400px)">
                     {!this.props.hit &&
                         <div>

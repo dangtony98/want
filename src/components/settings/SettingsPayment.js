@@ -19,6 +19,7 @@ export class SettingsPayment extends Component {
     componentDidMount() {
         getCards((response) => {
             this.props.storeCards(response.data.data);
+            console.log('getCards response: ');
             console.log(response);
         });
     }
@@ -48,13 +49,12 @@ export class SettingsPayment extends Component {
 
     render() {
         const { savedCards } = this.state;
-        // CONSIDER REVISING DIV STRUCTURE TO CSS GRID LAYOUT
         return (
             <div className="settings-edit-profile">
                 <div className="settings-content">
                     <h4 className="content-heading">Saved Cards</h4>
                     <div className="settings-content__box settings-payment__card-grid wrapper-flex wrapper-flex--center">
-                        {savedCards.map((card) => (
+                        {savedCards && savedCards.map((card) => (
                             <div 
                                 key={card.id}
                                 className="settings-payment__card-box"

@@ -180,6 +180,7 @@ export default class InboxChat extends Component {
                     imageAttachments: []
                 });
                 // TRIGGER GETCONVOS AGAIN IF CURRENT CONVO ISN'T ALREADY ON TOP
+                console.log('Change first convo to convo with id: ' + convo_id);
                 this.props.handleInboxPeopleOrder(convo_id);
                 console.log('onEnterPressed() after sendMessage()');
             });

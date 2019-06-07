@@ -1,9 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import recombee from 'recombee-js-api-client';
 import './styles/_styles.scss';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import store from './store/store';
+import { RECOMBEE_DB, RECOMBEE_TOKEN } from './services/variables/variables';
 
 // PAGES
 import LandingPage from './components/pages/LandingPage';
@@ -23,6 +25,8 @@ import FulfillersPage from './components/pages/FulfillersPage';
 
 // HOCS
 import RequireAuth from './components/helpers/RequireAuth';
+
+const client = new recombee.ApiClient(RECOMBEE_DB, RECOMBEE_TOKEN);
 
 ReactDOM.render(
     <Provider store={store}>
@@ -46,3 +50,5 @@ ReactDOM.render(
         </Router>
     </Provider>
 , document.getElementById('app'));
+
+export { client };

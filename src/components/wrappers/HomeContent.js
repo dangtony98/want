@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import InfiniteScroll from 'react-infinite-scroller';
-import { InstantSearch, Hits, Configure, Highlight, connectHits } from 'react-instantsearch-dom';
+import { InstantSearch, Configure, connectHits } from 'react-instantsearch-dom';
 import { updateFeed, addWants, setNextPageUrl, setHasMoreWants } from '../../actions/feed';
 import Post from '../post/Post';
 import Filter from '../narrow/Filter';

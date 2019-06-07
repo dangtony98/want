@@ -35,7 +35,9 @@ export class SettingsPaymentModal extends Component {
             ccExpiryMonth,
             ccExpiryYear,
             cvvNumber
-        }, () => {
+        }, (response) => {
+            console.log('Successful addCard');
+            console.log(response);
             getCards((response) => {
                 this.props.storeCards(response.data.data);
             });
