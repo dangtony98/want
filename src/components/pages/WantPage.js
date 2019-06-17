@@ -36,6 +36,12 @@ export default class WantPage extends Component {
                 admin_id,
                 startTime: new Date()
             });
+            
+            client.send(new recombee.AddDetailView(String(admin_id), String(this.props.match.params.id), {
+                'timestamp': new Date()
+            }), () => {
+                console.log('Recombee Want view ABC');
+            });
         });
     }
 
@@ -44,14 +50,14 @@ export default class WantPage extends Component {
         const admin_id = JSON.parse(localStorage.getItem('user')).id;
 
         // timeElapsed is in seconds.
-        const timeElapsed = Math.round((new Date() - startTime) / 1000);
+        // const timeElapsed = Math.round((new Date() - startTime) / 1000);
 
-        client.send(new recombee.AddDetailView(String(admin_id), String(this.props.match.params.id), {
-            'timestamp': new Date(),
-            'duration': timeElapsed
-        }), () => {
-            console.log('Recombee Want view ')
-        });
+        // client.send(new recombee.AddDetailView(String(admin_id), String(this.props.match.params.id), {
+        //     'timestamp': new Date(),
+        //     'duration': timeElapsed
+        // }), () => {
+        //     console.log('Recombee Want view ')
+        // });
     }
 
     toggleCollapse() {

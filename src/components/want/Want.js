@@ -90,7 +90,7 @@ export class Want extends Component {
                     'timestamp': new Date()
                 }), () => {
                     console.log('Recombee bookmark sent');
-                  });
+                });
             });
         } else {
             unbookmarkWant(bookmark_id, () => {
