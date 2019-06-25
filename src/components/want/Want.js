@@ -78,7 +78,7 @@ export class Want extends Component {
 
     onBookmarkWantPressed(id) {
         const { bookmark_id } = this.state;
-        const { admin_id } = this.props;
+        const { admin_id, recc_id } = this.props;
 
         if (bookmark_id == null) {
             bookmarkWant(id, (response) => {
@@ -87,7 +87,8 @@ export class Want extends Component {
                     bookmark_id: response.data.id
                 });
                 client.send(new recombee.AddBookmark(String(admin_id), String(id), {
-                    'timestamp': new Date()
+                    'timestamp': new Date(),
+                    'recc_id': recc_id
                 }), () => {
                     console.log('Recombee bookmark sent');
                 });
@@ -242,9 +243,10 @@ Want.propTypes = {
     history: PropTypes.object.isRequired
 }
 
-const mapStateToProps = ({ admin, filter }) => ({
+const mapStateToProps = ({ admin, filter, feed }) => ({
     admin_id: admin.id,
-    categories: filter.categories
+    categories: filter.categories,
+    recc_id: feed.recc_id
 });
 
 const mapDispatchToProps = (dispatch) => ({

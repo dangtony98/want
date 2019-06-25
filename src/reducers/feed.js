@@ -3,7 +3,8 @@ import { UPDATE_FEED, ADD_WANTS, SET_NEXT_PAGE_URL, SET_HAS_MORE_WANTS } from '.
 const feed = {
     wants: [],
     next_page_url: null,
-    hasMoreWants: true
+    hasMoreWants: true,
+    recc_id: null
 }
 
 export default (state = feed, action) => {
@@ -12,7 +13,8 @@ export default (state = feed, action) => {
             return {
                 ...state,
                 wants: action.feed ? action.feed.data : [],
-                next_page_url: action.feed ? action.feed.next_page_url : null
+                next_page_url: action.feed ? action.feed.next_page_url : null,
+                recc_id: action.feed ? action.feed.recc_id : null
             }
         case ADD_WANTS:            
             return {

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import recombee from 'recombee-js-api-client';
 import { Link } from 'react-router-dom';
 import NavigationBar from '../navigation/NavigationBar';
@@ -10,7 +11,7 @@ import moment from 'moment';
 import numeral from 'numeral';
 import { IMAGE_URL } from '../../services/variables/variables';
 
-export default class WantPage extends Component {
+export class WantPage extends Component {
     constructor(props) {
         super(props);
 
@@ -27,6 +28,7 @@ export default class WantPage extends Component {
 
     componentDidMount() {
         getWant(this.props.match.params.id, (response) => {
+            const { recc_id } = this.props;
             console.log('getWant() response: ');
             console.log(response.data.want);
             const admin_id = JSON.parse(localStorage.getItem('user')).id;
@@ -38,7 +40,8 @@ export default class WantPage extends Component {
             });
             
             client.send(new recombee.AddDetailView(String(admin_id), String(this.props.match.params.id), {
-                'timestamp': new Date()
+                'timestamp': new Date(),
+                'recc_id': recc_id
             }), () => {
                 console.log('Recombee Want view ABC');
             });
@@ -169,3 +172,9 @@ export default class WantPage extends Component {
         )
     }
 }
+
+const mapStateToProps = ({ feed }) => ({
+    recc_id: feed.recc_id
+});
+
+export default connect(mapStateToProps)(WantPage);
