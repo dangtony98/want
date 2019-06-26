@@ -53,6 +53,7 @@
     "react-select": "^2.0.0",
     "react-slick": "^0.23.2",
     "react-spinners": "^0.5.1",
+    "react-text-format": "^2.0.26",
     "react-textarea-autosize": "^7.0.4",
     "recombee-js-api-client": "^2.4.0",
     "redux": "^4.0.0",

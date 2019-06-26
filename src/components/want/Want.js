@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
 import recombee from 'recombee-js-api-client';
 import { Link } from 'react-router-dom';
+import ReactTextFormat from 'react-text-format';
 import WantComment from './WantComment';
 import WantInput from './WantInput';
 import { deleteWant, bookmarkWant, unbookmarkWant } from '../../services/api/want';
@@ -179,9 +180,11 @@ export class Want extends Component {
                     </h2>
                 </Link>
                 <h3 className="want__pay">{cost == 0 ? 'FREE' : numeral(cost / 100).format('$0,0.00')}</h3>
-                <p className="want-text">
-                    {expanded ? (!this.props.hit ? description : <Highlight hit={this.props.hit} attribute="description" />) : (width > 500 ? this.applyCharacterLimit(description, 200) : this.applyCharacterLimit(description, 100))}
-                </p>
+                <ReactTextFormat>
+                    <p className="want-text">
+                        {expanded ? (!this.props.hit ? description : <Highlight hit={this.props.hit} attribute="description" />) : (width > 500 ? description : this.applyCharacterLimit(description, 100))}
+                    </p>
+                </ReactTextFormat>
                 {/* <div className="wrapper-flex-spaced wrapper-flex-spaced--bottom">
                     <div className="wrapper-flex wrapper-flex--center">
                         <button
