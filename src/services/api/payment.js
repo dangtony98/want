@@ -77,4 +77,27 @@ const getCards = (callback) => {
     });
 }
 
-export { addCard, deleteCard, getCards };
+// GETBALANCE() — GET 
+
+// GETS THE USER'S ACCOUNT BALANCE
+// CALLBACK: CALLBACK TO TRIGGER WHEN ACOUNT BALANCE IS FETCHED
+
+const getBalance = (callback) => {
+    axios.get(`${WANT_URL}/api/balance`, 
+    {
+        headers: { 
+            Accept: 'application/json', 
+            Authorization: `Bearer ${localStorage.getItem('token')}` 
+        }
+    })
+    .then((response) => {
+        // GET BALANCE SUCCESSFUL
+        callback(response);
+    })
+    .catch((error) => {
+        // GET BALANCE UNSUCCESSFUL
+        console.log('Error: ' + error);
+    });
+}
+
+export { addCard, deleteCard, getCards, getBalance };

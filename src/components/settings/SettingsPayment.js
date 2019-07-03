@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { openSettingsPaymentModalIsExpanded } from '../../actions/modal';
 import { storeCards } from '../../actions/settings';
-import { getCards, deleteCard } from '../../services/api/payment';
+import { getCards, deleteCard, getBalance } from '../../services/api/payment';
 
 export class SettingsPayment extends Component {
     constructor(props) {
@@ -22,6 +22,11 @@ export class SettingsPayment extends Component {
             console.log('getCards response: ');
             console.log(response);
         });
+
+        getBalance((response) => {
+            console.log('getBalance() response: ');
+            console.log(response);
+        });      
     }
 
     componentWillReceiveProps(nextProps) {
