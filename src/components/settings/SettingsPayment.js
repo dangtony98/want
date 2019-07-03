@@ -57,7 +57,18 @@ export class SettingsPayment extends Component {
         return (
             <div className="settings-edit-profile">
                 <div className="settings-content">
-                    <h4 className="content-heading">Saved Cards</h4>
+                    <h4 className="content-heading">Account Balance</h4>
+                    <div className="settings-content__box">
+                        <div className="settings-payment__want-box">
+                            <h4 className="settings-text marg-e">
+                                Want Balance: $0.00
+                            </h4>
+                        </div>
+                        <h4 className="settings-text">We always use your Want balance first. If that doesn't cover the whole transaction, you can use one of your payment methods instead</h4>
+                    </div>
+                </div>
+                <div className="settings-content">
+                    <h4 className="content-heading">Payment Methods</h4>
                     <div className="settings-content__box settings-payment__card-grid wrapper-flex wrapper-flex--center">
                         {savedCards && savedCards.map((card) => (
                             <div 
