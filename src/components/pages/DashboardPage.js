@@ -1,8 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import NavigationBar from '../navigation/NavigationBar';
+import DashboardPreferences from '../dashboard/DashboardPreferences';
+import DashboardWants from '../dashboard/DashboardWants';
 import Footer from '../footer/Footer';
 import { changeSelectedDashboard } from '../../actions/dashboard';
+
+const dashboardContentSwitch = (selectedPreference) => {
+    switch (selectedPreference) {
+        case 'Wants':
+            return;
+        case 'Fulfillments':
+            return;
+        case 'Bookmarks':
+            return;
+        default:
+            return null;
+    }
+}
 
 export class DashboardPage extends Component {
     constructor(props) {
@@ -15,7 +30,10 @@ export class DashboardPage extends Component {
             <div className="dashboard-page wrapper-flex-spaced wrapper-flex-spaced--column">
                 <div>
                     <NavigationBar />
-                    This is the Dashboard Page.
+                    <div className="dashboard-wrapper wrapper-flex wrapper-flex--top">
+                        <DashboardPreferences />
+                        <DashboardWants />
+                    </div>
                 </div>
                 <Footer />
             </div>

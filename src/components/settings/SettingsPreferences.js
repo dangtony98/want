@@ -33,8 +33,6 @@ const preferenceStyles = {
     }
 }
 
-const WANT_URL = 'https://dry-mesa-87903.herokuapp.com'
-
 export class SettingsPreferences extends Component {
     constructor(props) {
         super(props);

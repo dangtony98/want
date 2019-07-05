@@ -1,0 +1,44 @@
+.dashboard-wrapper {
+    height: auto;
+    width: 98rem;
+    margin: 0 auto;
+}
+
+.dashboard-content {
+    width: 73.5rem;
+    padding: 1rem;
+
+    &__box {
+        width: 100%;
+        padding: 2rem;
+        background-color: $color-white;
+        border-radius: 0.5rem;
+        border: 1px solid $color-grey;
+        box-shadow: $box-shadow;
+    }
+}
+
+
+.dashboard-preferences {
+    width: 24.5rem;
+    padding: 1rem; 
+
+    &__box {
+        height: auto;
+        width: 100%;
+        background-color: $color-white;
+        border-radius: 0.5rem;
+        border: 1px solid $color-grey;
+        box-shadow: $box-shadow;
+        overflow: hidden;
+    }
+
+    &__preference { 
+        padding: 1rem 2rem;
+    }
+
+    &__button {
+        color: $color-grey-dark;
+        background-color: transparent;
+    }
+}
