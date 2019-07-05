@@ -7,6 +7,7 @@ import feed from '../reducers/feed';
 import filter from '../reducers/filter';
 import modal from '../reducers/modal';
 import settings from '../reducers/settings';
+import dashboard from '../reducers/dashboard';
 import notifications from '../reducers/notifications';
 
 export default createStore(combineReducers({
@@ -17,6 +18,7 @@ export default createStore(combineReducers({
     filter,
     modal,
     settings,
+    dashboard,
     notifications,
     form: formReducer
 }));

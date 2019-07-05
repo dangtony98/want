@@ -220,9 +220,9 @@ export class NavigationBar extends Component {
                             </Link>
                         </MediaQuery>
                         <button className="button-icon marg-e">
-                        {/* <Link to="/home" className="link"> */}
+                        <Link to="/dashboard" className="link">
                             <i className="icon-tasks fas fa-th-list marg-r-xs"></i>
-                        {/* </Link> */}
+                        </Link>
                         </button>
                         <button
                             onClick={() => this.setProfileDropdown(!profileDropdownIsOpen)} 

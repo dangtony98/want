@@ -17,6 +17,7 @@ import WantPage from './components/pages/WantPage';
 import ProfilePage from './components/pages/ProfilePage';
 import InboxPage from './components/pages/InboxPage';
 import SettingsPage from './components/pages/SettingsPage';
+import DashboardPage from './components/pages/DashboardPage';
 import AboutUsPage from './components/pages/AboutUsPage';
 import TeamPage from './components/pages/TeamPage';
 import PressPage from './components/pages/PressPage';
@@ -41,6 +42,7 @@ ReactDOM.render(
                 <Route path="/profile/:id" component={RequireAuth(ProfilePage)} exact />
                 <Route path="/inbox" component={RequireAuth(InboxPage)} />
                 <Route path="/settings" component={RequireAuth(SettingsPage)} />
+                <Route path="/dashboard" component={RequireAuth(DashboardPage)} />
                 <Route path="/about" component={AboutUsPage} />
                 <Route path="/team" component={TeamPage} />
                 <Route path="/press" component={PressPage} />
