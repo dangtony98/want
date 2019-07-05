@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import numeral from 'numeral';
 import { openSettingsPaymentModalIsExpanded } from '../../actions/modal';
 import { storeCards } from '../../actions/settings';
 import { getCards, deleteCard, getBalance } from '../../services/api/payment';
@@ -12,6 +13,7 @@ export class SettingsPayment extends Component {
         this.onFormSubmit = this.onFormSubmit.bind(this);
 
         this.state = {
+            balance: null,
             savedCards: []
         }
     }
@@ -26,6 +28,10 @@ export class SettingsPayment extends Component {
         getBalance((response) => {
             console.log('getBalance() response: ');
             console.log(response);
+            this.setState({
+                ...this.state,
+                balance: response.data.available[0].amount
+            });
         });      
     }
 
@@ -53,7 +59,7 @@ export class SettingsPayment extends Component {
     }
 
     render() {
-        const { savedCards } = this.state;
+        const { balance, savedCards } = this.state;
         return (
             <div className="settings-edit-profile">
                 <div className="settings-content">
@@ -61,7 +67,12 @@ export class SettingsPayment extends Component {
                     <div className="settings-content__box">
                         <div className="settings-payment__want-box">
                             <h4 className="settings-text marg-e">
-                                Want Balance: $0.00
+                                Want balance: 
+                                {balance && (
+                                    <span className="settings-payment-balance">
+                                        {` ${numeral(balance / 100).format('$0,0.00')}`}
+                                    </span>
+                                )}
                             </h4>
                         </div>
                         <h4 className="settings-text">We always use your Want balance first. If that doesn't cover the whole transaction, you can use one of your payment methods instead</h4>
